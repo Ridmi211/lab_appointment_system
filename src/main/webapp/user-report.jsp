@@ -296,7 +296,7 @@ try {
 
 		<!--    accessright -->
 
-		<div class=" card-container">
+		<!-- <div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Job Type Distribution</div>
@@ -314,14 +314,14 @@ try {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!--      /////////// -->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
 
 
-		<%
+	<%-- 	<%
  
     Map<String, Map<String, Object>> jobTypeDistributionData = userManager.getJobTypeDistributionData();
 
@@ -329,8 +329,8 @@ try {
     String jsonData = new ObjectMapper().writeValueAsString(jobTypeDistributionData);
 
     // You can use jsonData in your JavaScript code
-%>
-		<script>
+%> --%>
+<%-- 		<script>
     console.log('<%= jsonData %>');
 </script>
 		<script>
@@ -380,7 +380,7 @@ try {
                 }
             }
         });
-    </script>
+    </script> --%>
 
 		<!--    //////////////////////// -->
 
@@ -501,15 +501,15 @@ try {
 				</div>
 			</div>
 		</div>
-		<%
+<%-- 		<%
     Map<String, Map<String, Integer>> userDemographicsData = userManager.getUserDemographicsData();
 
     // Convert Java Map to JSON string
     String jsonData3 = new ObjectMapper().writeValueAsString(userDemographicsData);
 
     // You can use jsonData in your JavaScript code
-%>
-		<script>
+%> --%>
+<%-- 		<script>
     // Parse JSON data in JavaScript
     var userDemographicsData = JSON.parse('<%= jsonData3 %>');
 
@@ -564,7 +564,7 @@ try {
             }
         }
     });
-</script>
+</script> --%>
 
 		<div class=" card-container">
 			<div class="col">

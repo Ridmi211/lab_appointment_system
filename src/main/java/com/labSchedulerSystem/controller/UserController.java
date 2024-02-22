@@ -245,7 +245,7 @@ public class UserController extends HttpServlet {
 	        user.setRegistrationStatus(RegistrationStatus.APPROVED);
 	    }
 	    user.setEducationalQualifications(request.getParameter("educationalQualifications"));
-//	    user.setSpecializedJobs(request.getParameter("specializedJobs"));
+	    user.setSpecializedJobs(request.getParameter("specializedJobs"));
 //	    String[] selectedAvailableDays = request.getParameterValues("availableDays");
 //	    String[] selectedAvailableTimeSlots = request.getParameterValues("availableTimeSlots");
 //	    if (selectedAvailableDays != null && selectedAvailableTimeSlots != null) {
