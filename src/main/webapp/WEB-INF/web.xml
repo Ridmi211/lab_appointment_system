@@ -1,0 +1,66 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>AppointmentController</servlet-name>
+  	<display-name>AppointmentController</display-name>
+  	<description></description>
+  	<servlet-class>com.labSchedulerSystem.controller.AppointmentController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RegisterController</servlet-name>
+  	<display-name>RegisterController</display-name>
+  	<description></description>
+  	<servlet-class>com.labSchedulerSystem.controller.RegisterController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UserController</servlet-name>
+  	<display-name>UserController</display-name>
+  	<description></description>
+  	<servlet-class>com.labSchedulerSystem.controller.UserController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MessageController</servlet-name>
+  	<display-name>MessageController</display-name>
+  	<description></description>
+  	<servlet-class>com.labSchedulerSystem.controller.MessageController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ReportController</servlet-name>
+  	<display-name>ReportController</display-name>
+  	<description></description>
+  	<servlet-class>com.labSchedulerSystem.controller.ReportController</servlet-class>
+  </servlet>
+   <servlet-mapping>
+  	<servlet-name>AppointmentController</servlet-name>
+  	<url-pattern>/appointmentManager</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  	<servlet-name>AppointmentController</servlet-name>
+  	<url-pattern>/getAppointment</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   	<servlet-name>UserController</servlet-name>
+   	<url-pattern>/usermanager</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+   	<servlet-name>UserController</servlet-name>
+   	<url-pattern>/getuser</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+   	<servlet-name>MessageController</servlet-name>
+   	<url-pattern>/contactManager</url-pattern>
+   </servlet-mapping>
+    <servlet-mapping>
+   	<servlet-name>MessageController</servlet-name>
+   	<url-pattern>/getContact</url-pattern>
+   </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>ReportController</servlet-name>
+    	<url-pattern>/getReports</url-pattern>
+    </servlet-mapping>
+
+</web-app>

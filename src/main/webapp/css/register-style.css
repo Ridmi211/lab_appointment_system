@@ -1,0 +1,469 @@
+ @charset "ISO-8859-1";
+ 
+   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
+    
+  body, html {
+      font-family: 'Source Sans Pro', sans-serif;
+      background-color: #1d243d;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .container{
+      margin: 0;
+      top: 20px;
+      left: 50%;
+      position: absolute;
+      text-align: center;
+      transform: translateX(-50%);
+      background-color: rgb( 33, 41, 66 );
+      border-radius: 9px;
+      border-top: 10px solid #79a6fe;
+      border-bottom: 10px solid #8BD17C;
+      width: 600px;
+     /*  height: 800px; */
+      box-shadow: 1px 1px 108.8px 19.2px rgb(25,31,53);
+      padding-bottom:10px;
+    }
+    
+    .box h4 {
+      font-family: 'Source Sans Pro', sans-serif;
+      color: #5c6bc0; 
+      font-size: 18px;
+      margin-top:40px;;
+    }
+    
+    .box h4 span {
+      color: #dfdeee;
+      font-weight: lighter;
+    }
+    
+    .box h5 {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 13px;
+      color: #a1a4ad;
+      letter-spacing: 1.5px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .box input[type = "text"],.box input[type = "password"] {
+      display: block;
+      margin: 10px auto;
+      background: #262e49;
+      border: 0;
+      border-radius: 5px;
+      padding: 6px 10px;
+      width: 320px;
+      outline: none;
+      color: #d6d6d6;
+          -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -ms-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+      
+    }
+    ::-webkit-input-placeholder {
+      color: #565f79;
+    }
+    
+    .box input[type = "text"]:focus,.box input[type = "password"]:focus {
+      border: 1px solid #79A6FE;
+      
+    }
+    
+    a{
+      color: #5c7fda;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+     label input[type = "checkbox"] {
+      display: none; /* hide the default checkbox */
+    }
+    
+    /* style the artificial checkbox */
+    label span {
+      height: 13px;
+      width: 13px;
+      border: 2px solid #464d64;
+      border-radius: 2px;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      float: left;
+      left: 7.5%;
+    }
+    
+    .btn1 {
+      border:0;
+      background: #7f5feb;
+      color: #dfdeee;
+      border-radius: 100px;
+      width: 340px;
+      height: 49px;
+      font-size: 16px;
+      position: absolute;
+      top: 85%;
+      left: 8%;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    
+    .btn1:hover {
+      background: #5d33e6;
+    }
+    
+    .rmb {
+      position: absolute;
+      margin-left: -24%;
+      margin-top: 0px;
+      color: #dfdeee;
+      font-size: 13px;
+    }
+    
+    .forgetpass {
+      position: relative;
+      float: right;
+      right: 28px;
+    }
+    
+    .dnthave{
+        position: absolute;
+        top: 92%;
+        left: 29%;
+    }
+    
+    [type=checkbox]:checked + span:before {/* <-- style its checked state */
+        font-family: FontAwesome;
+        font-size: 16px;
+        content: "\f00c";
+        position: absolute;
+        top: -4px;
+        color: #896cec;
+        left: -1px;
+        width: 13px;
+    }
+    
+    .typcn {
+      position: absolute;
+      left: 339px;
+      top: 282px;
+      color: #3b476b;
+      font-size: 22px;
+      cursor: pointer;
+    }      
+    
+    .typcn.active {
+      color: #7f60eb;
+    }
+    
+    .error {
+      background: #ff3333;
+      text-align: center;
+      width: 337px;
+      height: 20px;
+      padding: 2px;
+      border: 0;
+      border-radius: 5px;
+      margin: 10px auto 10px;
+      position: absolute;
+      top: 31%;
+      left: 7.2%;
+      color: white;
+      display: none;
+    }
+    
+    .footer {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        top: 605px;
+        width: 100%;
+        color: #78797d;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .footer .fa {
+      color: #7f5feb;;
+    }
+    .gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto;
+  gap: 50px;
+  font-size: 13px;
+}
+
+.gender label {
+  color: #a1a4ad;
+}
+
+    .availableDays {
+/*   display: flex; */
+display: block;
+padding-left:150px;
+  justify-content: left;
+  align-items: left;
+  margin: 0px auto;
+  gap: 50px;
+  font-size: 13px;
+  text-align:left;
+}
+
+.availableDays label {
+  color: #a1a4ad;
+}
+
+
+    .availableTimeSlots {
+/*   display: flex; */
+display: block;
+padding-left:150px;
+  justify-content: left;
+  align-items: left;
+  margin: 0px auto;
+  gap: 50px;
+  font-size: 13px;
+  text-align:left;
+}
+
+.availableTimeSlots label {
+  color: #a1a4ad;
+}
+.usertype {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  gap: 50px;
+  font-size: 13px;
+}
+
+.usertype label {
+  color: #a1a4ad;
+}
+
+
+/* Style the custom radio buttons */
+.gender label span {
+  height: 13px;
+  width: 13px;
+  border: 2px solid #464d64;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  background-color: #1d243d;
+}
+
+/* .availableDays label span {
+  height: 13px;
+  width: 23px;
+  border: 2px solid #464d64;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  background-color: #1d243d;
+} */
+.usertype label span {
+  height: 13px;
+  width: 13px;
+  border: 2px solid #464d64;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  background-color: #1d243d;
+}
+
+/* Style the checked state of the radio buttons */
+.gender input[type="radio"]:checked + span:before {
+  content: "\f111"; /* Use a checkmark icon from FontAwesome */
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 11px;
+  position: absolute;
+  font-size: 13px;
+
+  color: #896cec;
+}
+
+/* .availableDays input[type="checkbox"]:checked + span:before {
+  content: "\f111"; /* Use a checkmark icon from FontAwesome */
+ /*  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 11px;
+  position: absolute; */
+ /*  font-size: 13px; */
+ 
+/*   color: #896cec;
+}
+ */
+.usertype input[type="radio"]:checked + span:before {
+  content: "\f111"; /* Use a checkmark icon from FontAwesome */
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 11px;
+  position: absolute;
+  font-size: 13px;
+
+  color: #896cec;
+}
+.box label[for="gender"]  {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 0px;
+  margin-left:22%;
+  text-align: left;
+  font-size: 13px;
+  font-family: 'Source Sans Pro', sans-serif;
+  
+}
+
+.box label[for="availableDays"]  {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 0px;
+  margin-left:22%;
+  text-align: left;
+  font-size: 13px;
+  font-family: 'Source Sans Pro', sans-serif;
+  
+}
+
+
+.box label[for="availableTimeSlots"] {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 0px;
+  margin-left:22%;
+  text-align: left;
+  font-size: 13px;
+  font-family: 'Source Sans Pro', sans-serif;
+  
+} 
+
+
+.box label[for="birthdate"] {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 0px;
+  text-align: left;
+  margin-left:22%;
+  font-size: 13px;
+}
+
+.box input[type="date"][name="birthdate"] {
+  display: block;
+  margin: 5px auto;
+  background: #262e49;
+  border: 0;
+  border-radius: 5px;
+  padding: 6px 10px;
+  width: 320px;
+  outline: none;
+  color:  #a1a4ad;
+  transition: all 0.2s ease-out;
+}
+
+.box input[type="date"][name="birthdate"]:focus {
+  border: 1px solid #79A6FE;
+}
+
+/* Style the Telephone Input */
+.box label[for="telephone"] {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 20px;
+  text-align: left;
+  margin-left:20%;
+}
+
+.box input[type="tel"][name="telephone"] {
+  display: block;
+  margin: 5px auto;
+  background: #262e49;
+  border: 0;
+  border-radius: 5px;
+  padding: 8px 10px;
+  width: 320px;
+  outline: none;
+  color:  #a1a4ad;
+  transition: all 0.2s ease-out;
+}
+
+.box input[type="tel"][name="telephone"]:focus {
+  border: 1px solid #79A6FE;
+}
+
+/* Style the Job Type and Country Dropdowns */
+.box label[for="jobtype"], .box label[for="country"], .box label[for="usertype"] {
+  color:  #a1a4ad;
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+  margin-left:22%;
+  font-size: 13px;
+}
+
+.box select[name="jobtype"], .box select[name="country"] {
+  display: block;
+  margin: 5px auto;
+  background: #262e49;
+  border: 0;
+  border-radius: 5px;
+  padding: 8px 10px;
+  width: 320px;
+  outline: none;
+  color:  #a1a4ad;
+  transition: all 0.2s ease-out;
+  margin-left:22%;
+  font-size: 13px;
+}
+
+.box select[name="jobtype"]:focus {
+  border: 1px solid #79A6FE;
+  
+}
+
+p{ color:white;
+}
+
+ #feedback-container {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    border-radius: 5px; 
+    opacity: 1; 
+    transition: opacity 0.5s; 
+  }
+
+  #feedback-container p {
+    margin: 0; /* Remove default margin for the <p> element */
+  }
+
+  /* Styling for the message when it's about to disappear */
+  #feedback-container.hidden {
+    opacity: 0; /* Fade out the message */
+  }
+  
