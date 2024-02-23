@@ -103,7 +103,7 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
-		int technitianId = Integer.parseInt(request.getParameter("technitianId"));
+		int technitianId = 123;
 		appointment.setTechnitianId(technitianId);
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));

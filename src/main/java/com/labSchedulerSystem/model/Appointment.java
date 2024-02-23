@@ -1,5 +1,7 @@
 package com.labSchedulerSystem.model;
 
+import com.labSchedulerSystem.model.Test.TestType;
+
 public class Appointment {
 
 	private int appointmentId;
@@ -17,7 +19,7 @@ public class Appointment {
 	private String seekerPhoneNumber;
 	private String seekerJob;
 	private String seekerCountry;
-	private int testTypeId;
+	private TestType testType;
 	private String testResults;
 	private String testResultsDescription;
 	private String recomendedDoctor;
@@ -157,15 +159,6 @@ public class Appointment {
 		this.seekerName = seekerName;
 	}
 
-
-	public int getTestId() {
-		return testTypeId;
-	}
-
-	public void setTestId(int testId) {
-		this.testTypeId = testId;
-	}
-
 	public String getTestResults() {
 		return testResults;
 	}
@@ -188,6 +181,14 @@ public class Appointment {
 
 	public void setRecomendedDoctor(String recomendedDoctor) {
 		this.recomendedDoctor = recomendedDoctor;
+	}
+
+	public TestType getTestType() {
+		return testType;
+	}
+
+	public void setTestType(TestType testType) {
+		this.testType = testType;
 	}
 
 	public enum Status {
