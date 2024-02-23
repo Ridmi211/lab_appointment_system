@@ -108,8 +108,8 @@ public class AppointmentController extends HttpServlet {
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
-		appointment.setCountry(request.getParameter("country"));
-		appointment.setJob(request.getParameter("job"));
+		appointment.setCountry(request.getParameter("test"));
+		appointment.setJob(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);

@@ -931,7 +931,7 @@ form input, form textarea, form select {
 
 							<div class="row mb-1 mt-1">Select Time</div>
 							<div class="row">
-								<select name="jobtype" id="jobtype" required>
+								<select name="test" id="test" required>
 									<option value="" disabled selected>Select Test Type</option>
 									<%
 									for (TestType type : TestType.values()) {
@@ -947,7 +947,7 @@ form input, form textarea, form select {
 
 							<div class="row mb-1 mt-3">Recommended doctor</div>
 							<div class="row">
-								<input name="job" id="job" required>
+								<input name="doctor" id="doctor" required>
 									<!-- Add job options here -->
 							
 							</div>
@@ -984,9 +984,9 @@ form input, form textarea, form select {
 							<li>Email : <%=user.getEmail()%>
 							</li>
 							<%--   <li >Consultant :<%= consultant.getName() %></li> --%>
-							<li>Selected job : None</li>
+							<!-- <li>Selected job : None</li>
 							<li>Selected country : None</li>
-							<li>Notes : None</li>
+							<li>Notes : None</li> -->
 
 						</div>
 
@@ -1002,12 +1002,6 @@ form input, form textarea, form select {
 						</div>
 
 						<div class="countries">
-							<!-- <h6>  Country you need help with</h6>  -->
-
-
-
-
-
 
 						</div>
 					</div>
@@ -1015,100 +1009,58 @@ form input, form textarea, form select {
 				</div>
 			</div>
 
-
-			<!--bnbnbnbnbnbnb  -->
-
-
-
-
-			<!-- ------------------------------contact-------------------------------- -->
-
-
-
-			<!--      <div class="copyright">
-                <p> Copyright © Ridmi. Made with <i class="fa-solid fa-heart"></i> by Easy Tutorials</p>
-            </div>
  -->
 		</div>
 
 		<!-- --------------------javascript-------------------------- -->
 
 		<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get references to the form and the booking details card
-        const form = document.getElementById("bookingForm");
-        const bookingDetailsCard = document.getElementById("bookingDetailsCard");
+		document.addEventListener("DOMContentLoaded", function () {
+		    const form = document.getElementById("bookingForm");
+		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");
+		    
+		    form.addEventListener("submit", function (e) {
+		        e.preventDefault(); 
+		        
+		        // Get form input values
+		        const date = form.querySelector('input[name="date"]').value;
+		        const testType = form.querySelector('select[name="test"]').value;
+		        const notes = form.querySelector('textarea[name="notes"]').value;
+		        const doctorName = form.querySelector('input[name="doctor"]').value;
+		        // Build the HTML to display the data in the card
+		        const bookingDetailsHTML = `        
+		            Your booking details are as follows
+		            <div class="card-container mt-2">
+		                <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
+		                    <li>Name : <%=user.getName()%></li>
+		                    <li>Email : <%=user.getEmail()%></li>
+		                    <li>Recomended Doctor : ${doctorName}</li>  
+		                    <li>Selected Test: ${testType}</li>
+		                    <li>Notes : ${notes}</li>                                          
+		                </div>                                                                         
+		                <div class="skills" style="padding-left: 30px;">
+		                    <li class="pb-2">Selected date and time</li>
+		                    <ul style="padding-left: 30px;"></ul>
+		                </div>
+		                <div class="countries">
+		                    <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
+		                </div>
+		            </div>
+		        `;
 
-        // Add a submit event listener to the form
-        form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Prevent the form from submitting
+		        // Update the booking details card with the generated HTML
+		        bookingDetailsCard.innerHTML = bookingDetailsHTML;
+		        bookingDetailsCard.style.display = "block";
 
-            // Get form input values
-            const date = form.querySelector('input[name="date"]').value;
-         /*    const time = form.querySelector('select[name="time"]').value; */
-         /*    const country = form.querySelector('select[name="country"]').value;
-            const job = form.querySelector('select[name="job"]').value; */
-            const notes = form.querySelector('textarea[name="notes"]').value;
+		        // Handle the confirm booking button click
+		        const confirmBookingButton = document.getElementById("confirmBookingButton");
+		        confirmBookingButton.addEventListener("click", function () {
+		            // Submit the form
+		            form.submit();
+		        });
+		    });
+		});
 
-            // Build the HTML to display the data in the card
-            const bookingDetailsHTML = `        
-                
-                                     Your booking details are as follows
-                                     <div class="card-container mt-2" >
-                                     <div  style=" padding-left: 30px; text-align: left;line-height: 2.5rem">
-                                      
-                                          <li > Name : <%=user.getName()%>  </li>
-                                          <li >Email : <%=user.getEmail()%> </li>
-                                       <%--    <li >Consultant  :<%= consultant.getName() %></li> 
-                                          <li>Selected job: ${job}</li>
-                                          <li>Selected country : ${country}</li>--%>
-                                          <li>Notes : ${notes}</li>
-                                          
-                                     </div>
-                                                                         
-                                                   
-                                                     <div class="skills" style=" padding-left: 30px; ">
-                                                       <li class="pb-2">Selected date and time</li>
-                                                       <ul style="padding-left: 30px;">
-                                                       <%--   <li>${date}</li>
-                                                       <li>${time}</li>--%>
-                                                     
-                                                          </ul>
-                                                   </div>
-
-                                                   <div class="countries">
-                                                       <!-- <h6>  Country you need help with</h6>  -->
-                                                
-                                                       <div class="countries">
-                                                       <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
-                                                   </div>
-
-                                                    
-                                                      
-                                                </div>
-                                      </div>
-                              
-                
-            `;
-            
-            
-       
-
-            // Update the booking details card with the generated HTML
-            bookingDetailsCard.innerHTML = bookingDetailsHTML;
-
-            // Display the card (you can toggle its visibility)
-            bookingDetailsCard.style.display = "block";
-            
-            const confirmBookingButton = document.getElementById("confirmBookingButton");
-
-            // Add a click event listener to the Confirm booking button
-            confirmBookingButton.addEventListener("click", function () {
-                // Submit the form
-                form.submit();
-            });
-        });
-    });
 </script>
 
 		<!--   <script>
