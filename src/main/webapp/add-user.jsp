@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.labSchedulerSystem.model.Test.TestType" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,21 @@
 				<!-- Add your additional questions here -->
 
 				<p>Please fill following mandatory fields.</p>
-
+				
+				<select name="jobtype" id="jobtype" required>
+    <option value="" disabled selected>Select Test Type</option>
+    <% for (TestType type : TestType.values()) { %>
+        <option value="<%= type.name() %>"><%= type.getDisplayName() %></option>
+    <% } %>
+</select>
+				
+           <!--  <select name="jobtype" id="jobtype" required>
+                <option value="" disabled selected>Select Test Type</option>
+                <option value="BLOOD_TEST">Blood Test</option>
+                <option value="URINE_TEST">Urine Test</option>
+                Add more test types as needed
+            </select>
+ -->
 				<input type="text" name="educationalQualifications"
 					placeholder="Mention your qualifications for this role"
 					id="educationalQualifications" autocomplete="off" required>
@@ -119,11 +134,14 @@
     if (document.querySelector('input[name="usertype"]:checked').value === "ROLE_TECHNITIAN") {
       jobConsultantQuestions.style.display = 'block';
       // Make the additional questions required for job consultants
+       document.querySelector('select[name="jobtype"]').setAttribute('required', 'required');
       document.querySelector('input[name="educationalQualifications"]').setAttribute('required', 'required');
       document.querySelector('input[name="specializedJobs"]').setAttribute('required', 'required');
     } else {
       jobConsultantQuestions.style.display = 'none';
+      
       // Remove the required attribute for the additional questions
+       document.querySelector('select[name="jobtype"]').setAttribute('required', 'required');
       document.querySelector('input[name="educationalQualifications"]').removeAttribute('required');
       document.querySelector('input[name="specializedJobs"]').removeAttribute('required');
     }
@@ -141,10 +159,11 @@
   form.addEventListener('submit', function (event) {
     if (document.querySelector('input[name="usertype"]:checked').value === "ROLE_TECHNITIAN") {
       // Check if additional questions are answered when "Job Consultant" is selected
+      const testType = document.querySelector('select[name="jobtype"]').value;
       const educationalQualifications = document.querySelector('input[name="educationalQualifications"]').value;
       const specializedJobs = document.querySelector('input[name="specializedJobs"]').value;
 
-      if (!educationalQualifications || !specializedCountries || !specializedJobs) {
+      if (!educationalQualifications || !specializedCountries || !jobtype) {
         event.preventDefault(); // Prevent form submission if additional questions are not answered
         alert('Please answer the additional questions for Job Consultants.');
       }

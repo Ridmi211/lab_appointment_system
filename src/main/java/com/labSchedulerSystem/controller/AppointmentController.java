@@ -103,8 +103,8 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
-		int consultantId = Integer.parseInt(request.getParameter("consultantId"));
-		appointment.setConsultantId(consultantId);
+		int technitianId = Integer.parseInt(request.getParameter("technitianId"));
+		appointment.setTechnitianId(technitianId);
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
@@ -114,7 +114,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);
 			if (savedAppointment) {
-				User consultant = getUserService().fetchSingleUser(consultantId);
+				User consultant = getUserService().fetchSingleUser(technitianId);
 				User seeker = getUserService().fetchSingleUser(seekerId);
 				AppointmentService.sendAppointmentConfirmationEmail(appointment, consultant, seeker);
 				message = "The appointment request has been successfully submitted!";
@@ -269,11 +269,11 @@ public class AppointmentController extends HttpServlet {
 
 	private void acceptAppointmentAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+		int appointmentId = Integer.parseInt(request.getParameter("technitianId"));
 		try {
 			if (getAppointmentService().acceptAppointmentAdmin(appointmentId)) {
 				Appointment approvedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(approvedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(approvedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(approvedAppointment.getSeekerId());
 				AppointmentService.sendNewAppointmentNotificationEmail(approvedAppointment, consultant, seeker);
 				message = "Appointment has been approved!";
@@ -294,7 +294,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().cancelAppointmentAdmin(appointmentId)) {
 				Appointment canceledAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(canceledAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(canceledAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(canceledAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCancellationEmail(canceledAppointment, consultant, seeker);
 				message = "Appointment has been canceled due to unavoidable reasons.";
@@ -317,7 +317,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().cancelAppointmentSeeker(appointmentId)) {
 				Appointment canceledAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(canceledAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(canceledAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(canceledAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCancellationBySeekerEmailToSeeker(canceledAppointment, consultant,
 						seeker);
@@ -343,7 +343,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().acceptAppointmentCon(appointmentId)) {
 				Appointment acceptedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(acceptedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(acceptedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(acceptedAppointment.getSeekerId());
 				AppointmentService.sendAppointmentAcceptedEmail(acceptedAppointment, consultant, seeker);
 				message = "Appointment has been accepted!";
@@ -385,7 +385,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().completedAppointment(appointmentId)) {
 				Appointment completedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(completedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(completedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(completedAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCompletedEmail(completedAppointment, consultant, seeker);
 				message = "Appointment has been marked as completed!";
@@ -633,7 +633,7 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(Integer.parseInt(request.getParameter("appointmentId")));
 		appointment.setSeekerId(Integer.parseInt(request.getParameter("seekerId")));
-		appointment.setConsultantId(Integer.parseInt(request.getParameter("consultantId")));
+		appointment.setTechnitianId(Integer.parseInt(request.getParameter("consultantId")));
 		appointment.setScheduledDate(request.getParameter("scheduledDate"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));

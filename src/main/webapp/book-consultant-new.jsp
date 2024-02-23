@@ -973,14 +973,14 @@ button.primary.ghost {
                 </select>
             </div>
 
-            <div class="row mb-1 mt-3">Select the country</div>
+            <div class="row mb-1 mt-3">Select the test Type</div>
             <div class="row">
                 <select name="country" id="country" required>
                     <!-- Add country options here -->
                 </select>
             </div>
 
-            <div class="row mb-1 mt-3">Select the job</div>
+            <div class="row mb-1 mt-3">Recommended doctor</div>
             <div class="row">
                 <select name="job" id="job" required>
                     <!-- Add job options here -->

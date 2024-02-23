@@ -37,7 +37,7 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public boolean addUser(User user) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO user(`name`,`phoneNumber`,`email`, `password`,`birthdate`,`gender`,`educationalQualifications`,`specializedJobs`,`accessRight`,`registrationStatus`,`registrationDate`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO user(`name`,`phoneNumber`,`email`, `password`,`birthdate`,`gender`,`educationalQualifications`,`specializedJobs`,`accessRight`,`registrationStatus`,`registrationDate`,`testType`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getPhoneNumber());
@@ -50,6 +50,7 @@ public class UserManagerImpl implements UserManager {
 		ps.setString(9, user.getAccessRight().toString());
 		ps.setString(10, user.getRegistrationStatus().toString());
 		ps.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
+		ps.setString(12, user.getSelectedTestType().toString());
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
