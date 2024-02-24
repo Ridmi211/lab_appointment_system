@@ -7,6 +7,17 @@
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
 <%@ page import="com.labSchedulerSystem.model.Test"%>
+<%@ page import="com.labSchedulerSystem.model.User"%>
+<%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
+<%@ page import="com.labSchedulerSystem.service.UserService"%>
+<%@ page import="com.labSchedulerSystem.service.MessageService"%>
+
+
+<%@ page import="java.time.Year"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
+
 
 <%
 User user = (User) session.getAttribute("user");
@@ -819,6 +830,25 @@ form input, form textarea, form select {
 
 		<div class="container">
 			<div class="row">
+			<%
+// Retrieve the test ID from the URL query parameter
+String testIdString = request.getParameter("testId");
+int testId = Integer.parseInt(testIdString);
+
+			AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
+			AppointmentService appointmentService = AppointmentService.getAppointmentService();
+// Assuming you have a method to fetch test details by ID
+Test test1 = appointmentManager.fetchSingleTest(testId);
+
+// Display test details as needed
+%>
+<div>
+    Test ID: <%= test1.getTestId() %><br>
+    Test Type: <%= test1.getType().getDisplayName() %><br>
+    Description: <%= test1.getDescription() %><br>
+    Cost: Rs.<%= test1.getCost() %><br>
+    <!-- Add more details as needed -->
+</div>
 				<%-- <div class="col-sm mb-5">
             <div class="work">
                 <div class="card-container">

@@ -959,7 +959,7 @@ input[type="text"] {
 
 						</div>
 						<div class="layer">
-							<a href="book-test-new.jsp">
+							<a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
 								<div class="btn btn2">
 									<i class="fa-regular fa-calendar-check"></i> Book
 
