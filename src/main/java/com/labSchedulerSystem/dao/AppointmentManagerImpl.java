@@ -22,6 +22,8 @@ import com.labSchedulerSystem.dao.dbUtils.DbDriverManagerFactory;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.RegistrationStatus;
+import com.labSchedulerSystem.model.Test;
+import com.labSchedulerSystem.model.Test.TestType;
 import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
 
@@ -128,6 +130,31 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		connection.close();
 		return appointment;
 	}
+	
+	@Override
+	public Test fetchSingleTestByType(String testType) throws SQLException, ClassNotFoundException {
+	    Connection connection = getConnection();
+	    String query = "SELECT * FROM test WHERE type = ?";
+	    PreparedStatement ps = connection.prepareStatement(query);
+	    ps.setString(1, testType);
+	    ResultSet rs = ps.executeQuery();
+	    
+	    Test test = null;
+	    if (rs.next()) {
+	        test = new Test(null, query);
+	        test.setTestId(rs.getInt("testId"));
+	        test.setType(TestType.valueOf(rs.getString("type")));
+	        test.setDescription(rs.getString("description"));
+	        // Add other properties if needed
+	    }
+	    
+	    rs.close();
+	    ps.close();
+	    connection.close();
+	    
+	    return test;
+	}
+
 
 	@Override
 	public List<Appointment> fetchAllAppointments() throws SQLException, ClassNotFoundException {

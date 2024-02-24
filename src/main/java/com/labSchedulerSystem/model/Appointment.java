@@ -19,7 +19,7 @@ public class Appointment {
 	private String seekerPhoneNumber;
 	private String seekerJob;
 	private String seekerCountry;
-	private TestType testType;
+	private String testType;
 	private String testResults;
 	private String testResultsDescription;
 	private String recomendedDoctor;
@@ -183,11 +183,11 @@ public class Appointment {
 		this.recomendedDoctor = recomendedDoctor;
 	}
 
-	public TestType getTestType() {
+	public String getTestType() {
 		return testType;
 	}
 
-	public void setTestType(TestType testType) {
+	public void setTestType(String testType) {
 		this.testType = testType;
 	}
 

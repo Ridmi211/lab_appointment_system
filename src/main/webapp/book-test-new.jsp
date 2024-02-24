@@ -6,6 +6,7 @@
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
+<%@ page import="com.labSchedulerSystem.model.Test"%>
 
 <%
 User user = (User) session.getAttribute("user");
@@ -1013,7 +1014,7 @@ form input, form textarea, form select {
 		</div>
 
 		<!-- --------------------javascript-------------------------- -->
-
+<%-- 
 		<script>
 		document.addEventListener("DOMContentLoaded", function () {
 		    const form = document.getElementById("bookingForm");
@@ -1028,6 +1029,9 @@ form input, form textarea, form select {
 		        const notes = form.querySelector('textarea[name="notes"]').value;
 		        const doctorName = form.querySelector('input[name="doctor"]').value;
 		        // Build the HTML to display the data in the card
+		        
+		       
+		          
 		        const bookingDetailsHTML = `        
 		            Your booking details are as follows
 		            <div class="card-container mt-2">
@@ -1061,31 +1065,78 @@ form input, form textarea, form select {
 		    });
 		});
 
-</script>
+</script> --%>
 
-		<!--   <script>
-            // Get the date input element
-            const dateInput = document.getElementById("date");
-    
-            // Replace this with your consultant's available days
-            const availableDays = ["Monday", "Tuesday", "Wednesday"]; // Example available days
-    
-            dateInput.addEventListener("input", function() {
-                // Get the selected date
-                const selectedDate = dateInput.value;
-    
-                // Get the current day of the week (e.g., "Monday")
-                const currentDay = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
-    
-                if (availableDays.includes(currentDay)) {
-                    // The selected date is available
-                    dateInput.setCustomValidity(""); // Clear any custom validation messages
-                } else {
-                    // The selected date is unavailable
-                    dateInput.setCustomValidity("Consultant is not available on " + currentDay);
-                }
-            });
-        </script> -->
+	  <script>
+	  document.addEventListener("DOMContentLoaded", function () {
+		    const form = document.getElementById("bookingForm");
+		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");
+		    
+		    form.addEventListener("submit", async function (e) {
+		        e.preventDefault(); 
+		        
+		        // Get form input values
+		        const date = form.querySelector('input[name="date"]').value;
+		        const testType = form.querySelector('select[name="test"]').value;
+		        const notes = form.querySelector('textarea[name="notes"]').value;
+		        const doctorName = form.querySelector('input[name="doctor"]').value;
+
+		        try {
+		            // Fetch test details based on the selected test type
+		            const testDetails = await fetchTestDetails(testType);
+		            
+		            // Build the HTML to display the data in the card
+		            const bookingDetailsHTML = `        
+		                Your booking details are as follows
+		                <div class="card-container mt-2">
+		                    <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
+		                        <li>Name : <%=user.getName()%></li>
+		                        <li>Email : <%=user.getEmail()%></li>
+		                        <li>Recomended Doctor : ${doctorName}</li>  
+		                        <li>Selected Test: ${testType}</li>
+		                        <li>Test Description: ${testDetails.description}</li>
+		                        <li>Notes : ${notes}</li>                                          
+		                    </div>                                                                         
+		                    <div class="skills" style="padding-left: 30px;">
+		                        <li class="pb-2">Selected date and time</li>
+		                        <ul style="padding-left: 30px;"></ul>
+		                    </div>
+		                    <div class="countries">
+		                        <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
+		                    </div>
+		                </div>
+		            `;
+
+		            // Update the booking details card with the generated HTML
+		            bookingDetailsCard.innerHTML = bookingDetailsHTML;
+		            bookingDetailsCard.style.display = "block";
+
+		            // Handle the confirm booking button click
+		            const confirmBookingButton = document.getElementById("confirmBookingButton");
+		            confirmBookingButton.addEventListener("click", function () {
+		                // Submit the form
+		                form.submit();
+		            });
+		        } catch (error) {
+		            console.error('Error:', error);
+		        }
+		    });
+
+		    // Function to fetch test details from the backend
+		    async function fetchTestDetails(testType) {
+		        try {
+		            const response = await fetch(`/fetch-single-test?testType=${testType}`);
+		            if (!response.ok) {
+		                throw new Error('Failed to fetch test details');
+		            }
+		            return await response.json();
+		        } catch (error) {
+		            throw error;
+		        }
+		    }
+		});
+
+        </script> 
 
 
 

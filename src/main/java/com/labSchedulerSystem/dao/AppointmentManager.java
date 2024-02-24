@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Appointment.Status;
+import com.labSchedulerSystem.model.Test;
 
 public interface AppointmentManager {
 
@@ -49,5 +50,7 @@ public interface AppointmentManager {
 
 	public List<Appointment> fetchAdminRequestedAppointments(int loggedInUserId)
 			throws SQLException, ClassNotFoundException;
+
+	public Test fetchSingleTestByType(String testType) throws SQLException, ClassNotFoundException;
 
 }
