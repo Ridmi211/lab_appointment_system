@@ -191,7 +191,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
-			style="background-image: url(https://cms-assets.tenderhut.com/bd14f8d2-e5c1-01a7-9b17-22610a939083/assets/3b00356d-cb7a-4576-823e-e9cded4f7c39/5.png);">
+			style="background-image: url(https://wallpapers.com/images/hd/medical-background-cjge7e89adg6ub8x.jpg);">
 
 			<div class="container d-flex justify-content-center p-0 m-0">
 

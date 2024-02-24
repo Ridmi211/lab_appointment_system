@@ -890,7 +890,7 @@ input[type="text"] {
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
-			style="background-image: url(https://remodelerplatform.blob.core.windows.net/wwwsolarmaxtechcom/gallery/original/b1954715-acfa-42f4-8c83-6de06a836d44.jpg);">
+			style="background-image: url(https://wallpapercave.com/wp/wp2968506.jpg);">
 
 			<div class="container d-flex justify-content-center p-0 m-0">
 
@@ -943,18 +943,28 @@ input[type="text"] {
 							<!-- Add image, name, and other details for the test -->
 							<div class="name">
 								<%=test.getType().getDisplayName()%>
+								
 							</div>
-							<div class="description">
-								Description:
-								<%=test.getDescription()%></div>
+							<div class="countries">
+							<h6>
+								<%=test.getDescription()%>
+							</h6>
+							</div>
+							<div class="skills">
+								<ul>
+									<li> Rs.<%=test.getCost()%></li>
+								</ul>
+							</div>
+
+
 						</div>
 						<div class="layer">
+							<a href="book-test-new.jsp">
+								<div class="btn btn2">
+									<i class="fa-regular fa-calendar-check"></i> Book
 
-							<div class="btn btn2">
-								<a href="book-test-new.jsp"> <i
-									class="fa-regular fa-calendar-check"></i> Book
-								</a>
-							</div>
+								</div>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -995,7 +1005,7 @@ input[type="text"] {
 	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-		
+
 
 	</div>
 

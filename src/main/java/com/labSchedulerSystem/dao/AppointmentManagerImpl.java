@@ -142,6 +142,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			 test.setTestId(rs.getInt("testId"));
 		        test.setType(TestType.valueOf(rs.getString("type")));
 		        test.setDescription(rs.getString("description"));
+		        test.setCost(rs.getString("cost"));
 		        testList.add(test);
 		}
 		st.close();
@@ -161,6 +162,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			 test.setTestId(rs.getInt("testId"));
 		        test.setType(TestType.valueOf(rs.getString("type")));
 		        test.setDescription(rs.getString("description"));
+		        test.setCost(rs.getString("cost"));
 		}
 		ps.close();
 		connection.close();
@@ -181,6 +183,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	        test.setTestId(rs.getInt("testId"));
 	        test.setType(TestType.valueOf(rs.getString("type")));
 	        test.setDescription(rs.getString("description"));
+	        test.setCost(rs.getString("cost"));
 	        // Add other properties if needed
 	    }
 	    

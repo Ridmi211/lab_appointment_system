@@ -8,6 +8,11 @@ public class Test {
 	private int testId;
     private TestType type;
     private String description;
+    private String cost;
+    private String reportReadyIn;
+    private String measurementUnit;
+    private String lowReferenceRange;
+    private String highReferenceRange;
 
     public Test(TestType type, String description) {
         this.type = type;
@@ -43,6 +48,56 @@ public class Test {
 	}
 
 	
+	public String getReportReadyIn() {
+		return reportReadyIn;
+	}
+
+
+	public void setReportReadyIn(String reportReadyIn) {
+		this.reportReadyIn = reportReadyIn;
+	}
+
+
+	public String getMeasurementUnit() {
+		return measurementUnit;
+	}
+
+
+	public void setMeasurementUnit(String measurementUnit) {
+		this.measurementUnit = measurementUnit;
+	}
+
+
+	public String getLowReferenceRange() {
+		return lowReferenceRange;
+	}
+
+
+	public void setLowReferenceRange(String lowReferenceRange) {
+		this.lowReferenceRange = lowReferenceRange;
+	}
+
+
+	public String getHighReferenceRange() {
+		return highReferenceRange;
+	}
+
+
+	public void setHighReferenceRange(String highReferenceRange) {
+		this.highReferenceRange = highReferenceRange;
+	}
+
+
+	public String getCost() {
+		return cost;
+	}
+
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+
 	public enum TestType {
 	    BLOOD_TEST("Blood Test"),
 	    URINE_TEST("Urine Test"),
