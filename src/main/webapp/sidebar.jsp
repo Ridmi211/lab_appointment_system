@@ -165,7 +165,8 @@ User user = (User) session.getAttribute("user");
     
   <% } %>
       <div class="normal-content">
-<a href="book-test-new.jsp" >
+<!-- <a href="book-test-new.jsp" > -->
+<a href="getAppointment?appactiontype=allTests" >
   <i class="fa-regular fa-calendar-check"></i>
     <span>Book Tests</span>
   </a>

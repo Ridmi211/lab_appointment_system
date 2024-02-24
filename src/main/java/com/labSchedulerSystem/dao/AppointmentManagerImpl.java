@@ -131,6 +131,43 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return appointment;
 	}
 	
+	
+	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		String query = "SELECT * FROM test ";
+		Statement st = connection.createStatement();
+		List<Test> testList = new ArrayList<>();
+		ResultSet rs = st.executeQuery(query);
+		while (rs.next()) {
+			Test test = new Test(null, query);
+			 test.setTestId(rs.getInt("testId"));
+		        test.setType(TestType.valueOf(rs.getString("type")));
+		        test.setDescription(rs.getString("description"));
+		        testList.add(test);
+		}
+		st.close();
+		connection.close();
+		return testList;
+	}
+	
+	@Override
+	public Test fetchSingleTest(int testId) throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		String query = "SELECT * FROM test WHERE testId = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1, testId);
+		ResultSet rs = ps.executeQuery();
+		Test test = new Test(null, query);
+		while (rs.next()) {
+			 test.setTestId(rs.getInt("testId"));
+		        test.setType(TestType.valueOf(rs.getString("type")));
+		        test.setDescription(rs.getString("description"));
+		}
+		ps.close();
+		connection.close();
+		return test;
+	}
+	
 	@Override
 	public Test fetchSingleTestByType(String testType) throws SQLException, ClassNotFoundException {
 	    Connection connection = getConnection();

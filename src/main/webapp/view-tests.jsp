@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
     <%@ page import="com.labSchedulerSystem.model.User" %>
     <%@ page import="com.labSchedulerSystem.model.AccessRight" %>
+      <%@ page import="com.labSchedulerSystem.model.Test" %>
     
 <%@ page import="java.util.ArrayList" %>
 
@@ -958,7 +959,7 @@ User user = (User) session.getAttribute("user");
   </div>
   
 
-  
+ <%--  
   
   <div class="row mt-5" style="color:#3f2e59;">
      <div class="col-2"> </div>
@@ -1037,25 +1038,9 @@ if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
                             <span class="pro">PRO</span>
                             <img class="round" src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg" alt="user" />
                            <br> <div class="name"> <%= user2.getName() %>  </div>
-                          
-                          <%--    <div class="qualifications">
-                               
-                                <ul>
-                                      <%
-                                        String educationalQualifications = user2.getEducationalQualifications();
-                                        if (educationalQualifications != null && !educationalQualifications.isEmpty()) {
-                                            String[] edus = educationalQualifications.split(",");
-                                            for (String edu : edus) {
-                                    %>
-                                    <li><%= edu.trim() %></li>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </ul>
-                            </div> --%>
+                         
                              <div class="countries">
-                               <%--  <h6>   <%= user.getSpecializedCountries() %></h6> --%>
+                                <h6>   <%= user.getSpecializedCountries() %></h6>
                                 <ul>
                                       <%
                                         String specializedCountries = user2.getSpecializedJobs();
@@ -1088,59 +1073,18 @@ if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
                             </div>
                         </div>
                         <div class="layer">
-                           <%--  <div class="days">
-                                <h6>  Available Days</h6>
-                                <ul>
-                                     <%
-                                        String availableDays = user2.getAvailableDays();
-                                        if (availableDays != null && !availableDays.isEmpty()) {
-                                            String[] days = availableDays.split(",");
-                                            for (String day : days) {
-                                    %>
-                                    <li><%= day.trim() %></li>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </ul>
-                            </div> --%>
-                        <%--     <div class="days">
-                                <h6>Available Time Slots</h6>
-                                 <ul>
-                                   
-                                     <%
-                                        String availableTimeSlots = user2.getAvailableTimeSlots();
-                                        if (availableTimeSlots != null && !availableTimeSlots.isEmpty()) {
-                                            String[] timeSlots = availableTimeSlots.split(",");
-                                            for (String timeSlot : timeSlots) {
-                                    %>
-                                    <li><%= timeSlot.trim() %></li>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </ul>
-                            </div> --%>
-                     <!-- 
-                          <button  class="btn primary"><i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now </button> -->
-                          
- <%--                          
-        <form action="usermanager" method="post">
-    <input type="hidden" name="userId" value="${user2.userId}">
-    <input type="hidden" name="useractiontype" value="viewConsultant">
-    <button type="submit" class="btn btn-primary">View</button>
-</form> --%>
+                         
  <form action="usermanager" method="post">
     <input type="hidden" name="userId" value="<%= String.valueOf(user2.getUserId()).trim() %>">
     <input type="hidden" name="useractiontype" value="viewConsultant">
     <button type="submit" class="btn btn2">View</button>
 </form> 
 
-                         <%-- <a href="UserController?useractiontype=viewConsultant&userId=<%= user2.getUserId() %>">View Consultant</a>
- --%>
+                         <a href="UserController?useractiontype=viewConsultant&userId=<%= user2.getUserId() %>">View Consultant</a>
+
                           
-                       <%--    <a href="book-consultant-new.jsp?userId=<%= user2.getUserId() %>" class="btn primary">
-    <i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now --%>
+                          <a href="book-consultant-new.jsp?userId=<%= user2.getUserId() %>" class="btn primary">
+    <i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now
 </a>
                           
                           
@@ -1154,7 +1098,81 @@ if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
                    <% } %>
                 </div>
               </div>
+        </div> --%>
+        
+
+
+        
+        
+        <!-- Add input fields for filtering by test type -->
+<!-- <div class="row mt-5" style="color:#3f2e59;">
+    <div class="col-2"> </div>
+    <div class="col-3">
+        <label for="filterTestType">Filter by Test Type:</label>
+        <input type="text" id="filterTestType" placeholder="Enter test type" name="filterTestType">
+    </div>
+    <div class="col-2">
+        <button class="btn-purple mt-4" onclick="applyFilter()">Apply Filter</button>
+    </div>
+    <div class="col-5"> </div>
+</div>
+
+ -->
+        
+<%
+String selectedTestType = request.getParameter("filterTestType");
+
+List<Test> tests = (List<Test>) request.getAttribute("tests");
+
+List<Test> filteredTests = new ArrayList<Test>();
+
+if (selectedTestType != null && !selectedTestType.isEmpty()) {
+    // Filter by test type
+    for (Test test : tests) {
+        Test.TestType type = test.getType(); // Get the TestType enum
+        if (type != null && type.getDisplayName().equals(selectedTestType)) {
+            filteredTests.add(test);
+        }
+    }
+} else {
+    // No test type selected, show all tests
+    filteredTests = tests;
+}
+%>
+
+<!-- Display filtered tests -->
+<div class="row p-0 pb-5" style="margin-left: 140px; margin-top:30px;">
+    <div class="container">
+        <div class="row">
+            <% for (Test test : filteredTests) { %>
+            <div class="col-sm mb-5">
+                <div class="work">
+                    <div class="card-container">
+                       
+                        <!-- Add image, name, and other details for the test -->
+                        <div class="name"> <%= test.getType().getDisplayName() %> </div>
+                        <div class="description">Description: <%= test.getDescription() %></div>
+                    </div>
+                    <div class="layer">
+							
+							<form action="appointmentManager" method="post">
+								<input type="hidden" name="testId"
+									value="<%=String.valueOf(test.getTestId()).trim()%>">
+								<input type="hidden" name="appactiontype"
+									value="viewTest">
+								<button type="submit" class="btn btn2">View</button>
+							</form>
+
+							</a>
+		<!-- <a href="add-user.jsp"  class="btn primary"><i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now</a> -->
+						</div>
+                </div>
+            </div>
+            <% } %>
         </div>
+    </div>
+</div>
+        
 <!--bnbnbnbnbnbnb  -->
 
 
@@ -1236,23 +1254,22 @@ if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
         });
     } */
     
-    function applyFilter() {
+
+    
+   /*  function applyFilter() {
         // Get the values entered by the user in the text input fields
-        var selectedCountry = document.getElementById("filterCountry").value;
-        var selectedJob = document.getElementById("filterJob").value;
+        var selectedTestType = document.getElementById("filterTestType").value;
 
         // Loop through the consultants and display only those that match the filter criteria
         var consultants = document.querySelectorAll(".work");
         consultants.forEach(function (consultant) {
-            var countries = consultant.querySelector(".countries");
+            var countries = consultant.querySelector(".name");
             var countriesText = countries.textContent.toLowerCase();
 
-            var jobs = consultant.querySelector(".skills");
-            var jobsText = jobs.textContent.toLowerCase();
 
             // Check if the user input is found in the consultant's countries or jobs
             if (
-                (selectedCountry === "" || countriesText.includes(selectedCountry.toLowerCase())) &&
+                (selectedCountry === "" || countriesText.includes(selectedTestType.toLowerCase())) &&
                 (selectedJob === "" || jobsText.includes(selectedJob.toLowerCase()))
             ) {
                 consultant.style.display = "block";
@@ -1261,7 +1278,7 @@ if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
             }
         });
     }
-
+ */
 </script>
 
 

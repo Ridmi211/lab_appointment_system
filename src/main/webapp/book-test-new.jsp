@@ -22,7 +22,7 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register for test</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -31,7 +31,7 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous"></script>
 
 <meta charset="utf-8">
-<title>Job-Seekers</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -792,7 +792,7 @@ form input, form textarea, form select {
 	</div>
 
 	<%
-	User consultant = (User) request.getAttribute("consultant");
+	Test test = (Test) request.getAttribute("test");
 	%>
 
 	<div class="row p-5 pb-0 m-0 mt-5" style="text-align: center;">
@@ -819,16 +819,18 @@ form input, form textarea, form select {
 
 		<div class="container">
 			<div class="row">
-				<%--  <div class="col-sm mb-5">
+				<div class="col-sm mb-5">
             <div class="work">
                 <div class="card-container">
                     <span class="pro">PRO</span>
                     <img class="round" src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg" alt="user" />
                     <br>
-                    <div class="name"><%= consultant.getName() %></div>
-                    <h6><%= consultant.getOccupation() %></h6>
+                    <div class="name"><%= test.getTestId() %></div>
+                          <div class="name"> <%= test.getType().getDisplayName() %> </div>
+                        <div class="description">Description: <%= test.getDescription() %></div>
+                  
                     <div class="qualifications">
-                        <ul>
+                    <%--     <ul>
                             <%
                                 String educationalQualifications = consultant.getEducationalQualifications();
                                 if (educationalQualifications != null && !educationalQualifications.isEmpty()) {
@@ -840,11 +842,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul>
+                        </ul> --%>
                     </div>
                     <div class="countries">
                         <h6>Specialized Countries</h6>
-                       <ul id="availableCountriesList">
+                    <%--    <ul id="availableCountriesList">
                             <%
                                 String specializedCountries = consultant.getSpecializedCountries();
                                 if (specializedCountries != null && !specializedCountries.isEmpty()) {
@@ -856,11 +858,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul>
+                        </ul> --%>
                     </div>
                     <div class="skills">
                         <h6>Specialized Jobs</h6>
-                        <ul id="availableJobsList">
+                      <%--   <ul id="availableJobsList">
                             <%
                                 String specializedJobs = consultant.getSpecializedJobs();
                                 if (specializedJobs != null && !specializedJobs.isEmpty()) {
@@ -872,13 +874,13 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul>
+                        </ul> --%>
                     </div>
                 </div>
                 <div class="layer">
                     <div class="days">
                         <h6>Available Days</h6>
-                       <ul id="availableDaysList">
+                      <%--  <ul id="availableDaysList">
                             <%
                                 String availableDays = consultant.getAvailableDays();
                                 if (availableDays != null && !availableDays.isEmpty()) {
@@ -890,11 +892,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul>
+                        </ul> --%>
                     </div>
                     <div class="days">
                         <h6>Available Time Slots</h6>
-                        <ul id="availableTimeSlotsList">
+                       <%--  <ul id="availableTimeSlotsList">
                             <%
                                 String availableTimeSlots = consultant.getAvailableTimeSlots();
                                 if (availableTimeSlots != null && !availableTimeSlots.isEmpty()) {
@@ -906,11 +908,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul>
+                        </ul> --%>
                     </div>
                 </div>
             </div>
-        </div> --%>
+        </div> 
 
 
 

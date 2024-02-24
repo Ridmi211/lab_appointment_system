@@ -7,6 +7,7 @@ import com.labSchedulerSystem.dao.AppointmentManager;
 import com.labSchedulerSystem.dao.AppointmentManagerImpl;
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.RegistrationStatus;
+import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
 
@@ -46,6 +47,10 @@ public class AppointmentService {
 	public Appointment fetchSingleAppointment(int appointmentId) throws ClassNotFoundException, SQLException {
 		return getAppointmentManager().fetchSingleAppointment(appointmentId);
 	}
+	
+	public Test fetchSingleTest(int testId) throws ClassNotFoundException, SQLException {
+		return getAppointmentManager().fetchSingleTest(testId);
+	}
 
 	public List<Appointment> fetchAllAppointments() throws ClassNotFoundException, SQLException {
 		return getAppointmentManager().fetchAllAppointments();
@@ -57,6 +62,10 @@ public class AppointmentService {
 
 	public List<Appointment> fetchAdminRequestedAllAppointments() throws ClassNotFoundException, SQLException {
 		return getAppointmentManager().fetchAdminRequestedAllAppointments();
+	}
+	
+	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException {
+		return getAppointmentManager().fetchAllTests();
 	}
 
 	public List<Appointment> fetchAllCompletedAppointments() throws ClassNotFoundException, SQLException {
