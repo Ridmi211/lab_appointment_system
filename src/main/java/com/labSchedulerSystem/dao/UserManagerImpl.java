@@ -368,17 +368,18 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public boolean editUser(User user) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE user SET name =?,phoneNumber=?,email=?,birthdate=?,gender=?,occupation=?,country=?,educationalQualifications=?,specializedCountries=?,specializedJobs=?,accessRight=?,availableDays=?,availableTimeSlots=? WHERE userId=?";
+		String query = "UPDATE user SET name =?,phoneNumber=?,email=?,birthdate=?,gender=?,educationalQualifications=?,specializedJobs=?,accessRight=? WHERE userId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getPhoneNumber());
 		ps.setString(3, user.getEmail());
 		ps.setString(4, user.getBirthdate());
 		ps.setString(5, user.getGender());
-		ps.setString(8, user.getEducationalQualifications());
-		ps.setString(10, user.getSpecializedJobs());
-		ps.setString(11, user.getAccessRight().toString());
-		ps.setInt(14, user.getUserId());
+		ps.setString(6, user.getEducationalQualifications());
+		ps.setString(7, user.getSpecializedJobs());
+		ps.setString(8, user.getAccessRight().toString());
+		ps.setInt(9, user.getUserId());
+		
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;

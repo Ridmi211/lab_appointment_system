@@ -189,29 +189,29 @@ body{
     <input class="form-control" type="date" id="birthdate" name="birthdate" value="${user.birthdate}"/>
       <label for="gender">Gender:</label>
     <input class="form-control" type="text" id="gender" name="gender" value="${user.gender}"/>
-      <label for="occupation">Occupation:</label>
+     <%--  <label for="occupation">Occupation:</label>
     <input class="form-control" type="text" id="occupation" name="occupation" value="${user.occupation}"/>
     <label for="country">Country:</label>
-    <input class="form-control" type="text" id="country" name="country" value="${user.country}"/>
+    <input class="form-control" type="text" id="country" name="country" value="${user.country}"/> --%>
   
     
     
     
-    <c:if test="${user.accessRight == 'ROLE_CONSULTANT'}">
+    <c:if test="${user.accessRight == 'ROLE_TECHNITIAN'}">
     <label for="educationalQualifications">Educational Qualifications:</label>
     <input class="form-control" type="text" id="educationalQualifications" name="educationalQualifications" value="${user.educationalQualifications}"/>
     
-    <label for="specializedCountries">Specialized Countries:</label>
+<%--     <label for="specializedCountries">Specialized Countries:</label>
     <input class="form-control" type="text" id="specializedCountries" name="specializedCountries" value="${user.specializedCountries}"/>
-    
+     --%>
     <label for="specializedJobs">Specialized Jobs:</label>
     <input class="form-control" type="text" id="specializedJobs" name="specializedJobs" value="${user.specializedJobs}"/>
-    
-      <label for="availableDays">availableDays:</label>
-    <input class="form-control" type="text" id="availableDays" name="availableDays" value="${user.availableDays}"/>
-    
+   
+   <%--    <label for="availableDays">availableDays:</label>
+    <input class="form-control" type="text" id="selectedTestType" name="selectedTestType" value="${user.selectedTestType}"/> --%>
+    <%-- 
       <label for="availableTimeSlots">availableTimeSlotss:</label>
-    <input class="form-control" type="text" id="availableTimeSlots" name="availableTimeSlots" value="${user.availableTimeSlots}"/>
+    <input class="form-control" type="text" id="availableTimeSlots" name="availableTimeSlots" value="${user.availableTimeSlots}"/>  --%>
 </c:if>
    
 
