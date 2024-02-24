@@ -802,9 +802,9 @@ form input, form textarea, form select {
 		</div>
 	</div>
 
-	<%
+	<%-- 	<%
 	Test test = (Test) request.getAttribute("test");
-	%>
+	%> --%>
 
 	<div class="row p-5 pb-0 m-0 mt-5" style="text-align: center;">
 
@@ -830,84 +830,62 @@ form input, form textarea, form select {
 
 		<div class="container">
 			<div class="row">
-			<%
-// Retrieve the test ID from the URL query parameter
-String testIdString = request.getParameter("testId");
-int testId = Integer.parseInt(testIdString);
+				<%
+				// Retrieve the test ID from the URL query parameter
+				String testIdString = request.getParameter("testId");
+				int testId = Integer.parseInt(testIdString);
 
-			AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
-			AppointmentService appointmentService = AppointmentService.getAppointmentService();
-// Assuming you have a method to fetch test details by ID
-Test test1 = appointmentManager.fetchSingleTest(testId);
+				AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
+				AppointmentService appointmentService = AppointmentService.getAppointmentService();
+				// Assuming you have a method to fetch test details by ID
+				Test test1 = appointmentManager.fetchSingleTest(testId);
 
-// Display test details as needed
-%>
-<div>
-    Test ID: <%= test1.getTestId() %><br>
-    Test Type: <%= test1.getType().getDisplayName() %><br>
-    Description: <%= test1.getDescription() %><br>
-    Cost: Rs.<%= test1.getCost() %><br>
-    <!-- Add more details as needed -->
-</div>
-				<%-- <div class="col-sm mb-5">
-            <div class="work">
-                <div class="card-container">
-                    <span class="pro">PRO</span>
-                    <img class="round" src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg" alt="user" />
-                    <br>
-                    <div class="name"><%= test.getTestId() %></div>
-                          <div class="name"> <%= test.getType().getDisplayName() %> </div>
-                        <div class="description">Description: <%= test.getDescription() %></div>
-                  
-                    <div class="qualifications">
-                        <ul>
-                            <%
-                                String educationalQualifications = consultant.getEducationalQualifications();
-                                if (educationalQualifications != null && !educationalQualifications.isEmpty()) {
-                                    String[] edus = educationalQualifications.split(",");
-                                    for (String edu : edus) {
-                            %>
-                            <li><%= edu.trim() %></li>
-                            <%
-                                    }
-                                }
-                            %>
-                        </ul>
-                    </div>
-                    <div class="countries">
-                        <h6>Specialized Countries</h6>
-                       <ul id="availableCountriesList">
-                            <%
-                                String specializedCountries = consultant.getSpecializedCountries();
-                                if (specializedCountries != null && !specializedCountries.isEmpty()) {
-                                    String[] countries = specializedCountries.split(",");
-                                    for (String country : countries) {
-                            %>
-                            <li><%= country.trim() %></li>
-                            <%
-                                    }
-                                }
-                            %>
-                        </ul>
-                    </div>
-                    <div class="skills">
-                        <h6>Specialized Jobs</h6>
-                        <ul id="availableJobsList">
-                            <%
-                                String specializedJobs = consultant.getSpecializedJobs();
-                                if (specializedJobs != null && !specializedJobs.isEmpty()) {
-                                    String[] jobs = specializedJobs.split(",");
-                                    for (String job : jobs) {
-                            %>
-                            <li><%= job.trim() %></li>
-                            <%
-                                    }
-                                }
-                            %>
-                        </ul>
-                    </div>
-                </div>
-                <div class="layer">
+				// Display test details as needed
+				%>
+
+				<div class="col-sm mb-5">
+					<div class="work">
+						<div class="card-container">
+
+							<img class="round"
+								src="https://i.pinimg.com/1200x/7c/ab/9e/7cab9e1d435b5b8c51998bd2085e3b70.jpg"
+								alt="user" /> <br>
+							<%--   <div class="name"><%= test1.getTestId() %></div> --%>
+							<div class="name">
+								<%=test1.getType().getDisplayName()%>
+							</div>
+
+
+							<div class="qualifications">
+								<ul>
+									<li>
+										<h6><%=test1.getDescription()%></h6>
+									</li>
+									<li><%=test1.getReportReadyIn()%></li>
+									<li><%=test1.getMeasurementUnit()%></li>
+
+								</ul>
+							</div>
+							<div class="countries">
+								<h6>Reference range</h6>
+								<ul id="availableCountriesList">
+
+									<li><%=test1.getLowReferenceRange()%></li>
+									<li><%=test1.getHighReferenceRange()%></li>
+
+								</ul>
+							</div>
+							<div class="skills">
+								<h6>Cost</h6>
+								<ul id="availableJobsList">
+
+									<li><%=test1.getCost()%></li>
+
+
+								</ul>
+							</div>
+						</div>
+						<%--  <div class="layer">
                     <div class="days">
                         <h6>Available Days</h6>
                        <ul id="availableDaysList">
@@ -940,9 +918,9 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
                             %>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>  --%>
+                </div> --%>
+					</div>
+				</div>
 
 
 
@@ -956,13 +934,19 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
 							<%--   <input type="hidden" name="consultantId" value="<%= consultant.getUserId() %>"> --%>
 							<input type="hidden" name="seekerId"
 								value="<%=user.getUserId()%>">
+							
+							<div class="row mb-1 mt-3"></div>
+							<div class="row">
+								<input type="hidden" name="test" id="test" value="<%=test1.getType().getDisplayName()%>">
+									
 
+							</div>
 							<div class="row mb-1">Select a Date</div>
 							<div class="row">
 								<input type="date" id="date" name="date" required>
 							</div>
 
-							<div class="row mb-1 mt-1">Select Time</div>
+							<%-- <div class="row mb-1 mt-1">Select Time</div>
 							<div class="row">
 								<select name="test" id="test" required>
 									<option value="" disabled selected>Select Test Type</option>
@@ -974,15 +958,15 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
 									}
 									%>
 								</select>
-							</div>
+							</div> --%>
 
-						
+
 
 							<div class="row mb-1 mt-3">Recommended doctor</div>
 							<div class="row">
 								<input name="doctor" id="doctor" required>
-									<!-- Add job options here -->
-							
+								<!-- Add job options here -->
+
 							</div>
 
 							<div class="row mb-1 mt-3">Add your qualifications so we
@@ -1034,15 +1018,13 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
 							</ul>
 						</div>
 
-						<div class="countries">
-
-						</div>
+						<div class="countries"></div>
 					</div>
 
 				</div>
 			</div>
 
- -->
+			-->
 		</div>
 
 		<!-- --------------------javascript-------------------------- -->
@@ -1057,7 +1039,7 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
 		        
 		        // Get form input values
 		        const date = form.querySelector('input[name="date"]').value;
-		        const testType = form.querySelector('select[name="test"]').value;
+		        const testType = form.querySelector('input[name="test"]').value;
 		        const notes = form.querySelector('textarea[name="notes"]').value;
 		        const doctorName = form.querySelector('input[name="doctor"]').value;
 		        // Build the HTML to display the data in the card
@@ -1099,11 +1081,11 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
 
 </script>
 
-	
 
 
 
-	<!-- 	<script>
+
+		<!-- 	<script>
     // Get the date input element
     const dateInput = document.getElementById("date");
 
@@ -1161,8 +1143,6 @@ Test test1 = appointmentManager.fetchSingleTest(testId);
         timeSelect.appendChild(option);
     }); */
 </script> -->
-
-
 </body>
 
 </html>
