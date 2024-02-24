@@ -819,7 +819,7 @@ form input, form textarea, form select {
 
 		<div class="container">
 			<div class="row">
-				<div class="col-sm mb-5">
+				<%-- <div class="col-sm mb-5">
             <div class="work">
                 <div class="card-container">
                     <span class="pro">PRO</span>
@@ -830,7 +830,7 @@ form input, form textarea, form select {
                         <div class="description">Description: <%= test.getDescription() %></div>
                   
                     <div class="qualifications">
-                    <%--     <ul>
+                        <ul>
                             <%
                                 String educationalQualifications = consultant.getEducationalQualifications();
                                 if (educationalQualifications != null && !educationalQualifications.isEmpty()) {
@@ -842,11 +842,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul> --%>
+                        </ul>
                     </div>
                     <div class="countries">
                         <h6>Specialized Countries</h6>
-                    <%--    <ul id="availableCountriesList">
+                       <ul id="availableCountriesList">
                             <%
                                 String specializedCountries = consultant.getSpecializedCountries();
                                 if (specializedCountries != null && !specializedCountries.isEmpty()) {
@@ -858,11 +858,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul> --%>
+                        </ul>
                     </div>
                     <div class="skills">
                         <h6>Specialized Jobs</h6>
-                      <%--   <ul id="availableJobsList">
+                        <ul id="availableJobsList">
                             <%
                                 String specializedJobs = consultant.getSpecializedJobs();
                                 if (specializedJobs != null && !specializedJobs.isEmpty()) {
@@ -874,13 +874,13 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul> --%>
+                        </ul>
                     </div>
                 </div>
                 <div class="layer">
                     <div class="days">
                         <h6>Available Days</h6>
-                      <%--  <ul id="availableDaysList">
+                       <ul id="availableDaysList">
                             <%
                                 String availableDays = consultant.getAvailableDays();
                                 if (availableDays != null && !availableDays.isEmpty()) {
@@ -892,11 +892,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul> --%>
+                        </ul>
                     </div>
                     <div class="days">
                         <h6>Available Time Slots</h6>
-                       <%--  <ul id="availableTimeSlotsList">
+                        <ul id="availableTimeSlotsList">
                             <%
                                 String availableTimeSlots = consultant.getAvailableTimeSlots();
                                 if (availableTimeSlots != null && !availableTimeSlots.isEmpty()) {
@@ -908,11 +908,11 @@ form input, form textarea, form select {
                                     }
                                 }
                             %>
-                        </ul> --%>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>  --%>
 
 
 
@@ -1016,7 +1016,7 @@ form input, form textarea, form select {
 		</div>
 
 		<!-- --------------------javascript-------------------------- -->
-<%-- 
+
 		<script>
 		document.addEventListener("DOMContentLoaded", function () {
 		    const form = document.getElementById("bookingForm");
@@ -1067,78 +1067,9 @@ form input, form textarea, form select {
 		    });
 		});
 
-</script> --%>
+</script>
 
-	  <script>
-	  document.addEventListener("DOMContentLoaded", function () {
-		    const form = document.getElementById("bookingForm");
-		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");
-		    
-		    form.addEventListener("submit", async function (e) {
-		        e.preventDefault(); 
-		        
-		        // Get form input values
-		        const date = form.querySelector('input[name="date"]').value;
-		        const testType = form.querySelector('select[name="test"]').value;
-		        const notes = form.querySelector('textarea[name="notes"]').value;
-		        const doctorName = form.querySelector('input[name="doctor"]').value;
-
-		        try {
-		            // Fetch test details based on the selected test type
-		            const testDetails = await fetchTestDetails(testType);
-		            
-		            // Build the HTML to display the data in the card
-		            const bookingDetailsHTML = `        
-		                Your booking details are as follows
-		                <div class="card-container mt-2">
-		                    <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
-		                        <li>Name : <%=user.getName()%></li>
-		                        <li>Email : <%=user.getEmail()%></li>
-		                        <li>Recomended Doctor : ${doctorName}</li>  
-		                        <li>Selected Test: ${testType}</li>
-		                        <li>Test Description: ${testDetails.description}</li>
-		                        <li>Notes : ${notes}</li>                                          
-		                    </div>                                                                         
-		                    <div class="skills" style="padding-left: 30px;">
-		                        <li class="pb-2">Selected date and time</li>
-		                        <ul style="padding-left: 30px;"></ul>
-		                    </div>
-		                    <div class="countries">
-		                        <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
-		                    </div>
-		                </div>
-		            `;
-
-		            // Update the booking details card with the generated HTML
-		            bookingDetailsCard.innerHTML = bookingDetailsHTML;
-		            bookingDetailsCard.style.display = "block";
-
-		            // Handle the confirm booking button click
-		            const confirmBookingButton = document.getElementById("confirmBookingButton");
-		            confirmBookingButton.addEventListener("click", function () {
-		                // Submit the form
-		                form.submit();
-		            });
-		        } catch (error) {
-		            console.error('Error:', error);
-		        }
-		    });
-
-		    // Function to fetch test details from the backend
-		    async function fetchTestDetails(testType) {
-		        try {
-		            const response = await fetch(`/fetch-single-test?testType=${testType}`);
-		            if (!response.ok) {
-		                throw new Error('Failed to fetch test details');
-		            }
-		            return await response.json();
-		        } catch (error) {
-		            throw error;
-		        }
-		    }
-		});
-
-        </script> 
+	
 
 
 

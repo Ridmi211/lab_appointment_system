@@ -88,7 +88,7 @@ public class UserController extends HttpServlet {
 			User consultant = getUserService().fetchSingleUser(userId);
 			if (consultant.getUserId() > 0) {
 				request.setAttribute("consultant", consultant);
-				RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("book-consultant-new.jsp");
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("message", "No consultant found!");

@@ -4,7 +4,6 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
-<%@ page import="com.labSchedulerSystem.model.Test"%>
 
 <%@ page import="java.util.ArrayList"%>
 
@@ -318,9 +317,14 @@ h2 {
 
 .layer a {
 	margin-top: 20px;
-	color: #000000;
+	color: #d6adff;
 	text-decoration: none;
 	font-size: 18px;
+	line-height: 60px;
+	background: #020202;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
 	text-align: center;
 	transition: background 8s;
 }
@@ -861,10 +865,6 @@ input[type="text"] {
 	<nav class="p-0 m-0 pt-0">
 		<img src="images/logo.png" alt="logo">
 		<ul class="" id="sidemenu">
-			<!--   <li><a href="#header">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Extra-Curricular</a></li>
-        <li><a href="#portfolio">Projects</a></li> -->
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
 
 			<%
@@ -899,64 +899,119 @@ input[type="text"] {
 					<h1>Choose your dream path with our experienced</h1>
 					<h2>Consultation panel</h2>
 
-
-
 				</div>
 
 			</div>
 		</div>
 	</div>
 
+	<div class="row mt-5" style="color: #3f2e59;">
+		<div class="col-2"></div>
+		<div class="col-3">
+			<label for="filterCountry">Filter by Country:</label> <input
+				type="text" id="filterCountry" placeholder="Enter country"
+				name="filterCountry">
+		</div>
+		<div class="col-3">
+			<label for="filterJob">Filter by Job:</label> <input type="text"
+				id="filterJob" name="filterJob" placeholder="Enter job">
+		</div>
+		<div class="col-2">
+			<button class="btn-purple mt-4" onclick="applyFilter()">Apply
+				Filter</button>
+		</div>
+		<div class="col-2"></div>
+	</div>
+
+
+	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
 
 	<%
-	String selectedTestType = request.getParameter("filterTestType");
+	String selectedCountry = request.getParameter("filterCountry");
+	String selectedJob = request.getParameter("filterJob"); // Add this line
 
-	List<Test> tests = (List<Test>) request.getAttribute("tests");
+	List<User> consultantUsers = (List<User>) request.getAttribute("consultantUsers");
 
-	List<Test> filteredTests = new ArrayList<Test>();
+	List<User> filteredConsultants = new ArrayList<User>();
+	
 
-	if (selectedTestType != null && !selectedTestType.isEmpty()) {
-		// Filter by test type
-		for (Test test : tests) {
-			Test.TestType type = test.getType(); // Get the TestType enum
-			if (type != null && type.getDisplayName().equals(selectedTestType)) {
-		filteredTests.add(test);
+	if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
+		List<User> jobFilteredConsultants = new ArrayList<User>();
+		for (User user2 : filteredConsultants) {
+			String specializedJobs = user2.getSpecializedJobs();
+			if (specializedJobs != null) {
+		String[] jobs = specializedJobs.split(", ");
+		for (String job : jobs) {
+			if (job.equals(selectedJob)) {
+				jobFilteredConsultants.add(user2);
+				break; // No need to check further if job is found
 			}
 		}
-	} else {
-		// No test type selected, show all tests
-		filteredTests = tests;
+			}
+		}
+		filteredConsultants = jobFilteredConsultants; // Update filtered consultants with job filter
 	}
 	%>
 
-	<!-- Display filtered tests -->
-	<div class="row p-0 pb-5" style="margin-left: 140px; margin-top: 30px;">
+
+	<div class="row p-0 pb-5  "
+		style="margin-left: 140px; margin-top: 30px;">
+
 		<div class="container">
 			<div class="row">
+
+
 				<%
-				for (Test test : filteredTests) {
+				for (User user2 : filteredConsultants) {
 				%>
 				<div class="col-sm mb-5">
+
 					<div class="work">
 						<div class="card-container">
-
-							<!-- Add image, name, and other details for the test -->
+							<span class="pro">PRO</span> <img class="round"
+								src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg"
+								alt="user" /> <br>
 							<div class="name">
-								<%=test.getType().getDisplayName()%>
+								<%=user2.getName()%>
 							</div>
-							<div class="description">
-								Description:
-								<%=test.getDescription()%></div>
+							<h6>
+							
+							
+							<div class="countries">
+								
+							</div>
+						<%-- 	<div class="skills">
+								<h6>Specialized Jobs</h6>
+								<ul>
+									<%
+									String specializedJobs = user2.getSpecializedJobs();
+									if (specializedJobs != null && !specializedJobs.isEmpty()) {
+										String[] jobs = specializedJobs.split(",");
+										for (String job : jobs) {
+									%>
+									<li><%=job.trim()%></li>
+									<%
+									}
+									}
+									%>
+								</ul>
+							</div> --%>
 						</div>
 						<div class="layer">
+							
+							<form action="usermanager" method="post">
+								<input type="hidden" name="userId"
+									value="<%=String.valueOf(user2.getUserId()).trim()%>">
+								<input type="hidden" name="useractiontype"
+									value="viewConsultant">
+								<button type="submit" class="btn btn2">View</button>
+							</form>
 
-							<div class="btn btn2">
-								<a href="book-test-new.jsp"> <i
-									class="fa-regular fa-calendar-check"></i> Book
-								</a>
-							</div>
+							</a>
+		<!-- <a href="add-user.jsp"  class="btn primary"><i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now</a> -->
 						</div>
 					</div>
+
 				</div>
 				<%
 				}
@@ -964,12 +1019,7 @@ input[type="text"] {
 			</div>
 		</div>
 	</div>
-
-	<!--bnbnbnbnbnbnb  -->
-
-
-
-
+	
 	<div
 		class="p-0 m-0 d-flex align-items-center services justify-content-center"
 		id="about-us"
@@ -995,13 +1045,42 @@ input[type="text"] {
 	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-		
-
+	
 	</div>
 
 	<!-- --------------------javascript-------------------------- -->
-	<script>
+	<!-- <script>
  
+    function applyFilter() {
+        // Get the values entered by the user in the text input fields
+        var selectedCountry = document.getElementById("filterCountry").value;
+        var selectedJob = document.getElementById("filterJob").value;
+
+        // Loop through the consultants and display only those that match the filter criteria
+        var consultants = document.querySelectorAll(".work");
+        consultants.forEach(function (consultant) {
+            var countries = consultant.querySelector(".countries");
+            var countriesText = countries.textContent.toLowerCase();
+
+            var jobs = consultant.querySelector(".skills");
+            var jobsText = jobs.textContent.toLowerCase();
+
+            // Check if the user input is found in the consultant's countries or jobs
+            if (
+                (selectedCountry === "" || countriesText.includes(selectedCountry.toLowerCase())) &&
+                (selectedJob === "" || jobsText.includes(selectedJob.toLowerCase()))
+            ) {
+                consultant.style.display = "block";
+            } else {
+                consultant.style.display = "none";
+            }
+        });
+    }
+
+</script> -->
+
+
+
 	<script>
 
             var tablinks = document.getElementsByClassName("tab-links");
@@ -1036,7 +1115,7 @@ input[type="text"] {
 
         </script>
 
-	<script>
+	<!-- <script>
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwjcx0iILVo5hybLY6R97WYDrv3PQ7RoVLotpwiMk7FAUS7EPA5Ajsnsw6sr7zWa1V6/exec'
             const form = document.forms['submit-to-google-sheet']
             const msg = document.getElementById("msg")
@@ -1055,7 +1134,7 @@ input[type="text"] {
 
                     .catch(error => console.error('Error!', error.message))
             })
-        </script>
+        </script> -->
 	<!-- chart-js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
