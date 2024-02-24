@@ -100,37 +100,36 @@ public class AppointmentManagerImpl implements AppointmentManager {
 
 	@Override
 	public Appointment fetchSingleAppointment(int appointmentId) throws SQLException, ClassNotFoundException {
-		Connection connection = getConnection();
-		String query = "SELECT a.*, c.name AS consultantName, s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerPhoneNumber, s.occupation AS seekerJob, s.country AS seekerCountry "
-				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
-				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.appointmentId = ?";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, appointmentId);
-		ResultSet rs = ps.executeQuery();
-		Appointment appointment = new Appointment();
-		while (rs.next()) {
-			appointment = new Appointment();
-			appointment.setAppointmentId(rs.getInt("appointmentId"));
-			appointment.setTechnitianId(rs.getInt("technitianId"));
-			appointment.setSeekerId(rs.getInt("seekerId"));
-			appointment.setScheduledDate(rs.getString("scheduledDate"));
-			appointment.setStartTime(rs.getString("startTime"));
-			appointment.setStatus(Status.valueOf(rs.getString("status")));
-			appointment.setNotes(rs.getString("notes"));
-			appointment.setJob(rs.getString("job"));
-			appointment.setCountry(rs.getString("country"));
-			appointment.setConsultantName(rs.getString("consultantName"));
-			appointment.setSeekerName(rs.getString("seekerName"));
-			appointment.setSeekerEmail(rs.getString("seekerEmail"));
-			appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
-			appointment.setSeekerJob(rs.getString("seekerJob"));
-			appointment.setSeekerCountry(rs.getString("seekerCountry"));
-		}
-		ps.close();
-		connection.close();
-		return appointment;
+	    Connection connection = getConnection();
+	    String query = "SELECT a.*, c.name AS consultantName, s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerPhoneNumber " +
+	                   "FROM appointments a " +
+	                   "INNER JOIN user c ON a.technitianId = c.userId " +
+	                   "INNER JOIN user s ON a.seekerId = s.userId " +
+	                   "WHERE a.appointmentId = ?";
+	    PreparedStatement ps = connection.prepareStatement(query);
+	    ps.setInt(1, appointmentId);
+	    ResultSet rs = ps.executeQuery();
+	    Appointment appointment = null; // Initialize to null
+	    while (rs.next()) {
+	        appointment = new Appointment(); // Update only if data is found
+	        appointment.setAppointmentId(rs.getInt("appointmentId"));
+	        appointment.setTechnitianId(rs.getInt("technitianId"));
+	        appointment.setSeekerId(rs.getInt("seekerId"));
+	        appointment.setScheduledDate(rs.getString("scheduledDate"));
+	        appointment.setStartTime(rs.getString("startTime"));
+	        appointment.setStatus(Status.valueOf(rs.getString("status")));
+	        appointment.setNotes(rs.getString("notes"));
+	        appointment.setConsultantName(rs.getString("consultantName"));
+	        appointment.setSeekerName(rs.getString("seekerName"));
+	        appointment.setSeekerEmail(rs.getString("seekerEmail"));
+	        appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
+	    }
+	    rs.close();
+	    ps.close();
+	    connection.close();
+	    return appointment;
 	}
-	
+
 	
 	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();

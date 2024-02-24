@@ -366,7 +366,7 @@ p {
  
     <input class="form-control" type="number" id="appointmentId" name="appointmentId"  readonly="readonly" value="${appointment.appointmentId}"/>
     <label for="userIdUpdate">consultantId:</label>
-    <input class="form-control" type="number" id="consultantId" name="consultantId" readonly="readonly" value="${appointment.consultantId}"/>
+    <input class="form-control" type="number" id="consultantId" name="consultantId" readonly="readonly" value="${appointment.technitianId}"/>
         <label for="email">seekerId:</label>
     <input class="form-control" type="number" id="seekerId" name="seekerId" readonly="readonly" value="${appointment.seekerId}"/>
     <label for="scheduledDate"> scheduledDate:</label>
@@ -377,10 +377,10 @@ p {
   
       <label for="startTime">notes</label>
     <textarea class="form-control" style="height:100px"   type="text" id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-      <label for="gender">Gender:</label>
+    <%--   <label for="gender">Gender:</label>
     <input class="form-control" type="text" id="job" name="job" value="${appointment.job}"/>
       <label for="occupation">Occupation:</label>
-    <input class="form-control" type="text" id="country" name="country" value="${appointment.country}"/>
+    <input class="form-control" type="text" id="country" name="country" value="${appointment.country}"/> --%>
     <label for="country">status:</label>
     <input class="form-control" type="text" id="status" name="status" value="${appointment.status.displayName}"/>
    
@@ -398,11 +398,11 @@ p {
 <label for="seekerPhoneNumber">Seeker Phone Number:</label>
 <input class="form-control" type="text" id="seekerPhoneNumber" name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}"/>
 
-<label for="seekerJob">Seeker Job:</label>
-<input class="form-control" type="text" id="seekerJob" name="seekerJob" value="${appointment.seekerJob}"/>
+<%-- <label for="seekerJob">Seeker Job:</label>
+<input class="form-control" type="text" id="seekerJob" name="seekerJob" value="${appointment.seekerJob}"/> --%>
 
-<label for="seekerCountry">Seeker Country:</label>
-<input class="form-control" type="text" id="seekerCountry" name="seekerCountry" value="${appointment.seekerCountry}"/>
+<%-- <label for="seekerCountry">Seeker Country:</label>
+<input class="form-control" type="text" id="seekerCountry" name="seekerCountry" value="${appointment.seekerCountry}"/> --%>
    
    
    

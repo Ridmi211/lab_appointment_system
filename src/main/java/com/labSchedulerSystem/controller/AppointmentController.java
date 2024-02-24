@@ -55,7 +55,7 @@ public class AppointmentController extends HttpServlet {
 			fetchAdminRequestedAppointments(request, response);
 		} else if (appactiontype.equals("adminRequestedAll")) {
 			fetchAdminRequestedAllAppointments(request, response);
-		}else if (appactiontype.equals("allTests")) {
+		} else if (appactiontype.equals("allTests")) {
 			fetchAllTests(request, response);
 		} else if (appactiontype.equals("adminCompleted")) {
 			fetchAllCompletedAppointments(request, response);
@@ -95,7 +95,7 @@ public class AppointmentController extends HttpServlet {
 			viewAppointment(request, response);
 		} else if (appactiontype.equals("test")) {
 			viewTest(request, response);
-		}else if (appactiontype.equals("completed")) {
+		} else if (appactiontype.equals("completed")) {
 			completedAppointment(request, response);
 		} else if (appactiontype.equals("cancel")) {
 			cancelAppointmentAdmin(request, response);
@@ -110,6 +110,7 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
+		//TODO: int technitianId = 123;
 		int technitianId = 123;
 		appointment.setTechnitianId(technitianId);
 		appointment.setScheduledDate(request.getParameter("date"));
@@ -197,8 +198,7 @@ public class AppointmentController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("view-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
-	
-	
+
 	private void fetchAllTests(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
@@ -634,7 +634,6 @@ public class AppointmentController extends HttpServlet {
 		}
 	}
 
-	
 	private void viewTest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int testId = Integer.parseInt(request.getParameter("testId"));
@@ -654,20 +653,7 @@ public class AppointmentController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	/*
-	 * private void viewConsultant(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { int userId =
-	 * Integer.parseInt(request.getParameter("userId")); try { User consultant =
-	 * getUserService().fetchSingleUser(userId); if (consultant.getUserId() > 0) {
-	 * request.setAttribute("consultant", consultant); RequestDispatcher rd =
-	 * request.getRequestDispatcher("book-test-new.jsp"); rd.forward(request,
-	 * response); } else { request.setAttribute("message", "No consultant found!");
-	 * LOGGER.warning("No consultant found!" + consultant.getUserId());
-	 * RequestDispatcher rd = request.getRequestDispatcher("consultants-list.jsp");
-	 * rd.forward(request, response); } } catch (ClassNotFoundException |
-	 * SQLException e) { e.printStackTrace(); } }
-	 */
+
 	private void fetchSingleAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
