@@ -958,14 +958,42 @@ input[type="text"] {
 
 
 						</div>
-						<div class="layer">
+						<%-- <div class="layer">
 							<a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
 								<div class="btn btn2">
 									<i class="fa-regular fa-calendar-check"></i> Book
 
 								</div>
 							</a>
-						</div>
+						</div> --%>
+						<%@ page import="javax.servlet.http.HttpSession" %>
+
+<%
+HttpSession session2 = request.getSession(false);
+
+if (session2 == null || session2.getAttribute("user") == null) {
+    // User is not logged in, display a message or redirect to the login page
+%>
+    <div class="layer">
+        <div class="btn btn2 disabled">
+            <i class="fa-regular fa-calendar-check"></i> Book (Login required)
+        </div>
+    </div>
+<%
+} else {
+    // User is logged in, allow access to the page
+%>
+    <div class="layer">
+        <a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
+            <div class="btn btn2">
+                <i class="fa-regular fa-calendar-check"></i> Book
+            </div>
+        </a>
+    </div>
+<%
+}
+%>
+						
 					</div>
 				</div>
 				<%
