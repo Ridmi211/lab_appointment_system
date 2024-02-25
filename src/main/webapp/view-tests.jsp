@@ -975,9 +975,11 @@ if (session2 == null || session2.getAttribute("user") == null) {
     // User is not logged in, display a message or redirect to the login page
 %>
     <div class="layer">
-        <div class="btn btn2 disabled">
+    <a href="login.jsp">
+        <div class="btn btn2 ">
             <i class="fa-regular fa-calendar-check"></i> Book (Login required)
         </div>
+         </a>
     </div>
 <%
 } else {
