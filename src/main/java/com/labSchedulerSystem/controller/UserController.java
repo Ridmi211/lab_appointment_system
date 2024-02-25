@@ -24,6 +24,7 @@ import com.labSchedulerSystem.dao.UserManagerImpl;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.RegistrationStatus;
 import com.labSchedulerSystem.model.User;
+import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.service.EmailService;
 import com.labSchedulerSystem.service.UserService;
 
@@ -244,6 +245,7 @@ public class UserController extends HttpServlet {
 	        user.setAccessRight(AccessRight.ROLE_USER);
 	        user.setRegistrationStatus(RegistrationStatus.APPROVED);
 	    }
+	    user.setSelectedTestType(Test.TestType.valueOf(request.getParameter("jobtype")));
 	    user.setEducationalQualifications(request.getParameter("educationalQualifications"));
 	    user.setSpecializedJobs(request.getParameter("specializedJobs"));
 //	    String[] selectedAvailableDays = request.getParameterValues("availableDays");

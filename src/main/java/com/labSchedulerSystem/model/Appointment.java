@@ -1,9 +1,11 @@
 package com.labSchedulerSystem.model;
 
+import com.labSchedulerSystem.model.Test.TestType;
+
 public class Appointment {
 
 	private int appointmentId;
-	private int consultantId;
+	private int technitianId;
 	private String consultantName;
 	private String seekerName;
 	private int seekerId;
@@ -17,6 +19,14 @@ public class Appointment {
 	private String seekerPhoneNumber;
 	private String seekerJob;
 	private String seekerCountry;
+	private String testType;
+	private String testResults;
+	private String testResultsDescription;
+	private String recomendedDoctor;
+	    
+	    //testtype table
+	
+	
 
 	public String getSeekerEmail() {
 		return seekerEmail;
@@ -93,12 +103,12 @@ public class Appointment {
 		this.notes = notes;
 	}
 
-	public int getConsultantId() {
-		return consultantId;
+	public int getTechnitianId() {
+		return technitianId;
 	}
 
-	public void setConsultantId(int consultantId) {
-		this.consultantId = consultantId;
+	public void setTechnitianId(int technitianId) {
+		this.technitianId = technitianId;
 	}
 
 	public int getSeekerId() {
@@ -147,6 +157,38 @@ public class Appointment {
 
 	public void setSeekerName(String seekerName) {
 		this.seekerName = seekerName;
+	}
+
+	public String getTestResults() {
+		return testResults;
+	}
+
+	public void setTestResults(String testResults) {
+		this.testResults = testResults;
+	}
+
+	public String getTestResultsDescription() {
+		return testResultsDescription;
+	}
+
+	public void setTestResultsDescription(String testResultsDescription) {
+		this.testResultsDescription = testResultsDescription;
+	}
+
+	public String getRecomendedDoctor() {
+		return recomendedDoctor;
+	}
+
+	public void setRecomendedDoctor(String recomendedDoctor) {
+		this.recomendedDoctor = recomendedDoctor;
+	}
+
+	public String getTestType() {
+		return testType;
+	}
+
+	public void setTestType(String testType) {
+		this.testType = testType;
 	}
 
 	public enum Status {

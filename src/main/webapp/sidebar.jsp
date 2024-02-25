@@ -147,7 +147,7 @@ User user = (User) session.getAttribute("user");
     </a>
     <div class="dropdown-content">
       <a  href="user-report.jsp" >User</a>
-      <a  href="appointment-summary-report.jsp" >Appointments</a>
+      <a  href="appointment-summary-report.jsp" >Your tests</a>
  <div class="dropdown">
     <a>
   
@@ -165,12 +165,18 @@ User user = (User) session.getAttribute("user");
     
   <% } %>
       <div class="normal-content">
+<!-- <a href="book-test-new.jsp" > -->
+<a href="getAppointment?appactiontype=allTests" >
+  <i class="fa-regular fa-calendar-check"></i>
+    <span>Book Tests</span>
+  </a>
+ </div>
+  <div class="normal-content">
 <a href="getuser?useractiontype=consultants" >
    <i class="fa fa-address-card" aria-hidden="true"></i>
     <span>Consultants</span>
   </a>
  </div>
-
   <%-- Display Services for all users, regardless of role --%>
  
 
