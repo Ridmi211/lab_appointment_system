@@ -10,6 +10,7 @@ public class Test {
     private String description;
     private String cost;
     private String reportReadyIn;
+    private String PreparationInstructions;
     private String measurementUnit;
     private String lowReferenceRange;
     private String highReferenceRange;
@@ -95,6 +96,16 @@ public class Test {
 
 	public void setCost(String cost) {
 		this.cost = cost;
+	}
+
+
+	public String getPreparationInstructions() {
+		return PreparationInstructions;
+	}
+
+
+	public void setPreparationInstructions(String preparationInstructions) {
+		PreparationInstructions = preparationInstructions;
 	}
 
 

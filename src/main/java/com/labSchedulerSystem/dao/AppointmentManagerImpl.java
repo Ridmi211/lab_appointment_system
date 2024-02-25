@@ -167,6 +167,11 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	        test.setType(TestType.valueOf(rs.getString("type")));
 	        test.setDescription(rs.getString("description"));
 	        test.setCost(rs.getString("cost"));
+	        test.setPreparationInstructions("PreparationInstructions");
+	        test.setReportReadyIn(rs.getString("ReportReadyIn"));
+	        test.setMeasurementUnit(rs.getString("MeasurementUnit"));
+	        test.setLowReferenceRange(rs.getString("LowReferenceRange"));
+	        test.setHighReferenceRange(rs.getString("HighReferenceRange"));
 	    }
 	    
 	    ps.close();
@@ -190,7 +195,11 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	        test.setType(TestType.valueOf(rs.getString("type")));
 	        test.setDescription(rs.getString("description"));
 	        test.setCost(rs.getString("cost"));
-	        // Add other properties if needed
+	        test.setPreparationInstructions("PreparationInstructions");
+	        test.setReportReadyIn(rs.getString("ReportReadyIn"));
+	        test.setMeasurementUnit(rs.getString("MeasurementUnit"));
+	        test.setLowReferenceRange(rs.getString("LowReferenceRange"));
+	        test.setHighReferenceRange(rs.getString("HighReferenceRange"));
 	    }
 	    
 	    rs.close();
