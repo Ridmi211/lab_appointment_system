@@ -4,10 +4,29 @@
     
   body, html {
       font-family: 'Source Sans Pro', sans-serif;
-      background-color: #1d243d;
+     /* background-color: #1d243d;*/
+    background-image: url(https://wallpapercave.com/wp/wp4085844.jpg);
+     position: relative;
       padding: 0;
       margin: 0;
-    }
+            width: 100;
+            height: 100vh;
+            background-size: cover;
+            background-position:center  ;
+        }
+        
+               body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(25,31,53, 0.249); /* Adjust the color and opacity as needed */
+  z-index: 0;
+  /* You can also add other styles like gradients or patterns here */
+}
+   
     
     #particles-js {
       position: absolute;
@@ -22,7 +41,7 @@
       position: absolute;
       text-align: center;
       transform: translateX(-50%);
-      background-color: rgb( 33, 41, 66 );
+      background: rgb(89,144,166, 0.549);
       border-radius: 9px;
       border-top: 10px solid #79a6fe;
       border-bottom: 10px solid #8BD17C;
@@ -34,8 +53,8 @@
     
     .box h4 {
       font-family: 'Source Sans Pro', sans-serif;
-      color: #5c6bc0; 
-      font-size: 18px;
+      color: rgb(25,31,53); 
+      font-size: 32px;
       margin-top:40px;;
     }
     
@@ -47,7 +66,7 @@
     .box h5 {
       font-family: 'Source Sans Pro', sans-serif;
       font-size: 13px;
-      color: #a1a4ad;
+      color: rgb(25,31,53);
       letter-spacing: 1.5px;
       margin-top: 5px;
       margin-bottom: 20px;
@@ -56,13 +75,13 @@
     .box input[type = "text"],.box input[type = "password"] {
       display: block;
       margin: 10px auto;
-      background: #262e49;
+      background: rgb(89,144,166, 0.749);
       border: 0;
       border-radius: 5px;
       padding: 6px 10px;
       width: 320px;
       outline: none;
-      color: #d6d6d6;
+      color: rgb(25,31,53);
           -webkit-transition: all .2s ease-out;
         -moz-transition: all .2s ease-out;
         -ms-transition: all .2s ease-out;
@@ -71,7 +90,7 @@
       
     }
     ::-webkit-input-placeholder {
-      color: #565f79;
+      color:   rgb(25,31,53);
     }
     
     .box input[type = "text"]:focus,.box input[type = "password"]:focus {
@@ -107,7 +126,7 @@
     
     .btn1 {
       border:0;
-      background: #7f5feb;
+        background:rgb(25,31,53);
       color: #dfdeee;
       border-radius: 100px;
       width: 340px;
@@ -121,14 +140,14 @@
     }
     
     .btn1:hover {
-      background: #5d33e6;
+      background: #529ece;
     }
     
     .rmb {
       position: absolute;
       margin-left: -24%;
       margin-top: 0px;
-      color: #dfdeee;
+      color: rgb(25,31,53);
       font-size: 13px;
     }
     
@@ -142,6 +161,7 @@
         position: absolute;
         top: 92%;
         left: 29%;
+       color:rgb(25,31,53);;
     }
     
     [type=checkbox]:checked + span:before {/* <-- style its checked state */
@@ -150,7 +170,7 @@
         content: "\f00c";
         position: absolute;
         top: -4px;
-        color: #896cec;
+        color: #529ece;
         left: -1px;
         width: 13px;
     }
@@ -159,7 +179,7 @@
       position: absolute;
       left: 339px;
       top: 282px;
-      color: #3b476b;
+    color:   rgb(25,31,53);
       font-size: 22px;
       cursor: pointer;
     }      
@@ -196,7 +216,7 @@
     }
     
     .footer .fa {
-      color: #7f5feb;;
+      color:rgb(25,31,53);
     }
     .gender {
   display: flex;
@@ -208,7 +228,7 @@
 }
 
 .gender label {
-  color: #a1a4ad;
+  color: rgb(25,31,53);
 }
 
     .availableDays {
@@ -224,7 +244,7 @@ padding-left:150px;
 }
 
 .availableDays label {
-  color: #a1a4ad;
+  color:  rgb(25,31,53);
 }
 
 
@@ -241,7 +261,7 @@ padding-left:150px;
 }
 
 .availableTimeSlots label {
-  color: #a1a4ad;
+  color:  rgb(25,31,53);
 }
 .usertype {
   display: flex;
@@ -253,7 +273,7 @@ padding-left:150px;
 }
 
 .usertype label {
-  color: #a1a4ad;
+  color:  rgb(25,31,53);
 }
 
 
@@ -304,7 +324,7 @@ padding-left:150px;
   position: absolute;
   font-size: 13px;
 
-  color: #896cec;
+  color: #529ece;
 }
 
 /* .availableDays input[type="checkbox"]:checked + span:before {
@@ -324,10 +344,10 @@ padding-left:150px;
   position: absolute;
   font-size: 13px;
 
-  color: #896cec;
+  color: #529ece;
 }
 .box label[for="gender"]  {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 0px;
   margin-left:22%;
@@ -338,7 +358,7 @@ padding-left:150px;
 }
 
 .box label[for="availableDays"]  {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 0px;
   margin-left:22%;
@@ -350,7 +370,7 @@ padding-left:150px;
 
 
 .box label[for="availableTimeSlots"] {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 0px;
   margin-left:22%;
@@ -362,7 +382,7 @@ padding-left:150px;
 
 
 .box label[for="birthdate"] {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 0px;
   text-align: left;
@@ -373,13 +393,13 @@ padding-left:150px;
 .box input[type="date"][name="birthdate"] {
   display: block;
   margin: 5px auto;
-  background: #262e49;
+ background: rgb(89,144,166, 0.549);
   border: 0;
   border-radius: 5px;
   padding: 6px 10px;
   width: 320px;
   outline: none;
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   transition: all 0.2s ease-out;
 }
 
@@ -389,7 +409,7 @@ padding-left:150px;
 
 /* Style the Telephone Input */
 .box label[for="telephone"] {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 20px;
   text-align: left;
@@ -399,13 +419,13 @@ padding-left:150px;
 .box input[type="tel"][name="telephone"] {
   display: block;
   margin: 5px auto;
-  background: #262e49;
+  background: rgb(89,144,166, 0.549);
   border: 0;
   border-radius: 5px;
   padding: 8px 10px;
   width: 320px;
   outline: none;
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   transition: all 0.2s ease-out;
 }
 
@@ -415,7 +435,7 @@ padding-left:150px;
 
 /* Style the Job Type and Country Dropdowns */
 .box label[for="jobtype"], .box label[for="country"], .box label[for="usertype"] {
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   display: block;
   margin-top: 10px;
   text-align: left;
@@ -426,13 +446,13 @@ padding-left:150px;
 .box select[name="jobtype"], .box select[name="country"] {
   display: block;
   margin: 5px auto;
-  background: #262e49;
+  background: rgb(89,144,166, 0.549);
   border: 0;
   border-radius: 5px;
   padding: 8px 10px;
   width: 320px;
   outline: none;
-  color:  #a1a4ad;
+  color:   rgb(25,31,53);
   transition: all 0.2s ease-out;
   margin-left:22%;
   font-size: 13px;
@@ -443,12 +463,12 @@ padding-left:150px;
   
 }
 
-p{ color:white;
+p{ color:   rgb(25,31,53);
 }
 
  #feedback-container {
     background-color: #4CAF50; 
-    color: white; 
+   color:   rgb(25,31,53);
     padding: 10px; 
     position: fixed; 
     bottom: 20px; 

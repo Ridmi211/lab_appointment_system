@@ -8,7 +8,7 @@
 <head>
 
 <meta charset="ISO-8859-1">
-<title>Register</title>
+<title>MediCheck - Register</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/x-icon"
@@ -40,7 +40,7 @@
 	<div class="container">
 		<form name="form1" class="box" action="usermanager" method="post">
 			<h4>
-				Job<span>Consultancy</span>
+				Medi<span>Check</span>
 			</h4>
 			<p>${feebackMessage}</p>
 			<h5>Create a new account.</h5>

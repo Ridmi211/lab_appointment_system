@@ -117,7 +117,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
 		appointment.setCountry(request.getParameter("test"));
-		appointment.setJob(request.getParameter("doctor"));
+		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);
@@ -684,7 +684,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
 		appointment.setCountry(request.getParameter("country"));
-		appointment.setJob(request.getParameter("job"));
+		appointment.setRecomendedDoctor(request.getParameter("job"));
 		appointment.setNotes(request.getParameter("notes"));
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {

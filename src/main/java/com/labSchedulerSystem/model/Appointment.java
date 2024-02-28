@@ -10,7 +10,7 @@ public class Appointment {
 	private String seekerName;
 	private int seekerId;
 	private String country;
-	private String job;
+	private String recomendedDoctor;
 	private String scheduledDate;
 	private String startTime;
 	private Status status;
@@ -22,7 +22,7 @@ public class Appointment {
 	private String testType;
 	private String testResults;
 	private String testResultsDescription;
-	private String recomendedDoctor;
+	/* private String recomendedDoctor; */
 	    
 	    //testtype table
 	
@@ -135,13 +135,11 @@ public class Appointment {
 		this.country = country;
 	}
 
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
+	/*
+	 * public String getJob() { return job; }
+	 * 
+	 * public void setJob(String job) { this.job = job; }
+	 */
 
 	public String getConsultantName() {
 		return consultantName;

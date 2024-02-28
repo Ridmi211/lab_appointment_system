@@ -42,14 +42,14 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean addAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`job`,`country`, `notes`) VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`) VALUES (?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
 		ps.setString(3, appointment.getScheduledDate());
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
-		ps.setString(6, appointment.getJob());
+		ps.setString(6, appointment.getRecomendedDoctor());
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
 		boolean result = false;
@@ -64,14 +64,14 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean editAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,job=?,country=?,notes=? WHERE appointmentId=?";
+		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=? WHERE appointmentId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
 		ps.setString(3, appointment.getScheduledDate());
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
-		ps.setString(6, appointment.getJob());
+		ps.setString(6, appointment.getRecomendedDoctor());
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
 		ps.setInt(9, appointment.getAppointmentId());

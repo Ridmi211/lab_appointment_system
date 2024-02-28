@@ -15,12 +15,12 @@
             display: inline-block;
              margin: 10px auto;
             width: fit-content;
-            border: 1px solid #d6adff;
+            border: 1px solid #77c2d7;
             padding: 14px 50px;
             border-radius: 6px;
             text-decoration: none;
             transition: background 0.5s;
-            background: #d6adff;
+            background: #77c2d7;
 
         }
 
@@ -34,7 +34,7 @@
             display: block;
             margin: 30px auto;
             width: fit-content;
-            border: 1px solid #d6adff;
+            border: 1px solid #77c2d7;
             padding: 14px 50px;
             border-radius: 6px;
             text-decoration: none;
@@ -45,7 +45,7 @@
         }
         
         .btn-purple:hover{
-            background: #d6adff;
+            background: #77c2d7;
         }
      
         /* .tab-contents{
@@ -128,7 +128,7 @@ label #btn,label #cancel{
   position: absolute;
   left: 5px;
   cursor: pointer;
-  color: #d6adff;
+  color: #77c2d7;
   border-radius: 5px;
   margin: 15px 30px;
   font-size: 29px;

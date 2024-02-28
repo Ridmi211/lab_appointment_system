@@ -39,7 +39,6 @@
 
 <%
 UserManagerImpl userManager = new UserManagerImpl();
-
 %>
 
 <%
@@ -60,7 +59,7 @@ List<Integer> consultantCounts = monthlyCountsMap.get("consultantCounts");
 int totalConsultantCounts = consultantCounts.stream().mapToInt(Integer::intValue).sum(); */
 
 int totalClientsCounts = userManager.getCountOfClientUsers();
-int totalConsultantCounts =  userManager.getCountOfConsultantUsers();
+int totalConsultantCounts = userManager.getCountOfConsultantUsers();
 
 // Get the monthly user registration counts
 %>
@@ -103,7 +102,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	crossorigin="anonymous"></script>
 
 <meta charset="ISO-8859-1">
-<title>Job-Seekers</title>
+<title>MediCheck</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -128,8 +127,12 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 <Style>
 .main-title {
-	color: #584674;
-	font-size: 60px;
+	color: #529ece;
+	font-size: 65px;
+}
+
+.first-title {
+	font-size: 20px;
 }
 
 /*  <!-- sidebar styling end here  --> */
@@ -164,7 +167,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 		<ul class="" id="sidemenu">
 			<li><a href="#header">Home</a></li>
 			<li><a href="#about-us">About</a></li>
-			<li><a href="#experts">Our Experts</a></li>
+<!-- 			<li><a href="#experts">Our Experts</a></li> -->
 			<li><a href="#growth">Growth</a></li>
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
 
@@ -196,12 +199,11 @@ int newMessagesCount = messageService.getNewMessagesCount();
 			<div class="container d-flex justify-content-center p-0 m-0">
 
 				<div class="header-text pt-2">
-					<div class="mt-2">
-						<p>Unlock Your International Career Potential</p>
-					</div>
-					<div class="main-title">THRIVE GLOBALLY</div>
-					<a href="getuser?useractiontype=consultants" class="btn-purple"
-						style="text-size: 12px;">Schedule Your Consultation</a>
+					<div class="mt-2 first-title">EMPOWER YOUR WELLNESS JOURNEY
+						WITH</div>
+					<div class="main-title">MediCheck</div>
+					<a href="getAppointment?appactiontype=allTests" class="btn-purple"
+						style="text-size: 12px;">Schedule Your Appointment</a>
 				</div>
 
 			</div>
@@ -220,14 +222,14 @@ int newMessagesCount = messageService.getNewMessagesCount();
 				<div class="m-2">
 					<i class="fa-solid fa-hand-holding-hand purple-icon"></i>
 					<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
-					<h2>Services</h2>
-					<p style="text-align: justify;">In our streamlined online
-						appointment scheduling platform, you can access expert advice for
-						international career consultations. You can effortlessly book
-						appointments after a simple registration process, providing a
-						user-friendly experience. Once registered, you'll gain the
-						convenience of tracking upcoming appointments, ensuring a seamless
-						and organized approach to their international career journey.</p>
+					<h2>Appointments</h2>
+					<p style="text-align: justify;">At MediCheck, our modern online
+						appointment scheduling system provides access to essential medical
+						tests. With a hassle-free registration process, you can
+						effortlessly book your test appointments, ensuring a user-friendly
+						experience. Once registered, you'll have the convenience of
+						monitoring your upcoming appointments, ensuring a seamless and
+						organized approach to managing your health with MediCheck..</p>
 
 					<!--   <a href="#" class="btn-purple">See more</a> -->
 				</div>
@@ -236,27 +238,26 @@ int newMessagesCount = messageService.getNewMessagesCount();
 				<div class="m-2">
 					<!-- <i class="fa-solid fa-users"></i> -->
 					<i class="fa-sharp fa-solid fa-people-group purple-icon"></i>
-					<h2>Consultants</h2>
-					<p style="text-align: justify;">Discover a network of seasoned
-						professionals ready to guide you on your international career
-						path. Our pool of consultants spans various countries and
-						industries, each bringing a wealth of expertise to address your
-						unique needs. Easily browse through profiles, explore consultant
-						specialties, and find the perfect match for your career goals.</p>
+					<h2>Technicians</h2>
+					<p style="text-align: justify;">We have a team of skilled
+						technicians dedicated to ensuring the accuracy and efficiency of
+						your medical tests at MediCheck. Our technicians possess extensive
+						training and experience in conducting a wide range of tests,
+						guaranteeing reliable results for your healthcare needs..</p>
 					<!--  <a href="#" class="btn-purple">See more</a> -->
 				</div>
 
 				<div class="m-2">
 					<i class="fa-solid fa-handshake purple-icon"></i>
-					<h2>Join Us</h2>
-					<p style="text-align: justify;">For consultants seeking to join
-						our dynamic network, our registration process is designed with
-						simplicity in mind. By becoming a registered consultant, you gain
-						access to a global pool of clients actively seeking your
-						expertise. Our platform facilitates a secure and efficient payment
-						system, ensuring that you are compensated promptly for your
-						valuable insights and guidance. Join us in shaping the future of
-						international careers, where expertise meets opportunity.</p>
+					<h2>Wide range of testing</h2>
+					<p style="text-align: justify;">Discover a comprehensive range
+						of medical tests available at MediCheck, designed to cater to your
+						diverse healthcare needs. From routine screenings to specialized
+						diagnostics, our state-of-the-art facility offers an array of
+						tests conducted by experienced professionals. Explore our test
+						catalog, which includes blood tests, imaging scans, genetic
+						screenings, and more, all aimed at providing you with accurate and
+						timely insights into your health</p>
 					<!--   <a href="#" class="btn-purple">See more</a> -->
 				</div>
 
@@ -269,26 +270,23 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	<div
 		class="p-0 m-0 mb-5 d-flex align-items-center services justify-content-center"
 		id="about-us"
-		style="background-image: url(https://images.unsplash.com/photo-1474127773417-aec7504236d2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aWN5JTIwbW91bnRhaW58ZW58MHx8MHx8fDA%3D&w=1000&q=80); position: relative;">
+		style="background-image: url(https://wallpapercave.com/wp/wp4085844.jpg); position: relative;">
 		<div style="text-align: center; z-index: 1;">
 			<h1>About Us</h1>
 			<div class="row">
 				<div class="col-2"></div>
 				<div class="col-8">
-					<div>"At THE JOBS, we are passionate about empowering
-						individuals to reach new heights in their careers on a global
-						scale. With a dedicated team of seasoned professionals and a
-						network of consultants spanning diverse countries and industries,
-						we are committed to guiding you through the intricacies of the
-						international job market. Our mission is to not only connect you
-						with exciting career opportunities but also to provide
-						personalized strategies that align with your unique aspirations.
-						Whether you are navigating the dynamic tech hubs of Asia, the
-						financial districts of Europe, or the vibrant landscapes of the
-						Americas, we are here to be your trusted partners on your journey
-						to professional success. Explore a world of possibilities with THE
-						JOBS, where your international career aspirations become a
-						reality."</div>
+					<div>"At MediCheck Laboratories, we are dedicated to
+						providing accurate and reliable testing services to support your
+						health journey. With a team of skilled technicians and
+						state-of-the-art equipment, we offer a wide range of diagnostic
+						tests to help you make informed decisions about your health. Our
+						mission is to deliver precise results and personalized guidance
+						that aligns with your healthcare needs. Whether you require
+						routine screenings, specialized tests, or wellness evaluations, we
+						are here to be your trusted partner in promoting your well-being.
+						Experience the quality and convenience of laboratory services at
+						MediCheck Laboratories, where your health is our priority."</div>
 				</div>
 				<div class="col-2"></div>
 			</div>
@@ -298,7 +296,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 
 	<!-- ////////////// -->
-
+<%-- 
 	<div class="row" id="experts">
 
 		<div>
@@ -322,7 +320,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 			<div class="row">
 				<div class="col-2"></div>
 				<div class="col-8">
-					<%--  <div id="map" style="height: 500px;"></div>
+					 <div id="map" style="height: 500px;"></div>
       <script>
   const map = L.map('map').setView([0, 0], 2); // Set the initial view
 
@@ -375,24 +373,24 @@ int newMessagesCount = messageService.getNewMessagesCount();
         .bindPopup(`<b>${country}</b><br>Consultants: ${count}`);
     }
   });
-</script> --%>
+</script>
 
-		
+
 
 				</div>
 				<div class="col-2"></div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<!-------------------------------------------------- about  ----------------------------------------- -->
-	
+
 	<!-------------------------------------------------- about  ----------------------------------------- -->
 	<div id="growth" style="background-color: rgba(218, 186, 247, 0.195)">
 		<div class="container" style="height: 85vh;">
 			<div class="row mt-2">
 				<div class="about-col-1 ">
 
-					<h1 class="mt-5 pt-5 sub-title " style="color: #5b4a6b;">
+					<h1 class="mt-5 pt-5 sub-title " style="color: #529ece;">
 						Witness the vibrant growth of our community month by month in
 						<%=currentYear%>!
 					</h1>
@@ -403,6 +401,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 						consultants joining our platform and escalating demand for
 						appointments. Be a part of this dynamic ecosystem and unlock
 						countless opportunities. Join today and shape your future with us!
+
 
 					
 					<div class="tab-titles"></div>
@@ -417,48 +416,129 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 
 						<script>
-    const data1 = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-            label: 'Monthly Appointments',
-            data: [<%=monthlyCounts.get(0)%>, <%=monthlyCounts.get(1)%>, <%=monthlyCounts.get(2)%>, <%=monthlyCounts.get(3)%>, <%=monthlyCounts.get(4)%>, <%=monthlyCounts.get(5)%>, <%=monthlyCounts.get(6)%>, <%=monthlyCounts.get(7)%>, <%=monthlyCounts.get(8)%>, <%=monthlyCounts.get(9)%>, <%=monthlyCounts.get(10)%>, <%=monthlyCounts.get(11)%>],
-            borderColor: 'rgb(91,74,107)',
-            borderWidth: 2,
-            fill: false,
-        },
-        {
-            label: 'User Registrations',
-            data: [<%=userCounts.get(0)%>, <%=userCounts.get(1)%>, <%=userCounts.get(2)%>, <%=userCounts.get(3)%>, <%=userCounts.get(4)%>, <%=userCounts.get(5)%>, <%=userCounts.get(6)%>, <%=userCounts.get(7)%>, <%=userCounts.get(8)%>, <%=userCounts.get(9)%>, <%=userCounts.get(10)%>, <%=userCounts.get(11)%>],
-            borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 2,
-            fill: false,
-        },
-        {
-            label: 'Consultant Registrations',
-            data: [<%=consultantCounts.get(0)%>, <%=consultantCounts.get(1)%>, <%=consultantCounts.get(2)%>, <%=consultantCounts.get(3)%>, <%=consultantCounts.get(4)%>, <%=consultantCounts.get(5)%>, <%=consultantCounts.get(6)%>, <%=consultantCounts.get(7)%>, <%=consultantCounts.get(8)%>, <%=consultantCounts.get(9)%>, <%=consultantCounts.get(10)%>, <%=consultantCounts.get(11)%>],
-            borderColor: 'rgb(75, 192, 192)',
-            borderWidth: 2,
-            fill: false,
-        }]
-    };
+							const data1 = {
+								labels : [ 'January', 'February', 'March',
+										'April', 'May', 'June', 'July',
+										'August', 'September', 'October',
+										'November', 'December' ],
+								datasets : [
+										{
+											label : 'Monthly Appointments',
+											data : [
+						<%=monthlyCounts.get(0)%>
+							,
+						<%=monthlyCounts.get(1)%>
+							,
+						<%=monthlyCounts.get(2)%>
+							,
+						<%=monthlyCounts.get(3)%>
+							,
+						<%=monthlyCounts.get(4)%>
+							,
+						<%=monthlyCounts.get(5)%>
+							,
+						<%=monthlyCounts.get(6)%>
+							,
+						<%=monthlyCounts.get(7)%>
+							,
+						<%=monthlyCounts.get(8)%>
+							,
+						<%=monthlyCounts.get(9)%>
+							,
+						<%=monthlyCounts.get(10)%>
+							,
+						<%=monthlyCounts.get(11)%>
+							],
+											borderColor : 'rgb(91,74,107)',
+											borderWidth : 2,
+											fill : false,
+										},
+										{
+											label : 'User Registrations',
+											data : [
+						<%=userCounts.get(0)%>
+							,
+						<%=userCounts.get(1)%>
+							,
+						<%=userCounts.get(2)%>
+							,
+						<%=userCounts.get(3)%>
+							,
+						<%=userCounts.get(4)%>
+							,
+						<%=userCounts.get(5)%>
+							,
+						<%=userCounts.get(6)%>
+							,
+						<%=userCounts.get(7)%>
+							,
+						<%=userCounts.get(8)%>
+							,
+						<%=userCounts.get(9)%>
+							,
+						<%=userCounts.get(10)%>
+							,
+						<%=userCounts.get(11)%>
+							],
+											borderColor : 'rgb(255, 99, 132)',
+											borderWidth : 2,
+											fill : false,
+										},
+										{
+											label : 'Consultant Registrations',
+											data : [
+						<%=consultantCounts.get(0)%>
+							,
+						<%=consultantCounts.get(1)%>
+							,
+						<%=consultantCounts.get(2)%>
+							,
+						<%=consultantCounts.get(3)%>
+							,
+						<%=consultantCounts.get(4)%>
+							,
+						<%=consultantCounts.get(5)%>
+							,
+						<%=consultantCounts.get(6)%>
+							,
+						<%=consultantCounts.get(7)%>
+							,
+						<%=consultantCounts.get(8)%>
+							,
+						<%=consultantCounts.get(9)%>
+							,
+						<%=consultantCounts.get(10)%>
+							,
+						<%=consultantCounts.get(11)%>
+							],
+											borderColor : 'rgb(75, 192, 192)',
+											borderWidth : 2,
+											fill : false,
+										} ]
+							};
 
-    const ctx1 = document.getElementById('myLineChart').getContext('2d');
-    const myLineChart = new Chart(ctx1, {
-        type: 'line',
-        data: data1,
-        options: {
-            scales: {
-                x: {
-                    type: 'category',
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                },
-                y: {
-                    beginAtZero: true,
-                }
-            }
-        }
-    });
-</script>
+							const ctx1 = document.getElementById('myLineChart')
+									.getContext('2d');
+							const myLineChart = new Chart(ctx1, {
+								type : 'line',
+								data : data1,
+								options : {
+									scales : {
+										x : {
+											type : 'category',
+											labels : [ 'January', 'February',
+													'March', 'April', 'May',
+													'June', 'July', 'August',
+													'September', 'October',
+													'November', 'December' ],
+										},
+										y : {
+											beginAtZero : true,
+										}
+									}
+								}
+							});
+						</script>
 					</div>
 					<!-- Education -->
 					<div class="tab-contents" id="Education">
@@ -502,22 +582,25 @@ int newMessagesCount = messageService.getNewMessagesCount();
 						</div>
 						<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 						<script>
-              const data = {
-                labels: ['Red', 'Blue', 'Yellow'],
-                datasets: [{
-                  label: 'My First Dataset',
-                  data: [300, 50, 100],
-                  backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-                  hoverOffset: 4
-                }]
-              };
-            
-              const chartContext = document.getElementById('doughnutChart').getContext('2d');
-              const myChart = new Chart(chartContext, {
-                type: 'doughnut',
-                data: data
-              });
-            </script>
+							const data = {
+								labels : [ 'Red', 'Blue', 'Yellow' ],
+								datasets : [ {
+									label : 'My First Dataset',
+									data : [ 300, 50, 100 ],
+									backgroundColor : [ 'rgb(255, 99, 132)',
+											'rgb(54, 162, 235)',
+											'rgb(255, 205, 86)' ],
+									hoverOffset : 4
+								} ]
+							};
+
+							const chartContext = document.getElementById(
+									'doughnutChart').getContext('2d');
+							const myChart = new Chart(chartContext, {
+								type : 'doughnut',
+								data : data
+							});
+						</script>
 
 
 					</div>
@@ -560,7 +643,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 
 	<div class="p-0 m-0 "
-		style="background-color: #ffffff; height: 60vh; color: #5b4a6b; font-size: 2.5rem;">
+		style="background-color: #ffffff; height: 60vh; color: #529ece; font-size: 2.5rem;">
 		<!-- <div class="container m-0 p-0 pt-2" style="text-align: center;height: 70vh; background-color: #5b4a6b; width: 100%;"> -->
 		<div class="row p-0 m-0 pt-5 font-weight-bold"
 			style="text-align: center; margin-top: 50px;">
@@ -606,7 +689,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 
 	<div class="p-0 m-0 "
-		style="background-color: #f9f2fc; height: 60vh; color: #5b4a6b; font-size: 2.5rem;">
+		style="background-color: #f9f2fc; height: 60vh; color: #529ece; font-size: 2.5rem;">
 		<div class="row pt-5 font-weight-bold p-0 m-0"
 			style="text-align: center; margin-top: 100px; font-size: 120px">
 			<i class="fa-solid fa-earth-americas"></i>
@@ -631,10 +714,10 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 	<!-- --------------------javascript-------------------------- -->
 	<script>
-    function resetForm() {
-        document.getElementById("form1").reset();
-    }
-</script>
+		function resetForm() {
+			document.getElementById("form1").reset();
+		}
+	</script>
 
 	<!-- <script>
 
@@ -654,21 +737,16 @@ int newMessagesCount = messageService.getNewMessagesCount();
 </script> -->
 
 	<script>
-  var sidemenu=document.getElementById("sidemenu");
+		var sidemenu = document.getElementById("sidemenu");
 
-  function openmenu(){
-    sidemenu.style.right="0"
-  }
+		function openmenu() {
+			sidemenu.style.right = "0"
+		}
 
-  function closemenu(){
-    sidemenu.style.right="-200px"
-  }
-
-
-
-
-
-</script>
+		function closemenu() {
+			sidemenu.style.right = "-200px"
+		}
+	</script>
 
 
 
