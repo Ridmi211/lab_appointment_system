@@ -26,7 +26,7 @@
 </html> --%>
 
 
-		<title>Login</title>
+		<title>MC-Login</title>
  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
@@ -41,13 +41,33 @@
 	  <style>
    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
     
-    body, html {
-      font-family: 'Source Sans Pro', sans-serif;
-      background-color: #1d243d;
-      padding: 0;
-      margin: 0;
-    }
-    
+   body,
+ html {
+ 	font-family: 'Source Sans Pro', sans-serif;
+ 	/* background-color: #1d243d;*/
+ 	background-image: url(https://wallpapercave.com/wp/wp4085844.jpg);
+ 	position: relative;
+ 	padding: 0;
+ 	margin: 0;
+ 	width: 100;
+ 	height: 100vh;
+ 	background-size: cover;
+ 	background-position: center;
+ }
+
+ body::before {
+ 	content: "";
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	width: 100%;
+ 	height: 100%;
+ 	background: rgba(25, 31, 53, 0.449);
+ 	/* Adjust the color and opacity as needed */
+ 	z-index: 0;
+ 	/* You can also add other styles like gradients or patterns here */
+ }
+
     #particles-js {
       position: absolute;
       width: 100%;
@@ -61,7 +81,7 @@
       position: absolute;
       text-align: center;
       transform: translateX(-50%);
-      background-color: rgb( 33, 41, 66 );
+      background: rgb(89, 144, 166, 0.549);
       border-radius: 9px;
       border-top: 10px solid #79a6fe;
       border-bottom: 10px solid #8BD17C;
@@ -70,11 +90,11 @@
       box-shadow: 1px 1px 108.8px 19.2px rgb(25,31,53);
     }
     
-    .box h4 {
+     .box h4 {
       font-family: 'Source Sans Pro', sans-serif;
-      color: #5c6bc0; 
-      font-size: 18px;
-      margin-top:94px;;
+     color: rgb(25,31,53);
+      font-size: 25px;
+      margin-top:40px;;
     }
     
     .box h4 span {
@@ -85,7 +105,7 @@
     .box h5 {
       font-family: 'Source Sans Pro', sans-serif;
       font-size: 13px;
-      color: #a1a4ad;
+    color: rgb(25, 31, 53);
       letter-spacing: 1.5px;
       margin-top: 5px;
       margin-bottom: 50px;
@@ -145,7 +165,7 @@
     
     .btn1 {
       border:0;
-      background: #7f5feb;
+     	background: rgb(25, 31, 53);
       color: #dfdeee;
       border-radius: 100px;
       width: 340px;
@@ -159,14 +179,14 @@
     }
     
     .btn1:hover {
-      background: #5d33e6;
+     	background: #529ece;
     }
     
     .rmb {
       position: absolute;
       margin-left: -24%;
       margin-top: 0px;
-      color: #dfdeee;
+    color: rgb(25, 31, 53);
       font-size: 13px;
     }
     
@@ -180,6 +200,7 @@
         position: absolute;
         top: 90%;
         left: 24%;
+        color: rgb(25, 31, 53);
     }
     
     [type=checkbox]:checked + span:before {/* <-- style its checked state */
@@ -197,7 +218,7 @@
       position: absolute;
       left: 339px;
       top: 282px;
-      color: #3b476b;
+   color: rgb(25, 31, 53);
       font-size: 22px;
       cursor: pointer;
     }      
@@ -228,7 +249,7 @@
         bottom: 0;
         top: 605px;
         width: 100%;
-        color: #78797d;
+       color: rgb(25, 31, 53);
         font-size: 14px;
         text-align: center;
     }
@@ -273,7 +294,7 @@ p{ color:white;
       
 
       <form name="form1" class="box" method="post" action="usermanager">
-        <h4>Job<span>Consultancy</span></h4>
+        <h4>Medi<span>Check</span></h4>
         
         <h5>Sign in to your account.</h5>
           

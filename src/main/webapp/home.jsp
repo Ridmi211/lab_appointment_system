@@ -385,9 +385,9 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	<!-------------------------------------------------- about  ----------------------------------------- -->
 
 	<!-------------------------------------------------- about  ----------------------------------------- -->
-	<div id="growth" style="background-color: rgba(218, 186, 247, 0.195)">
+	<div id="growth" style="background-color: rgb(139,209,232, 0.149);">
 		<div class="container" style="height: 85vh;">
-			<div class="row mt-2">
+			<div class="row ">
 				<div class="about-col-1 ">
 
 					<h1 class="mt-5 pt-5 sub-title " style="color: #529ece;">
