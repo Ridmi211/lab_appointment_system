@@ -10,7 +10,32 @@
    nav{
 	   background-color: #fff;  
    }
+            
+.nav-logo
+{
+ width:55px;	
+  height: 55px;
+  position: relative;
+  top: -10px;
+  left: 20px;
+}
+
      
+         h4 {
+      font-family: 'Source Sans Pro', sans-serif;
+     color: rgb(25,31,53);
+      font-size: 22px;
+      margin-top:40px;
+      position: relative;
+  top: -23px;
+    left: -380px;
+    }
+    
+    h4 span {
+      color: #91d7f4;
+      font-weight: lighter;
+    }
+    
        .btn.btn2 {
             display: inline-block;
              margin: 10px auto;
@@ -70,8 +95,6 @@
         /* ----------------contact------------------- */
       
       
-
-       
 
 
 

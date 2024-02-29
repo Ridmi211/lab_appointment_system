@@ -352,7 +352,7 @@
        form input,
         form textarea {
             width: 100%;
-            border: 1px solid rgb(223, 179, 245);
+            border: 1px solid #91d7f4;
             outline: none;
             background: #ffffff;
             padding: 15px;
@@ -376,6 +376,7 @@
             background: #262626;
             font-weight: 300;
             margin-top: 50px;
+            color: #6c6c6c;
         
         }
         .copyright i{

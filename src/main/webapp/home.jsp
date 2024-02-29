@@ -110,7 +110,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -163,7 +163,10 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 	<!--   nav -->
 	<nav class="p-0 m-0 pt-0">
-		<img src="images/logo.png" alt="logo">
+		<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<h4>
+				Medi<span>Check</span>
+			</h4>
 		<ul class="" id="sidemenu">
 			<li><a href="#header">Home</a></li>
 			<li><a href="#about-us">About</a></li>
@@ -391,16 +394,13 @@ int newMessagesCount = messageService.getNewMessagesCount();
 				<div class="about-col-1 ">
 
 					<h1 class="mt-5 pt-5 sub-title " style="color: #529ece;">
-						Witness the vibrant growth of our community month by month in
+						Witness the vibrant growth of our community in
 						<%=currentYear%>!
 					</h1>
 					<!-- <img src="https://images.inc.com/uploaded_files/image/1920x1080/getty_468868827_970566970450047_60099.jpg" alt="user image"> -->
 				</div>
 				<div class="about-col-2">
-					<p>Chart below showcases the exciting journey of new users and
-						consultants joining our platform and escalating demand for
-						appointments. Be a part of this dynamic ecosystem and unlock
-						countless opportunities. Join today and shape your future with us!
+					<p>
 
 
 					
@@ -423,7 +423,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 										'November', 'December' ],
 								datasets : [
 										{
-											label : 'Monthly Appointments',
+											label : 'Appointments',
 											data : [
 						<%=monthlyCounts.get(0)%>
 							,
@@ -454,7 +454,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 											fill : false,
 										},
 										{
-											label : 'User Registrations',
+											label : 'Clients',
 											data : [
 						<%=userCounts.get(0)%>
 							,
@@ -485,7 +485,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 											fill : false,
 										},
 										{
-											label : 'Consultant Registrations',
+											label : 'Technicians',
 											data : [
 						<%=consultantCounts.get(0)%>
 							,
@@ -694,7 +694,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 			style="text-align: center; margin-top: 100px; font-size: 120px">
 			<i class="fa-solid fa-earth-americas"></i>
 			<h1 style="margin-top: 70px;">
-				<b> Start your global work adventure</b>
+				<b> Take Control of Your Health</b>
 			</h1>
 		</div>
 		<div class="m-0 services justify-content-center">

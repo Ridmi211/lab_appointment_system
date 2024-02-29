@@ -44,12 +44,12 @@ User user = (User) session.getAttribute("user");
     <div class="row" style=" margin-top: 100px;">
       <div class="contact-left">
         <h1 class="sub-title margin-top: 50px;">Contact Us</h1>
-        <p><i class="fa-solid fa-paper-plane"></i> jos@gmail.com</p>
+        <p><i class="fa-solid fa-paper-plane"></i> mediCheck@gmail.com</p>
         <p><i class="fa-solid fa-square-phone"></i> (+94)81-954 3823</p>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/ridmi-yatigammana-b42383214/"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://github.com/Ridmi211"><i class="fa-brands fa-github"></i></a>
-         <a href="https://www.instagram.com/ridmi_y_y/"><i class="fa-brands fa-instagram"></i></a> 
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+         <a href="#"><i class="fa-brands fa-instagram"></i></a> 
         </div>
      <!--    <a href="images/Resume- Ridmi Yatigammana.pdf" download class="btn btn2">Download CV</a> -->
       </div>
@@ -71,7 +71,7 @@ User user = (User) session.getAttribute("user");
   </div>
 
   <div class="copyright">
-    <p> Copyright © 2023</p>
+    <p> Copyright © 2024</p>
   </div>
   
 </div>
