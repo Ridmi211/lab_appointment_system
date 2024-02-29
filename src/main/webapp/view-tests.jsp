@@ -14,17 +14,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-	rel="stylesheet">
-<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-	rel="stylesheet">
-<script src="https://kit.fontawesome.com/1a4bb98cfa.js"
-	crossorigin="anonymous"></script>
+
+
 
 <meta charset="utf-8">
-<title>Job-Seekers</title>
+<title>MediCheck</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -32,7 +26,8 @@
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -40,6 +35,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
+<script src="https://kit.fontawesome.com/1a4bb98cfa.js"
+	crossorigin="anonymous"></script>
 <Style>
 * {
 	margin: 0;
@@ -53,8 +50,23 @@ html {
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(242, 248, 255) 100%);
 	color: #000000;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 
 h2 {
@@ -90,7 +102,7 @@ h2 {
 .header-text h2 {
 	font-size: 60px;
 	margin-top: 40px;
-	color: #584674;
+	color: #529ece;
 }
 
 .header-text h1 span {
@@ -126,7 +138,7 @@ h2 {
 .sub-title {
 	font-size: 50px;
 	font-weight: 600;
-	color: #000000;
+	color: #529ece;
 }
 
 .tab-titles {
@@ -294,7 +306,7 @@ h2 {
 .layer {
 	width: 360px;
 	height: 0;
-	background: linear-gradient(rgba(187, 187, 187, 0.942), #3fcbe4);
+	background: linear-gradient(rgba(187, 187, 187, 0.942), #91d7f4);
 	border-radius: 10px;
 	position: absolute;
 	left: 0;
@@ -359,7 +371,7 @@ h2 {
 }
 
 .contact-left p i {
-	color: #d6adff;
+	color: #529ece;
 	margin-right: 15px;
 	font-size: 25px;
 }
@@ -378,7 +390,7 @@ h2 {
 }
 
 .social-icons a:hover {
-	color: #d6adff;
+	color: #529ece;
 	transform: translateY(-5px);
 }
 
@@ -398,7 +410,7 @@ h2 {
 
 form input, form textarea {
 	width: 100%;
-	border: 1px solid rgb(223, 179, 245);
+	border: 1px solid #91d7f4;
 	outline: none;
 	background: #ffffff;
 	padding: 15px;
@@ -497,7 +509,7 @@ nav .fas {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(190, 156, 209, 0.649);
+	background: rgb(139, 209, 232, 0.449);
 	/* Adjust the color and opacity as needed */
 	z-index: 0;
 	/* You can also add other styles like gradients or patterns here */
@@ -664,7 +676,7 @@ label #cancel {
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
-	background-color: #b88eda;
+	background-color: #91d7f4;
 	border-radius: 5px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #ffffff;
@@ -685,6 +697,11 @@ label #cancel {
 	position: absolute;
 	top: 30px;
 	left: 30px;
+}
+
+.card-container h6 {
+	color: rgb(128, 128, 128);
+	
 }
 
 .card-container .round {
@@ -711,7 +728,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #905abd;
+	background-color: #529ece;
 	text-align: left;
 	padding: 15px;
 	margin-top: 10px;
@@ -859,7 +876,10 @@ input[type="text"] {
 
 	<!-- sidebar end here  -->
 	<nav class="p-0 m-0 pt-0">
-		<img src="images/logo.png" alt="logo">
+		<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<h4>
+				Medi<span>Check</span>
+			</h4>
 		<ul class="" id="sidemenu">
 			<!--   <li><a href="#header">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -896,8 +916,8 @@ input[type="text"] {
 
 				<div class="header-text pt-2 ">
 
-					<h1>Choose your dream path with our experienced</h1>
-					<h2>Consultation panel</h2>
+					<h1>Choose What's Right for You from our</h1>
+					<h2>Comprehensive Test Selection</h2>
 
 
 
@@ -943,16 +963,16 @@ input[type="text"] {
 							<!-- Add image, name, and other details for the test -->
 							<div class="name">
 								<%=test.getType().getDisplayName()%>
-								
+
 							</div>
 							<div class="countries">
-							<h6>
-								<%=test.getDescription()%>
-							</h6>
+								<h6>
+									<%=test.getDescription()%>
+								</h6>
 							</div>
 							<div class="skills">
 								<ul>
-									<li> Rs.<%=test.getCost()%></li>
+									<li>Rs.<%=test.getCost()%></li>
 								</ul>
 							</div>
 
@@ -966,36 +986,37 @@ input[type="text"] {
 								</div>
 							</a>
 						</div> --%>
-						<%@ page import="javax.servlet.http.HttpSession" %>
+						<%@ page import="javax.servlet.http.HttpSession"%>
 
-<%
-HttpSession session2 = request.getSession(false);
+						<%
+						HttpSession session2 = request.getSession(false);
 
-if (session2 == null || session2.getAttribute("user") == null) {
-    // User is not logged in, display a message or redirect to the login page
-%>
-    <div class="layer">
-    <a href="login.jsp">
-        <div class="btn btn2 ">
-            <i class="fa-regular fa-calendar-check"></i> Book (Login required)
-        </div>
-         </a>
-    </div>
-<%
-} else {
-    // User is logged in, allow access to the page
-%>
-    <div class="layer">
-        <a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
-            <div class="btn btn2">
-                <i class="fa-regular fa-calendar-check"></i> Book
-            </div>
-        </a>
-    </div>
-<%
-}
-%>
-						
+						if (session2 == null || session2.getAttribute("user") == null) {
+							// User is not logged in, display a message or redirect to the login page
+						%>
+						<div class="layer">
+							<a href="login.jsp">
+								<div class="btn btn2 ">
+									<i class="fa-regular fa-calendar-check"></i> Book (Login
+									required)
+								</div>
+							</a>
+						</div>
+						<%
+						} else {
+						// User is logged in, allow access to the page
+						%>
+						<div class="layer">
+							<a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
+								<div class="btn btn2">
+									<i class="fa-regular fa-calendar-check"></i> Book
+								</div>
+							</a>
+						</div>
+						<%
+						}
+						%>
+
 					</div>
 				</div>
 				<%
@@ -1013,14 +1034,14 @@ if (session2 == null || session2.getAttribute("user") == null) {
 	<div
 		class="p-0 m-0 d-flex align-items-center services justify-content-center"
 		id="about-us"
-		style="height: 60vh; color: #5b4a6b; font-size: 2.5rem; background-image: url(https://images.unsplash.com/photo-1474127773417-aec7504236d2?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aWN5JTIwbW91bnRhaW58ZW58MHx8MHx8fDA%3D&amp;w=1000&amp;q=80); position: relative;">
+		style="height: 60vh; color: #5b4a6b; font-size: 2.5rem; background-image: url(https://wallpapercave.com/wp/wp4085844.jpg); position: relative;">
 		<div style="text-align: center; z-index: 1;">
 			<div class="p-0 m-0 "
-				style="background-color: #f9f2fc; height: 40vh; color: #5b4a6b; font-size: 2.5rem;">
+				style="background-color: #f9f2fc; height: 40vh; color: #529ece; font-size: 2.5rem;">
 				<div class="row pt-5 font-weight-bold p-0 m-0"
 					style="text-align: center; margin-top: 100px;">
 					<h1 style="margin-top: 70px;">
-						<b> Start your global work adventure</b>
+						<b>Empower Your Wellness Journey</b>
 					</h1>
 				</div>
 				<div class="m-0 services justify-content-center">

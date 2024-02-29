@@ -111,6 +111,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -133,6 +134,21 @@ int newMessagesCount = messageService.getNewMessagesCount();
 
 .first-title {
 	font-size: 20px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-3px;
+	left: -280px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 
 /*  <!-- sidebar styling end here  --> */
@@ -692,7 +708,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 		style="background-color: #f9f2fc; height: 60vh; color: #529ece; font-size: 2.5rem;">
 		<div class="row pt-5 font-weight-bold p-0 m-0"
 			style="text-align: center; margin-top: 100px; font-size: 120px">
-			<i class="fa-solid fa-earth-americas"></i>
+			<i class="fa-solid fa-vial-circle-check"></i>
 			<h1 style="margin-top: 70px;">
 				<b> Take Control of Your Health</b>
 			</h1>
