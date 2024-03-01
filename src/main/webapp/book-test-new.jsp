@@ -764,6 +764,12 @@ h4 {
 	left: -450px;
 }
 
+.reference {
+
+color: rgb(25, 31, 53);
+	font-size: 14px;
+}
+
 h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
@@ -839,18 +845,18 @@ h4 span {
 							</div>
 							<div class="qualifications">
 								<ul>
-									<li>
-										<h6><%=test1.getDescription()%></h6>
+									<li><p>Preparation instructions</p>
+										<div class="reference"><%=test1.getPreparationInstructions()%></div>
 									</li>
-									<li><%=test1.getReportReadyIn()%></li>
-									<li><%=test1.getMeasurementUnit()%></li>
+									<li> Report ready in : <%=test1.getReportReadyIn()%></li>
+									<li>Measured in : <%=test1.getMeasurementUnit()%></li>
 								</ul>
 							</div>
 							<div class="countries">
-								<h6>Reference range</h6>
+								<div class="reference">Reference range</div>
 								<ul id="availableCountriesList">
-									<li><%=test1.getLowReferenceRange()%></li>
-									<li><%=test1.getHighReferenceRange()%></li>
+									<li>Lower: <%=test1.getLowReferenceRange()%></li>
+									<li>Higher: <%=test1.getHighReferenceRange()%></li>
 								</ul>
 							</div>
 							<div class="skills">
@@ -880,8 +886,7 @@ h4 span {
 							<div class="row">
 								<input name="doctor" id="doctor" required>
 							</div>
-							<div class="row mb-1 mt-3">Add your qualifications so we
-								can help you better</div>
+							<div class="row mb-1 mt-3">Additional Notes </div>
 							<div class="row">
 								<textarea name="notes" style="height: 100px" required></textarea>
 							</div>
@@ -899,12 +904,16 @@ h4 span {
 						<div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
 							<li>Name : <%=user.getName()%></li>
 							<li>Email : <%=user.getEmail()%></li>
+							<li>Test Type :<%=test1.getType().getDisplayName()%></li>
+							<li>Recommended Doctor : - </li>
+							<li>Date : -</li>
+							<li>Additional Notes : -</li>
 						</div>
 						<div class="skills" style="padding-left: 30px;">
-							<li class="pb-2">Selected date and time</li>
+							<li class="pb-2">Your Payment</li>
 							<ul style="padding-left: 30px;">
-								<li>None</li>
-								<li>None</li>
+								<li>00.00</li>
+								
 							</ul>
 						</div>
 						<div class="countries"></div>
@@ -972,14 +981,16 @@ h4 span {
         <div class="card-container mt-2">
           <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
             <li>Name : <%=user.getName()%></li>
-            <li>Email : <%=user.getEmail()%></li>
-            <li>Recomended Doctor : ${doctorName}</li>
+            <li>Email : <%=user.getEmail()%></li>           
             <li>Selected Test:<%=test1.getType().getDisplayName()%></li>
+            <li>Recomended Doctor : ${doctorName}</li>
+            <li>Date : ${date}</li>
             <li>Notes : ${notes}</li>
           </div>
           <div class="skills" style="padding-left: 30px;">
-            <li class="pb-2">Selected date and time</li>
-            <ul style="padding-left: 30px;"></ul>
+            <li class="pb-2">Payement Confirmed</li>
+            <ul style="padding-left: 30px;">
+            <li><%=test1.getCost()%></li></ul>
           </div>
           <div class="countries">
             <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
