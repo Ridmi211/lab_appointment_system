@@ -30,7 +30,7 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Register for test</title>
+<title>MC-Test Registration</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -47,7 +47,7 @@ if (session.getAttribute("user") == null) {
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -66,9 +66,8 @@ if (session.getAttribute("user") == null) {
 html {
 	scroll-behavior: smooth;
 }
-
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(240, 247, 255) 100%);
 	color: #000000;
 }
 
@@ -577,7 +576,7 @@ label #cancel {
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
-	background-color: #b88eda;
+	background-color: #91d7f4;
 	border-radius: 5px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #ffffff;
@@ -624,7 +623,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #905abd;
+	background-color: #529ece;
 	text-align: left;
 	padding: 15px;
 	margin-top: 10px;
@@ -724,22 +723,22 @@ button.primary.ghost {
 	display: inline-block;
 	margin: 5px auto;
 	width: fit-content;
-	border: 1px solid #d6adff;
+	border: 1px solid #91d7f4;
 	padding: 5px 50px;
 	border-radius: 6px;
 	text-decoration: none;
 	transition: background 0.5s;
-	background: #d6adff;
+	background: #91d7f4;
 }
 
 .btn.btn3:hover {
-	background: #5b4a6b;
+	background: #529ece;
 	color: #ffffff;
 }
 
 form input, form textarea, form select {
 	width: 100%;
-	border: 1px solid rgb(223, 179, 245);
+	border: 1px solid #91d7f4;
 	outline: none;
 	background: #ffffff;
 	padding: 10px;
@@ -747,6 +746,27 @@ form input, form textarea, form select {
 	color: #6c6c6c;
 	font-size: 14px;
 	border-radius: 6px;
+}
+
+.title-one{
+font-family: 'Source Sans Pro', sans-serif;
+	color: #529ece;
+	font-size: 35px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 /*  <!-- sidebar styling end here  --> */
 </Style>
@@ -767,7 +787,10 @@ form input, form textarea, form select {
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
+				<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<h4>
+				Medi<span>Check</span>
+			</h4>
 				<ul class="" id="sidemenu">
 					<%
 					if (user != null) {
@@ -789,8 +812,8 @@ form input, form textarea, form select {
 		</div>
 	</div>
 	<div class="row p-5 pb-0 m-0 mt-5" style="text-align: center;">
-		<h2>Check out our availability and book the date and time that
-			works for you</h2>
+		<div class="title-one">Check out our availability and book the date and time that
+			works for you</div>
 	</div>
 	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
 	<div class="row p-0 p-5  " style="margin-left: 140px; margin-top: 0px;">
@@ -808,7 +831,7 @@ form input, form textarea, form select {
 					<div class="work">
 						<div class="card-container">
 							<img class="round"
-								src="https://i.pinimg.com/1200x/7c/ab/9e/7cab9e1d435b5b8c51998bd2085e3b70.jpg"
+								src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
 								alt="user" /> <br>
 							<%--   <div class="name"><%= test1.getTestId() %></div> --%>
 							<div class="name">

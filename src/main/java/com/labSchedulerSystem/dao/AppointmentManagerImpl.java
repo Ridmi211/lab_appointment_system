@@ -404,7 +404,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 				+ "s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerContact "
 				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
 				+ "INNER JOIN user s ON a.seekerId = s.userId "
-				+ "WHERE a.status = 'ADMIN_CONFIRMED' AND a.consultantId = ?";
+				+ "WHERE a.status = 'ADMIN_CONFIRMED' AND a.technitianId = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, loggedInUserId);
 		List<Appointment> requestedAppointments = new ArrayList<>();
@@ -432,7 +432,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		String query = "SELECT a.*, c.name AS consultantName, c.email AS consultantEmail, c.phoneNumber AS consultantContact, "
 				+ "s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerContact "
 				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
-				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.status = 'COMPLETED' AND a.consultantId = ?";
+				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.status = 'COMPLETED' AND a.technitianId = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, loggedInUserId);
 		List<Appointment> requestedAppointments = new ArrayList<>();
@@ -461,7 +461,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 				+ "s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerContact "
 				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
 				+ "INNER JOIN user s ON a.seekerId = s.userId "
-				+ "WHERE (a.status = 'ADMIN_CANCELLED' OR a.status = 'SEEKER_CANCELLED') AND a.consultantId = ?";
+				+ "WHERE (a.status = 'ADMIN_CANCELLED' OR a.status = 'SEEKER_CANCELLED') AND a.technitianId = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, loggedInUserId);
 		List<Appointment> requestedAppointments = new ArrayList<>();
@@ -490,7 +490,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 				+ "s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerContact "
 				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
 				+ "INNER JOIN user s ON a.seekerId = s.userId "
-				+ "WHERE a.status = 'CON_CONFIRMED' AND a.consultantId = ?";
+				+ "WHERE a.status = 'CON_CONFIRMED' AND a.technitianId = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, loggedInUserId);
 		List<Appointment> requestedAppointments = new ArrayList<>();
@@ -544,7 +544,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		String query = "SELECT a.*, c.name AS consultantName, c.email AS consultantEmail, c.phoneNumber AS consultantContact, "
 				+ "s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerContact "
 				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
-				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.consultantId = ?";
+				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.technitianId = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(query);
 		preparedStatement.setInt(1, loggedInUserId);
 		List<Appointment> requestedAppointments = new ArrayList<>();

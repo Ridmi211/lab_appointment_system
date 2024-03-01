@@ -12,7 +12,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -83,12 +84,12 @@
 
 				<p>Please fill following mandatory fields.</p>
 				
-				<select name="jobtype" id="jobtype" required>
+	<%-- 			<select name="jobtype" id="jobtype" required>
     <option value="" disabled selected>Select Test Type</option>
     <% for (TestType type : TestType.values()) { %>
         <option value="<%= type.name() %>"><%= type.getDisplayName() %></option>
     <% } %>
-</select>
+</select> --%>
 				
            <!--  <select name="jobtype" id="jobtype" required>
                 <option value="" disabled selected>Select Test Type</option>
