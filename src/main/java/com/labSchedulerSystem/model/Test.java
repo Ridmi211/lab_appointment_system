@@ -10,6 +10,7 @@ public class Test {
     private String description;
     private String cost;
     private String reportReadyIn;
+    private String PreparationInstructions;
     private String measurementUnit;
     private String lowReferenceRange;
     private String highReferenceRange;
@@ -98,7 +99,18 @@ public class Test {
 	}
 
 
+	public String getPreparationInstructions() {
+		return PreparationInstructions;
+	}
+
+
+	public void setPreparationInstructions(String preparationInstructions) {
+		PreparationInstructions = preparationInstructions;
+	}
+
+
 	public enum TestType {
+		DEFAULT("Default"),
 	    BLOOD_TEST("Blood Test"),
 	    URINE_TEST("Urine Test"),
 	    XRAY("X-Ray"),

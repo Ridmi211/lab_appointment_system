@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManager;
@@ -78,41 +79,59 @@ public class UserManagerImpl implements UserManager {
 		
 	}
 
+	private static final Logger LOGGER = Logger.getLogger(UserManagerImpl.class.getName());
+	
 	public Map<String, List<Integer>> getMonthlyUserRegistrationCounts() throws SQLException, ClassNotFoundException {
-		Connection connection = getConnection();
-		List<Integer> userCounts = new ArrayList<>();
-		List<Integer> consultantCounts = new ArrayList<>();
-		int currentYear = Year.now().getValue();
-		for (int month = 1; month <= 12; month++) {
-			String userQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_USER'";
-			try (PreparedStatement userPs = connection.prepareStatement(userQuery)) {
-				userPs.setInt(1, currentYear);
-				userPs.setInt(2, month);
-				try (ResultSet userRs = userPs.executeQuery()) {
-					if (userRs.next()) {
-						int userCount = userRs.getInt(1);
-						userCounts.add(userCount);
-					}
-				}
-			}
-			String consultantQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_TECHNITIAN'";
-			try (PreparedStatement consultantPs = connection.prepareStatement(consultantQuery)) {
-				consultantPs.setInt(1, currentYear);
-				consultantPs.setInt(2, month);
-				try (ResultSet consultantRs = consultantPs.executeQuery()) {
-					if (consultantRs.next()) {
-						int consultantCount = consultantRs.getInt(1);
-						consultantCounts.add(consultantCount);
-					}
-				}
-			}
-		}
-		connection.close();
-		Map<String, List<Integer>> countsMap = new HashMap<>();
-		countsMap.put("userCounts", userCounts);
-		countsMap.put("consultantCounts", consultantCounts);
-		return countsMap;
+	    Connection connection = null;
+	    List<Integer> userCounts = new ArrayList<>();
+	    List<Integer> consultantCounts = new ArrayList<>();
+	    int currentYear = Year.now().getValue();
+	    try {
+	        connection = getConnection();
+	        for (int month = 1; month <= 12; month++) {
+	            String userQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_USER'";
+	            try (PreparedStatement userPs = connection.prepareStatement(userQuery)) {
+	                userPs.setInt(1, currentYear);
+	                userPs.setInt(2, month);
+	                try (ResultSet userRs = userPs.executeQuery()) {
+	                    if (userRs.next()) {
+	                        int userCount = userRs.getInt(1);
+	                        userCounts.add(userCount);
+	                        LOGGER.info("User count for month " + month + ": " + userCount);
+	                        
+	                    }
+	                }
+	            }
+	            String consultantQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_TECHNITIAN'";
+	            try (PreparedStatement consultantPs = connection.prepareStatement(consultantQuery)) {
+	                consultantPs.setInt(1, currentYear);
+	                consultantPs.setInt(2, month);
+	                try (ResultSet consultantRs = consultantPs.executeQuery()) {
+	                    if (consultantRs.next()) {
+	                        int consultantCount = consultantRs.getInt(1);
+	                        consultantCounts.add(consultantCount);
+	                        LOGGER.info("Consultant count for month " + month + ": " + consultantCount);
+	                    }
+	                }
+	            }
+	        }
+	    } catch (SQLException | ClassNotFoundException e) {
+	        LOGGER.log(Level.SEVERE, "Error occurred while fetching monthly user registration counts", e);
+	    } finally {
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException e) {
+	                LOGGER.log(Level.SEVERE, "Error occurred while closing the database connection", e);
+	            }
+	        }
+	    }
+	    Map<String, List<Integer>> countsMap = new HashMap<>();
+	    countsMap.put("userCounts", userCounts);
+	    countsMap.put("consultantCounts", consultantCounts);
+	    return countsMap;
 	}
+
 
 //	public Map<String, Map<String, Object>> getJobTypeDistributionData() throws SQLException, ClassNotFoundException {
 //		Connection connection = null;
@@ -312,7 +331,7 @@ public class UserManagerImpl implements UserManager {
 //		return consultantCountByCountry;
 //	}
 
-	private static final Logger LOGGER = Logger.getLogger(UserManagerImpl.class.getName());
+	
 
 //	public Map<String, Map<String, Integer>> getConsultantAvailabilityData()
 //			throws SQLException, ClassNotFoundException {

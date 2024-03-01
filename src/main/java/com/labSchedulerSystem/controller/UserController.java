@@ -245,7 +245,7 @@ public class UserController extends HttpServlet {
 	        user.setAccessRight(AccessRight.ROLE_USER);
 	        user.setRegistrationStatus(RegistrationStatus.APPROVED);
 	    }
-	    user.setSelectedTestType(Test.TestType.valueOf(request.getParameter("jobtype")));
+	    user.setSelectedTestType(Test.TestType.DEFAULT);
 	    user.setEducationalQualifications(request.getParameter("educationalQualifications"));
 	    user.setSpecializedJobs(request.getParameter("specializedJobs"));
 //	    String[] selectedAvailableDays = request.getParameterValues("availableDays");

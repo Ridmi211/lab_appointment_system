@@ -21,11 +21,8 @@
 
 <%
 User user = (User) session.getAttribute("user");
-// Check if the user is logged in
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
 }
 %>
 
@@ -33,7 +30,7 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Register for test</title>
+<title>MC-Test Registration</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -50,7 +47,7 @@ if (session.getAttribute("user") == null) {
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -69,9 +66,8 @@ if (session.getAttribute("user") == null) {
 html {
 	scroll-behavior: smooth;
 }
-
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(240, 247, 255) 100%);
 	color: #000000;
 }
 
@@ -580,7 +576,7 @@ label #cancel {
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
-	background-color: #b88eda;
+	background-color: #91d7f4;
 	border-radius: 5px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #ffffff;
@@ -627,7 +623,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #905abd;
+	background-color: #529ece;
 	text-align: left;
 	padding: 15px;
 	margin-top: 10px;
@@ -727,22 +723,22 @@ button.primary.ghost {
 	display: inline-block;
 	margin: 5px auto;
 	width: fit-content;
-	border: 1px solid #d6adff;
+	border: 1px solid #91d7f4;
 	padding: 5px 50px;
 	border-radius: 6px;
 	text-decoration: none;
 	transition: background 0.5s;
-	background: #d6adff;
+	background: #91d7f4;
 }
 
 .btn.btn3:hover {
-	background: #5b4a6b;
+	background: #529ece;
 	color: #ffffff;
 }
 
 form input, form textarea, form select {
 	width: 100%;
-	border: 1px solid rgb(223, 179, 245);
+	border: 1px solid #91d7f4;
 	outline: none;
 	background: #ffffff;
 	padding: 10px;
@@ -750,6 +746,27 @@ form input, form textarea, form select {
 	color: #6c6c6c;
 	font-size: 14px;
 	border-radius: 6px;
+}
+
+.title-one{
+font-family: 'Source Sans Pro', sans-serif;
+	color: #529ece;
+	font-size: 35px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 /*  <!-- sidebar styling end here  --> */
 </Style>
@@ -763,25 +780,21 @@ form input, form textarea, form select {
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-
 	<!-- sidebar end here  -->
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<h4>
+				Medi<span>Check</span>
+			</h4>
 				<ul class="" id="sidemenu">
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -794,68 +807,36 @@ form input, form textarea, form select {
 					<%
 					}
 					%>
-
 				</ul>
-
-
 			</nav>
 		</div>
 	</div>
-
-	<%-- 	<%
-	Test test = (Test) request.getAttribute("test");
-	%> --%>
-
 	<div class="row p-5 pb-0 m-0 mt-5" style="text-align: center;">
-
-
-		<h2>Check out our availability and book the date and time that
-			works for you</h2>
-
-
-
-
+		<div class="title-one">Check out our availability and book the date and time that
+			works for you</div>
 	</div>
-
-
-
-
-
 	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
-
-
-
-
 	<div class="row p-0 p-5  " style="margin-left: 140px; margin-top: 0px;">
-
 		<div class="container">
 			<div class="row">
 				<%
-				// Retrieve the test ID from the URL query parameter
 				String testIdString = request.getParameter("testId");
 				int testId = Integer.parseInt(testIdString);
-
 				AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
 				AppointmentService appointmentService = AppointmentService.getAppointmentService();
-				// Assuming you have a method to fetch test details by ID
 				Test test1 = appointmentManager.fetchSingleTest(testId);
-
-				// Display test details as needed
 				%>
 
 				<div class="col-sm mb-5">
 					<div class="work">
 						<div class="card-container">
-
 							<img class="round"
-								src="https://i.pinimg.com/1200x/7c/ab/9e/7cab9e1d435b5b8c51998bd2085e3b70.jpg"
+								src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
 								alt="user" /> <br>
 							<%--   <div class="name"><%= test1.getTestId() %></div> --%>
 							<div class="name">
 								<%=test1.getType().getDisplayName()%>
 							</div>
-
-
 							<div class="qualifications">
 								<ul>
 									<li>
@@ -863,121 +844,47 @@ form input, form textarea, form select {
 									</li>
 									<li><%=test1.getReportReadyIn()%></li>
 									<li><%=test1.getMeasurementUnit()%></li>
-
 								</ul>
 							</div>
 							<div class="countries">
 								<h6>Reference range</h6>
 								<ul id="availableCountriesList">
-
 									<li><%=test1.getLowReferenceRange()%></li>
 									<li><%=test1.getHighReferenceRange()%></li>
-
 								</ul>
 							</div>
 							<div class="skills">
 								<h6>Cost</h6>
 								<ul id="availableJobsList">
-
 									<li><%=test1.getCost()%></li>
-
-
 								</ul>
 							</div>
-						</div>
-						<%--  <div class="layer">
-                    <div class="days">
-                        <h6>Available Days</h6>
-                       <ul id="availableDaysList">
-                            <%
-                                String availableDays = consultant.getAvailableDays();
-                                if (availableDays != null && !availableDays.isEmpty()) {
-                                    String[] days = availableDays.split(",");
-                                    for (String day : days) {
-                            %>
-                            <li><%= day.trim() %></li>
-                            <%
-                                    }
-                                }
-                            %>
-                        </ul>
-                    </div>
-                    <div class="days">
-                        <h6>Available Time Slots</h6>
-                        <ul id="availableTimeSlotsList">
-                            <%
-                                String availableTimeSlots = consultant.getAvailableTimeSlots();
-                                if (availableTimeSlots != null && !availableTimeSlots.isEmpty()) {
-                                    String[] timeSlots = availableTimeSlots.split(",");
-                                    for (String timeSlot : timeSlots) {
-                            %>
-                            <li><%= timeSlot.trim() %></li>
-                            <%
-                                    }
-                                }
-                            %>
-                        </ul>
-                    </div>
-                </div> --%>
+						</div>						
 					</div>
 				</div>
-
-
-
 				<div class="col-sm mb-5 p-5 m-5 mt-0 pt-1">
 					<div class="row">
-						<!--            <form  action="appointmentManager" method="post"> -->
 						<form action="appointmentManager" method="post" id="bookingForm">
-
-
-							<!-- Add the hidden input fields for consultantId and seekerId -->
-							<%--   <input type="hidden" name="consultantId" value="<%= consultant.getUserId() %>"> --%>
 							<input type="hidden" name="seekerId"
 								value="<%=user.getUserId()%>">
-							
 							<div class="row mb-1 mt-3"></div>
 							<div class="row">
-								<input type="hidden" name="test" id="test" value="<%=test1.getType().getDisplayName()%>">
-									
-
+								<input type="hidden" name="test" id="test"
+									value="<%=test1.getType()%>">
 							</div>
 							<div class="row mb-1">Select a Date</div>
 							<div class="row">
 								<input type="date" id="date" name="date" required>
 							</div>
-
-							<%-- <div class="row mb-1 mt-1">Select Time</div>
-							<div class="row">
-								<select name="test" id="test" required>
-									<option value="" disabled selected>Select Test Type</option>
-									<%
-									for (TestType type : TestType.values()) {
-									%>
-									<option value="<%=type.name()%>"><%=type.getDisplayName()%></option>
-									<%
-									}
-									%>
-								</select>
-							</div> --%>
-
-
-
 							<div class="row mb-1 mt-3">Recommended doctor</div>
 							<div class="row">
 								<input name="doctor" id="doctor" required>
-								<!-- Add job options here -->
-
 							</div>
-
 							<div class="row mb-1 mt-3">Add your qualifications so we
 								can help you better</div>
 							<div class="row">
 								<textarea name="notes" style="height: 100px" required></textarea>
 							</div>
-
-							<!--  <input type="submit" value="Add Appointment"> -->
-
-
 							<div>
 								<input type="hidden" name="appactiontype" value="addAppointment" />
 								<button style="position: relative; left: 0%;" class="btn btn3"
@@ -986,66 +893,123 @@ form input, form textarea, form select {
 						</form>
 					</div>
 				</div>
-
-
-
 				<div class="col-sm mb-5 p-5 mt-0 pt-1" id="bookingDetailsCard">
-
 					Your booking details are as follows
 					<div class="card-container mt-2">
-						<div
-							style="padding-left: 30px; text-align: left; line-height: 2.5rem">
-
-							<li>Name : <%=user.getName()%>
-							</li>
-							<li>Email : <%=user.getEmail()%>
-							</li>
-							<%--   <li >Consultant :<%= consultant.getName() %></li> --%>
-							<!-- <li>Selected job : None</li>
-							<li>Selected country : None</li>
-							<li>Notes : None</li> -->
-
+						<div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
+							<li>Name : <%=user.getName()%></li>
+							<li>Email : <%=user.getEmail()%></li>
 						</div>
-
-
 						<div class="skills" style="padding-left: 30px;">
 							<li class="pb-2">Selected date and time</li>
 							<ul style="padding-left: 30px;">
 								<li>None</li>
-
 								<li>None</li>
-
 							</ul>
 						</div>
-
 						<div class="countries"></div>
 					</div>
-
 				</div>
+				
+				
+				<!-- payment/////////////////// -->
+				<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <!-- Payment form goes here -->
+    <!-- For simplicity, let's assume a simple payment form with credit card fields -->
+    <h2>Payment Details</h2>
+    <form id="paymentForm">
+      <!-- Credit card fields -->
+      <input type="text" placeholder="Credit Card Number" required>
+      <input type="text" placeholder="Expiry Date" required>
+      <input type="text" placeholder="CVV" required>
+      <!-- Submit button for payment -->
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+</div>
+				<!-- //////////////////////////// -->
+				
+				
+				
 			</div>
-
-			-->
 		</div>
-
-		<!-- --------------------javascript-------------------------- -->
-
+		
+		
 		<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("bookingForm");
+    const bookingDetailsCard = document.getElementById("bookingDetailsCard");
+    const paymentModal = document.getElementById("paymentModal");
+    const paymentForm = document.getElementById("paymentForm");
+
+    // Show payment modal when the form is submitted
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      paymentModal.style.display = "block";
+    });
+
+    // Handle payment form submission
+    paymentForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // Perform payment processing here (e.g., validate credit card details, make API call to payment gateway)
+      // After successful payment, update booking details card and hide payment modal
+      updateBookingDetails();
+      paymentModal.style.display = "none";
+    });
+
+    // Function to update booking details card
+    function updateBookingDetails() {
+      // Get form data
+      const date = form.querySelector('input[name="date"]').value;
+      const testType = form.querySelector('input[name="test"]').value;
+      const notes = form.querySelector('textarea[name="notes"]').value;
+      const doctorName = form.querySelector('input[name="doctor"]').value;
+
+      // Update booking details card with the appointment details
+      const bookingDetailsHTML = `
+        Your booking details are as follows
+        <div class="card-container mt-2">
+          <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
+            <li>Name : <%=user.getName()%></li>
+            <li>Email : <%=user.getEmail()%></li>
+            <li>Recomended Doctor : ${doctorName}</li>
+            <li>Selected Test:<%=test1.getType().getDisplayName()%></li>
+            <li>Notes : ${notes}</li>
+          </div>
+          <div class="skills" style="padding-left: 30px;">
+            <li class="pb-2">Selected date and time</li>
+            <ul style="padding-left: 30px;"></ul>
+          </div>
+          <div class="countries">
+            <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
+          </div>
+        </div>
+      `;
+      bookingDetailsCard.innerHTML = bookingDetailsHTML;
+      bookingDetailsCard.style.display = "block";
+
+      // Add event listener to confirm booking button
+      const confirmBookingButton = document.getElementById("confirmBookingButton");
+      confirmBookingButton.addEventListener("click", function () {
+        form.submit(); // Submit the booking form
+      });
+    }
+  });
+</script>
+		
+		
+		
+<%-- 		<script>
 		document.addEventListener("DOMContentLoaded", function () {
 		    const form = document.getElementById("bookingForm");
-		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");
-		    
+		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");	    
 		    form.addEventListener("submit", function (e) {
 		        e.preventDefault(); 
-		        
-		        // Get form input values
 		        const date = form.querySelector('input[name="date"]').value;
 		        const testType = form.querySelector('input[name="test"]').value;
 		        const notes = form.querySelector('textarea[name="notes"]').value;
 		        const doctorName = form.querySelector('input[name="doctor"]').value;
-		        // Build the HTML to display the data in the card
-		        
-		       
-		          
 		        const bookingDetailsHTML = `        
 		            Your booking details are as follows
 		            <div class="card-container mt-2">
@@ -1065,84 +1029,16 @@ form input, form textarea, form select {
 		                </div>
 		            </div>
 		        `;
-
-		        // Update the booking details card with the generated HTML
 		        bookingDetailsCard.innerHTML = bookingDetailsHTML;
 		        bookingDetailsCard.style.display = "block";
-
-		        // Handle the confirm booking button click
 		        const confirmBookingButton = document.getElementById("confirmBookingButton");
 		        confirmBookingButton.addEventListener("click", function () {
-		            // Submit the form
 		            form.submit();
 		        });
 		    });
 		});
 
-</script>
-
-
-
-
-
-		<!-- 	<script>
-    // Get the date input element
-    const dateInput = document.getElementById("date");
-
-    // Initialize availableDays as an empty array
-    let availableDays = [];
-
-    // Replace this with your consultant's available days
-    // This code will populate availableDays from the HTML list
-    const availableDaysList = document.getElementById("availableDaysList");
-    const availableDaysItems = availableDaysList.getElementsByTagName("li");
-    
-    for (let i = 0; i < availableDaysItems.length; i++) {
-        availableDays.push(availableDaysItems[i].textContent.trim());
-    }
-
-    dateInput.addEventListener("input", function() {
-        // Get the selected date
-        const selectedDate = dateInput.value;
-
-        // Get the current day of the week (e.g., "Monday")
-        const currentDay = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' });
-
-        if (availableDays.includes(currentDay)) {
-            // The selected date is available
-            dateInput.setCustomValidity(""); // Clear any custom validation messages
-        } else {
-            // The selected date is unavailable
-            dateInput.setCustomValidity("Consultant is not available on " + currentDay);
-        }
-    });
-</script>
-
-
-		<script>
-    // Get the time select element
-    const timeSelect = document.getElementById("time");
-
-    // Initialize availableTimeSlots as an empty array
-    let availableTimeSlots = [];
-
-    // Replace this with your consultant's available time slots
-    // This code will populate availableTimeSlots from the HTML list
-    const availableTimeSlotsList = document.getElementById("availableTimeSlotsList");
-    const availableTimeSlotsItems = availableTimeSlotsList.getElementsByTagName("li");
-
-    for (let i = 0; i < availableTimeSlotsItems.length; i++) {
-        availableTimeSlots.push(availableTimeSlotsItems[i].textContent.trim());
-    }
-
-    // Populate the select options
-   /*  availableTimeSlots.forEach((timeSlot) => {
-        const option = document.createElement("option");
-        option.value = timeSlot;
-        option.textContent = timeSlot;
-        timeSelect.appendChild(option);
-    }); */
-</script> -->
+</script> --%>
 </body>
 
 </html>
