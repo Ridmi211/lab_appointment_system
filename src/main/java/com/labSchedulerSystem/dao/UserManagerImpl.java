@@ -21,6 +21,7 @@ import com.labSchedulerSystem.dao.dbUtils.DbDriverManager;
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManagerFactory;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.RegistrationStatus;
+import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.User;
 
 public class UserManagerImpl implements UserManager {
@@ -38,7 +39,7 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public boolean addUser(User user) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO user(`name`,`phoneNumber`,`email`, `password`,`birthdate`,`gender`,`educationalQualifications`,`specializedJobs`,`accessRight`,`registrationStatus`,`registrationDate`,`testType`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO user(`name`,`phoneNumber`,`email`, `password`,`birthdate`,`gender`,`educationalQualifications`,`specializedJobs`,`accessRight`,`registrationStatus`,`registrationDate`,`selectedTestType`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getPhoneNumber());
@@ -387,7 +388,7 @@ public class UserManagerImpl implements UserManager {
 	@Override
 	public boolean editUser(User user) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE user SET name =?,phoneNumber=?,email=?,birthdate=?,gender=?,educationalQualifications=?,specializedJobs=?,accessRight=? WHERE userId=?";
+		String query = "UPDATE user SET name =?,phoneNumber=?,email=?,birthdate=?,gender=?,educationalQualifications=?,specializedJobs=?,accessRight=?,selectedTestType=? WHERE userId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, user.getName());
 		ps.setString(2, user.getPhoneNumber());
@@ -397,8 +398,12 @@ public class UserManagerImpl implements UserManager {
 		ps.setString(6, user.getEducationalQualifications());
 		ps.setString(7, user.getSpecializedJobs());
 		ps.setString(8, user.getAccessRight().toString());
-		ps.setInt(9, user.getUserId());
+		ps.setString(9, user.getSelectedTestType().toString());
+		ps.setInt(10, user.getUserId());
 		
+		LOGGER.info("Executing SQL query: " + query);
+        LOGGER.info("Parameters: name=" + user.getName() + ", phoneNumber=" + user.getPhoneNumber() + ", email=" + user.getEmail() + ", birthdate=" + user.getBirthdate() + ", gender=" + user.getGender() + ", educationalQualifications=" + user.getEducationalQualifications() + ", specializedJobs=" + user.getSpecializedJobs() + ", accessRight=" + user.getAccessRight().toString() + ", selectedTestType=" + user.getSelectedTestType().toString() + ", userId=" + user.getUserId());
+        
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
@@ -438,6 +443,7 @@ public class UserManagerImpl implements UserManager {
 			user.setBirthdate(rs.getString("birthdate"));
 			user.setGender(rs.getString("gender"));
 			user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+			user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
 			user.setEducationalQualifications(rs.getString("educationalQualifications"));
 			user.setSpecializedJobs(rs.getString("specializedJobs"));
 		}
