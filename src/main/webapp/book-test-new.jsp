@@ -754,6 +754,14 @@ font-family: 'Source Sans Pro', sans-serif;
 	font-size: 35px;
 }
 
+.title-two{
+
+	font-size: 30px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+	color: #2D2747;
+}
+
 h4 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: rgb(25, 31, 53);
@@ -774,6 +782,36 @@ h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
 }
+
+.modal-container {
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+	color: rgb(25, 31, 53);
+	padding-top: 30px;
+	position: relative;
+	left:20%;
+	width: 60%;
+	top:25%;
+	min-height:400px;
+	text-align: center;
+}
+
+.inner-modal-container{
+
+	border-radius: 5px;
+	color: rgb(25, 31, 53);
+	padding: 30px;
+	padding-top: 0px;
+	margin-top:10px;
+	margin-bottom:10px;
+	margin:60px;
+	position: relative;	
+	min-height:350px;
+	text-align: center;
+}
+
+
 /*  <!-- sidebar styling end here  --> */
 </Style>
 
@@ -923,18 +961,21 @@ h4 span {
 				
 				<!-- payment/////////////////// -->
 				<div id="paymentModal" class="modal">
-  <div class="modal-content">
+  <div class="modal-container">
     <!-- Payment form goes here -->
     <!-- For simplicity, let's assume a simple payment form with credit card fields -->
-    <h2>Payment Details</h2>
+     <div class="inner-modal-container">
+    <div class="title-two" >Payment Details</div >
     <form id="paymentForm">
       <!-- Credit card fields -->
       <input type="text" placeholder="Credit Card Number" required>
       <input type="text" placeholder="Expiry Date" required>
       <input type="text" placeholder="CVV" required>
+      <div class="name"> Amount :<%=test1.getCost()%></div><br>
       <!-- Submit button for payment -->
-      <button type="submit">Pay Now</button>
+      <button type="submit" class="btn btn3">Pay Now</button>
     </form>
+  </div>
   </div>
 </div>
 				<!-- //////////////////////////// -->
@@ -993,7 +1034,7 @@ h4 span {
             <li><%=test1.getCost()%></li></ul>
           </div>
           <div class="countries">
-            <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
+            <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Proceed</button>
           </div>
         </div>
       `;
