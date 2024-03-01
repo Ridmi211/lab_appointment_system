@@ -110,6 +110,7 @@ public class Test {
 
 
 	public enum TestType {
+		DEFAULT("Default"),
 	    BLOOD_TEST("Blood Test"),
 	    URINE_TEST("Urine Test"),
 	    XRAY("X-Ray"),
