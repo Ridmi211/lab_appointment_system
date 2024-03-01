@@ -67,7 +67,8 @@ h4 span {
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, rgb(214, 230, 254) 0%, rgb(233, 232, 253) 100%);
+
 }
 
 .form-group {
@@ -76,22 +77,42 @@ body {
 
 label {
 	font-weight: bold;
+	 	font-family: 'Source Sans Pro', sans-serif;
+ 	font-size: 13px;
+ 	color: rgb(25, 31, 53);
+ 	letter-spacing: 1.5px;
+ 	margin-top: 5px;
+ 	margin-bottom: 10px;
 }
 
 input[type="text"], input[type="date"],select[name="selectedTestType"], textarea {
 	width: 100%;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+	border: 0;
+ 	border-radius: 5px;
+ 	padding: 6px 10px;
+ 	outline: none;
+ 	color: rgb(25, 31, 53);
+ 	-webkit-transition: all .2s ease-out;
+ 	-moz-transition: all .2s ease-out;
+ 	-ms-transition: all .2s ease-out;
+ 	-o-transition: all .2s ease-out;
+ 	transition: all .2s ease-out;
+
 }
 
 select[name="selectedTestType"]:focus {
  	width: 100%;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+	border: 0;
+ 	border-radius: 5px;
+ 	padding: 6px 10px;
+ 	outline: none;
+ 	color: rgb(25, 31, 53);
+ 	-webkit-transition: all .2s ease-out;
+ 	-moz-transition: all .2s ease-out;
+ 	-ms-transition: all .2s ease-out;
+ 	-o-transition: all .2s ease-out;
+ 	transition: all .2s ease-out;
+
 }
 
 .btn {
@@ -200,11 +221,11 @@ select[name="selectedTestType"]:focus {
 		<div class="col-2 m-0"></div>
 	</div>
 
-	<div class="row m-0 d-flex justify-content-center">
+	<div class="row m-0 d-flex justify-content-center ">
 		<%-- <p style='color:magenta'>${message}</p>	 --%>
 	</div>
 
-	<div class="row m-0">
+	<div class="row m-0 mb-5">
 		<!-- Search abr  -->
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
@@ -230,7 +251,7 @@ select[name="selectedTestType"]:focus {
 
 				<c:if test="${user.accessRight == 'ROLE_TECHNITIAN'}">
 
-					<label for="selectedTestType">Test type:</label>
+					<label for="selectedTestType">Assigned test type:</label>
 				<%-- 	<input class="form-control" type="text" id="selectedTestType"
 						name="selectedTestType" value="${user.selectedTestType}" /> --%>
 					<select name="selectedTestType" id="selectedTestType" required>
@@ -248,7 +269,7 @@ select[name="selectedTestType"]:focus {
 						id="educationalQualifications" name="educationalQualifications"
 						value="${user.educationalQualifications}" />
 
-					<label for="specializedJobs">Specialized Jobs:</label>
+					<label for="specializedJobs">Specialized Job qualifications:</label>
 					<input class="form-control" type="text" id="specializedJobs"
 						name="specializedJobs" value="${user.specializedJobs}" />
 				</c:if>

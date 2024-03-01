@@ -255,17 +255,11 @@ public class UserController extends HttpServlet {
 		user.setEducationalQualifications(request.getParameter("educationalQualifications"));
 		user.setSpecializedJobs(request.getParameter("specializedJobs"));
 		user.setAccessRight(AccessRight.valueOf(request.getParameter("accessRight")));
-		/*
-		 * user.setSelectedTestType(Test.TestType.valueOf(request.getParameter(
-		 * "selectedTestType")));
-		 */
-		
-		  if (user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
-		        user.setSelectedTestType(Test.TestType.valueOf(request.getParameter("selectedTestType")));
-		    } else {
-		        // Set the selectedTestType to default if the user's role is not ROLE_TECHNITIAN
-		        user.setSelectedTestType(Test.TestType.DEFAULT);
-		    }
+		if (user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
+			user.setSelectedTestType(Test.TestType.valueOf(request.getParameter("selectedTestType")));
+		} else {
+			user.setSelectedTestType(Test.TestType.DEFAULT);
+		}
 		try {
 			if (getUserService().editUser(user)) {
 				UserService.sendUserUpdateEmail(user);
