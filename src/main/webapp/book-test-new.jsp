@@ -79,8 +79,10 @@ if (session.getAttribute("user") == null) {
 html {
 	scroll-behavior: smooth;
 }
+
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(240, 247, 255) 100%);
+	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(240, 247, 255)
+		100%);
 	color: #000000;
 }
 
@@ -761,14 +763,13 @@ form input, form textarea, form select {
 	border-radius: 6px;
 }
 
-.title-one{
-font-family: 'Source Sans Pro', sans-serif;
+.title-one {
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #529ece;
 	font-size: 35px;
 }
 
-.title-two{
-
+.title-two {
 	font-size: 30px;
 	margin: 0 7px 7px 0;
 	padding: 7px;
@@ -781,13 +782,12 @@ h4 {
 	font-size: 22px;
 	margin-top: 40px;
 	position: relative;
-	top:-3px;
+	top: -3px;
 	left: -450px;
 }
 
 .reference {
-
-color: rgb(25, 31, 53);
+	color: rgb(25, 31, 53);
 	font-size: 14px;
 }
 
@@ -803,27 +803,25 @@ h4 span {
 	color: rgb(25, 31, 53);
 	padding-top: 30px;
 	position: relative;
-	left:20%;
+	left: 20%;
 	width: 60%;
-	top:25%;
-	min-height:400px;
+	top: 25%;
+	min-height: 400px;
 	text-align: center;
 }
 
-.inner-modal-container{
-
+.inner-modal-container {
 	border-radius: 5px;
 	color: rgb(25, 31, 53);
 	padding: 30px;
 	padding-top: 0px;
-	margin-top:10px;
-	margin-bottom:10px;
-	margin:60px;
-	position: relative;	
-	min-height:350px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin: 60px;
+	position: relative;
+	min-height: 350px;
 	text-align: center;
 }
-
 
 /*  <!-- sidebar styling end here  --> */
 </Style>
@@ -844,10 +842,12 @@ h4 span {
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
-			<h4>
-				Medi<span>Check</span>
-			</h4>
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
 				<ul class="" id="sidemenu">
 					<%
 					if (user != null) {
@@ -869,8 +869,8 @@ h4 span {
 		</div>
 	</div>
 	<div class="row p-5 pb-0 m-0 mt-5" style="text-align: center;">
-		<div class="title-one">Check out our availability and book the date and time that
-			works for you</div>
+		<div class="title-one">Check out our availability and book the
+			date and time that works for you</div>
 	</div>
 	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
 	<div class="row p-0 p-5  " style="margin-left: 140px; margin-top: 0px;">
@@ -905,7 +905,7 @@ h4 span {
 									<li><p>Preparation instructions</p>
 										<div class="reference"><%=test1.getPreparationInstructions()%></div>
 									</li>
-									<li> Report ready in : <%=test1.getReportReadyIn()%></li>
+									<li>Report ready in : <%=test1.getReportReadyIn()%></li>
 									<li>Measured in : <%=test1.getMeasurementUnit()%></li>
 								</ul>
 							</div>
@@ -922,7 +922,7 @@ h4 span {
 									<li><%=test1.getCost()%></li>
 								</ul>
 							</div>
-						</div>						
+						</div>
 					</div>
 				</div>
 				<div class="col-sm mb-5 p-5 m-5 mt-0 pt-1">
@@ -943,7 +943,7 @@ h4 span {
 							<div class="row">
 								<input name="doctor" id="doctor" required>
 							</div>
-		<%-- 					<div class="row">
+							<%-- 					<div class="row">
 							<select name="technician" id="technician" required>
         <option value="">Select Technician</option>
         Populate the dropdown with technicians here
@@ -955,28 +955,32 @@ h4 span {
         <% } %>
     </select>
     </div> --%>
-    
-    <!-- Inside your form -->
-<%
-// Instantiate TechnicianService
-UserManagerImpl userManager = new UserManagerImpl();
 
-// Call the method
-List<User> technicians = userManager.fetchTechniciansForTest(testId);
+							<!-- Inside your form -->
+							<%
+							// Instantiate TechnicianService
+							UserManagerImpl userManager = new UserManagerImpl();
 
-// Populate dropdown
-%>
-<div class="row mb-1 mt-3">Select Technician</div>
-<div class="row">
-    <select name="technician" id="technician" required>
-        <option value="">Select Technician</option>
-        <% for (User technician : technicians) { %>
-            <option value="<%= technician.getUserId() %>"><%= technician.getName() %></option>
-        <% } %>
-    </select>
-</div>
-    
-							<div class="row mb-1 mt-3">Additional Notes </div>
+							// Call the method
+							List<User> technicians = userManager.fetchTechniciansForTest(testId);
+
+							// Populate dropdown
+							%>
+							<div class="row mb-1 mt-3">Select Technician</div>
+							<div class="row">
+								<select name="technitianId" id="technitianId" required>
+									<option value="">Select Technician</option>
+									<%
+									for (User technician : technicians) {
+									%>
+									<option value="<%=technician.getUserId()%>"><%=technician.getName()%></option>
+									<%
+									}
+									%>
+								</select>
+							</div>
+
+							<div class="row mb-1 mt-3">Additional Notes</div>
 							<div class="row">
 								<textarea name="notes" style="height: 100px" required></textarea>
 							</div>
@@ -991,11 +995,12 @@ List<User> technicians = userManager.fetchTechniciansForTest(testId);
 				<div class="col-sm mb-5 p-5 mt-0 pt-1" id="bookingDetailsCard">
 					Your booking details are as follows
 					<div class="card-container mt-2">
-						<div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
+						<div
+							style="padding-left: 30px; text-align: left; line-height: 2.5rem">
 							<li>Name : <%=user.getName()%></li>
 							<li>Email : <%=user.getEmail()%></li>
 							<li>Test Type :<%=test1.getType().getDisplayName()%></li>
-							<li>Recommended Doctor : - </li>
+							<li>Recommended Doctor : -</li>
 							<li>Date : -</li>
 							<li>Additional Notes : -</li>
 						</div>
@@ -1003,41 +1008,43 @@ List<User> technicians = userManager.fetchTechniciansForTest(testId);
 							<li class="pb-2">Your Payment</li>
 							<ul style="padding-left: 30px;">
 								<li>00.00</li>
-								
+
 							</ul>
 						</div>
 						<div class="countries"></div>
 					</div>
 				</div>
-				
-				
+
+
 				<!-- payment/////////////////// -->
 				<div id="paymentModal" class="modal">
-  <div class="modal-container">
-    <!-- Payment form goes here -->
-    <!-- For simplicity, let's assume a simple payment form with credit card fields -->
-     <div class="inner-modal-container">
-    <div class="title-two" >Payment Details</div >
-    <form id="paymentForm">
-      <!-- Credit card fields -->
-      <input type="text" placeholder="Credit Card Number" required>
-      <input type="text" placeholder="Expiry Date" required>
-      <input type="text" placeholder="CVV" required>
-      <div class="name"> Amount :<%=test1.getCost()%></div><br>
-      <!-- Submit button for payment -->
-      <button type="submit" class="btn btn3">Pay Now</button>
-    </form>
-  </div>
-  </div>
-</div>
+					<div class="modal-container">
+						<!-- Payment form goes here -->
+						<!-- For simplicity, let's assume a simple payment form with credit card fields -->
+						<div class="inner-modal-container">
+							<div class="title-two">Payment Details</div>
+							<form id="paymentForm">
+								<!-- Credit card fields -->
+								<input type="text" placeholder="Credit Card Number" required>
+								<input type="text" placeholder="Expiry Date" required> <input
+									type="text" placeholder="CVV" required>
+								<div class="name">
+									Amount :<%=test1.getCost()%></div>
+								<br>
+								<!-- Submit button for payment -->
+								<button type="submit" class="btn btn3">Pay Now</button>
+							</form>
+						</div>
+					</div>
+				</div>
 				<!-- //////////////////////////// -->
-				
-				
-				
+
+
+
 			</div>
 		</div>
-		
-		
+
+
 		<script>
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("bookingForm");
@@ -1067,7 +1074,8 @@ List<User> technicians = userManager.fetchTechniciansForTest(testId);
       const testType = form.querySelector('input[name="test"]').value;
       const notes = form.querySelector('textarea[name="notes"]').value;
       const doctorName = form.querySelector('input[name="doctor"]').value;
-
+      const technitianId = form.querySelector('select[name="technitianId"]').value;
+      
       // Update booking details card with the appointment details
       const bookingDetailsHTML = `
         Your booking details are as follows
@@ -1077,6 +1085,7 @@ List<User> technicians = userManager.fetchTechniciansForTest(testId);
             <li>Email : <%=user.getEmail()%></li>           
             <li>Selected Test:<%=test1.getType().getDisplayName()%></li>
             <li>Recomended Doctor : ${doctorName}</li>
+            <li>Technician : ${doctorName}</li>
             <li>Date : ${date}</li>
             <li>Notes : ${notes}</li>
           </div>
@@ -1101,10 +1110,10 @@ List<User> technicians = userManager.fetchTechniciansForTest(testId);
     }
   });
 </script>
-		
-		
-		
-<%-- 		<script>
+
+
+
+		<%-- 		<script>
 		document.addEventListener("DOMContentLoaded", function () {
 		    const form = document.getElementById("bookingForm");
 		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");	    
