@@ -1001,6 +1001,7 @@ h4 span {
 							<li>Email : <%=user.getEmail()%></li>
 							<li>Test Type :<%=test1.getType().getDisplayName()%></li>
 							<li>Recommended Doctor : -</li>
+							<li>Selected Technician : -</li>
 							<li>Date : -</li>
 							<li>Additional Notes : -</li>
 						</div>
