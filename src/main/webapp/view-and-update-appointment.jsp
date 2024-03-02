@@ -3,6 +3,8 @@
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
+<%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -427,6 +429,23 @@ h4 span {
 				 
 				 //////////////
 				 <div class="page-title">Update Test Details</div>
+				 
+				 
+				 	<label for="selectedTestType">Assigned test type:</label>
+				<%-- 	<input class="form-control" type="text" id="selectedTestType"
+						name="selectedTestType" value="${user.selectedTestType}" /> --%>
+					<select name="testType" id="testType" required>
+						<option value="" disabled selected>${appointment.testType}</option>
+						<%
+						for (TestType type : TestType.values()) {
+						%>
+						<option value="<%=type.name()%>"><%=type.getDisplayName()%></option>
+						<%
+						}
+						%>
+					</select>
+				 
+				 
 				  <label	for="seekerPhoneNumber">Test type</label>
 				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
 				 		 <label	for="seekerPhoneNumber">Test Results:</label>

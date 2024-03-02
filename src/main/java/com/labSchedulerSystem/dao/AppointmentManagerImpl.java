@@ -66,7 +66,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean editAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=?,appointmentRefId=? WHERE appointmentId=?";
+		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=?,appointmentRefId=?,testType=? WHERE appointmentId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -77,7 +77,8 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
-		ps.setInt(10, appointment.getAppointmentId());
+		ps.setString(10, appointment.getTestType().toString());
+		ps.setInt(11, appointment.getAppointmentId());
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
@@ -125,6 +126,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			appointment.setSeekerName(rs.getString("seekerName"));
 			appointment.setSeekerEmail(rs.getString("seekerEmail"));
 			appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
+			appointment.setTestType(Test.TestType.valueOf(rs.getString("TestType")));
 		}
 		rs.close();
 		ps.close();
