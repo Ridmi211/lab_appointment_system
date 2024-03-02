@@ -16,7 +16,7 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Job-Seekers</title>
+<title>MC- My Profile</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -29,7 +29,8 @@ if (session.getAttribute("user") == null) {
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -47,7 +48,8 @@ if (session.getAttribute("user") == null) {
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, rgb(214, 230, 254) 0%,
+		rgb(233, 232, 253) 100%);
 }
 
 .form-inline {
@@ -92,14 +94,20 @@ body {
 	object-fit: cover;
 }
 
-.card-title {
+.card-body .card-title {
 	font-size: 24px;
+	color: #529ece;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 .card-text {
-	font-size: 16px;
-	line-height: 1.5;
-	font-weight: 500;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
+	margin-bottom: 10px;
 }
 
 .list-group-item {
@@ -169,10 +177,25 @@ body {
 .page-title {
 	text-align: center;
 	font-size: 24px;
-	color: #7c6694;
+	color: #529ece;
 	margin-top: 100px;
 	margin-bottom: 20px;
 	text-transform: uppercase;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 </Style>
 
@@ -194,8 +217,12 @@ body {
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
 				<ul class="" id="sidemenu">
 
 					<%
@@ -238,10 +265,10 @@ body {
 			<div class="col-8">
 				<div class="card" style="z-index: 1;">
 					<img class="card-img-top"
-						src="https://www.chieflearningofficer.com/wp-content/uploads/2021/06/AdobeStock_196042217_1.jpg"
+						src="https://www.labtestingmatters.org/wp-content/uploads/2019/10/Medical-Affairs-cover-1-1200x520.jpg"
 						alt="Card image cap">
 					<div class="card-body">
-						<h2 class="card-title"><%=user.getName()%></h2>
+						<div class="card-title"><%=user.getName()%></div>
 
 						<ul class="list-group">
 
@@ -251,8 +278,8 @@ body {
 							<li class="list-group-item"><%=user.getGender()%></li>
 							<div class="card-text">Birthdate :</div>
 							<li class="list-group-item"><%=user.getBirthdate()%></li>
-						
-					
+
+
 							<div class="card-text">Email :</div>
 							<li class="list-group-item"><%=user.getEmail()%></li>
 							<div class="card-text">Conatct Number :</div>
@@ -265,10 +292,10 @@ body {
 							<li class="list-group-item"></li>
 							<div class="card-text">specializedJobs :</div>
 							<li class="list-group-item"><%=user.getSpecializedJobs()%></li>
-						
+
 							<div class="card-text">specializedJobs :</div>
 							<li class="list-group-item"><%=user.getEducationalQualifications()%></li>
-					
+
 							<%
 							}
 							%>
