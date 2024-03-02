@@ -29,6 +29,7 @@ public class UserManagerImpl implements UserManager {
 	public UserManagerImpl() {
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	private Connection getConnection() throws ClassNotFoundException, SQLException {
 		DbDriverManagerFactory driverFactory = new DbDriverManagerFactory();
@@ -496,7 +497,66 @@ public class UserManagerImpl implements UserManager {
 		connection.close();
 		return consultantUsers;
 	}
+	
+	/*
+	 * public List<User> fetchTechniciansForTest(int testId) throws SQLException,
+	 * ClassNotFoundException { Connection connection = getConnection(); String
+	 * query = "SELECT DISTINCT u.* FROM user u " +
+	 * "JOIN t tt ON u.userId = tt.technicianId " + "WHERE tt.testId = ? " +
+	 * "AND u.accessRight = 'ROLE_TECHNICIAN' " +
+	 * "AND u.registrationStatus = 'APPROVED'"; PreparedStatement pst =
+	 * connection.prepareStatement(query); pst.setInt(1, testId); ResultSet rs =
+	 * pst.executeQuery();
+	 * 
+	 * List<User> technicianUsers = new ArrayList<>(); while (rs.next()) { User user
+	 * = new User(); user.setUserId(rs.getInt("userId"));
+	 * user.setName(rs.getString("name"));
+	 * user.setPhoneNumber(rs.getString("phoneNumber"));
+	 * user.setEmail(rs.getString("email"));
+	 * user.setBirthdate(rs.getString("birthdate"));
+	 * user.setGender(rs.getString("gender"));
+	 * user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+	 * user.setEducationalQualifications(rs.getString("educationalQualifications"));
+	 * user.setSpecializedJobs(rs.getString("specializedJobs"));
+	 * technicianUsers.add(user); }
+	 * 
+	 * pst.close(); connection.close(); return technicianUsers; }
+	 */
 
+	public List<User> fetchTechniciansForTest(int testId) throws SQLException, ClassNotFoundException {
+	    Connection connection = getConnection();
+	    LOGGER.log(Level.INFO, "Fetching technicians for test ID: {0}", testId);
+	    String query = "SELECT * FROM user WHERE accessRight = 'ROLE_TECHNITIAN' " +
+	                   "AND registrationStatus = 'APPROVED' " +
+	                   "AND selectedTestType = (SELECT type FROM test WHERE testId = ?)";
+	    PreparedStatement pst = connection.prepareStatement(query);
+	    pst.setInt(1, testId);
+	    ResultSet rs = pst.executeQuery();
+	    
+	    List<User> technicianUsers = new ArrayList<>();
+	    while (rs.next()) {
+	        User user = new User();
+	        user.setUserId(rs.getInt("userId"));
+	        user.setName(rs.getString("name"));
+	        user.setPhoneNumber(rs.getString("phoneNumber"));
+	        user.setEmail(rs.getString("email"));
+	        user.setBirthdate(rs.getString("birthdate"));
+	        user.setGender(rs.getString("gender"));
+	        user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+	        user.setEducationalQualifications(rs.getString("educationalQualifications"));
+	        user.setSpecializedJobs(rs.getString("specializedJobs"));
+	        user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
+	        technicianUsers.add(user);
+	    }
+	    
+	    pst.close();
+	    connection.close();
+	    LOGGER.log(Level.INFO, "Fetched {0} technicians for test ID: {1}", new Object[]{technicianUsers.size(), testId});
+        
+	    return technicianUsers;
+	}
+
+	
 	public int getCountOfConsultantUsers() throws SQLException, ClassNotFoundException {
 	    Connection connection = getConnection();
 	    String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_TECHNITIAN' AND registrationStatus = 'APPROVED'";

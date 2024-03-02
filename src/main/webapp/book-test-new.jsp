@@ -17,6 +17,7 @@
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
+<%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
 
 
 <%-- <%
@@ -882,7 +883,13 @@ h4 span {
 				AppointmentService appointmentService = AppointmentService.getAppointmentService();
 				Test test1 = appointmentManager.fetchSingleTest(testId);
 				%>
-
+				<%-- <%
+				
+				UserManagerImpl userManager = new UserManagerImpl();
+				
+				
+				%>
+ --%>
 				<div class="col-sm mb-5">
 					<div class="work">
 						<div class="card-container">
@@ -936,6 +943,39 @@ h4 span {
 							<div class="row">
 								<input name="doctor" id="doctor" required>
 							</div>
+		<%-- 					<div class="row">
+							<select name="technician" id="technician" required>
+        <option value="">Select Technician</option>
+        Populate the dropdown with technicians here
+        <% 
+        UserManagerImpl userManager = new UserManagerImpl();
+        List<User> technicians = userManager.fetchTechniciansForTest(testId); // Assuming you have a method to fetch technicians for a given test ID
+        for (User technician : technicians) { %>
+            <option value="<%= technician.getUserId() %>"><%= technician.getName() %></option>
+        <% } %>
+    </select>
+    </div> --%>
+    
+    <!-- Inside your form -->
+<%
+// Instantiate TechnicianService
+UserManagerImpl userManager = new UserManagerImpl();
+
+// Call the method
+List<User> technicians = userManager.fetchTechniciansForTest(testId);
+
+// Populate dropdown
+%>
+<div class="row mb-1 mt-3">Select Technician</div>
+<div class="row">
+    <select name="technician" id="technician" required>
+        <option value="">Select Technician</option>
+        <% for (User technician : technicians) { %>
+            <option value="<%= technician.getUserId() %>"><%= technician.getName() %></option>
+        <% } %>
+    </select>
+</div>
+    
 							<div class="row mb-1 mt-3">Additional Notes </div>
 							<div class="row">
 								<textarea name="notes" style="height: 100px" required></textarea>
