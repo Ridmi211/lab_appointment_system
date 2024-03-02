@@ -42,7 +42,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean addAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`) VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`,`appointmentRefId`) VALUES (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -52,6 +52,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(6, appointment.getRecomendedDoctor());
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
+		ps.setString(9, appointment.getAppointmentRefId());
 		boolean result = false;
 		if (ps.executeUpdate() > 0) {
 			result = true;
@@ -64,7 +65,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean editAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=? WHERE appointmentId=?";
+		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=?,appointmentRefId=? WHERE appointmentId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -74,7 +75,8 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(6, appointment.getRecomendedDoctor());
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
-		ps.setInt(9, appointment.getAppointmentId());
+		ps.setString(9, appointment.getAppointmentRefId());
+		ps.setInt(10, appointment.getAppointmentId());
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
@@ -100,37 +102,35 @@ public class AppointmentManagerImpl implements AppointmentManager {
 
 	@Override
 	public Appointment fetchSingleAppointment(int appointmentId) throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    String query = "SELECT a.*, c.name AS consultantName, s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerPhoneNumber " +
-	                   "FROM appointments a " +
-	                   "INNER JOIN user c ON a.technitianId = c.userId " +
-	                   "INNER JOIN user s ON a.seekerId = s.userId " +
-	                   "WHERE a.appointmentId = ?";
-	    PreparedStatement ps = connection.prepareStatement(query);
-	    ps.setInt(1, appointmentId);
-	    ResultSet rs = ps.executeQuery();
-	    Appointment appointment = null; // Initialize to null
-	    while (rs.next()) {
-	        appointment = new Appointment(); // Update only if data is found
-	        appointment.setAppointmentId(rs.getInt("appointmentId"));
-	        appointment.setTechnitianId(rs.getInt("technitianId"));
-	        appointment.setSeekerId(rs.getInt("seekerId"));
-	        appointment.setScheduledDate(rs.getString("scheduledDate"));
-	        appointment.setStartTime(rs.getString("startTime"));
-	        appointment.setStatus(Status.valueOf(rs.getString("status")));
-	        appointment.setNotes(rs.getString("notes"));
-	        appointment.setConsultantName(rs.getString("consultantName"));
-	        appointment.setSeekerName(rs.getString("seekerName"));
-	        appointment.setSeekerEmail(rs.getString("seekerEmail"));
-	        appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
-	    }
-	    rs.close();
-	    ps.close();
-	    connection.close();
-	    return appointment;
+		Connection connection = getConnection();
+		String query = "SELECT a.*, c.name AS consultantName, s.name AS seekerName, s.email AS seekerEmail, s.phoneNumber AS seekerPhoneNumber "
+				+ "FROM appointments a " + "INNER JOIN user c ON a.technitianId = c.userId "
+				+ "INNER JOIN user s ON a.seekerId = s.userId " + "WHERE a.appointmentId = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1, appointmentId);
+		ResultSet rs = ps.executeQuery();
+		Appointment appointment = null; // Initialize to null
+		while (rs.next()) {
+			appointment = new Appointment(); // Update only if data is found
+			appointment.setAppointmentId(rs.getInt("appointmentId"));
+			appointment.setAppointmentRefId(rs.getString("appointmentRefId"));
+			appointment.setTechnitianId(rs.getInt("technitianId"));
+			appointment.setSeekerId(rs.getInt("seekerId"));
+			appointment.setScheduledDate(rs.getString("scheduledDate"));
+			appointment.setStartTime(rs.getString("startTime"));
+			appointment.setStatus(Status.valueOf(rs.getString("status")));
+			appointment.setNotes(rs.getString("notes"));
+			appointment.setConsultantName(rs.getString("consultantName"));
+			appointment.setSeekerName(rs.getString("seekerName"));
+			appointment.setSeekerEmail(rs.getString("seekerEmail"));
+			appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
+		}
+		rs.close();
+		ps.close();
+		connection.close();
+		return appointment;
 	}
 
-	
 	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String query = "SELECT * FROM test ";
@@ -139,76 +139,74 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ResultSet rs = st.executeQuery(query);
 		while (rs.next()) {
 			Test test = new Test(null, query);
-			 test.setTestId(rs.getInt("testId"));
-		        test.setType(TestType.valueOf(rs.getString("type")));
-		        test.setDescription(rs.getString("description"));
-		        test.setCost(rs.getString("cost"));
-		        testList.add(test);
+			test.setTestId(rs.getInt("testId"));
+			test.setType(TestType.valueOf(rs.getString("type")));
+			test.setDescription(rs.getString("description"));
+			test.setCost(rs.getString("cost"));
+			testList.add(test);
 		}
 		st.close();
 		connection.close();
 		return testList;
 	}
-	
+
 	@Override
 	public Test fetchSingleTest(int testId) throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    String query = "SELECT * FROM test WHERE testId = ?";
-	    PreparedStatement ps = connection.prepareStatement(query);
-	    ps.setInt(1, testId);
-	    ResultSet rs = ps.executeQuery();
-	    
-	    Test test = null; // Initialize the Test object outside the loop
-	    
-	    while (rs.next()) {
-	        // Create a new Test object inside the loop
-	        test = new Test(null, query);
-	        test.setTestId(rs.getInt("testId"));
-	        test.setType(TestType.valueOf(rs.getString("type")));
-	        test.setDescription(rs.getString("description"));
-	        test.setCost(rs.getString("cost"));
-	        test.setPreparationInstructions(rs.getString("PreparationInstructions"));
-	        test.setReportReadyIn(rs.getString("ReportReadyIn"));
-	        test.setMeasurementUnit(rs.getString("MeasurementUnit"));
-	        test.setLowReferenceRange(rs.getString("LowReferenceRange"));
-	        test.setHighReferenceRange(rs.getString("HighReferenceRange"));
-	    }
-	    
-	    ps.close();
-	    connection.close();
-	    return test;
+		Connection connection = getConnection();
+		String query = "SELECT * FROM test WHERE testId = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1, testId);
+		ResultSet rs = ps.executeQuery();
+
+		Test test = null; // Initialize the Test object outside the loop
+
+		while (rs.next()) {
+			// Create a new Test object inside the loop
+			test = new Test(null, query);
+			test.setTestId(rs.getInt("testId"));
+			test.setType(TestType.valueOf(rs.getString("type")));
+			test.setDescription(rs.getString("description"));
+			test.setCost(rs.getString("cost"));
+			test.setPreparationInstructions(rs.getString("PreparationInstructions"));
+			test.setReportReadyIn(rs.getString("ReportReadyIn"));
+			test.setMeasurementUnit(rs.getString("MeasurementUnit"));
+			test.setLowReferenceRange(rs.getString("LowReferenceRange"));
+			test.setHighReferenceRange(rs.getString("HighReferenceRange"));
+		}
+
+		ps.close();
+		connection.close();
+		return test;
 	}
 
-	
 	@Override
 	public Test fetchSingleTestByType(String testType) throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    String query = "SELECT * FROM test WHERE type = ?";
-	    PreparedStatement ps = connection.prepareStatement(query);
-	    ps.setString(1, testType);
-	    ResultSet rs = ps.executeQuery();
-	    
-	    Test test = null;
-	    if (rs.next()) {
-	        test = new Test(null, query);
-	        test.setTestId(rs.getInt("testId"));
-	        test.setType(TestType.valueOf(rs.getString("type")));
-	        test.setDescription(rs.getString("description"));
-	        test.setCost(rs.getString("cost"));
-	        test.setPreparationInstructions("PreparationInstructions");
-	        test.setReportReadyIn(rs.getString("ReportReadyIn"));
-	        test.setMeasurementUnit(rs.getString("MeasurementUnit"));
-	        test.setLowReferenceRange(rs.getString("LowReferenceRange"));
-	        test.setHighReferenceRange(rs.getString("HighReferenceRange"));
-	    }
-	    
-	    rs.close();
-	    ps.close();
-	    connection.close();
-	    
-	    return test;
-	}
+		Connection connection = getConnection();
+		String query = "SELECT * FROM test WHERE type = ?";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setString(1, testType);
+		ResultSet rs = ps.executeQuery();
 
+		Test test = null;
+		if (rs.next()) {
+			test = new Test(null, query);
+			test.setTestId(rs.getInt("testId"));
+			test.setType(TestType.valueOf(rs.getString("type")));
+			test.setDescription(rs.getString("description"));
+			test.setCost(rs.getString("cost"));
+			test.setPreparationInstructions("PreparationInstructions");
+			test.setReportReadyIn(rs.getString("ReportReadyIn"));
+			test.setMeasurementUnit(rs.getString("MeasurementUnit"));
+			test.setLowReferenceRange(rs.getString("LowReferenceRange"));
+			test.setHighReferenceRange(rs.getString("HighReferenceRange"));
+		}
+
+		rs.close();
+		ps.close();
+		connection.close();
+
+		return test;
+	}
 
 	@Override
 	public List<Appointment> fetchAllAppointments() throws SQLException, ClassNotFoundException {

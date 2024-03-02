@@ -110,7 +110,7 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
-		//TODO: int technitianId = 123;
+		// TODO: int technitianId = 123;
 		/* int technitianId = 1; */
 		int technitianId = Integer.parseInt(request.getParameter("technitianId"));
 		appointment.setTechnitianId(technitianId);
@@ -121,6 +121,8 @@ public class AppointmentController extends HttpServlet {
 		appointment.setCountry(request.getParameter("test"));
 		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
+		String appointmentRefId = getAppointmentService().generateReferenceId();
+		appointment.setAppointmentRefId(appointmentRefId);
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);
 			if (savedAppointment) {
@@ -683,6 +685,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setSeekerId(Integer.parseInt(request.getParameter("seekerId")));
 		appointment.setTechnitianId(Integer.parseInt(request.getParameter("consultantId")));
 		appointment.setScheduledDate(request.getParameter("scheduledDate"));
+		appointment.setAppointmentRefId(request.getParameter("appointmentRefId"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
 		appointment.setCountry(request.getParameter("country"));

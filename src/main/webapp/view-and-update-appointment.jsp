@@ -296,6 +296,16 @@ input[type="text"], input[type="date"], textarea {
 	font-size: 14px;
 	cursor: pointer;
 }
+
+label {
+	font-weight: bold;
+	 	font-family: 'Source Sans Pro', sans-serif;
+ 	font-size: 13px;
+ 	color: rgb(25, 31, 53);
+ 	letter-spacing: 1.5px;
+ 	margin-top: 5px;
+ 	margin-bottom: 10px;
+}
 </Style>
 
 </head>
@@ -367,11 +377,17 @@ input[type="text"], input[type="date"], textarea {
 			<form action="appointmentManager" method="post"
 				onsubmit="return confirmUpdate();">
 
-				<input class="form-control" type="number" id="appointmentId"
-					name="appointmentId" readonly="readonly"
-					value="${appointment.appointmentId}" /> <label for="userIdUpdate">consultantId:</label>
+				<input class="form-control" type="hidden" id="appointmentId"
+					name="appointmentId" 
+					value="${appointment.appointmentId}" /> 
+					
+					<label for="RefId">Appointment RefId:</label> 
+				 <input	class="form-control" type="text" id="appointmentRefId" name="appointmentRefId" readonly="readonly"
+					value="${appointment.appointmentRefId}" />
+					
+					<label for="userIdUpdate">consultantId:</label>
 				<input class="form-control" type="number" id="consultantId"
-					name="consultantId" 
+					name="consultantId" readonly="readonly"
 					value="${appointment.technitianId}" /> <label for="email">seekerId:</label>
 				<input class="form-control" type="number" id="seekerId"
 					name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
@@ -383,10 +399,6 @@ input[type="text"], input[type="date"], textarea {
 					value="${appointment.startTime}" /> <label for="startTime">notes</label>
 				<textarea class="form-control" style="height: 100px" type="text"
 					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-				<%--   <label for="gender">Gender:</label>
-    <input class="form-control" type="text" id="job" name="job" value="${appointment.job}"/>
-      <label for="occupation">Occupation:</label>
-    <input class="form-control" type="text" id="country" name="country" value="${appointment.country}"/> --%>
 				<label for="country">status:</label> <input class="form-control"
 					type="text" id="status" name="status"
 					value="${appointment.status.displayName}" /> <label
@@ -402,13 +414,7 @@ input[type="text"], input[type="date"], textarea {
 					class="form-control" type="text" id="seekerPhoneNumber"
 					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
 
-				<%-- <label for="seekerJob">Seeker Job:</label>
-<input class="form-control" type="text" id="seekerJob" name="seekerJob" value="${appointment.seekerJob}"/> --%>
-
-				<%-- <label for="seekerCountry">Seeker Country:</label>
-<input class="form-control" type="text" id="seekerCountry" name="seekerCountry" value="${appointment.seekerCountry}"/> --%>
-
-
+			
 
 				<input class="form-control" type="hidden" id="status"
 					name="enum-status" value="${appointment.status}" />

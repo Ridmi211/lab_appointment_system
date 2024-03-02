@@ -1,10 +1,11 @@
 package com.labSchedulerSystem.model;
 
-import com.labSchedulerSystem.model.Test.TestType;
+
 
 public class Appointment {
 
 	private int appointmentId;
+	private String appointmentRefId;
 	private int technitianId;
 	private String consultantName;
 	private String seekerName;
@@ -187,6 +188,14 @@ public class Appointment {
 
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+
+	public String getAppointmentRefId() {
+		return appointmentRefId;
+	}
+
+	public void setAppointmentRefId(String appointmentRefId) {
+		this.appointmentRefId = appointmentRefId;
 	}
 
 	public enum Status {
