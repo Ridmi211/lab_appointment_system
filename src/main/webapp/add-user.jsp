@@ -229,6 +229,8 @@
 
 				<p>Please fill following mandatory fields.</p>
 
+
+
 				<input type="text" name="educationalQualifications"
 					placeholder="Mention your qualifications for this role"
 					id="educationalQualifications" autocomplete="off" required>
