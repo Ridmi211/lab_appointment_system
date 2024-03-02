@@ -943,19 +943,7 @@ h4 span {
 							<div class="row">
 								<input name="doctor" id="doctor" required>
 							</div>
-							<%-- 					<div class="row">
-							<select name="technician" id="technician" required>
-        <option value="">Select Technician</option>
-        Populate the dropdown with technicians here
-        <% 
-        UserManagerImpl userManager = new UserManagerImpl();
-        List<User> technicians = userManager.fetchTechniciansForTest(testId); // Assuming you have a method to fetch technicians for a given test ID
-        for (User technician : technicians) { %>
-            <option value="<%= technician.getUserId() %>"><%= technician.getName() %></option>
-        <% } %>
-    </select>
-    </div> --%>
-
+						
 							<!-- Inside your form -->
 							<%
 							// Instantiate TechnicianService

@@ -1,6 +1,6 @@
 package com.labSchedulerSystem.model;
 
-
+import com.labSchedulerSystem.model.Test.TestType;
 
 public class Appointment {
 
@@ -20,7 +20,7 @@ public class Appointment {
 	private String seekerPhoneNumber;
 	private String seekerJob;
 	private String seekerCountry;
-	private String testType;
+	private Test.TestType testType;
 	private String testResults;
 	private String testResultsDescription;
 	/* private String recomendedDoctor; */
@@ -182,11 +182,11 @@ public class Appointment {
 		this.recomendedDoctor = recomendedDoctor;
 	}
 
-	public String getTestType() {
+	public Test.TestType getTestType() {
 		return testType;
 	}
 
-	public void setTestType(String testType) {
+	public void setTestType(Test.TestType testType) {
 		this.testType = testType;
 	}
 

@@ -424,39 +424,25 @@ h4 span {
 				 <input class="form-control" type="text" id="seekerEmail"	name="seekerEmail" value="${appointment.seekerEmail}" />
 				 <label	for="seekerPhoneNumber">Patient's Phone Number:</label>
 				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				 
+				 //////////////
+				 <div class="page-title">Update Test Details</div>
+				  <label	for="seekerPhoneNumber">Test type</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				 		 <label	for="seekerPhoneNumber">Test Results:</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				 		 <label	for="seekerPhoneNumber">Test Description:</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				 		 <label	for="seekerPhoneNumber">Test Details Updated By:</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />				 
+				  		 <label	for="seekerPhoneNumber">Updated On:</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				////////////// 	
+				 
 				 <label for="country">Appointment status:</label> 
 				<input class="form-control"	type="text" id="status" name="status" value="${appointment.status.displayName}" />
 				<input class="form-control" type="hidden" id="status"	name="enum-status" value="${appointment.status}" />
 
-
-
-				<%--   <c:if test="${user.accessRight == 'ROLE_CONSULTANT'}">
-    <label for="educationalQualifications">Educational Qualifications:</label>
-    <input class="form-control" type="text" id="educationalQualifications" name="educationalQualifications" value="${user.educationalQualifications}"/>
-    
-    <label for="specializedCountries">Specialized Countries:</label>
-    <input class="form-control" type="text" id="specializedCountries" name="specializedCountries" value="${user.specializedCountries}"/>
-    
-    <label for="specializedJobs">Specialized Jobs:</label>
-    <input class="form-control" type="text" id="specializedJobs" name="specializedJobs" value="${user.specializedJobs}"/>
-    
-      <label for="availableDays">availableDays:</label>
-    <input class="form-control" type="text" id="availableDays" name="availableDays" value="${user.availableDays}"/>
-    
-      <label for="availableTimeSlots">availableTimeSlotss:</label>
-    <input class="form-control" type="text" id="availableTimeSlots" name="availableTimeSlots" value="${user.availableTimeSlots}"/>
-</c:if> --%>
-				<%--  <label for="country">educational Qualifications:</label>
-    <input class="form-control" type="text" id="educationalQualifications" name="educationalQualifications" value="${user.educationalQualifications}"/>
-      <label for="country">specializedCountries:</label>
-    <input class="form-control" type="text" id="specializedCountries" name="specializedCountries" value="${user.specializedCountries}"/>
-      <label for="country">specializedJobs:</label>
-    <input class="form-control" type="text" id="specializedJobs" name="specializedJobs" value="${user.specializedJobs}"/> --%>
-				<%--  <label for="country">Registered as :</label>
-    <input class="form-control" type="text" id="accessRight" name="accessRight" readonly="readonly" value="${user.accessRight.displayName}"/>
-    
-    
-     --%>
 
 
 

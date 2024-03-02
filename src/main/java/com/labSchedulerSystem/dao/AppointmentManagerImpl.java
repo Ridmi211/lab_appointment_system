@@ -42,7 +42,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean addAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`,`appointmentRefId`) VALUES (?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`,`appointmentRefId`, `testType`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -53,6 +53,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(7, appointment.getCountry());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
+		ps.setString(10, appointment.getTestType().toString());
 		boolean result = false;
 		if (ps.executeUpdate() > 0) {
 			result = true;

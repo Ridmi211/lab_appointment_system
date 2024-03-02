@@ -121,6 +121,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setCountry(request.getParameter("test"));
 		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("test")));
 		String appointmentRefId = getAppointmentService().generateReferenceId();
 		appointment.setAppointmentRefId(appointmentRefId);
 		try {
