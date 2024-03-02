@@ -19,14 +19,14 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
 
 <meta charset="utf-8">
-<title>Job-Seekers</title>
+<title>Update Appointment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -34,7 +34,8 @@ if (session.getAttribute("user") == null) {
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -299,12 +300,28 @@ input[type="text"], input[type="date"], textarea {
 
 label {
 	font-weight: bold;
-	 	font-family: 'Source Sans Pro', sans-serif;
- 	font-size: 13px;
- 	color: rgb(25, 31, 53);
- 	letter-spacing: 1.5px;
- 	margin-top: 5px;
- 	margin-bottom: 10px;
+	font-family: 'Source Sans Pro', sans-serif; font-size : 13px; color :
+	rgb( 25, 31, 53); letter-spacing : 1.5px; margin-top : 5px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 </Style>
 
@@ -329,8 +346,12 @@ label {
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
 				<ul class="" id="sidemenu">
 
 					<%
@@ -378,46 +399,34 @@ label {
 				onsubmit="return confirmUpdate();">
 
 				<input class="form-control" type="hidden" id="appointmentId"
-					name="appointmentId" 
-					value="${appointment.appointmentId}" /> 
+					name="appointmentId" value="${appointment.appointmentId}" /> 
 					
-					<label for="RefId">Appointment RefId:</label> 
-				 <input	class="form-control" type="text" id="appointmentRefId" name="appointmentRefId" readonly="readonly"
-					value="${appointment.appointmentRefId}" />
-					
-					<label for="userIdUpdate">consultantId:</label>
-				<input class="form-control" type="number" id="consultantId"
-					name="consultantId" readonly="readonly"
-					value="${appointment.technitianId}" /> <label for="email">seekerId:</label>
-				<input class="form-control" type="number" id="seekerId"
-					name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
-				<label for="scheduledDate"> scheduledDate:</label> <input
-					class="form-control" type="text" id="scheduledDate"
-					name="scheduledDate" value="${appointment.scheduledDate}" /> <label
-					for="startTime"> startTime:</label> <input class="form-control"
-					type="text" id="startTime" name="startTime"
-					value="${appointment.startTime}" /> <label for="startTime">notes</label>
-				<textarea class="form-control" style="height: 100px" type="text"
-					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-				<label for="country">status:</label> <input class="form-control"
-					type="text" id="status" name="status"
-					value="${appointment.status.displayName}" /> <label
-					for="consultantName">Consultant Phone consultantName:</label> <input
-					class="form-control" type="text" id="consultantName"
-					name="consultantName" value="${appointment.consultantName}" /> <label
-					for="seekerName">Consultant Email:</label> <input
-					class="form-control" type="text" id="seekerName" name="seekerName"
-					value="${appointment.seekerName}" /> <label for="seekerEmail">Seeker
-					Email:</label> <input class="form-control" type="text" id="seekerEmail"
-					name="seekerEmail" value="${appointment.seekerEmail}" /> <label
-					for="seekerPhoneNumber">Seeker Phone Number:</label> <input
-					class="form-control" type="text" id="seekerPhoneNumber"
-					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
-
-			
-
-				<input class="form-control" type="hidden" id="status"
-					name="enum-status" value="${appointment.status}" />
+					<label	for="RefId">Appointment RefId:</label> 
+					<input class="form-control"	type="text" id="appointmentRefId" name="appointmentRefId"
+					readonly="readonly" value="${appointment.appointmentRefId}" />
+					<!--  <label	for="userIdUpdate">consultantId:</label> -->
+					 <input	class="form-control" type="hidden" id="consultantId"	name="consultantId" readonly="readonly"
+					value="${appointment.technitianId}" />
+					<!--  <label for="email">seekerId:</label> -->
+				<input class="form-control" type="hidden" id="seekerId"	name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
+				<label for="scheduledDate"> Scheduled Date:</label>
+				 <input	class="form-control" type="date" id="scheduledDate"	name="scheduledDate" value="${appointment.scheduledDate}" />
+					 <label	for="startTime"> Start Time:</label>
+					 <input class="form-control"type="time" id="startTime" name="startTime"	value="${appointment.startTime}" />
+					 <label for="startTime">Notes</label>
+				<textarea class="form-control" style="height: 100px" type="text"id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
+				
+				 <label	for="consultantName">Technician Name:</label> 
+				<input class="form-control" type="text" id="consultantName"	name="consultantName" value="${appointment.consultantName}" /> 
+				<label	for="seekerName">Patient Name:</label>
+				 <input	class="form-control" type="text" id="seekerName" name="seekerName"	value="${appointment.seekerName}" />
+				 <label for="seekerEmail">Patient Email:</label>
+				 <input class="form-control" type="text" id="seekerEmail"	name="seekerEmail" value="${appointment.seekerEmail}" />
+				 <label	for="seekerPhoneNumber">Patient's Phone Number:</label>
+				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				 <label for="country">Appointment status:</label> 
+				<input class="form-control"	type="text" id="status" name="status" value="${appointment.status.displayName}" />
+				<input class="form-control" type="hidden" id="status"	name="enum-status" value="${appointment.status}" />
 
 
 
