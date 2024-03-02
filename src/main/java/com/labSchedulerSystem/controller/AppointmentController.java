@@ -692,7 +692,9 @@ public class AppointmentController extends HttpServlet {
 		appointment.setCountry(request.getParameter("country"));
 		appointment.setRecomendedDoctor(request.getParameter("job"));
 		appointment.setNotes(request.getParameter("notes"));
-		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType")));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));
+		appointment.setTestResults(request.getParameter("testResults"));
+		appointment.setTestResultsDescription(request.getParameter("testResultsDescription"));
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
 				message = "The user has been successfully updated! User ID: " + appointment.getAppointmentId();
