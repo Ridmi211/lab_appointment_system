@@ -1,5 +1,7 @@
 package com.labSchedulerSystem.model;
 
+import java.util.Date;
+
 import com.labSchedulerSystem.model.Test.TestType;
 
 public class Appointment {
@@ -23,6 +25,9 @@ public class Appointment {
 	private Test.TestType testType;
 	private String testResults;
 	private String testResultsDescription;
+	private String testUpdatedBy;
+	private Date testUpdatedOn;
+	
 	/* private String recomendedDoctor; */
 	    
 	    //testtype table
@@ -196,6 +201,22 @@ public class Appointment {
 
 	public void setAppointmentRefId(String appointmentRefId) {
 		this.appointmentRefId = appointmentRefId;
+	}
+
+	public String getTestUpdatedBy() {
+		return testUpdatedBy;
+	}
+
+	public void setTestUpdatedBy(String testUpdatedBy) {
+		this.testUpdatedBy = testUpdatedBy;
+	}
+
+	public Date getTestUpdatedOn() {
+		return testUpdatedOn;
+	}
+
+	public void setTestUpdatedOn(Date testUpdatedOn) {
+		this.testUpdatedOn = testUpdatedOn;
 	}
 
 	public enum Status {

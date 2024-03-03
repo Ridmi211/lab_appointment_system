@@ -506,12 +506,12 @@ h4 span {
 					class="form-control" type="text" id="testResultsDescription"
 					name="testResultsDescription" style="height: 100px"
 					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea> <label
-					for="seekerPhoneNumber">Test Details Updated By:</label> <input
-					class="form-control" type="text" id="seekerPhoneNumber"
-					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
-				<label for="seekerPhoneNumber">Updated On:</label> <input
-					class="form-control" type="text" id="seekerPhoneNumber"
-					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+					for="testUpdatedBy">Test Details Updated By:</label> <input
+					class="form-control" type="text" id="testUpdatedBy"
+					name="testUpdatedBy" value="${appointment.testUpdatedBy}" readonly="readonly"/>
+				<label for="testUpdatedOn">Updated On:</label> <input
+					class="form-control" type="text" id="testUpdatedOn"
+					name="testUpdatedOn" value="${appointment.testUpdatedOn}" readonly="readonly"/>
 
 
 

@@ -6,7 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.util.Base64;
-
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -695,6 +695,22 @@ public class AppointmentController extends HttpServlet {
 		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));
 		appointment.setTestResults(request.getParameter("testResults"));
 		appointment.setTestResultsDescription(request.getParameter("testResultsDescription"));
+		Date currentDate = new Date();
+		appointment.setTestUpdatedOn(currentDate);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println("User from session: " + user);
+		if (user == null) {
+			message = "You are not logged in!";
+			request.setAttribute("feebackMessage", message);
+			RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		String loggedInUserName = user.getName();
+		appointment.setTestUpdatedBy(loggedInUserName);
+		
+		
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
 				message = "The user has been successfully updated! User ID: " + appointment.getAppointmentId();
