@@ -390,11 +390,11 @@ public class UserManagerImpl implements UserManager {
 	public Map<String, Integer> getConsultantJobTypeDistribution() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		Map<String, Integer> jobTypeDistribution = new HashMap<>();
-		String consultantJobTypesQuery = "SELECT specializedJobs FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
+		String consultantJobTypesQuery = "SELECT selectedTestType FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
 		try (PreparedStatement jobTypesPs = connection.prepareStatement(consultantJobTypesQuery)) {
 			try (ResultSet jobTypesRs = jobTypesPs.executeQuery()) {
 				while (jobTypesRs.next()) {
-					String jobTypesString = jobTypesRs.getString("specializedJobs");
+					String jobTypesString = jobTypesRs.getString("selectedTestType");
 					String[] jobTypes = jobTypesString.split(",\\s*");
 					for (String jobType : jobTypes) {
 						jobTypeDistribution.put(jobType, jobTypeDistribution.getOrDefault(jobType, 0) + 1);

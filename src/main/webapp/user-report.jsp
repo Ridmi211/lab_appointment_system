@@ -4,6 +4,7 @@
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.RegistrationStatus"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
@@ -619,6 +620,7 @@ try {
     });
 </script> --%>
 
+
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -689,6 +691,164 @@ try {
     e.printStackTrace(); 
 }
 %>
+
+
+		<div class=" card-container">
+			<div class="col">
+				<div class=" common-border">
+					<div class="card-title common-border">Distribution of
+						Technicians by the assigned test type</div>
+				</div>
+
+
+
+				<div class="row common-border m-0 p-0">
+					<div class="col-sm col-12 common-border pb-2 m-0 p-0 "
+						style="height: 250px">
+						<div class=" common-border m-0 p-0">
+							<div class="card-comment common-border m-0 p-0">*
+								Technician availability for different test types are
+								depicted</div>
+						</div>
+						<canvas id="consultantJobTypeChart" width="200" height="200"></canvas>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+	
+<%-- 
+		<%
+		try {
+			Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+
+			// Convert the data into JavaScript arrays
+			String labelsArray = "['" + String.join("', '", consultantJobTypeDistribution.keySet()) + "']";
+			String dataValuesArray = "[" + String.join(", ",
+			consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+		%>
+
+		<script>
+			// JavaScript function to generate colors dynamically
+			function generateRandomColors(count) {
+				var colors = [];
+				for (var i = 0; i < count; i++) {
+					var red = Math.floor(Math.random() * 256);
+					var green = Math.floor(Math.random() * 256);
+					var blue = Math.floor(Math.random() * 256);
+					var alpha = 0.8; // Constant alpha value
+
+					colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+				}
+				return colors;
+			}
+
+			// Parse JSON data in JavaScript
+			var consultantJobTypeData = {
+				labels :
+		<%=labelsArray%>
+			,
+				datasets : [ {
+					data :
+		<%=dataValuesArray%>
+			,
+					backgroundColor : generateRandomColors(
+		<%=consultantJobTypeDistribution.size()%>
+			),
+				} ]
+			};
+
+			var ctx8 = document.getElementById('consultantJobTypeChart')
+					.getContext('2d');
+			var consultantJobTypeChart = new Chart(ctx8, {
+				type : 'pie',
+				data : consultantJobTypeData,
+				options : {
+					responsive : true,
+					maintainAspectRatio : false,
+					title : {
+						display : true,
+						text : 'Consultant Specialized Job Type Distribution'
+					}
+				}
+			});
+		</script>
+
+		<%
+		} catch (ClassNotFoundException | SQLException e) {
+		e.printStackTrace(); // Handle the exception appropriately in your application
+		}
+		%>
+ --%>
+
+
+<%
+    try {
+        Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+        Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();
+        
+        // Get display names for enum labels
+        for (String label : consultantJobTypeDistribution.keySet()) {
+            Test.TestType testType = Test.TestType.valueOf(label);
+            String displayName = testType.getDisplayName();
+            consultantJobTypeDisplayNames.put(label, displayName);
+        }
+
+        // Convert the display names into JavaScript array
+        String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
+        String dataValuesArray = "[" + String.join(", ", consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+    %>
+
+    <script>
+        // JavaScript function to generate colors dynamically
+        function generateRandomColors(count) {
+            var colors = [];
+            for (var i = 0; i < count; i++) {
+                var red = Math.floor(Math.random() * 100) + 155; // Adjust the range for lighter colors
+                var green = Math.floor(Math.random() * 100) + 155;
+                var blue = Math.floor(Math.random() * 100) + 155;
+                var alpha = 0.8; // Constant alpha value
+
+                colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+            }
+            return colors;
+        }
+
+        // Parse JSON data in JavaScript
+        var consultantJobTypeData = {
+            labels: <%=labelsArray%>,
+            datasets: [{
+                data: <%=dataValuesArray%>,
+                backgroundColor: generateRandomColors(<%=consultantJobTypeDistribution.size()%>),
+            }]
+        };
+
+        var ctx8 = document.getElementById('consultantJobTypeChart').getContext('2d');
+        var consultantJobTypeChart = new Chart(ctx8, {
+            type: 'pie',
+            data: consultantJobTypeData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Consultant Specialized Job Type Distribution'
+                }
+            }
+        });
+    </script>
+
+<%
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace(); // Handle the exception appropriately in your application
+    }
+%>
+
+
 		<%--  <div class="">
             <div class="page-title d-flex align-items-center align-self-center">Consultant availability Report</div>
         </div>
