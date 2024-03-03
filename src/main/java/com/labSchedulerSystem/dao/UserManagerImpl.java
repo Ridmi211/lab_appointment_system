@@ -631,6 +631,7 @@ public class UserManagerImpl implements UserManager {
 			user.setEducationalQualifications(resultSet.getString("educationalQualifications"));
 			user.setSpecializedJobs(resultSet.getString("specializedJobs"));
 			user.setAccessRight(AccessRight.valueOf(resultSet.getString("accessRight")));
+			user.setSelectedTestType(Test.TestType.valueOf(resultSet.getString("selectedTestType")));
 			user.setRegistrationStatus(RegistrationStatus.valueOf(resultSet.getString("registrationStatus")));
 		}
 		preparedStatement.close();

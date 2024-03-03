@@ -290,10 +290,13 @@ h4 span {
 							if (user != null && user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
 							%>
 							<li class="list-group-item"></li>
-							<div class="card-text">specializedJobs :</div>
+								<div class="card-text">Assigned Test Type :</div>
+							<li class="list-group-item"><%=user.getSelectedTestType().getDisplayName()%></li>
+							
+							<div class="card-text">Specialized Jobs :</div>
 							<li class="list-group-item"><%=user.getSpecializedJobs()%></li>
 
-							<div class="card-text">specializedJobs :</div>
+							<div class="card-text">Qualifications :</div>
 							<li class="list-group-item"><%=user.getEducationalQualifications()%></li>
 
 							<%

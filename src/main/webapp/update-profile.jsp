@@ -7,8 +7,13 @@
 <%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <%
 User user = (User) session.getAttribute("user");
+boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN); // Modify this condition according to your User class
+
+boolean isAdmin = user != null && user.getAccessRight().equals(AccessRight.ROLE_ADMIN); // Modify this condition according to your User class
+
 // Check if the user is logged in
 if (session.getAttribute("user") == null) {
 	// Redirect the user to a login page or display an error message
@@ -254,8 +259,8 @@ select[name="selectedTestType"]:focus {
 					<label for="selectedTestType">Assigned test type:</label>
 				<%-- 	<input class="form-control" type="text" id="selectedTestType"
 						name="selectedTestType" value="${user.selectedTestType}" /> --%>
-					<select name="selectedTestType" id="selectedTestType" required>
-						<option value="" disabled selected>${user.selectedTestType}</option>
+					<select name="selectedTestType" id="selectedTestType" >
+						<option value="${user.selectedTestType}"  selected>${user.selectedTestType.displayName}</option>
 						<%
 						for (TestType type : TestType.values()) {
 						%>
@@ -264,6 +269,9 @@ select[name="selectedTestType"]:focus {
 						}
 						%>
 					</select>
+					
+					
+					
 					<label for="educationalQualifications">Educational Qualifications</label>
 					<input class="form-control" type="text"
 						id="educationalQualifications" name="educationalQualifications"
