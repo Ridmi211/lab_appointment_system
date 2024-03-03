@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Technicians</title>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -23,7 +23,7 @@
 	crossorigin="anonymous"></script>
 
 <meta charset="utf-8">
-<title>Job-Seekers</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -31,7 +31,9 @@
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -89,7 +91,7 @@ h2 {
 .header-text h2 {
 	font-size: 60px;
 	margin-top: 40px;
-	color: #584674;
+	color: #529ece;
 }
 
 .header-text h1 span {
@@ -125,7 +127,7 @@ h2 {
 .sub-title {
 	font-size: 50px;
 	font-weight: 600;
-	color: #000000;
+	color: #529ece;
 }
 
 .tab-titles {
@@ -363,7 +365,7 @@ h2 {
 }
 
 .contact-left p i {
-	color: #d6adff;
+	color: #529ece;
 	margin-right: 15px;
 	font-size: 25px;
 }
@@ -382,13 +384,13 @@ h2 {
 }
 
 .social-icons a:hover {
-	color: #d6adff;
+	color: #529ece;
 	transform: translateY(-5px);
 }
 
 .btn.btn2 {
 	display: inline-block;
-	background: #d6adff;
+	background: #529ece;
 }
 
 .btn.btn2:hover {
@@ -402,7 +404,7 @@ h2 {
 
 form input, form textarea {
 	width: 100%;
-	border: 1px solid rgb(223, 179, 245);
+	border: 1px solid #91d7f4;
 	outline: none;
 	background: #ffffff;
 	padding: 15px;
@@ -431,7 +433,7 @@ form .btn2 {
 }
 
 .copyright i {
-	color: #d6adff;
+	color: #529ece;
 }
 
 /* -----css for small screen------------ */
@@ -501,7 +503,7 @@ nav .fas {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(190, 156, 209, 0.649);
+	background: rgb(139, 209, 232, 0.449);
 	/* Adjust the color and opacity as needed */
 	z-index: 0;
 	/* You can also add other styles like gradients or patterns here */
@@ -668,7 +670,7 @@ label #cancel {
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
-	background-color: #b88eda;
+	background-color: #d3eaff;
 	border-radius: 5px;
 	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 	color: #ffffff;
@@ -715,7 +717,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #905abd;
+	background-color: #004cc0;
 	text-align: left;
 	padding: 15px;
 	margin-top: 10px;
@@ -838,6 +840,26 @@ input[type="text"] {
 	border-radius: 4px;
 }
 
+.test {
+	color: #231E39;
+	font-size: 16px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -450px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
+
 /*  <!-- sidebar styling end here  --> */
 </Style>
 
@@ -863,7 +885,12 @@ input[type="text"] {
 
 	<!-- sidebar end here  -->
 	<nav class="p-0 m-0 pt-0">
-		<img src="images/logo.png" alt="logo">
+	<img class="nav-logo p-0 m-0 pt-0 mt-0"
+			src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+			alt="logo">
+		<h4>
+			Medi<span>Check</span>
+		</h4>
 		<ul class="" id="sidemenu">
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
 
@@ -890,14 +917,15 @@ input[type="text"] {
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
-			style="background-image: url(https://remodelerplatform.blob.core.windows.net/wwwsolarmaxtechcom/gallery/original/b1954715-acfa-42f4-8c83-6de06a836d44.jpg);">
+			style="background-image: url(https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_767389_17028477443396086.jpg
+			);">
 
 			<div class="container d-flex justify-content-center p-0 m-0">
 
 				<div class="header-text pt-2 ">
 
-					<h1>Choose your dream path with our experienced</h1>
-					<h2>Consultation panel</h2>
+					<h1>Embark on Your Health Journey with Our Skilled</h1>
+					<h2>Technician Team</h2>
 
 				</div>
 
@@ -905,7 +933,7 @@ input[type="text"] {
 		</div>
 	</div>
 
-	<div class="row mt-5" style="color: #3f2e59;">
+	<!-- <div class="row mt-5" style="color: #3f2e59;">
 		<div class="col-2"></div>
 		<div class="col-3">
 			<label for="filterCountry">Filter by Country:</label> <input
@@ -921,7 +949,7 @@ input[type="text"] {
 				Filter</button>
 		</div>
 		<div class="col-2"></div>
-	</div>
+	</div> -->
 
 
 	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
@@ -933,7 +961,23 @@ input[type="text"] {
 	List<User> consultantUsers = (List<User>) request.getAttribute("consultantUsers");
 
 	List<User> filteredConsultants = new ArrayList<User>();
-	
+	if (selectedCountry != null && !selectedCountry.isEmpty()) {
+		for (User user2 : consultantUsers) {
+			String specializedCountries = user2.getSpecializedJobs();
+			if (specializedCountries != null) {
+		String[] countries = specializedCountries.split(", ");
+		for (String country : countries) {
+			if (country.equals(selectedCountry)) {
+				filteredConsultants.add(user2);
+				break; // No need to check further if country is found
+			}
+		}
+			}
+		}
+	} else {
+		// No country selected, show all consultants
+		filteredConsultants = consultantUsers;
+	}
 
 	if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
 		List<User> jobFilteredConsultants = new ArrayList<User>();
@@ -968,19 +1012,33 @@ input[type="text"] {
 
 					<div class="work">
 						<div class="card-container">
-							<span class="pro">PRO</span> <img class="round"
-								src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg"
+							<img class="round"
+								src="https://images.assetsdelivery.com/compings_v2/olgatik/olgatik2004/olgatik200400013.jpg"
 								alt="user" /> <br>
 							<div class="name">
 								<%=user2.getName()%>
 							</div>
-							<h6>
-							
-							
+							<div class="test">
+								Assigned test:
+								<%=user2.getSelectedTestType().getDisplayName()%></div>
+
 							<div class="countries">
-								
+								<%--  <h6>   <%= user.getSpecializedCountries() %></h6> --%>
+								<ul>
+									<%
+									String eduQualifications = user2.getEducationalQualifications();
+									if (eduQualifications != null && !eduQualifications.isEmpty()) {
+										String[] qualifications = eduQualifications.split(",");
+										for (String qualification : qualifications) {
+									%>
+									<li><%=qualification.trim()%></li>
+									<%
+									}
+									}
+									%>
+								</ul>
 							</div>
-						<%-- 	<div class="skills">
+							<div class="skills">
 								<h6>Specialized Jobs</h6>
 								<ul>
 									<%
@@ -995,9 +1053,9 @@ input[type="text"] {
 									}
 									%>
 								</ul>
-							</div> --%>
+							</div>
 						</div>
-						<div class="layer">
+						<%-- 	<div class="layer">
 							
 							<form action="usermanager" method="post">
 								<input type="hidden" name="userId"
@@ -1009,7 +1067,7 @@ input[type="text"] {
 
 							</a>
 		<!-- <a href="add-user.jsp"  class="btn primary"><i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now</a> -->
-						</div>
+						</div> --%>
 					</div>
 
 				</div>
@@ -1019,18 +1077,20 @@ input[type="text"] {
 			</div>
 		</div>
 	</div>
-	
+
+
+
 	<div
 		class="p-0 m-0 d-flex align-items-center services justify-content-center"
 		id="about-us"
-		style="height: 60vh; color: #5b4a6b; font-size: 2.5rem; background-image: url(https://images.unsplash.com/photo-1474127773417-aec7504236d2?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aWN5JTIwbW91bnRhaW58ZW58MHx8MHx8fDA%3D&amp;w=1000&amp;q=80); position: relative;">
+		style="height: 60vh; color: #5b4a6b; font-size: 2.5rem; background-image: url(https://wallpapercave.com/wp/wp4085844.jpg); position: relative;">
 		<div style="text-align: center; z-index: 1;">
 			<div class="p-0 m-0 "
-				style="background-color: #f9f2fc; height: 40vh; color: #5b4a6b; font-size: 2.5rem;">
+				style="background-color: #f9f2fc; height: 40vh; color: #529ece; font-size: 2.5rem;">
 				<div class="row pt-5 font-weight-bold p-0 m-0"
 					style="text-align: center; margin-top: 100px;">
 					<h1 style="margin-top: 70px;">
-						<b> Start your global work adventure</b>
+						<b>Empower Your Wellness Journey</b>
 					</h1>
 				</div>
 				<div class="m-0 services justify-content-center">
@@ -1045,11 +1105,11 @@ input[type="text"] {
 	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-	
+
 	</div>
 
 	<!-- --------------------javascript-------------------------- -->
-	<!-- <script>
+	<script>
  
     function applyFilter() {
         // Get the values entered by the user in the text input fields
@@ -1077,7 +1137,7 @@ input[type="text"] {
         });
     }
 
-</script> -->
+</script>
 
 
 
@@ -1115,7 +1175,7 @@ input[type="text"] {
 
         </script>
 
-	<!-- <script>
+<!-- 	<script>
             const scriptURL = 'https://script.google.com/macros/s/AKfycbwjcx0iILVo5hybLY6R97WYDrv3PQ7RoVLotpwiMk7FAUS7EPA5Ajsnsw6sr7zWa1V6/exec'
             const form = document.forms['submit-to-google-sheet']
             const msg = document.getElementById("msg")
@@ -1136,7 +1196,7 @@ input[type="text"] {
             })
         </script> -->
 	<!-- chart-js -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 	<script>
@@ -1161,7 +1221,7 @@ input[type="text"] {
                 }
             });
         </script>
-
+ -->
 
 </body>
 

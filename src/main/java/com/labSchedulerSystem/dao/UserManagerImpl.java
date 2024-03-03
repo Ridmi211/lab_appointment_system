@@ -487,6 +487,7 @@ public class UserManagerImpl implements UserManager {
 			user.setBirthdate(rs.getString("birthdate"));
 			user.setGender(rs.getString("gender"));
 			user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+			user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
 			user.setEducationalQualifications(rs.getString("educationalQualifications"));
 			user.setSpecializedJobs(rs.getString("specializedJobs"));
 			consultantUsers.add(user);
