@@ -85,6 +85,8 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 <!-- Add this in the head section of your HTML -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
 
 <title>User Summary Report</title>
 
@@ -120,7 +122,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
         // element.style.height = '900px';
         var opt = {
             margin:       0,
-            filename:     'Registered Job Consultants.pdf',
+            filename:     'User Summary Report.pdf',
             image:        { type: 'jpeg', quality: 1},
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
@@ -501,6 +503,57 @@ try {
 				</div>
 			</div>
 		</div>
+		
+		
+		<%
+    Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
+
+    // Convert Java Map to JSON string
+    String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
+
+    // You can use jsonData in your JavaScript code
+%> 
+
+<script>
+    // Parse JSON data in JavaScript
+    var userGenderDistribution = JSON.parse('<%= jsonData %>');
+
+    // Extract genders and counts from the JSON data
+    var genders = Object.keys(userGenderDistribution);
+    var counts = Object.values(userGenderDistribution);
+
+    // Create dataset for gender distribution
+    var genderDataset = {
+        label: 'Gender Distribution',
+        data: counts,
+        backgroundColor: ['rgba(54, 162, 235, 0.8)','rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ], // Add more colors if needed
+        borderWidth: 1
+    };
+
+    // Create a bar chart using Chart.js
+    var ctx = document.getElementById('userDemographicsChart').getContext('2d');
+    var userDemographicsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: genders,
+            datasets: [genderDataset]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+		
+		
 <%-- 		<%
     Map<String, Map<String, Integer>> userDemographicsData = userManager.getUserDemographicsData();
 

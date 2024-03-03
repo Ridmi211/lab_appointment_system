@@ -852,7 +852,7 @@ h4 {
 	margin-top: 40px;
 	position: relative;
 	top: -3px;
-	left: -450px;
+	left: -350px;
 }
 
 h4 span {
@@ -1013,7 +1013,7 @@ h4 span {
 					<div class="work">
 						<div class="card-container">
 							<img class="round"
-								src="https://images.assetsdelivery.com/compings_v2/olgatik/olgatik2004/olgatik200400013.jpg"
+								src="https://medicine.utah.edu/sites/g/files/zrelqx231/files/styles/square_wide/public/media/images/2021/why-mls.jpg?h=40581486&itok=Smbz-0KO"
 								alt="user" /> <br>
 							<div class="name">
 								<%=user2.getName()%>

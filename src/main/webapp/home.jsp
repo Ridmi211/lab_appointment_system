@@ -143,7 +143,7 @@ h4 {
 	margin-top: 40px;
 	position: relative;
 	top:-3px;
-	left: -280px;
+	left: -220px;
 }
 
 h4 span {
