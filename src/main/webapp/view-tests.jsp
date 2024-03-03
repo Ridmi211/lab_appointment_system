@@ -708,8 +708,8 @@ label #cancel {
 	border: 1px solid #03BFCB;
 	border-radius: 50%;
 	padding: 7px;
-	height: 120px;
-	width: 120px;
+	height: 60px;
+	width: 60px;
 }
 
 button.primary {
@@ -959,6 +959,9 @@ input[type="text"] {
 				<div class="col-sm mb-5">
 					<div class="work">
 						<div class="card-container">
+						<img class="round"
+								src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+								alt="user" /> <br>
 
 							<!-- Add image, name, and other details for the test -->
 							<div class="name">

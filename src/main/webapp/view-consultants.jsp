@@ -717,7 +717,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #004cc0;
+	background-color: #0088d3;
 	text-align: left;
 	padding: 15px;
 	margin-top: 10px;
