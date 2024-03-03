@@ -242,34 +242,33 @@ label {
 	font-weight: bold;
 }
 
-input[type="text"], input[type="date"],select[name="testType"], textarea {
+input[type="text"], input[type="date"], select[name="testType"],
+	textarea {
 	width: 100%;
 	border: 0;
- 	border-radius: 5px;
- 	padding: 6px 10px;
- 	outline: none;
- 	color: rgb(25, 31, 53);
- 	-webkit-transition: all .2s ease-out;
- 	-moz-transition: all .2s ease-out;
- 	-ms-transition: all .2s ease-out;
- 	-o-transition: all .2s ease-out;
- 	transition: all .2s ease-out;
-
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
 }
 
 select[name="testType"]:focus {
- 	width: 100%;
+	width: 100%;
 	border: 0;
- 	border-radius: 5px;
- 	padding: 6px 10px;
- 	outline: none;
- 	color: rgb(25, 31, 53);
- 	-webkit-transition: all .2s ease-out;
- 	-moz-transition: all .2s ease-out;
- 	-ms-transition: all .2s ease-out;
- 	-o-transition: all .2s ease-out;
- 	transition: all .2s ease-out;
-
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
 }
 
 .btn {
@@ -324,8 +323,11 @@ select[name="testType"]:focus {
 
 label {
 	font-weight: bold;
-	font-family: 'Source Sans Pro', sans-serif; font-size : 13px; color :
-	rgb( 25, 31, 53); letter-spacing : 1.5px; margin-top : 5px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 13px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
 	margin-bottom: 10px;
 	font-size: 13px;
 	color: rgb(25, 31, 53);
@@ -348,12 +350,13 @@ h4 span {
 	font-weight: lighter;
 }
 
-.test-title{
-	font-size: 22px;
-	font-family: 'Source Sans Pro', sans-serif;
-	color: rgb(25, 31, 53);
-	margin:20px;
-	margin-top:30px;
+.test-title {
+	 text-align: center;
+    font-size: 24px;
+    color: #529ece;
+    margin-top: 30px;
+    margin-bottom: 20px;
+     text-transform: uppercase;
 }
 </Style>
 
@@ -389,7 +392,8 @@ h4 span {
 					<%
 					if (user != null) {
 					%>
-
+					<li><a href="#appointment">Appointment</a></li>
+					<li><a href="#test">Test</a></li>
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -411,7 +415,7 @@ h4 span {
 	</div>
 	<!-- sidebar end here  -->
 
-	<div class="row m-0 ">
+	<div class="row m-0 " id="appointment">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
 			<div class="page-title">Update Appointment</div>
@@ -431,42 +435,55 @@ h4 span {
 				onsubmit="return confirmUpdate();">
 
 				<input class="form-control" type="hidden" id="appointmentId"
-					name="appointmentId" value="${appointment.appointmentId}" /> 
-					
-					<label	for="RefId">Appointment RefId:</label> 
-					<input class="form-control"	type="text" id="appointmentRefId" name="appointmentRefId"
-					readonly="readonly" value="${appointment.appointmentRefId}" />
-					
-					<label	for="testType">testType:</label> 
-					<input class="form-control"	type="text" id="testType" name="testType" readonly="readonly" value="${appointment.testType.displayName}" />
-					<input class="form-control"	type="hidden" id="testType1" name="testType1"  value="${appointment.testType}" />
-					
-					<!--  <label	for="userIdUpdate">consultantId:</label> -->
-					 <input	class="form-control" type="hidden" id="consultantId"	name="consultantId" readonly="readonly"
+					name="appointmentId" value="${appointment.appointmentId}" /> <label
+					for="RefId">Appointment RefId:</label> <input class="form-control"
+					type="text" id="appointmentRefId" name="appointmentRefId"
+					readonly="readonly" value="${appointment.appointmentRefId}" /> <label
+					for="testType">Selected Test Type:</label> <input
+					class="form-control" type="text" id="testType" name="testType"
+					readonly="readonly" value="${appointment.testType.displayName}" />
+				<input class="form-control" type="hidden" id="testType1"
+					name="testType1" value="${appointment.testType}" />
+
+				<!--  <label	for="userIdUpdate">consultantId:</label> -->
+				<input class="form-control" type="hidden" id="consultantId"
+					name="consultantId" readonly="readonly"
 					value="${appointment.technitianId}" />
-					<!--  <label for="email">seekerId:</label> -->
-				<input class="form-control" type="hidden" id="seekerId"	name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
-				<label for="scheduledDate"> Scheduled Date:</label>
-				 <input	class="form-control" type="date" id="scheduledDate"	name="scheduledDate" value="${appointment.scheduledDate}" />
-					 <label	for="startTime"> Start Time:</label>
-					 <input class="form-control"type="time" id="startTime" name="startTime"	value="${appointment.startTime}" />
-					 <label for="startTime">Notes</label>
-				<textarea class="form-control" style="height: 100px" type="text"id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-				
-				 <label	for="consultantName">Technician Name:</label> 
-				<input class="form-control" type="text" id="consultantName"	name="consultantName" value="${appointment.consultantName}" /> 
-				<label	for="seekerName">Patient Name:</label>
-				 <input	class="form-control" type="text" id="seekerName" name="seekerName"	value="${appointment.seekerName}" />
-				 <label for="seekerEmail">Patient Email:</label>
-				 <input class="form-control" type="text" id="seekerEmail"	name="seekerEmail" value="${appointment.seekerEmail}" />
-				 <label	for="seekerPhoneNumber">Patient's Phone Number:</label>
-				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
-				 
-			
-				 <div class="test-title">Update Test Details</div>
-				 
-			 
-				 	<%-- <label for="selectedTestType">Assigned test type:</label>
+				<!--  <label for="email">seekerId:</label> -->
+				<input class="form-control" type="hidden" id="seekerId"
+					name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
+				<label for="scheduledDate"> Scheduled Date:</label> <input
+					class="form-control" type="date" id="scheduledDate"
+					name="scheduledDate" value="${appointment.scheduledDate}" /> <label
+					for="startTime"> Start Time:</label> <input class="form-control"
+					type="time" id="startTime" name="startTime"
+					value="${appointment.startTime}" /> <label for="startTime">Notes</label>
+				<textarea class="form-control" style="height: 100px" type="text"
+					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
+
+				<label for="consultantName">Technician Name:</label> <input
+					class="form-control" type="text" id="consultantName"
+					name="consultantName" value="${appointment.consultantName}" /> <label
+					for="seekerName">Patient Name:</label> <input class="form-control"
+					type="text" id="seekerName" name="seekerName"
+					value="${appointment.seekerName}" /> <label for="seekerEmail">Patient
+					Email:</label> <input class="form-control" type="text" id="seekerEmail"
+					name="seekerEmail" value="${appointment.seekerEmail}" /> <label
+					for="seekerPhoneNumber">Patient's Phone Number:</label> <input
+					class="form-control" type="text" id="seekerPhoneNumber"
+					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				<label for="country">Appointment status:</label> <input
+					class="form-control" type="text" id="status" name="status"
+					value="${appointment.status.displayName}" /> <input
+					class="form-control" type="hidden" id="status" name="enum-status"
+					value="${appointment.status}" />
+
+
+
+				<div class="test-title" id="test">Update Test Details</div>
+
+
+				<%-- <label for="selectedTestType">Assigned test type:</label>
 					
 					<select name="testType" id="testType" required>
 						<option value="" disabled selected>${appointment.testType}</option>
@@ -478,20 +495,24 @@ h4 span {
 						}
 						%>
 					</select>  --%>
-				 
-				  <label	for="testResults">Test Results:</label>
-				 <input	class="form-control" type="text" id="testResults"	name="testResults" value="${appointment.testResults}" />
-				 		 <label	for="testResultsDescription">Test Description:</label>
-				 <input	class="form-control" type="text" id="testResultsDescription"	name="testResultsDescription" value="${appointment.testResultsDescription}" />
-				 		 <label	for="seekerPhoneNumber">Test Details Updated By:</label>
-				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />				 
-				  		 <label	for="seekerPhoneNumber">Updated On:</label>
-				 <input	class="form-control" type="text" id="seekerPhoneNumber"	name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
-			
-				 
-				 <label for="country">Appointment status:</label> 
-				<input class="form-control"	type="text" id="status" name="status" value="${appointment.status.displayName}" />
-				<input class="form-control" type="hidden" id="status"	name="enum-status" value="${appointment.status}" />
+ <label
+					for="testType">Test Type:</label> <input
+					class="form-control" type="text" id="testType" name="testType"
+					readonly="readonly" value="${appointment.testType.displayName}" />
+				<label for="testResults">Test Results:</label> <input
+					class="form-control" type="text" id="testResults"
+					name="testResults" value="${appointment.testResults}" /> <label
+					for="testResultsDescription">Test Description:</label> <textarea
+					class="form-control" type="text" id="testResultsDescription"
+					name="testResultsDescription" style="height: 100px"
+					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea> <label
+					for="seekerPhoneNumber">Test Details Updated By:</label> <input
+					class="form-control" type="text" id="seekerPhoneNumber"
+					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+				<label for="seekerPhoneNumber">Updated On:</label> <input
+					class="form-control" type="text" id="seekerPhoneNumber"
+					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
+
 
 
 
