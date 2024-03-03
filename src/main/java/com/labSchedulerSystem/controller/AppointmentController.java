@@ -6,7 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.util.Base64;
-
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +110,7 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
-		//TODO: int technitianId = 123;
+		// TODO: int technitianId = 123;
 		/* int technitianId = 1; */
 		int technitianId = Integer.parseInt(request.getParameter("technitianId"));
 		appointment.setTechnitianId(technitianId);
@@ -121,6 +121,9 @@ public class AppointmentController extends HttpServlet {
 		appointment.setCountry(request.getParameter("test"));
 		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("test")));
+		String appointmentRefId = getAppointmentService().generateReferenceId();
+		appointment.setAppointmentRefId(appointmentRefId);
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);
 			if (savedAppointment) {
@@ -683,11 +686,31 @@ public class AppointmentController extends HttpServlet {
 		appointment.setSeekerId(Integer.parseInt(request.getParameter("seekerId")));
 		appointment.setTechnitianId(Integer.parseInt(request.getParameter("consultantId")));
 		appointment.setScheduledDate(request.getParameter("scheduledDate"));
+		appointment.setAppointmentRefId(request.getParameter("appointmentRefId"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
 		appointment.setCountry(request.getParameter("country"));
 		appointment.setRecomendedDoctor(request.getParameter("job"));
 		appointment.setNotes(request.getParameter("notes"));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));
+		appointment.setTestResults(request.getParameter("testResults"));
+		appointment.setTestResultsDescription(request.getParameter("testResultsDescription"));
+		Date currentDate = new Date();
+		appointment.setTestUpdatedOn(currentDate);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println("User from session: " + user);
+		if (user == null) {
+			message = "You are not logged in!";
+			request.setAttribute("feebackMessage", message);
+			RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		String loggedInUserName = user.getName();
+		appointment.setTestUpdatedBy(loggedInUserName);
+		
+		
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
 				message = "The user has been successfully updated! User ID: " + appointment.getAppointmentId();

@@ -1,7 +1,6 @@
 package com.labSchedulerSystem.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -489,6 +487,7 @@ public class UserManagerImpl implements UserManager {
 			user.setBirthdate(rs.getString("birthdate"));
 			user.setGender(rs.getString("gender"));
 			user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+			user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
 			user.setEducationalQualifications(rs.getString("educationalQualifications"));
 			user.setSpecializedJobs(rs.getString("specializedJobs"));
 			consultantUsers.add(user);

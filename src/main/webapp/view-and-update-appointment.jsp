@@ -3,10 +3,14 @@
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
+<%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
 User user = (User) session.getAttribute("user");
+boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN); // Modify this condition according to your User class
+
 // Check if the user is logged in
 if (session.getAttribute("user") == null) {
 	// Redirect the user to a login page or display an error message
@@ -19,14 +23,14 @@ if (session.getAttribute("user") == null) {
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
 
 <meta charset="utf-8">
-<title>Job-Seekers</title>
+<title>Update Appointment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -34,7 +38,8 @@ if (session.getAttribute("user") == null) {
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -239,12 +244,33 @@ label {
 	font-weight: bold;
 }
 
-input[type="text"], input[type="date"], textarea {
+input[type="text"], input[type="date"], select[name="testType"],
+	textarea {
 	width: 100%;
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
+}
+
+select[name="testType"]:focus {
+	width: 100%;
+	border: 0;
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
 }
 
 .btn {
@@ -296,6 +322,44 @@ input[type="text"], input[type="date"], textarea {
 	font-size: 14px;
 	cursor: pointer;
 }
+
+label {
+	font-weight: bold;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 13px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
+}
+
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -350px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
+
+.test-title {
+	 text-align: center;
+    font-size: 24px;
+    color: #529ece;
+    margin-top: 30px;
+    margin-bottom: 20px;
+     text-transform: uppercase;
+}
 </Style>
 
 </head>
@@ -319,14 +383,19 @@ input[type="text"], input[type="date"], textarea {
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
 				<ul class="" id="sidemenu">
 
 					<%
 					if (user != null) {
 					%>
-
+					<li><a href="#appointment">Appointment</a></li>
+					<li><a href="#test">Test</a></li>
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -348,7 +417,7 @@ input[type="text"], input[type="date"], textarea {
 	</div>
 	<!-- sidebar end here  -->
 
-	<div class="row m-0 ">
+	<div class="row m-0 " id="appointment">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
 			<div class="page-title">Update Appointment</div>
@@ -367,81 +436,96 @@ input[type="text"], input[type="date"], textarea {
 			<form action="appointmentManager" method="post"
 				onsubmit="return confirmUpdate();">
 
-				<input class="form-control" type="number" id="appointmentId"
-					name="appointmentId" readonly="readonly"
-					value="${appointment.appointmentId}" /> <label for="userIdUpdate">consultantId:</label>
-				<input class="form-control" type="number" id="consultantId"
-					name="consultantId" 
-					value="${appointment.technitianId}" /> <label for="email">seekerId:</label>
-				<input class="form-control" type="number" id="seekerId"
+				<input class="form-control" type="hidden" id="appointmentId"
+					name="appointmentId" value="${appointment.appointmentId}" /> <label
+					for="RefId">Appointment RefId:</label> <input class="form-control"
+					type="text" id="appointmentRefId" name="appointmentRefId"
+					readonly="readonly" value="${appointment.appointmentRefId}" /> <label
+					for="testType">Selected Test Type:</label> <input
+					class="form-control" type="text" id="testType" name="testType"
+					readonly="readonly" value="${appointment.testType.displayName}" />
+				<input class="form-control" type="hidden" id="testType1"
+					name="testType1" value="${appointment.testType}" />
+
+				<!--  <label	for="userIdUpdate">consultantId:</label> -->
+				<input class="form-control" type="hidden" id="consultantId"
+					name="consultantId" readonly="readonly"
+					value="${appointment.technitianId}" />
+				<!--  <label for="email">seekerId:</label> -->
+				<input class="form-control" type="hidden" id="seekerId"
 					name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
-				<label for="scheduledDate"> scheduledDate:</label> <input
-					class="form-control" type="text" id="scheduledDate"
+				<label for="scheduledDate"> Scheduled Date:</label> <input
+					class="form-control" type="date" id="scheduledDate"
 					name="scheduledDate" value="${appointment.scheduledDate}" /> <label
-					for="startTime"> startTime:</label> <input class="form-control"
-					type="text" id="startTime" name="startTime"
-					value="${appointment.startTime}" /> <label for="startTime">notes</label>
+					for="startTime"> Start Time:</label> <input class="form-control"
+					type="time" id="startTime" name="startTime"
+					value="${appointment.startTime}" /> <label for="startTime">Notes</label>
 				<textarea class="form-control" style="height: 100px" type="text"
 					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-				<%--   <label for="gender">Gender:</label>
-    <input class="form-control" type="text" id="job" name="job" value="${appointment.job}"/>
-      <label for="occupation">Occupation:</label>
-    <input class="form-control" type="text" id="country" name="country" value="${appointment.country}"/> --%>
-				<label for="country">status:</label> <input class="form-control"
-					type="text" id="status" name="status"
-					value="${appointment.status.displayName}" /> <label
-					for="consultantName">Consultant Phone consultantName:</label> <input
+
+				<label for="consultantName">Technician Name:</label> <input
 					class="form-control" type="text" id="consultantName"
 					name="consultantName" value="${appointment.consultantName}" /> <label
-					for="seekerName">Consultant Email:</label> <input
-					class="form-control" type="text" id="seekerName" name="seekerName"
-					value="${appointment.seekerName}" /> <label for="seekerEmail">Seeker
+					for="seekerName">Patient Name:</label> <input class="form-control"
+					type="text" id="seekerName" name="seekerName"
+					value="${appointment.seekerName}" /> <label for="seekerEmail">Patient
 					Email:</label> <input class="form-control" type="text" id="seekerEmail"
 					name="seekerEmail" value="${appointment.seekerEmail}" /> <label
-					for="seekerPhoneNumber">Seeker Phone Number:</label> <input
+					for="seekerPhoneNumber">Patient's Phone Number:</label> <input
 					class="form-control" type="text" id="seekerPhoneNumber"
 					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
-
-				<%-- <label for="seekerJob">Seeker Job:</label>
-<input class="form-control" type="text" id="seekerJob" name="seekerJob" value="${appointment.seekerJob}"/> --%>
-
-				<%-- <label for="seekerCountry">Seeker Country:</label>
-<input class="form-control" type="text" id="seekerCountry" name="seekerCountry" value="${appointment.seekerCountry}"/> --%>
-
-
-
-				<input class="form-control" type="hidden" id="status"
-					name="enum-status" value="${appointment.status}" />
+				<label for="country">Appointment status:</label> <input
+					class="form-control" type="text" id="status" name="status"
+					value="${appointment.status.displayName}" readonly="readonly"/> <input
+					class="form-control" type="hidden" id="status" name="enum-status"
+					value="${appointment.status}" />
 
 
 
-				<%--   <c:if test="${user.accessRight == 'ROLE_CONSULTANT'}">
-    <label for="educationalQualifications">Educational Qualifications:</label>
-    <input class="form-control" type="text" id="educationalQualifications" name="educationalQualifications" value="${user.educationalQualifications}"/>
-    
-    <label for="specializedCountries">Specialized Countries:</label>
-    <input class="form-control" type="text" id="specializedCountries" name="specializedCountries" value="${user.specializedCountries}"/>
-    
-    <label for="specializedJobs">Specialized Jobs:</label>
-    <input class="form-control" type="text" id="specializedJobs" name="specializedJobs" value="${user.specializedJobs}"/>
-    
-      <label for="availableDays">availableDays:</label>
-    <input class="form-control" type="text" id="availableDays" name="availableDays" value="${user.availableDays}"/>
-    
-      <label for="availableTimeSlots">availableTimeSlotss:</label>
-    <input class="form-control" type="text" id="availableTimeSlots" name="availableTimeSlots" value="${user.availableTimeSlots}"/>
-</c:if> --%>
-				<%--  <label for="country">educational Qualifications:</label>
-    <input class="form-control" type="text" id="educationalQualifications" name="educationalQualifications" value="${user.educationalQualifications}"/>
-      <label for="country">specializedCountries:</label>
-    <input class="form-control" type="text" id="specializedCountries" name="specializedCountries" value="${user.specializedCountries}"/>
-      <label for="country">specializedJobs:</label>
-    <input class="form-control" type="text" id="specializedJobs" name="specializedJobs" value="${user.specializedJobs}"/> --%>
-				<%--  <label for="country">Registered as :</label>
-    <input class="form-control" type="text" id="accessRight" name="accessRight" readonly="readonly" value="${user.accessRight.displayName}"/>
-    
-    
-     --%>
+				<div class="test-title" id="test">Update Test Details</div>
+
+
+				<%-- <label for="selectedTestType">Assigned test type:</label>
+					
+					<select name="testType" id="testType" required>
+						<option value="" disabled selected>${appointment.testType}</option>
+						<%
+						for (TestType type : TestType.values()) {
+						%>
+						<option value="<%=type.name()%>"><%=type.getDisplayName()%></option>
+						<%
+						}
+						%>
+					</select>  --%>
+ <label
+					for="testType">Test Type:</label> <input
+					class="form-control" type="text" id="testType" name="testType"
+					readonly="readonly" value="${appointment.testType.displayName}" />
+					
+				<%-- <label for="testResults">Test Results:</label> <input
+					class="form-control" type="text" id="testResults"
+					name="testResults" value="${appointment.testResults}" /> <label
+					for="testResultsDescription">Test Description:</label> <textarea
+					class="form-control" type="text" id="testResultsDescription"
+					name="testResultsDescription" style="height: 100px"
+					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea>
+					 --%>
+					 
+					 <label for="testResults">Test Results:</label>
+<input class="form-control" type="text" id="testResults" name="testResults" <%= isTechnician ? "" : "readonly" %> value="${appointment.testResults}" />
+
+<label for="testResultsDescription">Test Description:</label>
+<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 100px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
+					 
+					 <label
+					for="testUpdatedBy">Test Details Updated By:</label> <input
+					class="form-control" type="text" id="testUpdatedBy"
+					name="testUpdatedBy" value="${appointment.testUpdatedBy}" readonly="readonly"/>
+				<label for="testUpdatedOn">Updated On:</label> <input
+					class="form-control" type="text" id="testUpdatedOn"
+					name="testUpdatedOn" value="${appointment.testUpdatedOn}" readonly="readonly"/>
+
+
 
 
 

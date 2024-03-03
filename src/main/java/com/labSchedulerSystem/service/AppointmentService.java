@@ -1,7 +1,10 @@
 package com.labSchedulerSystem.service;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import com.labSchedulerSystem.dao.AppointmentManager;
 import com.labSchedulerSystem.dao.AppointmentManagerImpl;
@@ -195,6 +198,31 @@ public class AppointmentService {
 	public int getUpcomingAppointmentsByConIdCount(int loggedInUserId) throws ClassNotFoundException, SQLException {
 		return getAppointmentManager().fetchUpcomingAppointmentsByConId(loggedInUserId).size();
 	}
+	
+	/*
+	 * public String generateReferenceId() { // Get current date/time information
+	 * LocalDateTime now = LocalDateTime.now(); DateTimeFormatter formatter =
+	 * DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+	 * 
+	 * // Generate a unique identifier for the appointment // You can use UUID or
+	 * any other method to ensure uniqueness String uniqueId =
+	 * UUID.randomUUID().toString().substring(0, 6); // Using first 6 characters of
+	 * UUID
+	 * 
+	 * // Concatenate "ref", date/time information, and unique identifier to form
+	 * reference ID String referenceId = "ref" + now.format(formatter) + "-" +
+	 * uniqueId; return referenceId; }
+	 */
+
+	public String generateReferenceId() {
+	    LocalDateTime now = LocalDateTime.now();
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmm");
+	    String uniqueId = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(0, 4);
+	    String referenceId = "REF-" + now.format(formatter) + uniqueId;
+	    return referenceId;
+	}
+
+	
 
 	public static void sendAppointmentConfirmationEmail(Appointment appointment, User consultant, User seeker) {
 		String subject = "Appointment Request Received";
