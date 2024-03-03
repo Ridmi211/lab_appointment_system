@@ -9,6 +9,8 @@
 
 <%
 User user = (User) session.getAttribute("user");
+boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN); // Modify this condition according to your User class
+
 // Check if the user is logged in
 if (session.getAttribute("user") == null) {
 	// Redirect the user to a login page or display an error message
@@ -342,7 +344,7 @@ h4 {
 	margin-top: 40px;
 	position: relative;
 	top: -3px;
-	left: -450px;
+	left: -350px;
 }
 
 h4 span {
@@ -474,7 +476,7 @@ h4 span {
 					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
 				<label for="country">Appointment status:</label> <input
 					class="form-control" type="text" id="status" name="status"
-					value="${appointment.status.displayName}" /> <input
+					value="${appointment.status.displayName}" readonly="readonly"/> <input
 					class="form-control" type="hidden" id="status" name="enum-status"
 					value="${appointment.status}" />
 
@@ -499,13 +501,23 @@ h4 span {
 					for="testType">Test Type:</label> <input
 					class="form-control" type="text" id="testType" name="testType"
 					readonly="readonly" value="${appointment.testType.displayName}" />
-				<label for="testResults">Test Results:</label> <input
+					
+				<%-- <label for="testResults">Test Results:</label> <input
 					class="form-control" type="text" id="testResults"
 					name="testResults" value="${appointment.testResults}" /> <label
 					for="testResultsDescription">Test Description:</label> <textarea
 					class="form-control" type="text" id="testResultsDescription"
 					name="testResultsDescription" style="height: 100px"
-					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea> <label
+					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea>
+					 --%>
+					 
+					 <label for="testResults">Test Results:</label>
+<input class="form-control" type="text" id="testResults" name="testResults" <%= isTechnician ? "" : "readonly" %> value="${appointment.testResults}" />
+
+<label for="testResultsDescription">Test Description:</label>
+<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 100px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
+					 
+					 <label
 					for="testUpdatedBy">Test Details Updated By:</label> <input
 					class="form-control" type="text" id="testUpdatedBy"
 					name="testUpdatedBy" value="${appointment.testUpdatedBy}" readonly="readonly"/>
