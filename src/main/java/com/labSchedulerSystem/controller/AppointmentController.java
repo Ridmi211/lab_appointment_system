@@ -300,7 +300,7 @@ public class AppointmentController extends HttpServlet {
 
 	private void acceptAppointmentAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int appointmentId = Integer.parseInt(request.getParameter("technitianId"));
+		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
 		try {
 			if (getAppointmentService().acceptAppointmentAdmin(appointmentId)) {
 				Appointment approvedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
