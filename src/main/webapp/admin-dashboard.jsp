@@ -41,7 +41,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
-<title>Admin dashboard</title>
+<title>Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -49,7 +49,8 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -58,6 +59,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
+
 @charset "ISO-8859-1";
 
 * {
@@ -238,8 +240,19 @@ text-align: center;
 	margin-bottom: 5px;
 }
 
-.welcome-title-2{
+.logo-text {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-30px;
+	left: -320px;
+}
 
+.logo-text span {
+	color: #91d7f4;
+	font-weight: lighter;
 }
 
 </Style>
@@ -261,8 +274,10 @@ text-align: center;
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<div class="logo-text">
+				Medi<span>Check</span>
+			</div>
 				<ul class="" id="sidemenu">
 
 
