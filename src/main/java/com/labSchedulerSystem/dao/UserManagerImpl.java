@@ -27,7 +27,6 @@ public class UserManagerImpl implements UserManager {
 	public UserManagerImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	private Connection getConnection() throws ClassNotFoundException, SQLException {
 		DbDriverManagerFactory driverFactory = new DbDriverManagerFactory();
@@ -55,12 +54,11 @@ public class UserManagerImpl implements UserManager {
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
-		  LOGGER.info("Registration added successfully for the email " + user.getEmail());
+		LOGGER.info("Registration added successfully for the email " + user.getEmail());
 		ps.close();
 		connection.close();
 		return result;
 	}
-
 
 	public boolean updateRegistrationStatus(int userId, RegistrationStatus status)
 			throws SQLException, ClassNotFoundException {
@@ -72,66 +70,65 @@ public class UserManagerImpl implements UserManager {
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
-		  LOGGER.info("Registration status updated successfully for userId: " + userId);
+		LOGGER.info("Registration status updated successfully for userId: " + userId);
 		ps.close();
 		connection.close();
 		return result;
-		
+
 	}
 
 	private static final Logger LOGGER = Logger.getLogger(UserManagerImpl.class.getName());
-	
-	public Map<String, List<Integer>> getMonthlyUserRegistrationCounts() throws SQLException, ClassNotFoundException {
-	    Connection connection = null;
-	    List<Integer> userCounts = new ArrayList<>();
-	    List<Integer> consultantCounts = new ArrayList<>();
-	    int currentYear = Year.now().getValue();
-	    try {
-	        connection = getConnection();
-	        for (int month = 1; month <= 12; month++) {
-	            String userQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_USER'";
-	            try (PreparedStatement userPs = connection.prepareStatement(userQuery)) {
-	                userPs.setInt(1, currentYear);
-	                userPs.setInt(2, month);
-	                try (ResultSet userRs = userPs.executeQuery()) {
-	                    if (userRs.next()) {
-	                        int userCount = userRs.getInt(1);
-	                        userCounts.add(userCount);
-	                        LOGGER.info("User count for month " + month + ": " + userCount);
-	                        
-	                    }
-	                }
-	            }
-	            String consultantQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_TECHNITIAN'";
-	            try (PreparedStatement consultantPs = connection.prepareStatement(consultantQuery)) {
-	                consultantPs.setInt(1, currentYear);
-	                consultantPs.setInt(2, month);
-	                try (ResultSet consultantRs = consultantPs.executeQuery()) {
-	                    if (consultantRs.next()) {
-	                        int consultantCount = consultantRs.getInt(1);
-	                        consultantCounts.add(consultantCount);
-	                        LOGGER.info("Consultant count for month " + month + ": " + consultantCount);
-	                    }
-	                }
-	            }
-	        }
-	    } catch (SQLException | ClassNotFoundException e) {
-	        LOGGER.log(Level.SEVERE, "Error occurred while fetching monthly user registration counts", e);
-	    } finally {
-	        if (connection != null) {
-	            try {
-	                connection.close();
-	            } catch (SQLException e) {
-	                LOGGER.log(Level.SEVERE, "Error occurred while closing the database connection", e);
-	            }
-	        }
-	    }
-	    Map<String, List<Integer>> countsMap = new HashMap<>();
-	    countsMap.put("userCounts", userCounts);
-	    countsMap.put("consultantCounts", consultantCounts);
-	    return countsMap;
-	}
 
+	public Map<String, List<Integer>> getMonthlyUserRegistrationCounts() throws SQLException, ClassNotFoundException {
+		Connection connection = null;
+		List<Integer> userCounts = new ArrayList<>();
+		List<Integer> consultantCounts = new ArrayList<>();
+		int currentYear = Year.now().getValue();
+		try {
+			connection = getConnection();
+			for (int month = 1; month <= 12; month++) {
+				String userQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_USER'";
+				try (PreparedStatement userPs = connection.prepareStatement(userQuery)) {
+					userPs.setInt(1, currentYear);
+					userPs.setInt(2, month);
+					try (ResultSet userRs = userPs.executeQuery()) {
+						if (userRs.next()) {
+							int userCount = userRs.getInt(1);
+							userCounts.add(userCount);
+							LOGGER.info("User count for month " + month + ": " + userCount);
+
+						}
+					}
+				}
+				String consultantQuery = "SELECT COUNT(*) FROM user WHERE YEAR(registrationDate) = ? AND MONTH(registrationDate) = ? AND accessRight = 'ROLE_TECHNITIAN'";
+				try (PreparedStatement consultantPs = connection.prepareStatement(consultantQuery)) {
+					consultantPs.setInt(1, currentYear);
+					consultantPs.setInt(2, month);
+					try (ResultSet consultantRs = consultantPs.executeQuery()) {
+						if (consultantRs.next()) {
+							int consultantCount = consultantRs.getInt(1);
+							consultantCounts.add(consultantCount);
+							LOGGER.info("Consultant count for month " + month + ": " + consultantCount);
+						}
+					}
+				}
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			LOGGER.log(Level.SEVERE, "Error occurred while fetching monthly user registration counts", e);
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					LOGGER.log(Level.SEVERE, "Error occurred while closing the database connection", e);
+				}
+			}
+		}
+		Map<String, List<Integer>> countsMap = new HashMap<>();
+		countsMap.put("userCounts", userCounts);
+		countsMap.put("consultantCounts", consultantCounts);
+		return countsMap;
+	}
 
 //	public Map<String, Map<String, Object>> getJobTypeDistributionData() throws SQLException, ClassNotFoundException {
 //		Connection connection = null;
@@ -205,6 +202,33 @@ public class UserManagerImpl implements UserManager {
 //				connection.close();
 //		}
 //	}
+	
+	public Map<String, Integer> getUserGenderDistribution() throws SQLException, ClassNotFoundException {
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+	    try {
+	        connection = getConnection();
+	        String query = "SELECT gender, COUNT(*) as count FROM user GROUP BY gender";
+	        statement = connection.prepareStatement(query);
+	        resultSet = statement.executeQuery();
+	        Map<String, Integer> genderDistribution = new HashMap<>();
+	        while (resultSet.next()) {
+	            String gender = resultSet.getString("gender");
+	            int count = resultSet.getInt("count");
+	            genderDistribution.put(gender, count);
+	        }
+	        return genderDistribution;
+	    } finally {
+	        if (resultSet != null)
+	            resultSet.close();
+	        if (statement != null)
+	            statement.close();
+	        if (connection != null)
+	            connection.close();
+	    }
+	}
+
 
 	public Map<RegistrationStatus, Integer> getRegistrationStatusData() throws SQLException, ClassNotFoundException {
 		Connection connection = null;
@@ -331,8 +355,6 @@ public class UserManagerImpl implements UserManager {
 //		return consultantCountByCountry;
 //	}
 
-	
-
 //	public Map<String, Map<String, Integer>> getConsultantAvailabilityData()
 //			throws SQLException, ClassNotFoundException {
 //		Connection connection = getConnection();
@@ -368,11 +390,11 @@ public class UserManagerImpl implements UserManager {
 	public Map<String, Integer> getConsultantJobTypeDistribution() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		Map<String, Integer> jobTypeDistribution = new HashMap<>();
-		String consultantJobTypesQuery = "SELECT specializedJobs FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
+		String consultantJobTypesQuery = "SELECT selectedTestType FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
 		try (PreparedStatement jobTypesPs = connection.prepareStatement(consultantJobTypesQuery)) {
 			try (ResultSet jobTypesRs = jobTypesPs.executeQuery()) {
 				while (jobTypesRs.next()) {
-					String jobTypesString = jobTypesRs.getString("specializedJobs");
+					String jobTypesString = jobTypesRs.getString("selectedTestType");
 					String[] jobTypes = jobTypesString.split(",\\s*");
 					for (String jobType : jobTypes) {
 						jobTypeDistribution.put(jobType, jobTypeDistribution.getOrDefault(jobType, 0) + 1);
@@ -399,10 +421,14 @@ public class UserManagerImpl implements UserManager {
 		ps.setString(8, user.getAccessRight().toString());
 		ps.setString(9, user.getSelectedTestType().toString());
 		ps.setInt(10, user.getUserId());
-		
+
 		LOGGER.info("Executing SQL query: " + query);
-        LOGGER.info("Parameters: name=" + user.getName() + ", phoneNumber=" + user.getPhoneNumber() + ", email=" + user.getEmail() + ", birthdate=" + user.getBirthdate() + ", gender=" + user.getGender() + ", educationalQualifications=" + user.getEducationalQualifications() + ", specializedJobs=" + user.getSpecializedJobs() + ", accessRight=" + user.getAccessRight().toString() + ", selectedTestType=" + user.getSelectedTestType().toString() + ", userId=" + user.getUserId());
-        
+		LOGGER.info("Parameters: name=" + user.getName() + ", phoneNumber=" + user.getPhoneNumber() + ", email="
+				+ user.getEmail() + ", birthdate=" + user.getBirthdate() + ", gender=" + user.getGender()
+				+ ", educationalQualifications=" + user.getEducationalQualifications() + ", specializedJobs="
+				+ user.getSpecializedJobs() + ", accessRight=" + user.getAccessRight().toString()
+				+ ", selectedTestType=" + user.getSelectedTestType().toString() + ", userId=" + user.getUserId());
+
 		boolean result = false;
 		if (ps.executeUpdate() > 0)
 			result = true;
@@ -496,7 +522,7 @@ public class UserManagerImpl implements UserManager {
 		connection.close();
 		return consultantUsers;
 	}
-	
+
 	/*
 	 * public List<User> fetchTechniciansForTest(int testId) throws SQLException,
 	 * ClassNotFoundException { Connection connection = getConnection(); String
@@ -523,74 +549,71 @@ public class UserManagerImpl implements UserManager {
 	 */
 
 	public List<User> fetchTechniciansForTest(int testId) throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    LOGGER.log(Level.INFO, "Fetching technicians for test ID: {0}", testId);
-	    String query = "SELECT * FROM user WHERE accessRight = 'ROLE_TECHNITIAN' " +
-	                   "AND registrationStatus = 'APPROVED' " +
-	                   "AND selectedTestType = (SELECT type FROM test WHERE testId = ?)";
-	    PreparedStatement pst = connection.prepareStatement(query);
-	    pst.setInt(1, testId);
-	    ResultSet rs = pst.executeQuery();
-	    
-	    List<User> technicianUsers = new ArrayList<>();
-	    while (rs.next()) {
-	        User user = new User();
-	        user.setUserId(rs.getInt("userId"));
-	        user.setName(rs.getString("name"));
-	        user.setPhoneNumber(rs.getString("phoneNumber"));
-	        user.setEmail(rs.getString("email"));
-	        user.setBirthdate(rs.getString("birthdate"));
-	        user.setGender(rs.getString("gender"));
-	        user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
-	        user.setEducationalQualifications(rs.getString("educationalQualifications"));
-	        user.setSpecializedJobs(rs.getString("specializedJobs"));
-	        user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
-	        technicianUsers.add(user);
-	    }
-	    
-	    pst.close();
-	    connection.close();
-	    LOGGER.log(Level.INFO, "Fetched {0} technicians for test ID: {1}", new Object[]{technicianUsers.size(), testId});
-        
-	    return technicianUsers;
+		Connection connection = getConnection();
+		LOGGER.log(Level.INFO, "Fetching technicians for test ID: {0}", testId);
+		String query = "SELECT * FROM user WHERE accessRight = 'ROLE_TECHNITIAN' "
+				+ "AND registrationStatus = 'APPROVED' "
+				+ "AND selectedTestType = (SELECT type FROM test WHERE testId = ?)";
+		PreparedStatement pst = connection.prepareStatement(query);
+		pst.setInt(1, testId);
+		ResultSet rs = pst.executeQuery();
+
+		List<User> technicianUsers = new ArrayList<>();
+		while (rs.next()) {
+			User user = new User();
+			user.setUserId(rs.getInt("userId"));
+			user.setName(rs.getString("name"));
+			user.setPhoneNumber(rs.getString("phoneNumber"));
+			user.setEmail(rs.getString("email"));
+			user.setBirthdate(rs.getString("birthdate"));
+			user.setGender(rs.getString("gender"));
+			user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
+			user.setEducationalQualifications(rs.getString("educationalQualifications"));
+			user.setSpecializedJobs(rs.getString("specializedJobs"));
+			user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
+			technicianUsers.add(user);
+		}
+
+		pst.close();
+		connection.close();
+		LOGGER.log(Level.INFO, "Fetched {0} technicians for test ID: {1}",
+				new Object[] { technicianUsers.size(), testId });
+
+		return technicianUsers;
 	}
 
-	
 	public int getCountOfConsultantUsers() throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_TECHNITIAN' AND registrationStatus = 'APPROVED'";
-	    
-	    try (Statement st = connection.createStatement();
-	         ResultSet rs = st.executeQuery(query)) {
-	        if (rs.next()) {
-	            int count = rs.getInt(1);
-	            return count;
-	        }
-	    } finally {
-	        connection.close();
-	    }
-	    
-	    return 0; 
-	}
-	
-	public int getCountOfClientUsers() throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_USER' AND registrationStatus = 'APPROVED'";
-	    
-	    try (Statement st = connection.createStatement();
-	         ResultSet rs = st.executeQuery(query)) {
-	        if (rs.next()) {
-	            int count = rs.getInt(1);
-	            return count;
-	        }
-	    } finally {
-	        connection.close();
-	    }
-	    
-	    return 0; 
+		Connection connection = getConnection();
+		String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_TECHNITIAN' AND registrationStatus = 'APPROVED'";
+
+		try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(query)) {
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				return count;
+			}
+		} finally {
+			connection.close();
+		}
+
+		return 0;
 	}
 
-	
+	public int getCountOfClientUsers() throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_USER' AND registrationStatus = 'APPROVED'";
+
+		try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(query)) {
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				return count;
+			}
+		} finally {
+			connection.close();
+		}
+
+		return 0;
+	}
+
 	public List<User> fetchPendingUsers() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String query = "SELECT * FROM user WHERE registrationStatus = 'PENDING'";
@@ -631,6 +654,7 @@ public class UserManagerImpl implements UserManager {
 			user.setEducationalQualifications(resultSet.getString("educationalQualifications"));
 			user.setSpecializedJobs(resultSet.getString("specializedJobs"));
 			user.setAccessRight(AccessRight.valueOf(resultSet.getString("accessRight")));
+			user.setSelectedTestType(Test.TestType.valueOf(resultSet.getString("selectedTestType")));
 			user.setRegistrationStatus(RegistrationStatus.valueOf(resultSet.getString("registrationStatus")));
 		}
 		preparedStatement.close();

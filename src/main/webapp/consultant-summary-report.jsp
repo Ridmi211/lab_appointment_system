@@ -11,6 +11,7 @@
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
 
 
+<%@ page import="java.util.LinkedHashMap"%>
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
@@ -63,6 +64,9 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta3/css/all.min.css"> -->
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <!-- exportas pdf -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
@@ -71,7 +75,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <!-- exportas pdf -->
-<title>Consultant Summary Report</title>
+<title>Technician Performance Report</title>
 
 <style>
 </style>
@@ -113,7 +117,7 @@
 			// element.style.height = '900px';
 			var opt = {
 				margin : 0,
-				filename : 'Registered Job Consultants.pdf',
+				filename : 'Technician Performance Report.pdf',
 				image : {
 					type : 'jpeg',
 					quality : 1
@@ -136,7 +140,7 @@
 
 	<div id="divToExport" class="a4-container">
 		<div class="">
-			<div class="page-title d-flex align-items-center align-self-center">Consultant
+			<div class="page-title d-flex align-items-center align-self-center">Technician
 				Performance Report</div>
 		</div>
 		<!-- Card 1  numbers -->
@@ -145,13 +149,289 @@
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Number of Appointments
-						per Consultant</div>
+						per Technician</div>
 				</div>
 
 				<div class=" common-border">
-					<div class="card-comment common-border">Description</div>
+					<div class="card-comment common-border">Color codes for the
+						appointment status is as follows</div>
+				</div>
+				<div class="progress" style="height: 20px; margin-bottom: 30px;">
+					<div class="progress-bar" role="progressbar"
+						style="width: 10%; background-color: #1E90FF;">Requested</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 20%; background-color: #0076CE;">Confirmed
+						Admin</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 15%; background-color: #00CED1;">Confirmed
+						Tech</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 15%; background-color: #6495ED;">Rejected Tech
+					</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 10%; background-color: #00FFFF;">Completed</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 15%; background-color: #073980;">Cancelled
+						Patient</div>
+					<div class="progress-bar" role="progressbar"
+						style="width: 15%; background-color: #73C2FB;">Cancelled
+						Admin</div>
 				</div>
 
+				<div class="row mb-3">
+
+					<div class="col-sm col-4 common-border pt-1 m-0 p-0 progress-text">
+						Technician</div>
+
+					<div class="col-sm col-2 common-border pt-1 m-0 p-0 progress-text">
+						Total Appointments</div>
+
+					<div class="col-sm col-6 common-border pt-1 m-0 p-0 progress-text">
+						Appointment Status</div>
+
+				</div>
+
+
+
+
+
+
+
+
+				<%
+				try {
+					AppointmentService appointmentService = AppointmentService.getAppointmentService();
+					AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
+					Map<String, Map<String, Integer>> appointmentsByTechnician = appointmentManager.getAppointmentCountsByConsultant();
+
+					
+					int maxAppointmentCount = 0;
+
+					// Find the maximum appointment count among all technicians
+					for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
+					    Map<String, Integer> appointmentCounts = entry.getValue();
+					    int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+					    if (totalCount > maxAppointmentCount) {
+					        maxAppointmentCount = totalCount;
+					    }
+					}
+					
+					// Define color codes for each appointment status
+					Map<String, String> statusColors = new LinkedHashMap<>();
+					statusColors.put("REQUESTED", "#1E90FF");
+					statusColors.put("ADMIN_CONFIRMED", "#0076CE");
+					statusColors.put("CON_CONFIRMED", "#00CED1");
+					statusColors.put("CON_REJECTED", "#6495ED");
+					statusColors.put("COMPLETED", "#00FFFF");
+					statusColors.put("SEEKER_CANCELLED", "#073980");
+					statusColors.put("ADMIN_CANCELLED", "#73C2FB");
+
+					
+					
+					for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
+						String technicianName = entry.getKey();
+						Map<String, Integer> appointmentCounts = entry.getValue();
+				%>
+
+
+				<div class="row">
+					<%-- <div>
+        <div style="position: relative;"> 
+            <div ><%= technicianName %></div> 
+
+        </div>
+    </div> --%>
+					<div class="col-sm col-3 common-border pt-1 m-0 p-0 progress-text">
+						<%=technicianName%>
+					</div>
+					<div class="col-sm col-5 common-border  m-0 p-0 progress-text"
+						style="text-align: center;">
+						<%-- <%
+							int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+							%>
+						<%=totalCount %> --%>
+
+
+
+
+						<%-- <div class="progress"
+							style="height: 15px; margin-top: 8px; margin-bottom: 8px; margin-right: 12px;">
+							<%
+							// Calculate the percentage value
+							int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+
+							int allTotalCount = appointmentService.getTotalAppointmentsCount();
+							/*   int totalCount = getTotalAppointmentsCount(); */ // Replace with the total count if available
+							int percentage = allTotalCount > 0 ? (totalCount * 100) / allTotalCount : 0;
+							%>
+
+
+							<div class="progress-bar m-0 p-0"
+								style="width: <%=percentage%>%;background-color: #1CAC78">
+								<%=totalCount%>
+							</div>
+						</div> --%>
+						
+						
+						<div class="progress"
+    style="height: 15px; margin-top: 8px; margin-bottom: 8px; margin-right: 12px;">
+    <%
+    // Calculate the percentage value based on the maximum appointment count
+    int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+    int percentage = maxAppointmentCount > 0 ? (totalCount * 100) / maxAppointmentCount : 0;
+    %>
+
+    <div class="progress-bar m-0 p-0"
+        style="width: <%=percentage%>%;background-color: #1CAC78">
+        <%=totalCount%>
+    </div>
+</div>
+					</div>
+
+					<div class="col-sm col-4 common-border  m-0 p-0">
+
+						<div class="progress"
+							style="height: 15px; margin-top: 8px; margin-bottom: 8px;">
+							<%
+							for (Map.Entry<String, String> statusEntry : statusColors.entrySet()) {
+							%>
+							<%
+							String status = statusEntry.getKey();
+							%>
+							<%
+							String color = statusEntry.getValue();
+							%>
+							<%
+							int count = appointmentCounts.getOrDefault(status, 0);
+							%>
+							<%-- <%
+							int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+							%> --%>
+							<%
+							int width = totalCount > 0 ? (count * 100) / totalCount : 0;
+							%>
+							<div class="progress-bar" role="progressbar"
+								style="font-size: 8px;padding-bottom: 5px; background-color: <%=color%>; color: white; width: <%=width%>%;"
+								aria-valuemin="0" aria-valuemax="100">
+								<%-- <%=status%>: --%>
+								<%=count%>
+
+							</div>
+							<%
+							}
+							%>
+						</div>
+					</div>
+				</div>
+				<%
+				}
+				} catch (SQLException | ClassNotFoundException e) {
+				// Handle exceptions
+				e.printStackTrace();
+				}
+				%>
+
+				<%-- 		
+				
+				<%
+try {
+    AppointmentService appointmentService = AppointmentService.getAppointmentService();
+    AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
+    Map<String, Map<String, Integer>> appointmentsByTechnician = appointmentManager.getAppointmentCountsByConsultant();
+    
+    // Define color codes for each appointment status
+    Map<String, String> statusColors = new HashMap<>();
+    statusColors.put("REQUESTED", "#1E90FF");           
+    statusColors.put("ADMIN_CONFIRMED", "#0076CE");    
+    statusColors.put("CON_CONFIRMED", "#00CED1"); 
+    statusColors.put("CON_REJECTED", "#6495ED");            
+    statusColors.put("COMPLETED", "#00FFFF");   
+    statusColors.put("SEEKER_CANCELLED", "#073980"); 
+    statusColors.put("ADMIN_CANCELLED", "#73C2FB"); 
+    
+    
+
+    for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
+        String technicianName = entry.getKey();
+        Map<String, Integer> appointmentCounts = entry.getValue();
+        
+        // Calculate total count of appointments for the technician
+        int totalCount = 0;
+        for (int count : appointmentCounts.values()) {
+            totalCount += count;
+        }
+%>
+    <div>
+        <div style="position: relative;"> 
+            <div style="display: inline-block;background-color: white; position: absolute; top: -10px; font-weight: 600; padding-right: 8px;"><%= technicianName %></div> 
+            <hr style="height: 1px; background-color: rgb(61, 95, 243); border: none;">
+        </div>
+    </div>
+    <div class="progress" style="height: 15px;margin-top: 8px;margin-bottom: 8px;">
+        <% for (Map.Entry<String, Integer> statusEntry : appointmentCounts.entrySet()) { %>
+            <% String status = statusEntry.getKey(); %>
+            <% int count = statusEntry.getValue(); %>
+            <% int width = totalCount > 0 ? (count * 100) / totalCount : 0; %>
+            <% String color = statusColors.get(status); %>
+            <div class="progress-bar" role="progressbar" style="font-size: 8px;padding-bottom: 5px; background-color: <%= color %>; color: white; width: <%= width %>%;" aria-valuemin="0" aria-valuemax="100">
+                <%= status %>: <%= count %> appointments
+            </div>
+        <% } %>
+    </div>
+<%
+    }
+} catch (SQLException | ClassNotFoundException e) {
+    // Handle exceptions
+    e.printStackTrace();
+}
+%>
+	 --%>
+
+				<%-- 				<%
+try {
+    AppointmentService appointmentService = AppointmentService.getAppointmentService();
+    AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
+    Map<String, Map<String, Integer>> appointmentsByTechnician = appointmentManager.getAppointmentCountsByConsultant();
+    
+    // Define color codes for each appointment status
+    Map<String, String> statusColors = new HashMap<>();
+    statusColors.put("Requested", "#ffcc00");           // Yellow
+    statusColors.put("Admin-Confirmed", "#00cc99");     // Green
+    statusColors.put("Consultant-Confirmed", "#3366ff"); // Blue
+    statusColors.put("Rejected", "#ff6666");            // Red
+    statusColors.put("Completed", "#99ff99");           // Light Green
+
+    for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
+        String technicianName = entry.getKey();
+        Map<String, Integer> appointmentCounts = entry.getValue();
+%>
+    <div>
+        <div style="position: relative;"> 
+            <div style="display: inline-block;background-color: white; position: absolute; top: -10px; font-weight: 600; padding-right: 8px;"><%= technicianName %></div> 
+            <hr style="height: 1px; background-color: rgb(61, 95, 243); border: none;">
+        </div>
+    </div>
+    <div class="progress" style="height: 15px;margin-top: 8px;margin-bottom: 8px;">
+        <% for (Map.Entry<String, Integer> statusEntry : appointmentCounts.entrySet()) { %>
+            <% String status = statusEntry.getKey(); %>
+            <% int count = statusEntry.getValue(); %>
+            <% int totalCount = appointmentService.getTotalAppointmentsCountForTechnician(technicianName); %>
+            <% int width = totalCount > 0 ? (count * 100) / totalCount : 0; %>
+            <% String color = statusColors.get(status); %>
+            <div class="progress-bar" role="progressbar" style="font-size: 8px;padding-bottom: 5px; background-color: <%= color %>; color: white; width: <%= width %>%;" aria-valuemin="0" aria-valuemax="100">
+                <%= status %>: <%= count %> appointments
+            </div>
+        <% } %>
+    </div>
+<%
+    }
+} catch (SQLException | ClassNotFoundException e) {
+    // Handle exceptions
+    e.printStackTrace();
+}
+%> --%>
+
+				<%-- 
 				<%
 				try {
 					AppointmentService appointmentService = AppointmentService.getAppointmentService();
@@ -169,7 +449,10 @@
 					<div class="col-sm col-3 common-border pb-2 m-0 p-0 progress-text">
 						<span><%=entry.getKey()%></span>
 					</div>
-					<div class="col-sm col-9 common-border pb-2 m-0 p-0">
+					<div class="col-sm col-1 common-border pb-2 m-0 p-0 progress-text">
+						<span>Total</span>
+					</div>
+					<div class="col-sm col-8 common-border pb-2 m-0 p-0">
 						<div class="progress m-0 p-0">
 							<%
 							// Calculate the percentage value
@@ -197,7 +480,7 @@
 				}
 				%>
 
-
+ --%>
 
 				<div class="pebble-footer">
 					<div class="row page-footer">

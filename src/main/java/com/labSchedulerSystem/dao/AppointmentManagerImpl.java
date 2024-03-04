@@ -611,14 +611,14 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return statusCounts;
 	}
 
-	public Map<String, Integer> getAppointmentCountsByCountry() throws SQLException, ClassNotFoundException {
+	public Map<String, Integer> getAppointmentCountsByTestType() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		Map<String, Integer> countryAppointmentCounts = new HashMap<>();
-		String query = "SELECT country, COUNT(*) FROM appointments GROUP BY country";
+		String query = "SELECT testType, COUNT(*) FROM appointments GROUP BY testType";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					String country = rs.getString("country");
+					String country = rs.getString("testType");
 					int count = rs.getInt(2);
 					countryAppointmentCounts.put(country, count);
 				}
@@ -628,6 +628,9 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		LOGGER.info("countryAppointmentCounts: " + countryAppointmentCounts);
 		return countryAppointmentCounts;
 	}
+	
+	
+	
 
 	public List<String> generateRandomColors(int count) {
 		List<String> colors = new ArrayList<>();
@@ -718,25 +721,97 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return appointmentsByDayAndTimeSlotData;
 	}
 
-	public Map<String, Integer> getAppointmentCountsByConsultant() throws SQLException, ClassNotFoundException {
-		Connection connection = getConnection();
-		Map<String, Integer> appointmentsByConsultantData = new HashMap<>();
-		String query = "SELECT consultantId, COUNT(*) AS appointmentCount FROM appointments GROUP BY consultantId";
-		try (PreparedStatement ps = connection.prepareStatement(query)) {
-			try (ResultSet rs = ps.executeQuery()) {
-				while (rs.next()) {
-					String consultantId = rs.getString("technitianId");
-					int appointmentCount = rs.getInt("appointmentCount");
-					String consultantName = getConsultantNameById(consultantId);
-					appointmentsByConsultantData.put(consultantName, appointmentCount);
-				}
-			}
-		}
-		connection.close();
-		LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
-		return appointmentsByConsultantData;
-	}
+	/*
+	 * public Map<String, Integer> getAppointmentCountsByConsultant() throws
+	 * SQLException, ClassNotFoundException { Connection connection =
+	 * getConnection(); Map<String, Integer> appointmentsByConsultantData = new
+	 * HashMap<>(); String query =
+	 * "SELECT technitianId, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId"
+	 * ; try (PreparedStatement ps = connection.prepareStatement(query)) { try
+	 * (ResultSet rs = ps.executeQuery()) { while (rs.next()) { String consultantId
+	 * = rs.getString("technitianId"); int appointmentCount =
+	 * rs.getInt("appointmentCount"); String consultantName =
+	 * getConsultantNameById(consultantId);
+	 * appointmentsByConsultantData.put(consultantName, appointmentCount); } } }
+	 * connection.close(); LOGGER.info("appointmentsByConsultantData: " +
+	 * appointmentsByConsultantData); return appointmentsByConsultantData; }
+	 */
+	
+	/*
+	 * public Map<String, Map<String, Integer>> getAppointmentCountsByConsultant()
+	 * throws SQLException, ClassNotFoundException { Connection connection =
+	 * getConnection(); Map<String, Map<String, Integer>>
+	 * appointmentsByConsultantData = new HashMap<>(); String query =
+	 * "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status"
+	 * ; try (PreparedStatement ps = connection.prepareStatement(query)) { try
+	 * (ResultSet rs = ps.executeQuery()) { while (rs.next()) { String consultantId
+	 * = rs.getString("technitianId"); String status = rs.getString("status"); int
+	 * appointmentCount = rs.getInt("appointmentCount"); String consultantName =
+	 * getConsultantNameById(consultantId);
+	 * appointmentsByConsultantData.putIfAbsent(consultantName, new HashMap<>());
+	 * appointmentsByConsultantData.get(consultantName).put(status,
+	 * appointmentCount); } } } connection.close();
+	 * LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
+	 * return appointmentsByConsultantData; }
+	 */
 
+//	public Map<String, Map<Appointment.Status, Integer>> getAppointmentCountsByTechnicianAndStatus() throws SQLException, ClassNotFoundException {
+//	    Connection connection = getConnection();
+//	    Map<String, Map<Appointment.Status, Integer>> appointmentsByTechnicianAndStatus = new HashMap<>();
+//	    String query = "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status";
+//	    try (PreparedStatement ps = connection.prepareStatement(query)) {
+//	        try (ResultSet rs = ps.executeQuery()) {
+//	            while (rs.next()) {
+//	                String technicianId = rs.getString("technitianId");
+//	                Appointment.Status status = Appointment.Status.valueOf(rs.getString("status"));
+//	                int appointmentCount = rs.getInt("appointmentCount");
+//
+//	                // Get technician name using technicianId
+//	                String technicianName = getConsultantNameById(technicianId);
+//
+//	                // If technician entry does not exist, create a new map
+//	                if (!appointmentsByTechnicianAndStatus.containsKey(technicianName)) {
+//	                    appointmentsByTechnicianAndStatus.put(technicianName, new HashMap<>());
+//	                }
+//
+//	                // Update appointment count for the specific status
+//	                appointmentsByTechnicianAndStatus.get(technicianName).put(status, appointmentCount);
+//	            }
+//	        }
+//	    }
+//	    connection.close();
+//	    LOGGER.info("appointmentsByTechnicianAndStatus: " + appointmentsByTechnicianAndStatus);
+//	    return appointmentsByTechnicianAndStatus;
+//	}
+	public Map<String, Map<String, Integer>> getAppointmentCountsByConsultant() throws SQLException, ClassNotFoundException {
+	    Connection connection = getConnection();
+	    Map<String, Map<String, Integer>> appointmentsByConsultantData = new HashMap<>();
+	    String query = "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status";
+	    try (PreparedStatement ps = connection.prepareStatement(query)) {
+	        try (ResultSet rs = ps.executeQuery()) {
+	            while (rs.next()) {
+	                String consultantId = rs.getString("technitianId");
+	                String status = rs.getString("status");
+	                int appointmentCount = rs.getInt("appointmentCount");
+	                String consultantName = getConsultantNameById(consultantId);
+	                appointmentsByConsultantData.putIfAbsent(consultantName, new HashMap<>());
+	                appointmentsByConsultantData.get(consultantName).put(status, appointmentCount);
+	                
+	                // Calculate and store the total count for each consultant
+					/*
+					 * int totalCount =
+					 * appointmentsByConsultantData.get(consultantName).getOrDefault("Total", 0);
+					 * totalCount += appointmentCount;
+					 * appointmentsByConsultantData.get(consultantName).put("Total", totalCount);
+					 */
+	            }
+	        }
+	    }
+	    connection.close();
+	    LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
+	    return appointmentsByConsultantData;
+	}
+	
 	public String getConsultantNameById(String userId) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String consultantName = null;

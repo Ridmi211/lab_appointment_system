@@ -178,29 +178,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 
 
 
-		<div class=" card-container">
-			<div class="col">
-				<div class=" common-border">
-					<div class="card-title common-border">Distribution of
-						consultants by specialized countries</div>
-				</div>
-
-
-
-				<div class="row common-border m-0 p-0">
-					<div class="col-sm col-12 common-border pb-2 m-0 p-0"
-						style="height: 250px">
-						<div class=" common-border m-0 p-0">
-							<div class="card-comment common-border m-0 p-0">*
-								Specialized consultant availability for different countries are
-								depicted</div>
-						</div>
-						<canvas id="countryJobDistributionChart" width="200" height="200"></canvas>
-
-					</div>
-				</div>
-			</div>
-		</div>
+	
 
 		<%
 		try {

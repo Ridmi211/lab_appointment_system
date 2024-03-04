@@ -214,7 +214,7 @@ User user = (User) session.getAttribute("user");
   </div>
 
   <div class="copyright">
-    <p> Copyright © 2023</p>
+    <p> Copyright © 2024</p>
   </div>
   
 </div>

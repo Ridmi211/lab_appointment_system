@@ -150,20 +150,13 @@ User user = (User) session.getAttribute("user");
     <div class="dropdown-content">
       <a  href="user-report.jsp" >User</a>
       <a  href="appointment-summary-report.jsp" >Appointments</a>
- <div class="dropdown">
-    <a>
-  
-   Technicians
-    </a>
-    <div class="dropdown-content">
-        
-         <a  href="consultant-availability-report.jsp" > Availability</a>
-         <a  href="consultant-summary-report.jsp" > performance</a>
-    </div>
+     
+         <a  href="consultant-summary-report.jsp" > Technicians</a>
+   
   </div>
     
     </div>
-  </div>
+ 
     
   <% } %>
       <div class="normal-content">

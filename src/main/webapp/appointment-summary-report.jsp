@@ -100,7 +100,7 @@
         // element.style.height = '900px';
         var opt = {
             margin:       0,
-            filename:     'Registered Job Consultants.pdf',
+            filename:     'Appointment and test summary.pdf',
             image:        { type: 'jpeg', quality: 1},
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
@@ -297,7 +297,7 @@ while (entryIterator.hasNext()) {
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
-						Appointments by Country</div>
+						Appointments by Test type</div>
 				</div>
 
 				<div class=" common-border">
@@ -314,8 +314,8 @@ while (entryIterator.hasNext()) {
 				</div>
 			</div>
 		</div>
-		<%
-		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByCountry();
+	<%
+		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByTestType();
 		%>
 
 		<script>
@@ -351,9 +351,9 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
         }
     }
 });
-</script>
+</script> 
 
-
+<!-- 
 
 		<div class=" card-container">
 			<div class="col">
@@ -374,9 +374,9 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-
+<%-- 
 		<%
 		Map<String, Integer> jobAppointmentData = appointmentManager.getAppointmentCountsByJob();
 		%>
@@ -405,10 +405,10 @@ const myPieChartJob = new Chart(ctxJobPie, {
         }
     }
 });
-</script>
+</script> --%>
 
 
-
+<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -428,8 +428,8 @@ const myPieChartJob = new Chart(ctxJobPie, {
 					</div>
 				</div>
 			</div>
-		</div>
-		<%
+		</div> -->
+		<%-- <%
 		Map<String, Integer> appointmentsByDayData = appointmentManager.getAppointmentCountsByDay();
 		%>
 
@@ -474,10 +474,10 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
     }
 });
 </script>
+ --%>
 
 
-
-
+<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -498,8 +498,8 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
 					</div>
 				</div>
 			</div>
-		</div>
-		<%
+		</div> -->
+	<%-- 	<%
 		Map<String, Integer> appointmentsByTimeSlotData = appointmentManager.getAppointmentCountsByTimeSlot();
 		%>
 
@@ -543,7 +543,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
         }
     }
 });
-</script>
+</script> --%>
 
 		<!--  
          <div class="">
@@ -551,7 +551,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
         </div> -->
 
 
-		<div class=" card-container">
+	<!-- 	<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
@@ -570,8 +570,8 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 					</div>
 				</div>
 			</div>
-		</div>
-
+		</div> -->
+<%-- 
 		<%
 		try {
 			Map<String, Map<String, Integer>> appointmentsByDayAndTimeSlotData = appointmentManager
@@ -638,7 +638,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 		}
 		%>
 
-
+ --%>
 
 		<div class="pebble-footer">
 			<div class="row page-footer">
