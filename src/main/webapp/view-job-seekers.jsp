@@ -66,6 +66,20 @@ h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
 }
+
+#message{
+	width: 70%;
+	height: 250px;
+	background-color: #ffffff;
+	color: #529ece;
+	text-align: center;
+	position: absolute;
+	top: 160px;
+	font-size: 30px;
+	border-radius: 5px;
+	box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+
+}
 </Style>
 
 </head>
@@ -122,14 +136,23 @@ h4 span {
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
-			<div class="page-title">Registered Job Seekers new</div>
+			<div class="page-title">Registered Patients</div>
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
 
-	<div class="row m-0 ">
-		<p style='color: magenta'>${message}</p>
-	</div>
+<%-- 	<div class="row m-0">
+    <div id="message" >${message}</div>
+</div> --%>
+
+<!-- Add JavaScript to hide the message after a certain time -->
+<script>
+       var messageElement = document.getElementById("message");
+    function hideMessage() {
+        messageElement.style.display = "none";
+    }
+    setTimeout(hideMessage, 5000);
+</script>
 
 	<!-- <div class="row m-0">
      Search abr    <div class="col-2 m-0"></div>

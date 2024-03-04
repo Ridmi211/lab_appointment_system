@@ -116,9 +116,9 @@ h4 span {
     <div class="col-2 m-0"></div>
 </div>
 
-<div class="row m-0 ">
+<%-- <div class="row m-0 ">
 <p style='color:magenta'>${message}</p>	
-</div>
+</div> --%>
 <!-- table -->
     <!-- <div class="col-sm"> -->
        <div class="row m-0">
