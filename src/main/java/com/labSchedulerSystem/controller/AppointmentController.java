@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.labSchedulerSystem.dao.AppointmentManager;
+import com.labSchedulerSystem.dao.AppointmentManagerImpl;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.RegistrationStatus;
@@ -33,6 +35,10 @@ public class AppointmentController extends HttpServlet {
 
 	private AppointmentService getAppointmentService() {
 		return AppointmentService.getAppointmentService();
+	}
+	
+	private AppointmentManagerImpl getAppointmentManagerImpl() {
+		return new AppointmentManagerImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -374,9 +380,10 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().acceptAppointmentCon(appointmentId)) {
 				Appointment acceptedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
+				Test test = getAppointmentManagerImpl().fetchSingleTestByType(acceptedAppointment.getTestType().toString());
 				User consultant = getUserService().fetchSingleUser(acceptedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(acceptedAppointment.getSeekerId());
-				AppointmentService.sendAppointmentAcceptedEmail(acceptedAppointment, consultant, seeker);
+				AppointmentService.sendAppointmentAcceptedEmail(acceptedAppointment, consultant, seeker,test);
 				message = "Appointment has been accepted!";
 			} else {
 				message = "Failed to accept to appointment!";
@@ -713,9 +720,9 @@ public class AppointmentController extends HttpServlet {
 		
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
-				message = "The user has been successfully updated! User ID: " + appointment.getAppointmentId();
+				message = "The appointment has been successfully updated! User ID: " + appointment.getAppointmentRefId();
 			} else {
-				message = "Failed to update the user! User ID: " + appointment.getAppointmentId();
+				message = "Failed to update the Appointment! Appointment ID: " + appointment.getAppointmentRefId();
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();

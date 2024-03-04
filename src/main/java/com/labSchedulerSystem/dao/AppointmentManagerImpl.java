@@ -205,7 +205,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			test.setType(TestType.valueOf(rs.getString("type")));
 			test.setDescription(rs.getString("description"));
 			test.setCost(rs.getString("cost"));
-			test.setPreparationInstructions("PreparationInstructions");
+			test.setPreparationInstructions(rs.getString("PreparationInstructions"));
 			test.setReportReadyIn(rs.getString("ReportReadyIn"));
 			test.setMeasurementUnit(rs.getString("MeasurementUnit"));
 			test.setLowReferenceRange(rs.getString("LowReferenceRange"));

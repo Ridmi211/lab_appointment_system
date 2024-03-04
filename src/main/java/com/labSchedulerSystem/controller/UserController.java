@@ -287,7 +287,7 @@ public class UserController extends HttpServlet {
 		}
 		try {
 			if (getUserService().editUser(user)) {
-				UserService.sendUserUpdateEmail(user);
+				/* UserService.sendUserUpdateEmail(user); */
 				message = "The user has been successfully updated! User ID: " + user.getUserId();
 				LOGGER.info("User successfully updated. User ID: " + user.getUserId());
 			} else {
