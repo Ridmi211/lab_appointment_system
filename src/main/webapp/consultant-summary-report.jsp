@@ -64,6 +64,9 @@
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta3/css/all.min.css"> -->
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <!-- exportas pdf -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
@@ -72,7 +75,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <!-- exportas pdf -->
-<title>Consultant Summary Report</title>
+<title>Technician Performance Report</title>
 
 <style>
 </style>
@@ -114,7 +117,7 @@
 			// element.style.height = '900px';
 			var opt = {
 				margin : 0,
-				filename : 'Registered Job Consultants.pdf',
+				filename : 'Technician Performance Report.pdf',
 				image : {
 					type : 'jpeg',
 					quality : 1
@@ -137,7 +140,7 @@
 
 	<div id="divToExport" class="a4-container">
 		<div class="">
-			<div class="page-title d-flex align-items-center align-self-center">Consultant
+			<div class="page-title d-flex align-items-center align-self-center">Technician
 				Performance Report</div>
 		</div>
 		<!-- Card 1  numbers -->
@@ -146,7 +149,7 @@
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Number of Appointments
-						per Consultant</div>
+						per Technician</div>
 				</div>
 
 				<div class=" common-border">
@@ -175,21 +178,25 @@
 						Admin</div>
 				</div>
 
-<div class="row">
+				<div class="row mb-3">
 
-<div class="col-sm col-4 common-border pt-1 m-0 p-0 progress-text">
-				Technician		
-					</div>
-					
-<div class="col-sm col-2 common-border pt-1 m-0 p-0 progress-text">
-					Total Appointments	
-					</div>
-					
-<div class="col-sm col-6 common-border pt-1 m-0 p-0 progress-text">
-						Appointment StatusS
-					</div>
-					
-							</div>
+					<div class="col-sm col-4 common-border pt-1 m-0 p-0 progress-text">
+						Technician</div>
+
+					<div class="col-sm col-2 common-border pt-1 m-0 p-0 progress-text">
+						Total Appointments</div>
+
+					<div class="col-sm col-6 common-border pt-1 m-0 p-0 progress-text">
+						Appointment Status</div>
+
+				</div>
+
+
+
+
+
+
+
 
 				<%
 				try {
@@ -220,16 +227,39 @@
 
         </div>
     </div> --%>
-					<div class="col-sm col-4 common-border pt-1 m-0 p-0 progress-text">
+					<div class="col-sm col-3 common-border pt-1 m-0 p-0 progress-text">
 						<%=technicianName%>
 					</div>
-					<div class="col-sm col-2 common-border pt-1 m-0 p-0 progress-text" style="text-align:center;">
-					<%
+					<div class="col-sm col-5 common-border  m-0 p-0 progress-text"
+						style="text-align: center;">
+						<%-- <%
 							int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
 							%>
-						Total : <%=totalCount %></div>
+						<%=totalCount %> --%>
 
-					<div class="col-sm col-6 common-border  m-0 p-0">
+
+
+
+						<div class="progress"
+							style="height: 15px; margin-top: 8px; margin-bottom: 8px; margin-right: 12px;">
+							<%
+							// Calculate the percentage value
+							int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+
+							int allTotalCount = appointmentService.getTotalAppointmentsCount();
+							/*   int totalCount = getTotalAppointmentsCount(); */ // Replace with the total count if available
+							int percentage = allTotalCount > 0 ? (totalCount * 100) / allTotalCount : 0;
+							%>
+
+
+							<div class="progress-bar m-0 p-0"
+								style="width: <%=percentage%>%;background-color: #1CAC78">
+								<%=totalCount%>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm col-4 common-border  m-0 p-0">
 
 						<div class="progress"
 							style="height: 15px; margin-top: 8px; margin-bottom: 8px;">
@@ -254,9 +284,9 @@
 							<div class="progress-bar" role="progressbar"
 								style="font-size: 8px;padding-bottom: 5px; background-color: <%=color%>; color: white; width: <%=width%>%;"
 								aria-valuemin="0" aria-valuemax="100">
-								<%=status%>:
+								<%-- <%=status%>: --%>
 								<%=count%>
-								appointments
+
 							</div>
 							<%
 							}
