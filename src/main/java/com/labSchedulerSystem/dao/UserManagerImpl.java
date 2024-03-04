@@ -437,19 +437,54 @@ public class UserManagerImpl implements UserManager {
 		return result;
 	}
 
+	/*
+	 * @Override public boolean deleteUser(int userId) throws SQLException,
+	 * ClassNotFoundException { Connection connection = getConnection(); String
+	 * query = "DELETE FROM user WHERE userId=?"; PreparedStatement ps =
+	 * connection.prepareStatement(query); ps.setInt(1, userId); boolean result =
+	 * false; if (ps.executeUpdate() > 0) { result = true; } ps.close();
+	 * connection.close(); return result; }
+	 */
 	@Override
 	public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
-		Connection connection = getConnection();
-		String query = "DELETE FROM user WHERE userId=?";
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, userId);
-		boolean result = false;
-		if (ps.executeUpdate() > 0) {
-			result = true;
-		}
-		ps.close();
-		connection.close();
-		return result;
+	    Connection connection = getConnection();
+	    boolean result = false;
+	    try {
+	        // Check for existing appointments
+	        if (hasAppointments(userId)) {
+	            return false; // User cannot be deleted due to existing appointments
+	        }
+
+	        String query = "DELETE FROM user WHERE userId=?";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setInt(1, userId);
+
+	        // Execute the deletion
+	        if (ps.executeUpdate() > 0) {
+	            result = true;
+	        }
+	        ps.close();
+	    } finally {
+	        connection.close();
+	    }
+	    return result;
+	}
+
+	private boolean hasAppointments(int userId) throws SQLException,ClassNotFoundException {
+	    Connection connection = getConnection();
+	    try {
+	        String query = "SELECT COUNT(*) FROM appointments WHERE technitianId=?";
+	        PreparedStatement ps = connection.prepareStatement(query);
+	        ps.setInt(1, userId);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            int count = rs.getInt(1);
+	            return count > 0; // Return true if appointments exist for this user
+	        }
+	        return false; // No appointments found
+	    } finally {
+	        connection.close();
+	    }
 	}
 
 	@Override

@@ -274,25 +274,39 @@ public class UserController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
 		rd.forward(request, response);
 	}
-
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		clearMessage();
-		int userId = Integer.parseInt(request.getParameter("userId"));
-		try {
-			if (getUserService().deleteUser(userId)) {
-				message = "The user has been successfully deleted. user Code: " + userId;
-			} else {
-				message = "Failed to delete the user! user Code: " + userId;
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			message = e.getMessage();
-		}
+	        throws ServletException, IOException {
+	    clearMessage();
+	    int userId = Integer.parseInt(request.getParameter("userId"));
+	    try {
+	        if (getUserService().deleteUser(userId)) {
+	            message = "The user has been successfully deleted. User Code: " + userId;
+	        } else {
+	            message = "Failed to delete the user! There are existing appointments for this user. User Code: " + userId;
+	        }
+	    } catch (ClassNotFoundException | SQLException e) {
+	        message = e.getMessage();
+	    }
 
-		HttpSession session = request.getSession();
-		session.setAttribute("message", message);
-		response.sendRedirect("getuser?useractiontype=all");
+	    HttpSession session = request.getSession();
+	    session.setAttribute("message", message);
+	    response.sendRedirect("getuser?useractiontype=all");
 	}
+
+	/*
+	 * private void deleteUser(HttpServletRequest request, HttpServletResponse
+	 * response) throws ServletException, IOException { clearMessage(); int userId =
+	 * Integer.parseInt(request.getParameter("userId")); try { if
+	 * (getUserService().deleteUser(userId)) { message =
+	 * "The user has been successfully deleted. user Code: " + userId; } else {
+	 * message = "Failed to delete the user! user Code: " + userId; } } catch
+	 * (ClassNotFoundException | SQLException e) { message = e.getMessage(); }
+	 * 
+	 * HttpSession session = request.getSession(); session.setAttribute("message",
+	 * message); response.sendRedirect("getuser?useractiontype=all"); }
+	 */
+	
+	
 
 	private void fetchSingleUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
