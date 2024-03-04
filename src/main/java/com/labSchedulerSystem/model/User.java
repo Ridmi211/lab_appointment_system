@@ -17,7 +17,8 @@ public class User {
 	private String specializedJobs;
 	private RegistrationStatus registrationStatus;
 	private Date registrationDate;
-
+    private Test.TestType selectedTestType;
+	
 	public User() {
 	}
 
@@ -135,6 +136,14 @@ public class User {
 
 	public void setRegistrationStatus(RegistrationStatus registrationStatus) {
 		this.registrationStatus = registrationStatus;
+	}	
+
+	public Test.TestType getSelectedTestType() {
+		return selectedTestType;
+	}
+
+	public void setSelectedTestType(Test.TestType selectedTestType) {
+		this.selectedTestType = selectedTestType;
 	}
 
 }

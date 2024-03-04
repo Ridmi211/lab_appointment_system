@@ -4,6 +4,7 @@
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.RegistrationStatus"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
@@ -85,6 +86,8 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 <!-- Add this in the head section of your HTML -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
 
 <title>User Summary Report</title>
 
@@ -120,7 +123,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
         // element.style.height = '900px';
         var opt = {
             margin:       0,
-            filename:     'Registered Job Consultants.pdf',
+            filename:     'User Summary Report.pdf',
             image:        { type: 'jpeg', quality: 1},
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
@@ -235,7 +238,7 @@ try {
 
 				<div class=" common-border">
 					<div class="card-comment common-border">*Chart provides a
-						comparison between growth of users, consultants and number of
+						comparison between growth of users, technicians and number of
 						scheduled appointments, within the current year.</div>
 				</div>
 
@@ -296,7 +299,7 @@ try {
 
 		<!--    accessright -->
 
-		<div class=" card-container">
+		<!-- <div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Job Type Distribution</div>
@@ -314,14 +317,14 @@ try {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!--      /////////// -->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
 
 
-		<%
+	<%-- 	<%
  
     Map<String, Map<String, Object>> jobTypeDistributionData = userManager.getJobTypeDistributionData();
 
@@ -329,8 +332,8 @@ try {
     String jsonData = new ObjectMapper().writeValueAsString(jobTypeDistributionData);
 
     // You can use jsonData in your JavaScript code
-%>
-		<script>
+%> --%>
+<%-- 		<script>
     console.log('<%= jsonData %>');
 </script>
 		<script>
@@ -380,7 +383,7 @@ try {
                 }
             }
         });
-    </script>
+    </script> --%>
 
 		<!--    //////////////////////// -->
 
@@ -486,7 +489,7 @@ try {
 
 				<div class=" common-border">
 					<div class="card-comment common-border">* Distribution of
-						users by gender and country</div>
+						users by gender </div>
 				</div>
 
 				<div class="row common-border m-0">
@@ -501,15 +504,66 @@ try {
 				</div>
 			</div>
 		</div>
+		
+		
 		<%
+    Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
+
+    // Convert Java Map to JSON string
+    String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
+
+    // You can use jsonData in your JavaScript code
+%> 
+
+<script>
+    // Parse JSON data in JavaScript
+    var userGenderDistribution = JSON.parse('<%= jsonData %>');
+
+    // Extract genders and counts from the JSON data
+    var genders = Object.keys(userGenderDistribution);
+    var counts = Object.values(userGenderDistribution);
+
+    // Create dataset for gender distribution
+    var genderDataset = {
+        label: 'Gender Distribution',
+        data: counts,
+        backgroundColor: ['rgba(54, 162, 235, 0.8)','rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ], // Add more colors if needed
+        borderWidth: 1
+    };
+
+    // Create a bar chart using Chart.js
+    var ctx = document.getElementById('userDemographicsChart').getContext('2d');
+    var userDemographicsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: genders,
+            datasets: [genderDataset]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+		
+		
+<%-- 		<%
     Map<String, Map<String, Integer>> userDemographicsData = userManager.getUserDemographicsData();
 
     // Convert Java Map to JSON string
     String jsonData3 = new ObjectMapper().writeValueAsString(userDemographicsData);
 
     // You can use jsonData in your JavaScript code
-%>
-		<script>
+%> --%>
+<%-- 		<script>
     // Parse JSON data in JavaScript
     var userDemographicsData = JSON.parse('<%= jsonData3 %>');
 
@@ -564,7 +618,8 @@ try {
             }
         }
     });
-</script>
+</script> --%>
+
 
 		<div class=" card-container">
 			<div class="col">
@@ -636,6 +691,164 @@ try {
     e.printStackTrace(); 
 }
 %>
+
+
+		<div class=" card-container">
+			<div class="col">
+				<div class=" common-border">
+					<div class="card-title common-border">Distribution of
+						Technicians by the assigned test type</div>
+				</div>
+
+
+
+				<div class="row common-border m-0 p-0">
+					<div class="col-sm col-12 common-border pb-2 m-0 p-0 "
+						style="height: 250px">
+						<div class=" common-border m-0 p-0">
+							<div class="card-comment common-border m-0 p-0">*
+								Technician availability for different test types are
+								depicted</div>
+						</div>
+						<canvas id="consultantJobTypeChart" width="200" height="200"></canvas>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+	
+<%-- 
+		<%
+		try {
+			Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+
+			// Convert the data into JavaScript arrays
+			String labelsArray = "['" + String.join("', '", consultantJobTypeDistribution.keySet()) + "']";
+			String dataValuesArray = "[" + String.join(", ",
+			consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+		%>
+
+		<script>
+			// JavaScript function to generate colors dynamically
+			function generateRandomColors(count) {
+				var colors = [];
+				for (var i = 0; i < count; i++) {
+					var red = Math.floor(Math.random() * 256);
+					var green = Math.floor(Math.random() * 256);
+					var blue = Math.floor(Math.random() * 256);
+					var alpha = 0.8; // Constant alpha value
+
+					colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+				}
+				return colors;
+			}
+
+			// Parse JSON data in JavaScript
+			var consultantJobTypeData = {
+				labels :
+		<%=labelsArray%>
+			,
+				datasets : [ {
+					data :
+		<%=dataValuesArray%>
+			,
+					backgroundColor : generateRandomColors(
+		<%=consultantJobTypeDistribution.size()%>
+			),
+				} ]
+			};
+
+			var ctx8 = document.getElementById('consultantJobTypeChart')
+					.getContext('2d');
+			var consultantJobTypeChart = new Chart(ctx8, {
+				type : 'pie',
+				data : consultantJobTypeData,
+				options : {
+					responsive : true,
+					maintainAspectRatio : false,
+					title : {
+						display : true,
+						text : 'Consultant Specialized Job Type Distribution'
+					}
+				}
+			});
+		</script>
+
+		<%
+		} catch (ClassNotFoundException | SQLException e) {
+		e.printStackTrace(); // Handle the exception appropriately in your application
+		}
+		%>
+ --%>
+
+
+<%
+    try {
+        Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+        Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();
+        
+        // Get display names for enum labels
+        for (String label : consultantJobTypeDistribution.keySet()) {
+            Test.TestType testType = Test.TestType.valueOf(label);
+            String displayName = testType.getDisplayName();
+            consultantJobTypeDisplayNames.put(label, displayName);
+        }
+
+        // Convert the display names into JavaScript array
+        String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
+        String dataValuesArray = "[" + String.join(", ", consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+    %>
+
+    <script>
+        // JavaScript function to generate colors dynamically
+        function generateRandomColors(count) {
+            var colors = [];
+            for (var i = 0; i < count; i++) {
+                var red = Math.floor(Math.random() * 100) + 155; // Adjust the range for lighter colors
+                var green = Math.floor(Math.random() * 100) + 155;
+                var blue = Math.floor(Math.random() * 100) + 155;
+                var alpha = 0.8; // Constant alpha value
+
+                colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+            }
+            return colors;
+        }
+
+        // Parse JSON data in JavaScript
+        var consultantJobTypeData = {
+            labels: <%=labelsArray%>,
+            datasets: [{
+                data: <%=dataValuesArray%>,
+                backgroundColor: generateRandomColors(<%=consultantJobTypeDistribution.size()%>),
+            }]
+        };
+
+        var ctx8 = document.getElementById('consultantJobTypeChart').getContext('2d');
+        var consultantJobTypeChart = new Chart(ctx8, {
+            type: 'pie',
+            data: consultantJobTypeData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Consultant Specialized Job Type Distribution'
+                }
+            }
+        });
+    </script>
+
+<%
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace(); // Handle the exception appropriately in your application
+    }
+%>
+
+
 		<%--  <div class="">
             <div class="page-title d-flex align-items-center align-self-center">Consultant availability Report</div>
         </div>

@@ -12,12 +12,14 @@
   <script src="https://kit.fontawesome.com/1a4bb98cfa.js" crossorigin="anonymous"></script>
   
 	<meta charset="ISO-8859-1">
-  <title>Job-Seekers
+  <title>Medicheck
 
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+ <link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -148,29 +150,28 @@ User user = (User) session.getAttribute("user");
     <div class="dropdown-content">
       <a  href="user-report.jsp" >User</a>
       <a  href="appointment-summary-report.jsp" >Appointments</a>
- <div class="dropdown">
-    <a>
-  
-    Consultants
-    </a>
-    <div class="dropdown-content">
-        
-         <a  href="consultant-availability-report.jsp" > Availability</a>
-         <a  href="consultant-summary-report.jsp" > performance</a>
-    </div>
+     
+         <a  href="consultant-summary-report.jsp" > Technicians</a>
+   
   </div>
     
     </div>
-  </div>
+ 
     
   <% } %>
       <div class="normal-content">
-<a href="getuser?useractiontype=consultants" >
-   <i class="fa fa-address-card" aria-hidden="true"></i>
-    <span>Consultants</span>
+<!-- <a href="book-test-new.jsp" > -->
+<a href="getAppointment?appactiontype=allTests" >
+  <i class="fa-regular fa-calendar-check"></i>
+    <span>Book Tests</span>
   </a>
  </div>
-
+  <div class="normal-content">
+<a href="getuser?useractiontype=consultants" >
+   <i class="fa fa-address-card" aria-hidden="true"></i>
+    <span>Technicians</span>
+  </a>
+ </div>
   <%-- Display Services for all users, regardless of role --%>
  
 
@@ -209,12 +210,12 @@ User user = (User) session.getAttribute("user");
   <% } %>
 
  
- <div class="normal-content">
+<!--  <div class="normal-content">
 <a href="spinner.jsp" >
     <i class="fas fa-qrcode"></i>
     <span>Spinner</span>
   </a>
-</div>
+</div> -->
 
   
  

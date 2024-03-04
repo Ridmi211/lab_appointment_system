@@ -1,6 +1,8 @@
 <html>
+<head>
+
 <body>
-<h2>Hello World!</h2>
-<% response.sendRedirect("login.jsp"); %>
+
+<% response.sendRedirect("home.jsp"); %>
 </body>
 </html>

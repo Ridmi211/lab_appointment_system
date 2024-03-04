@@ -178,29 +178,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 
 
 
-		<div class=" card-container">
-			<div class="col">
-				<div class=" common-border">
-					<div class="card-title common-border">Distribution of
-						consultants by specialized countries</div>
-				</div>
-
-
-
-				<div class="row common-border m-0 p-0">
-					<div class="col-sm col-12 common-border pb-2 m-0 p-0"
-						style="height: 250px">
-						<div class=" common-border m-0 p-0">
-							<div class="card-comment common-border m-0 p-0">*
-								Specialized consultant availability for different countries are
-								depicted</div>
-						</div>
-						<canvas id="countryJobDistributionChart" width="200" height="200"></canvas>
-
-					</div>
-				</div>
-			</div>
-		</div>
+	
 
 		<%
 		try {
@@ -266,7 +244,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 
 
 
-		<%
+	<%-- 	<%
 		try {
 			Map<String, Integer> consultantCountByCountry = userManager.getConsultantCountByCountry();
 
@@ -275,9 +253,9 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			String dataValuesArray = "["
 			+ String.join(", ", consultantCountByCountry.values().stream().map(String::valueOf).toArray(String[]::new))
 			+ "]";
-		%>
+		%> --%>
 
-		<script>
+	<%-- 	<script>
 			// Parse JSON data in JavaScript
 			var consultantCountByCountryData = {
 				labels :
@@ -308,14 +286,14 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 					}
 				}
 			});
-		</script>
+		</script> --%>
 
-		<%
+	<%-- 	<%
 		} catch (ClassNotFoundException | SQLException e) {
 		e.printStackTrace(); // Handle the exception appropriately in your application
 		}
 		%>
-
+ --%>
 
 		<div class=" card-container">
 			<div class="col">
@@ -339,7 +317,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 				</div>
 			</div>
 		</div>
-		<%
+	<%-- 	<%
 		try {
 			Map<String, Map<String, Integer>> consultantAvailabilityData = userManager.getConsultantAvailabilityData();
 
@@ -361,9 +339,9 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 				+ "['rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(55, 99, 172, 0.5)', 'rgba(205, 99, 192, 0.5)', 'rgba(125, 192, 132, 0.5)', 'rgba(255, 192, 0, 0.5)', 'rgba(255, 140, 0, 0.5)', 'rgba(128, 0, 128, 0.5)', 'rgba(0, 128, 128, 0.5)'], borderWidth: 2 },";
 			}
 			datasets = datasets.substring(0, datasets.length() - 1) + "]";
-		%>
+		%> --%>
 
-		<script>
+		<%-- <script>
 			var consultantAvailabilityData = {
 				labels :
 		<%=daysLabels%>
@@ -409,7 +387,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 		}
 		%>
 
-
+ --%>
 
 		<div class="pebble-footer">
 			<div class="row page-footer">

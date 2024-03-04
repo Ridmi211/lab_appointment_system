@@ -863,7 +863,7 @@ button.primary.ghost {
                     <img class="round" src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-vector-icon-with-white-background-png-image_5168884.jpg" alt="user" />
                     <br>
                     <div class="name"><%= consultant.getName() %></div>
-                  <%--   <h6><%= consultant.getOccupation() %></h6> --%>
+                   <%--  <h6><%= consultant.getOccupation() %></h6> --%>
                     <div class="qualifications">
                         <ul>
                             <%
@@ -881,7 +881,7 @@ button.primary.ghost {
                     </div>
                     <div class="countries">
                         <h6>Specialized Countries</h6>
-                   <%--     <ul id="availableCountriesList">
+                     <%--   <ul id="availableCountriesList">
                             <%
                                 String specializedCountries = consultant.getSpecializedCountries();
                                 if (specializedCountries != null && !specializedCountries.isEmpty()) {
@@ -915,7 +915,7 @@ button.primary.ghost {
                 <div class="layer">
                     <div class="days">
                         <h6>Available Days</h6>
-                      <%--  <ul id="availableDaysList">
+                     <%--   <ul id="availableDaysList">
                             <%
                                 String availableDays = consultant.getAvailableDays();
                                 if (availableDays != null && !availableDays.isEmpty()) {
@@ -931,7 +931,7 @@ button.primary.ghost {
                     </div>
                     <div class="days">
                         <h6>Available Time Slots</h6>
-                       <%--  <ul id="availableTimeSlotsList">
+                      <%--   <ul id="availableTimeSlotsList">
                             <%
                                 String availableTimeSlots = consultant.getAvailableTimeSlots();
                                 if (availableTimeSlots != null && !availableTimeSlots.isEmpty()) {

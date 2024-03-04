@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Appointment.Status;
+import com.labSchedulerSystem.model.Test;
+import com.labSchedulerSystem.model.User;
 
 public interface AppointmentManager {
 
@@ -15,6 +17,10 @@ public interface AppointmentManager {
 	public boolean deleteAppointment(int appointmentId) throws SQLException, ClassNotFoundException;
 
 	public Appointment fetchSingleAppointment(int appointmentId) throws SQLException, ClassNotFoundException;
+
+	public Test  fetchSingleTest(int testId) throws SQLException, ClassNotFoundException;
+	
+	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException;
 
 	public List<Appointment> fetchAppointmentsBySeekerId(int loggedInUserId)
 			throws SQLException, ClassNotFoundException;
@@ -49,5 +55,7 @@ public interface AppointmentManager {
 
 	public List<Appointment> fetchAdminRequestedAppointments(int loggedInUserId)
 			throws SQLException, ClassNotFoundException;
+
+	public Test fetchSingleTestByType(String testType) throws SQLException, ClassNotFoundException;
 
 }

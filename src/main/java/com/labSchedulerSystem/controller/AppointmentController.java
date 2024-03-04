@@ -6,7 +6,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.util.Base64;
-
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.RegistrationStatus;
+import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
 import com.labSchedulerSystem.service.AppointmentService;
@@ -42,6 +43,8 @@ public class AppointmentController extends HttpServlet {
 			fetchSingleAppointment(request, response);
 		} else if (appactiontype.equals("view")) {
 			viewAppointment(request, response);
+		} else if (appactiontype.equals("viewTest")) {
+			viewTest(request, response);
 		} else if (appactiontype.equals("requested")) {
 			fetchRequestedAppointments(request, response);
 		} else if (appactiontype.equals("appointmentBySeekerId")) {
@@ -52,6 +55,8 @@ public class AppointmentController extends HttpServlet {
 			fetchAdminRequestedAppointments(request, response);
 		} else if (appactiontype.equals("adminRequestedAll")) {
 			fetchAdminRequestedAllAppointments(request, response);
+		} else if (appactiontype.equals("allTests")) {
+			fetchAllTests(request, response);
 		} else if (appactiontype.equals("adminCompleted")) {
 			fetchAllCompletedAppointments(request, response);
 		} else if (appactiontype.equals("adminRejected")) {
@@ -88,6 +93,8 @@ public class AppointmentController extends HttpServlet {
 			rejectAppointmentCon(request, response);
 		} else if (appactiontype.equals("view")) {
 			viewAppointment(request, response);
+		} else if (appactiontype.equals("test")) {
+			viewTest(request, response);
 		} else if (appactiontype.equals("completed")) {
 			completedAppointment(request, response);
 		} else if (appactiontype.equals("cancel")) {
@@ -103,18 +110,24 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		int seekerId = Integer.parseInt(request.getParameter("seekerId"));
 		appointment.setSeekerId(seekerId);
-		int consultantId = Integer.parseInt(request.getParameter("consultantId"));
-		appointment.setConsultantId(consultantId);
+		// TODO: int technitianId = 123;
+		/* int technitianId = 1; */
+		int technitianId = Integer.parseInt(request.getParameter("technitianId"));
+		appointment.setTechnitianId(technitianId);
+		/* appointment.setTechnitianId(request.getParameter("date")); */
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
-		appointment.setCountry(request.getParameter("country"));
-		appointment.setJob(request.getParameter("job"));
+		appointment.setCountry(request.getParameter("test"));
+		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("test")));
+		String appointmentRefId = getAppointmentService().generateReferenceId();
+		appointment.setAppointmentRefId(appointmentRefId);
 		try {
 			boolean savedAppointment = getAppointmentService().addAppointment(appointment);
 			if (savedAppointment) {
-				User consultant = getUserService().fetchSingleUser(consultantId);
+				User consultant = getUserService().fetchSingleUser(technitianId);
 				User seeker = getUserService().fetchSingleUser(seekerId);
 				AppointmentService.sendAppointmentConfirmationEmail(appointment, consultant, seeker);
 				message = "The appointment request has been successfully submitted!";
@@ -188,6 +201,24 @@ public class AppointmentController extends HttpServlet {
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("view-requested-appointments.jsp");
+		rd.forward(request, response);
+	}
+
+	private void fetchAllTests(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		clearMessage();
+		List<Test> tests = new ArrayList<Test>();
+		try {
+			tests = getAppointmentService().fetchAllTests();
+			if (!(tests.size() > 0)) {
+				message = "No tests found!";
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			message = e.getMessage();
+		}
+		request.setAttribute("tests", tests);
+		request.setAttribute("feebackMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("view-tests.jsp");
 		rd.forward(request, response);
 	}
 
@@ -269,11 +300,11 @@ public class AppointmentController extends HttpServlet {
 
 	private void acceptAppointmentAdmin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+		int appointmentId = Integer.parseInt(request.getParameter("technitianId"));
 		try {
 			if (getAppointmentService().acceptAppointmentAdmin(appointmentId)) {
 				Appointment approvedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(approvedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(approvedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(approvedAppointment.getSeekerId());
 				AppointmentService.sendNewAppointmentNotificationEmail(approvedAppointment, consultant, seeker);
 				message = "Appointment has been approved!";
@@ -294,7 +325,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().cancelAppointmentAdmin(appointmentId)) {
 				Appointment canceledAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(canceledAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(canceledAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(canceledAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCancellationEmail(canceledAppointment, consultant, seeker);
 				message = "Appointment has been canceled due to unavoidable reasons.";
@@ -317,7 +348,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().cancelAppointmentSeeker(appointmentId)) {
 				Appointment canceledAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(canceledAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(canceledAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(canceledAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCancellationBySeekerEmailToSeeker(canceledAppointment, consultant,
 						seeker);
@@ -343,7 +374,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().acceptAppointmentCon(appointmentId)) {
 				Appointment acceptedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(acceptedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(acceptedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(acceptedAppointment.getSeekerId());
 				AppointmentService.sendAppointmentAcceptedEmail(acceptedAppointment, consultant, seeker);
 				message = "Appointment has been accepted!";
@@ -385,7 +416,7 @@ public class AppointmentController extends HttpServlet {
 		try {
 			if (getAppointmentService().completedAppointment(appointmentId)) {
 				Appointment completedAppointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-				User consultant = getUserService().fetchSingleUser(completedAppointment.getConsultantId());
+				User consultant = getUserService().fetchSingleUser(completedAppointment.getTechnitianId());
 				User seeker = getUserService().fetchSingleUser(completedAppointment.getSeekerId());
 				AppointmentService.sendAppointmentCompletedEmail(completedAppointment, consultant, seeker);
 				message = "Appointment has been marked as completed!";
@@ -608,6 +639,26 @@ public class AppointmentController extends HttpServlet {
 		}
 	}
 
+	private void viewTest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int testId = Integer.parseInt(request.getParameter("testId"));
+		System.out.println("Reached the 'appointmentId' method.");
+		try {
+			Test test = getAppointmentService().fetchSingleTest(testId);
+			if (test.getTestId() > 0) {
+				request.setAttribute("test", test);
+				RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
+				rd.forward(request, response);
+			} else {
+				request.setAttribute("message", "No user found!");
+				RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
+				rd.forward(request, response);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void fetchSingleAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
@@ -633,13 +684,33 @@ public class AppointmentController extends HttpServlet {
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(Integer.parseInt(request.getParameter("appointmentId")));
 		appointment.setSeekerId(Integer.parseInt(request.getParameter("seekerId")));
-		appointment.setConsultantId(Integer.parseInt(request.getParameter("consultantId")));
+		appointment.setTechnitianId(Integer.parseInt(request.getParameter("consultantId")));
 		appointment.setScheduledDate(request.getParameter("scheduledDate"));
+		appointment.setAppointmentRefId(request.getParameter("appointmentRefId"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
 		appointment.setCountry(request.getParameter("country"));
-		appointment.setJob(request.getParameter("job"));
+		appointment.setRecomendedDoctor(request.getParameter("job"));
 		appointment.setNotes(request.getParameter("notes"));
+		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));
+		appointment.setTestResults(request.getParameter("testResults"));
+		appointment.setTestResultsDescription(request.getParameter("testResultsDescription"));
+		Date currentDate = new Date();
+		appointment.setTestUpdatedOn(currentDate);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println("User from session: " + user);
+		if (user == null) {
+			message = "You are not logged in!";
+			request.setAttribute("feebackMessage", message);
+			RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		String loggedInUserName = user.getName();
+		appointment.setTestUpdatedBy(loggedInUserName);
+		
+		
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
 				message = "The user has been successfully updated! User ID: " + appointment.getAppointmentId();

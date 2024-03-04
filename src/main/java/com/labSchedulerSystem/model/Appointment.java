@@ -1,14 +1,19 @@
 package com.labSchedulerSystem.model;
 
+import java.util.Date;
+
+import com.labSchedulerSystem.model.Test.TestType;
+
 public class Appointment {
 
 	private int appointmentId;
-	private int consultantId;
+	private String appointmentRefId;
+	private int technitianId;
 	private String consultantName;
 	private String seekerName;
 	private int seekerId;
 	private String country;
-	private String job;
+	private String recomendedDoctor;
 	private String scheduledDate;
 	private String startTime;
 	private Status status;
@@ -17,6 +22,17 @@ public class Appointment {
 	private String seekerPhoneNumber;
 	private String seekerJob;
 	private String seekerCountry;
+	private Test.TestType testType;
+	private String testResults;
+	private String testResultsDescription;
+	private String testUpdatedBy;
+	private Date testUpdatedOn;
+	
+	/* private String recomendedDoctor; */
+	    
+	    //testtype table
+	
+	
 
 	public String getSeekerEmail() {
 		return seekerEmail;
@@ -93,12 +109,12 @@ public class Appointment {
 		this.notes = notes;
 	}
 
-	public int getConsultantId() {
-		return consultantId;
+	public int getTechnitianId() {
+		return technitianId;
 	}
 
-	public void setConsultantId(int consultantId) {
-		this.consultantId = consultantId;
+	public void setTechnitianId(int technitianId) {
+		this.technitianId = technitianId;
 	}
 
 	public int getSeekerId() {
@@ -125,13 +141,11 @@ public class Appointment {
 		this.country = country;
 	}
 
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
+	/*
+	 * public String getJob() { return job; }
+	 * 
+	 * public void setJob(String job) { this.job = job; }
+	 */
 
 	public String getConsultantName() {
 		return consultantName;
@@ -147,6 +161,62 @@ public class Appointment {
 
 	public void setSeekerName(String seekerName) {
 		this.seekerName = seekerName;
+	}
+
+	public String getTestResults() {
+		return testResults;
+	}
+
+	public void setTestResults(String testResults) {
+		this.testResults = testResults;
+	}
+
+	public String getTestResultsDescription() {
+		return testResultsDescription;
+	}
+
+	public void setTestResultsDescription(String testResultsDescription) {
+		this.testResultsDescription = testResultsDescription;
+	}
+
+	public String getRecomendedDoctor() {
+		return recomendedDoctor;
+	}
+
+	public void setRecomendedDoctor(String recomendedDoctor) {
+		this.recomendedDoctor = recomendedDoctor;
+	}
+
+	public Test.TestType getTestType() {
+		return testType;
+	}
+
+	public void setTestType(Test.TestType testType) {
+		this.testType = testType;
+	}
+
+	public String getAppointmentRefId() {
+		return appointmentRefId;
+	}
+
+	public void setAppointmentRefId(String appointmentRefId) {
+		this.appointmentRefId = appointmentRefId;
+	}
+
+	public String getTestUpdatedBy() {
+		return testUpdatedBy;
+	}
+
+	public void setTestUpdatedBy(String testUpdatedBy) {
+		this.testUpdatedBy = testUpdatedBy;
+	}
+
+	public Date getTestUpdatedOn() {
+		return testUpdatedOn;
+	}
+
+	public void setTestUpdatedOn(Date testUpdatedOn) {
+		this.testUpdatedOn = testUpdatedOn;
 	}
 
 	public enum Status {

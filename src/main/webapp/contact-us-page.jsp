@@ -12,12 +12,14 @@
   <script src="https://kit.fontawesome.com/1a4bb98cfa.js" crossorigin="anonymous"></script>
   
 	<meta charset="ISO-8859-1">
-  <title>Job-Seekers
+  <title>Contact Us
 
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="icon" type="image/x-icon" href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+  <link rel="icon" type="image/x-icon"
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -27,12 +29,25 @@
 
 <head>
 <Style>
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top:-3px;
+	left: -450px;
+}
 
-  .sub-title {
-            font-size: 50px;
-            font-weight: 600;
-            color: #d6adff;
-        }
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
+ .sub-title {
+	font-size: 50px;
+	font-weight: 600;
+	color: #529ece;
+}
      
         .contact-left {
             flex-basis: 35%;
@@ -46,13 +61,11 @@
             margin-top: 30px;
         }
 
-        .contact-left p i {
-            color: #d6adff;
-            margin-right: 15px;
-            font-size: 25px;
-
-        }
-
+       .contact-left p i {
+	color: #529ece;
+	margin-right: 15px;
+	font-size: 25px;
+}
         .social-icons {
             margin-top: 30px;
         }
@@ -67,14 +80,14 @@
         }
 
         .social-icons a:hover {
-            color: #d6adff;
+            color: #529ece;
             transform: translateY(-5px);
         }
         
         
              .btn.btn2 {
             display: inline-block;
-            background: #d6adff;
+            background: #529ece;
 
         }
 
@@ -90,7 +103,7 @@
         form input,
         form textarea {
             width: 100%;
-            border: 1px solid rgb(223, 179, 245);
+            border: 1px solid #91d7f4;
             outline: none;
             background: #ffffff;
             padding: 15px;
@@ -121,7 +134,7 @@
         }
 
         .copyright i {
-            color: #d6adff;
+            color: #529ece;
         }
 
    </Style>
@@ -148,8 +161,10 @@ User user = (User) session.getAttribute("user");
  <div class="row m-0 p-0">
  <div class="col-12 m-0 p-0">
    <nav class="p-0 m-0 ">
-    <img class="logo-img" src="" alt="logo">
-    <!-- images/navabar-logo.jpg -->
+  <img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
+			<h4>
+				Medi<span>Check</span>
+			</h4>
     <ul class="" id="sidemenu" >      
         
           <% if (user != null) { %>
@@ -172,12 +187,12 @@ User user = (User) session.getAttribute("user");
     <div class="row" style=" margin-top: 100px;">
       <div class="contact-left">
         <h1 class="sub-title margin-top: 50px;">Contact Us</h1>
-        <p><i class="fa-solid fa-paper-plane"></i> jobs@gmail.com</p>
+        <p><i class="fa-solid fa-paper-plane"></i> mediCheck@gmail.com</p>
         <p><i class="fa-solid fa-square-phone"></i> (+94)81-954 3823</p>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/ridmi-yatigammana-b42383214/"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="https://github.com/Ridmi211"><i class="fa-brands fa-github"></i></a>
-         <a href="https://www.instagram.com/ridmi_y_y/"><i class="fa-brands fa-instagram"></i></a> 
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-github"></i></a>
+         <a href="#"><i class="fa-brands fa-instagram"></i></a> 
         </div>
      <!--    <a href="images/Resume- Ridmi Yatigammana.pdf" download class="btn btn2">Download CV</a> -->
       </div>
@@ -199,7 +214,7 @@ User user = (User) session.getAttribute("user");
   </div>
 
   <div class="copyright">
-    <p> Copyright © 2023</p>
+    <p> Copyright © 2024</p>
   </div>
   
 </div>
