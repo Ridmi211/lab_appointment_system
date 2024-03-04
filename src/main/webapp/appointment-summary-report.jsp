@@ -100,7 +100,7 @@
         // element.style.height = '900px';
         var opt = {
             margin:       0,
-            filename:     'Registered Job Consultants.pdf',
+            filename:     'Appointment and test summary.pdf',
             image:        { type: 'jpeg', quality: 1},
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
@@ -314,7 +314,7 @@ while (entryIterator.hasNext()) {
 				</div>
 			</div>
 		</div>
-		<%
+	<%-- 	<%
 		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByCountry();
 		%>
 
@@ -351,7 +351,7 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
         }
     }
 });
-</script>
+</script> --%>
 
 
 
@@ -376,7 +376,7 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
 			</div>
 		</div>
 
-
+<%-- 
 		<%
 		Map<String, Integer> jobAppointmentData = appointmentManager.getAppointmentCountsByJob();
 		%>
@@ -405,7 +405,7 @@ const myPieChartJob = new Chart(ctxJobPie, {
         }
     }
 });
-</script>
+</script> --%>
 
 
 
@@ -429,7 +429,7 @@ const myPieChartJob = new Chart(ctxJobPie, {
 				</div>
 			</div>
 		</div>
-		<%
+		<%-- <%
 		Map<String, Integer> appointmentsByDayData = appointmentManager.getAppointmentCountsByDay();
 		%>
 
@@ -474,7 +474,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
     }
 });
 </script>
-
+ --%>
 
 
 
@@ -499,7 +499,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
 				</div>
 			</div>
 		</div>
-		<%
+	<%-- 	<%
 		Map<String, Integer> appointmentsByTimeSlotData = appointmentManager.getAppointmentCountsByTimeSlot();
 		%>
 
@@ -543,7 +543,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
         }
     }
 });
-</script>
+</script> --%>
 
 		<!--  
          <div class="">
@@ -571,7 +571,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 				</div>
 			</div>
 		</div>
-
+<%-- 
 		<%
 		try {
 			Map<String, Map<String, Integer>> appointmentsByDayAndTimeSlotData = appointmentManager
@@ -638,7 +638,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 		}
 		%>
 
-
+ --%>
 
 		<div class="pebble-footer">
 			<div class="row page-footer">

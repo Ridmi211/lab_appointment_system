@@ -238,7 +238,7 @@ try {
 
 				<div class=" common-border">
 					<div class="card-comment common-border">*Chart provides a
-						comparison between growth of users, consultants and number of
+						comparison between growth of users, technicians and number of
 						scheduled appointments, within the current year.</div>
 				</div>
 
@@ -489,7 +489,7 @@ try {
 
 				<div class=" common-border">
 					<div class="card-comment common-border">* Distribution of
-						users by gender and country</div>
+						users by gender </div>
 				</div>
 
 				<div class="row common-border m-0">

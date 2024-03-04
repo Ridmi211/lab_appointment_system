@@ -204,6 +204,18 @@
 					AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
 					Map<String, Map<String, Integer>> appointmentsByTechnician = appointmentManager.getAppointmentCountsByConsultant();
 
+					
+					int maxAppointmentCount = 0;
+
+					// Find the maximum appointment count among all technicians
+					for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
+					    Map<String, Integer> appointmentCounts = entry.getValue();
+					    int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+					    if (totalCount > maxAppointmentCount) {
+					        maxAppointmentCount = totalCount;
+					    }
+					}
+					
 					// Define color codes for each appointment status
 					Map<String, String> statusColors = new LinkedHashMap<>();
 					statusColors.put("REQUESTED", "#1E90FF");
@@ -214,6 +226,8 @@
 					statusColors.put("SEEKER_CANCELLED", "#073980");
 					statusColors.put("ADMIN_CANCELLED", "#73C2FB");
 
+					
+					
 					for (Map.Entry<String, Map<String, Integer>> entry : appointmentsByTechnician.entrySet()) {
 						String technicianName = entry.getKey();
 						Map<String, Integer> appointmentCounts = entry.getValue();
@@ -240,7 +254,7 @@
 
 
 
-						<div class="progress"
+						<%-- <div class="progress"
 							style="height: 15px; margin-top: 8px; margin-bottom: 8px; margin-right: 12px;">
 							<%
 							// Calculate the percentage value
@@ -256,7 +270,22 @@
 								style="width: <%=percentage%>%;background-color: #1CAC78">
 								<%=totalCount%>
 							</div>
-						</div>
+						</div> --%>
+						
+						
+						<div class="progress"
+    style="height: 15px; margin-top: 8px; margin-bottom: 8px; margin-right: 12px;">
+    <%
+    // Calculate the percentage value based on the maximum appointment count
+    int totalCount = appointmentCounts.values().stream().mapToInt(Integer::intValue).sum();
+    int percentage = maxAppointmentCount > 0 ? (totalCount * 100) / maxAppointmentCount : 0;
+    %>
+
+    <div class="progress-bar m-0 p-0"
+        style="width: <%=percentage%>%;background-color: #1CAC78">
+        <%=totalCount%>
+    </div>
+</div>
 					</div>
 
 					<div class="col-sm col-4 common-border  m-0 p-0">
