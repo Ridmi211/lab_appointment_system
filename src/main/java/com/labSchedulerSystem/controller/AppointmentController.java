@@ -720,7 +720,7 @@ public class AppointmentController extends HttpServlet {
 		
 		try {
 			if (getAppointmentService().editAppointment(appointment)) {
-				message = "The appointment has been successfully updated! User ID: " + appointment.getAppointmentRefId();
+				message = "The appointment has been successfully updated! Appointment ID: " + appointment.getAppointmentRefId();
 			} else {
 				message = "Failed to update the Appointment! Appointment ID: " + appointment.getAppointmentRefId();
 			}
