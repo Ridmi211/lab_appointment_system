@@ -297,7 +297,7 @@ while (entryIterator.hasNext()) {
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
-						Appointments by Country</div>
+						Appointments by Test type</div>
 				</div>
 
 				<div class=" common-border">
@@ -314,8 +314,8 @@ while (entryIterator.hasNext()) {
 				</div>
 			</div>
 		</div>
-	<%-- 	<%
-		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByCountry();
+	<%
+		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByTestType();
 		%>
 
 		<script>
@@ -351,9 +351,9 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
         }
     }
 });
-</script> --%>
+</script> 
 
-
+<!-- 
 
 		<div class=" card-container">
 			<div class="col">
@@ -374,7 +374,7 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 <%-- 
 		<%
@@ -408,7 +408,7 @@ const myPieChartJob = new Chart(ctxJobPie, {
 </script> --%>
 
 
-
+<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -428,7 +428,7 @@ const myPieChartJob = new Chart(ctxJobPie, {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<%-- <%
 		Map<String, Integer> appointmentsByDayData = appointmentManager.getAppointmentCountsByDay();
 		%>
@@ -477,7 +477,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
  --%>
 
 
-
+<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -498,7 +498,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	<%-- 	<%
 		Map<String, Integer> appointmentsByTimeSlotData = appointmentManager.getAppointmentCountsByTimeSlot();
 		%>
@@ -551,7 +551,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
         </div> -->
 
 
-		<div class=" card-container">
+	<!-- 	<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
@@ -570,7 +570,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 <%-- 
 		<%
 		try {

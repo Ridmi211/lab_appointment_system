@@ -611,14 +611,14 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return statusCounts;
 	}
 
-	public Map<String, Integer> getAppointmentCountsByCountry() throws SQLException, ClassNotFoundException {
+	public Map<String, Integer> getAppointmentCountsByTestType() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		Map<String, Integer> countryAppointmentCounts = new HashMap<>();
-		String query = "SELECT country, COUNT(*) FROM appointments GROUP BY country";
+		String query = "SELECT testType, COUNT(*) FROM appointments GROUP BY testType";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					String country = rs.getString("country");
+					String country = rs.getString("testType");
 					int count = rs.getInt(2);
 					countryAppointmentCounts.put(country, count);
 				}
@@ -628,6 +628,9 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		LOGGER.info("countryAppointmentCounts: " + countryAppointmentCounts);
 		return countryAppointmentCounts;
 	}
+	
+	
+	
 
 	public List<String> generateRandomColors(int count) {
 		List<String> colors = new ArrayList<>();
