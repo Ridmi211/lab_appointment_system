@@ -40,7 +40,25 @@ User user = (User) session.getAttribute("user");
 <Style>
 
 
-    /*  <!-- sidebar end here  --> */
+  h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -450px;
+}
+
+.reference {
+	color: rgb(25, 31, 53);
+	font-size: 14px;
+}
+
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
     </Style>
 
 </head>
@@ -62,8 +80,12 @@ User user = (User) session.getAttribute("user");
  <div class="row m-0 p-0">
  <div class="col-12 m-0 p-0">
    <nav class="p-0 m-0 ">
-    <img class="logo-img" src="" alt="logo">
-    <!-- images/navabar-logo.jpg -->
+   <img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
     <ul class="" id="sidemenu" >
        
         

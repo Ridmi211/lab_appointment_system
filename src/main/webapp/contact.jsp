@@ -12,7 +12,7 @@
   <script src="https://kit.fontawesome.com/1a4bb98cfa.js" crossorigin="anonymous"></script>
   
 	<meta charset="ISO-8859-1">
-  <title>Job-Seekers
+  <title>Contact
 
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
