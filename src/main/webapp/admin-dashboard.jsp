@@ -67,7 +67,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%, rgb(222, 241, 250) 100%);
 }
 
 @import
@@ -83,7 +83,7 @@ body {
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
-	background: #d6cdf1;
+	background: rgb(199, 224, 248);
 	padding: 2em;
 	font-family: 'Open Sans', sans-serif;
 }
@@ -112,13 +112,13 @@ body {
 	line-height: 1;
 	padding-bottom: 5px;
 	margin: 0 0 0.142857143em;
-	border-bottom: 2px solid #a759f5;
+	border-bottom: 2px solid rgb(88, 143, 245);
 	transition: color .45s ease, border .45s ease;
 	text-align: center;
 }
 
 .count {
-	color: #584674;
+	color:#529ece;
 	font-size: 3.5em;
 	font-weight: 600;
 	line-height: 1;
@@ -171,9 +171,9 @@ body {
 }
 
 .data-card:hover {
-	background: #906bcf;
+	background: rgb(107, 148, 207);
 	transform: scale(1.02);
-	border-color: #c1b1f7;
+	border-color: rgb(179, 196, 247);
 }
 
 .data-card:hover h3 {
@@ -224,11 +224,24 @@ translateX(
 .page-title {
 	text-align: center;
 	font-size: 24px;
-	color: #7c6694;
+	color: rgb(86, 121, 165);
 	margin-top: 100px;
 	margin-bottom: 20px;
 	text-transform: uppercase;
 }
+
+.welcome-title{
+text-align: center;
+	font-size: 28px;
+	color: #529ece;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.welcome-title-2{
+
+}
+
 </Style>
 
 </head>
@@ -300,10 +313,10 @@ translateX(
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
 
-			<h1>
+			<div class="welcome-title">
 				Welcome,
 				<%=user.getName()%>!
-			</h1>
+			</div>
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
@@ -312,9 +325,10 @@ translateX(
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
 
-			<p>
-				You're logged in as
-				<%=user.getAccessRight().getDisplayName()%></p>
+			<%-- <div class="welcome-title-2">
+				You're logged in as an
+				<%=user.getAccessRight().getDisplayName()%>
+					</div> --%>
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
