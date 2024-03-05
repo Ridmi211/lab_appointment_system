@@ -105,7 +105,7 @@
 
 	</div>
 	<button id="print"
-		style="background-color: #9884e4; border: #9884e4; margin-top: 20px; position: fixed; left: 85%; z-index: 80;"
+		style="background-color: #1da1f2; border: #1da1f2; margin-top: 20px; position: fixed; left: 85%; z-index: 80;"
 		type="button" onclick="generatePDF()" class="btn btn-primary">Export
 		as PDF</button>
 	<script type="text/javascript">

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class User {
-
 	private int userId;
 	private String name;
 	private String phoneNumber;
@@ -17,13 +16,14 @@ public class User {
 	private String specializedJobs;
 	private RegistrationStatus registrationStatus;
 	private Date registrationDate;
-    private Test.TestType selectedTestType;
-	
+	private Test.TestType selectedTestType;
+
 	public User() {
 	}
 
 	public User(int userId, String name, String phoneNumber, String email, String password, String birthdate,
-			String gender,AccessRight accessRight, String educationalQualifications,String specializedJobs,RegistrationStatus registrationStatus) {
+			String gender, AccessRight accessRight, String educationalQualifications, String specializedJobs,
+			RegistrationStatus registrationStatus) {
 
 		this.userId = userId;
 		this.name = name;
@@ -136,7 +136,7 @@ public class User {
 
 	public void setRegistrationStatus(RegistrationStatus registrationStatus) {
 		this.registrationStatus = registrationStatus;
-	}	
+	}
 
 	public Test.TestType getSelectedTestType() {
 		return selectedTestType;

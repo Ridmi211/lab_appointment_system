@@ -29,9 +29,7 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String useractiontype = request.getParameter("useractiontype");
-
 		if (useractiontype.equals("single")) {
 			fetchSingleUser(request, response);
 		} else if (useractiontype.equals("view")) {
@@ -242,31 +240,6 @@ public class UserController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	/*
-	 * private void editUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); User user =
-	 * new User(); user.setUserId(Integer.parseInt(request.getParameter("userId")));
-	 * user.setName(request.getParameter("name"));
-	 * user.setPhoneNumber(request.getParameter("phoneNumber"));
-	 * user.setEmail(request.getParameter("email"));
-	 * user.setBirthdate(request.getParameter("birthdate"));
-	 * user.setGender(request.getParameter("gender"));
-	 * user.setEducationalQualifications(request.getParameter(
-	 * "educationalQualifications"));
-	 * user.setSpecializedJobs(request.getParameter("specializedJobs"));
-	 * user.setAccessRight(AccessRight.valueOf(request.getParameter("accessRight")))
-	 * ; if (user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
-	 * user.setSelectedTestType(Test.TestType.valueOf(request.getParameter(
-	 * "selectedTestType"))); } else {
-	 * user.setSelectedTestType(Test.TestType.DEFAULT); } try { if
-	 * (getUserService().editUser(user)) { UserService.sendUserUpdateEmail(user);
-	 * message = "The user has been successfully updated! User ID: " +
-	 * user.getUserId(); } else { message = "Failed to update the user! User ID: " +
-	 * user.getUserId(); } } catch (ClassNotFoundException | SQLException e) {
-	 * message = e.getMessage(); } request.setAttribute("feebackMessage", message);
-	 * RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
-	 * rd.forward(request, response); }
-	 */
 	private void editUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
@@ -287,18 +260,15 @@ public class UserController extends HttpServlet {
 		}
 		try {
 			if (getUserService().editUser(user)) {
-				/* UserService.sendUserUpdateEmail(user); */
 				message = "The user has been successfully updated! User ID: " + user.getUserId();
 				LOGGER.info("User successfully updated. User ID: " + user.getUserId());
 			} else {
 				message = "Failed to update the user! User ID: " + user.getUserId();
-
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
-			LOGGER.log(Level.SEVERE, "Failed to update the user. User ID:" + user.getUserId(), e); // Log failure
+			LOGGER.log(Level.SEVERE, "Failed to update the user. User ID:" + user.getUserId(), e);
 		}
-
 		request.setAttribute("feebackMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
 		rd.forward(request, response);
@@ -321,125 +291,15 @@ public class UserController extends HttpServlet {
 			message = e.getMessage();
 			LOGGER.severe("Error occurred while deleting user with ID " + userId + ": " + e.getMessage());
 		}
-
-		/*
-		 * HttpSession session = request.getSession(); session.setAttribute("message",
-		 * message); response.sendRedirect("getuser?useractiontype=all");
-		 */
-
-	
-		  request.setAttribute("feebackMessage", message); RequestDispatcher rd =
-		  request.getRequestDispatcher("feedback-message.jsp"); rd.forward(request,
-		  response);
-		
+		request.setAttribute("feebackMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
+		rd.forward(request, response);
 	}
-
-	/*
-	 * private void deleteUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); int userId =
-	 * Integer.parseInt(request.getParameter("userId")); try { if
-	 * (getUserService().deleteUser(userId)) { message =
-	 * "The user has been successfully deleted. user Code: " + userId; } else {
-	 * message = "Failed to delete the user! user Code: " + userId; } } catch
-	 * (ClassNotFoundException | SQLException e) { message = e.getMessage(); }
-	 * 
-	 * HttpSession session = request.getSession(); session.setAttribute("message",
-	 * message); response.sendRedirect("getuser?useractiontype=all"); }
-	 */
-
-	/*
-	 * private void fetchSingleUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); int userId =
-	 * Integer.parseInt(request.getParameter("userId"));
-	 * 
-	 * try { User user = getUserService().fetchSingleUser(userId); if
-	 * (user.getUserId() > 0) { request.setAttribute("user", user); } else { message
-	 * = "No record found!"; } } catch (ClassNotFoundException | SQLException e) {
-	 * message = e.getMessage(); } request.setAttribute("feebackMessage", message);
-	 * RequestDispatcher rd =
-	 * request.getRequestDispatcher("search-and-update-user.jsp");
-	 * rd.forward(request, response); }
-	 */
-	/*
-	 * private void fetchSingleUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); int userId =
-	 * Integer.parseInt(request.getParameter("userId"));
-	 * 
-	 * try { User user = getUserService().fetchSingleUser(userId); if
-	 * (user.getUserId() > 0) { request.setAttribute("user", user); } else { message
-	 * = "No record found!"; LOGGER.log(Level.INFO,
-	 * "No record found for user with ID: " + userId); } } catch
-	 * (ClassNotFoundException | SQLException e) { message = e.getMessage();
-	 * LOGGER.log(Level.SEVERE, "Error fetching single user", e); }
-	 * request.setAttribute("feedbackMessage", message); RequestDispatcher rd =
-	 * request.getRequestDispatcher("search-and-update-user.jsp");
-	 * rd.forward(request, response); }
-	 * 
-	 * private void fetchAllUsers(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); List<User>
-	 * userList = new ArrayList<User>(); try { userList =
-	 * getUserService().fetchAllUsers();
-	 * 
-	 * if (!(userList.size() > 0)) { message = "No record found!"; } } catch
-	 * (ClassNotFoundException | SQLException e) { message = e.getMessage(); }
-	 * request.setAttribute("userList", userList);
-	 * request.setAttribute("feebackMessage", message); RequestDispatcher rd =
-	 * request.getRequestDispatcher("view-job-seekers.jsp"); rd.forward(request,
-	 * response); }
-	 * 
-	 * private void fetchConsultantUsers(HttpServletRequest request,
-	 * HttpServletResponse response) throws ServletException, IOException {
-	 * clearMessage(); List<User> consultantUsers = new ArrayList<User>(); try {
-	 * consultantUsers = getUserService().fetchAllConsultantUsers(); if
-	 * (!(consultantUsers.size() > 0)) { message = "No consultant users found!"; } }
-	 * catch (ClassNotFoundException | SQLException e) { message = e.getMessage(); }
-	 * request.setAttribute("consultantUsers", consultantUsers);
-	 * request.setAttribute("feebackMessage", message); RequestDispatcher rd =
-	 * request.getRequestDispatcher("view-consultants.jsp"); rd.forward(request,
-	 * response); }
-	 * 
-	 * private void fetchPendingUsers(HttpServletRequest request,
-	 * HttpServletResponse response) throws ServletException, IOException {
-	 * clearMessage(); List<User> pendingUsers = new ArrayList<User>(); try {
-	 * pendingUsers = getUserService().fetchPendingUsers(); if
-	 * (!(pendingUsers.size() > 0)) { message = "No consultant users found!"; } }
-	 * catch (ClassNotFoundException | SQLException e) { message = e.getMessage(); }
-	 * request.setAttribute("pendingUsers", pendingUsers);
-	 * request.setAttribute("feebackMessage", message); RequestDispatcher rd =
-	 * request.getRequestDispatcher("view-pending-users.jsp"); rd.forward(request,
-	 * response); }
-	 * 
-	 * private void approveUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); int userId =
-	 * Integer.parseInt(request.getParameter("userId")); try { if
-	 * (getUserService().approveUser(userId)) { User approvedUser =
-	 * getUserService().fetchSingleUser(userId);
-	 * UserService.sendApprovalEmail(approvedUser); message =
-	 * "User has been approved!"; } else { message = "Failed to approve the user!";
-	 * } } catch (ClassNotFoundException | SQLException e) { message =
-	 * "Operation failed! " + e.getMessage(); } HttpSession session =
-	 * request.getSession(); session.setAttribute("message", message);
-	 * 
-	 * response.sendRedirect("getuser?useractiontype=pending"); }
-	 * 
-	 * private void rejectUser(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException { clearMessage(); int userId =
-	 * Integer.parseInt(request.getParameter("userId")); try { if
-	 * (getUserService().rejectUser(userId)) { User rejectedUser =
-	 * getUserService().fetchSingleUser(userId);
-	 * UserService.sendRejectionEmail(rejectedUser); message =
-	 * "User has been rejected!"; } else { message = "Failed to reject the user!"; }
-	 * } catch (ClassNotFoundException | SQLException e) { message =
-	 * "Operation failed! " + e.getMessage(); } HttpSession session =
-	 * request.getSession(); session.setAttribute("message", message);
-	 * response.sendRedirect("getuser?useractiontype=pending"); }
-	 */
 
 	private void fetchSingleUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
 		int userId = Integer.parseInt(request.getParameter("userId"));
-
 		try {
 			User user = getUserService().fetchSingleUser(userId);
 			if (user.getUserId() > 0) {
@@ -463,7 +323,6 @@ public class UserController extends HttpServlet {
 		List<User> userList = new ArrayList<User>();
 		try {
 			userList = getUserService().fetchAllUsers();
-
 			if (!(userList.size() > 0)) {
 				message = "No record found!";
 				LOGGER.log(Level.INFO, "No users found in the database");
@@ -538,7 +397,6 @@ public class UserController extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("message", message);
-
 		response.sendRedirect("getuser?useractiontype=pending");
 	}
 

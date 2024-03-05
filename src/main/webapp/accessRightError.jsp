@@ -28,12 +28,12 @@
 body {
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
 	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
 }
+
 .modal-container {
 	background-color: #ffffff;
 	border-radius: 5px;

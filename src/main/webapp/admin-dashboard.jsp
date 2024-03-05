@@ -13,7 +13,7 @@ User user = (User) session.getAttribute("user");
 if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_ADMIN)) {
 	session.setAttribute("errorMessage", "You do not have the required access to view this page.");
 	response.sendRedirect("accessRightError.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
 
@@ -465,7 +465,7 @@ text-align: center;
 					</div>
 					<h4>
 						All <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
+					</h4>
 
 				</a> <a href="getuser?useractiontype=all" class="data-card">
 					<h3>
@@ -475,7 +475,7 @@ text-align: center;
 					</div>
 					<h4>
 						Registered <br>Users
-					</h4> <!-- <p>Manage Issued Prescriptions</p> -->
+					</h4> 
 				</a>
 			</section>
 

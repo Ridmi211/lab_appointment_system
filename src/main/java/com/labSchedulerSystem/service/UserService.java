@@ -37,14 +37,9 @@ public class UserService implements UserManager {
 		return new UserManagerImpl();
 	}
 	private static final Logger LOGGER = Logger.getLogger(UserManager.class.getName());
-	/*
-	 * public boolean addUser(User user) throws ClassNotFoundException, SQLException
-	 * { return getUserManager().addUser(user); }
-	 */
-
 	
 	 public boolean addUser(User user) throws ClassNotFoundException, SQLException
-	 { // Check if the email already exists if
+	 {
 	if (isEmailAlreadyExists(user.getEmail())) {
 	 System.out.println("ERROR: Attempted to add a user with a duplicate email: "
 	 + user.getEmail()); return false; } return getUserManager().addUser(user); }
@@ -152,19 +147,16 @@ public class UserService implements UserManager {
 	            + "Please keep your login credentials secure. You can now access our platform to schedule your tests and manage your health appointments.\n\n"
 	            + "If you have any questions or require assistance, please feel free to reach out to our dedicated team of laboratory technicians.\n\n"
 	            + "Best regards,\n" + "The MediCheck Laboratory Services Team";
-
 	    try {
 	        EmailService.sendEmail(user.getEmail(), subject, body);
 	        LOGGER.info("Registration email sent successfully to: " + user.getEmail());
 	         
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        LOGGER.severe("Failed to send registration email to: " + user.getEmail());
-	          
+	        LOGGER.severe("Failed to send registration email to: " + user.getEmail());	          
 	    }
 	    return false;
 	}
-
 
 	public static boolean sendConsultantRegistrationEmail(User consultant) {
 		 String subject = "Welcome to MediCheck Laboratory Services - Technician Registration Confirmation";
@@ -177,8 +169,6 @@ public class UserService implements UserManager {
 		            + "If you have any questions or need further information, please feel free to contact our support team at [Support Email Address].\n\n"
 		            + "Thank you for choosing to be a part of MediCheck Laboratory Services.\n\n" + "Best regards,\n"
 		            + "The MediCheck Laboratory Services Team";
-
-
 		try {
 			EmailService.sendEmail(consultant.getEmail(), subject, body);
 			 LOGGER.info("Technician registration email sent successfully to: " + consultant.getEmail());
@@ -198,11 +188,9 @@ public class UserService implements UserManager {
 	            + "Technician Details:\n" + "Name: " + consultant.getName() + "\n" + "Email: " + consultant.getEmail()
 	            + "\n" + "Specializations: " + consultant.getSpecializedJobs() + "\n" + "Qualifications: " + consultant.getEducationalQualifications() +  "\n\n" +
 	            "Considering your qualifications, we have assigned you to perform " + consultant.getSelectedTestType().getDisplayName() + " tests.\n\n" +
-
 	            "If you have any questions or need assistance, please feel free to contact our support team at [Support Email Address].\n\n"
 	            + "Thank you for choosing to be a part of MediCheck Laboratory Services.\n\n" + "Best regards,\n"
 	            + "The MediCheck Laboratory Services Team";
-
 		EmailService.sendEmail(consultant.getEmail(), subject, messageBody);
 	}
 
@@ -220,38 +208,6 @@ public class UserService implements UserManager {
 		            + "If you have any questions or need further information, please feel free to contact our support team at [Support Email Address].\n\n"
 		            + "Thank you for considering MediCheck Laboratory Services, and we look forward to receiving your improved application in the future.\n\n"
 		            + "Best regards,\n" + "The MediCheck Laboratory Services Team";
-
-
 		EmailService.sendEmail(user.getEmail(), subject, messageBody);
 	}
-
-	/*
-	 * public static void sendUserUpdateEmail(User user) { String subject =
-	 * "User Profile Update Confirmation"; StringBuilder messageBody = new
-	 * StringBuilder("Dear " + user.getName() + ",\n\n" +
-	 * "We are writing to confirm that your user profile with [Your Job Consultancy Service] has been successfully updated!\n\n"
-	 * + "Updated Profile Details:\n" + "User ID: " + user.getUserId() + "\n" +
-	 * "Name: " + user.getName() + "\n" + "Email: " + user.getEmail() + "\n" +
-	 * "Phone Number: " + user.getPhoneNumber() + "\n" + "Birthdate: " +
-	 * user.getBirthdate() + "\n" + "Gender: " + user.getGender() + "\n" ); if
-	 * (user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
-	 * messageBody.append("Educational Qualifications: ").append(user.
-	 * getEducationalQualifications()).append("\n"); //
-	 * messageBody.append("Specialized Countries: ").append(user.
-	 * getSpecializedCountries()).append("\n");
-	 * messageBody.append("Specialized Jobs: ").append(user.getSpecializedJobs()).
-	 * append("\n");
-	 * messageBody.append("Access Right: ").append(user.getAccessRight()).append(
-	 * "\n"); //
-	 * messageBody.append("Available Days: ").append(user.getAvailableDays()).append
-	 * ("\n"); // messageBody.append("Available Time Slots: ").append(user.
-	 * getAvailableTimeSlots()).append("\n"); } messageBody.append("\n");
-	 * messageBody.append(
-	 * "Thank you for keeping your information up to date with us. If you have any questions or need further assistance, please feel free to contact our support team at [Support Email Address].\n\n"
-	 * ); messageBody.append("Best regards,\n");
-	 * messageBody.append("The Job Consultancy Service Team");
-	 * 
-	 * EmailService.sendEmail(user.getEmail(), subject, messageBody.toString()); }
-	 */
-
 }

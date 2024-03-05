@@ -180,7 +180,7 @@ h4 span {
     <input type="hidden" name="msgactiontype" value="reply">
     <input type="hidden" name="emailRecipient" value="${message.messangerEmail}">
     
-    <a href="mailto:${message.messangerEmail}?subject=Follow-up to Your Recent Message&body=Hello,${message.messangerName}%0D%0AThis is in reference to your recent message,%0D%0A${message.messageBody}%0D%0A---%0D%0AFirst,We appreciate your communication with us,%0D%0A[reply goes here]%0D%0A%0D%0A--%0D%0AThank you for reaching out to us.%0D%0ABest regards,%0D%0AThe Job Consultancy Service Team" class="btn-reply">Reply</a>
+    <a href="mailto:${message.messangerEmail}?subject=Follow-up to Your Recent Message&body=Hello,${message.messangerName}%0D%0AThis is in reference to your recent message,%0D%0A${message.messageBody}%0D%0A---%0D%0AFirst,We appreciate your communication with us,%0D%0A[reply goes here]%0D%0A%0D%0A--%0D%0AThank you for reaching out to us.%0D%0ABest regards,%0D%0AThe MediCheck Laboratory Support Team" class="btn-reply">Reply</a>
 </form>
 
 </td>

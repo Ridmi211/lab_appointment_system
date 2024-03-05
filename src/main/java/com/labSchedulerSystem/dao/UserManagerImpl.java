@@ -130,39 +130,6 @@ public class UserManagerImpl implements UserManager {
 		return countsMap;
 	}
 
-//	public Map<String, Map<String, Object>> getJobTypeDistributionData() throws SQLException, ClassNotFoundException {
-//		Connection connection = null;
-//		PreparedStatement statement = null;
-//		ResultSet resultSet = null;
-//		try {
-//			connection = getConnection();
-//
-//			String query = "SELECT occupation, COUNT(*) as count FROM user GROUP BY occupation ORDER BY count DESC LIMIT 20";
-//			statement = connection.prepareStatement(query);
-//			resultSet = statement.executeQuery();
-//			Map<String, Map<String, Object>> jobTypeDistributionData = new HashMap<>();
-//			int colorIndex = 0;
-//			while (resultSet.next()) {
-//				String occupation = resultSet.getString("occupation");
-//				int count = resultSet.getInt("count");
-//				String color = getPredefinedColor(colorIndex);
-//				Map<String, Object> jobTypeInfo = new HashMap<>();
-//				jobTypeInfo.put("count", count);
-//				jobTypeInfo.put("color", color);
-//				jobTypeDistributionData.put(occupation, jobTypeInfo);
-//				colorIndex = (colorIndex + 1) % PREDEFINED_COLORS.size();
-//			}
-//			return jobTypeDistributionData;
-//		} finally {
-//			if (resultSet != null)
-//				resultSet.close();
-//			if (statement != null)
-//				statement.close();
-//			if (connection != null)
-//				connection.close();
-//		}
-//	}
-
 	private static final List<String> PREDEFINED_COLORS = Arrays.asList("rgba(255, 99, 132, 0.8)",
 			"rgba(54, 162, 235, 0.8)", "rgba(255, 182, 193, 0.8)", "rgba(240, 230, 140, 0.8)",
 			"rgba(192, 192, 192, 0.8)", "rgba(255, 69, 0, 0.8)", "rgba(0, 128, 0, 0.8)", "rgba(255, 215, 0, 0.8)",
@@ -174,35 +141,7 @@ public class UserManagerImpl implements UserManager {
 		index = index % PREDEFINED_COLORS.size();
 		return PREDEFINED_COLORS.get(index);
 	}
-//
-//	public Map<String, Map<String, Integer>> getUserDemographicsData() throws SQLException, ClassNotFoundException {
-//		Connection connection = null;
-//		PreparedStatement statement = null;
-//		ResultSet resultSet = null;
-//		try {
-//			connection = getConnection();
-//			String query = "SELECT country, gender, COUNT(*) as count FROM user GROUP BY country, gender";
-//			statement = connection.prepareStatement(query);
-//			resultSet = statement.executeQuery();
-//			Map<String, Map<String, Integer>> userDemographicsData = new HashMap<>();
-//			while (resultSet.next()) {
-//				String country = resultSet.getString("country");
-//				String gender = resultSet.getString("gender");
-//				int count = resultSet.getInt("count");
-//				userDemographicsData.putIfAbsent(country, new HashMap<>());
-//				userDemographicsData.get(country).put(gender, count);
-//			}
-//			return userDemographicsData;
-//		} finally {
-//			if (resultSet != null)
-//				resultSet.close();
-//			if (statement != null)
-//				statement.close();
-//			if (connection != null)
-//				connection.close();
-//		}
-//	}
-	
+
 	public Map<String, Integer> getUserGenderDistribution() throws SQLException, ClassNotFoundException {
 	    Connection connection = null;
 	    PreparedStatement statement = null;
@@ -228,7 +167,6 @@ public class UserManagerImpl implements UserManager {
 	            connection.close();
 	    }
 	}
-
 
 	public Map<RegistrationStatus, Integer> getRegistrationStatusData() throws SQLException, ClassNotFoundException {
 		Connection connection = null;
@@ -336,57 +274,6 @@ public class UserManagerImpl implements UserManager {
 		}
 	}
 
-//	public Map<String, Integer> getConsultantCountByCountry() throws SQLException, ClassNotFoundException {
-//		Connection connection = getConnection();
-//		Map<String, Integer> consultantCountByCountry = new HashMap<>();
-//		String consultantCountriesQuery = "SELECT specializedCountries FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
-//		try (PreparedStatement countriesPs = connection.prepareStatement(consultantCountriesQuery)) {
-//			try (ResultSet countriesRs = countriesPs.executeQuery()) {
-//				while (countriesRs.next()) {
-//					String countriesString = countriesRs.getString("specializedCountries");
-//					String[] countries = countriesString.split(",\\s*");
-//					for (String country : countries) {
-//						consultantCountByCountry.put(country, consultantCountByCountry.getOrDefault(country, 0) + 1);
-//					}
-//				}
-//			}
-//		}
-//		connection.close();
-//		return consultantCountByCountry;
-//	}
-
-//	public Map<String, Map<String, Integer>> getConsultantAvailabilityData()
-//			throws SQLException, ClassNotFoundException {
-//		Connection connection = getConnection();
-//		Map<String, Map<String, Integer>> consultantAvailabilityData = new HashMap<>();
-//		String consultantAvailabilityQuery = "SELECT availableDays, availableTimeSlots FROM user WHERE accessRight = 'ROLE_TECHNITIAN'";
-//		try (PreparedStatement availabilityPs = connection.prepareStatement(consultantAvailabilityQuery)) {
-//			try (ResultSet availabilityRs = availabilityPs.executeQuery()) {
-//				while (availabilityRs.next()) {
-//					String daysString = availabilityRs.getString("availableDays");
-//					String timeSlotsString = availabilityRs.getString("availableTimeSlots");
-//					LOGGER.info("Days String: " + daysString);
-//					LOGGER.info("Time Slots String: " + timeSlotsString);
-//					if (daysString != null && timeSlotsString != null) {
-//						String[] days = daysString.split(",\\s*");
-//						String[] timeSlots = timeSlotsString.split(",\\s*");
-//						for (String day : days) {
-//							consultantAvailabilityData.computeIfAbsent(day, k -> new HashMap<>());
-//							for (String timeSlot : timeSlots) {
-//								consultantAvailabilityData.get(day).put(timeSlot,
-//										consultantAvailabilityData.get(day).getOrDefault(timeSlot, 0) + 1);
-//							}
-//						}
-//					}
-//				}
-//			}
-//		} finally {
-//			connection.close();
-//		}
-//		LOGGER.info("Consultant Availability Data: " + consultantAvailabilityData);
-//		return consultantAvailabilityData;
-//	}
-
 	public Map<String, Integer> getConsultantJobTypeDistribution() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		Map<String, Integer> jobTypeDistribution = new HashMap<>();
@@ -421,7 +308,6 @@ public class UserManagerImpl implements UserManager {
 		ps.setString(8, user.getAccessRight().toString());
 		ps.setString(9, user.getSelectedTestType().toString());
 		ps.setInt(10, user.getUserId());
-
 		LOGGER.info("Executing SQL query: " + query);
 		LOGGER.info("Parameters: name=" + user.getName() + ", phoneNumber=" + user.getPhoneNumber() + ", email="
 				+ user.getEmail() + ", birthdate=" + user.getBirthdate() + ", gender=" + user.getGender()
@@ -437,29 +323,17 @@ public class UserManagerImpl implements UserManager {
 		return result;
 	}
 
-	/*
-	 * @Override public boolean deleteUser(int userId) throws SQLException,
-	 * ClassNotFoundException { Connection connection = getConnection(); String
-	 * query = "DELETE FROM user WHERE userId=?"; PreparedStatement ps =
-	 * connection.prepareStatement(query); ps.setInt(1, userId); boolean result =
-	 * false; if (ps.executeUpdate() > 0) { result = true; } ps.close();
-	 * connection.close(); return result; }
-	 */
 	@Override
 	public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
 	    Connection connection = getConnection();
 	    boolean result = false;
 	    try {
-	        // Check for existing appointments
 	        if (hasAppointments(userId)) {
-	            return false; // User cannot be deleted due to existing appointments
+	            return false; 
 	        }
-
 	        String query = "DELETE FROM user WHERE userId=?";
 	        PreparedStatement ps = connection.prepareStatement(query);
 	        ps.setInt(1, userId);
-
-	        // Execute the deletion
 	        if (ps.executeUpdate() > 0) {
 	            result = true;
 	        }
@@ -479,9 +353,9 @@ public class UserManagerImpl implements UserManager {
 	        ResultSet rs = ps.executeQuery();
 	        if (rs.next()) {
 	            int count = rs.getInt(1);
-	            return count > 0; // Return true if appointments exist for this user
+	            return count > 0; 
 	        }
-	        return false; // No appointments found
+	        return false; 
 	    } finally {
 	        connection.close();
 	    }
@@ -558,31 +432,6 @@ public class UserManagerImpl implements UserManager {
 		return consultantUsers;
 	}
 
-	/*
-	 * public List<User> fetchTechniciansForTest(int testId) throws SQLException,
-	 * ClassNotFoundException { Connection connection = getConnection(); String
-	 * query = "SELECT DISTINCT u.* FROM user u " +
-	 * "JOIN t tt ON u.userId = tt.technicianId " + "WHERE tt.testId = ? " +
-	 * "AND u.accessRight = 'ROLE_TECHNICIAN' " +
-	 * "AND u.registrationStatus = 'APPROVED'"; PreparedStatement pst =
-	 * connection.prepareStatement(query); pst.setInt(1, testId); ResultSet rs =
-	 * pst.executeQuery();
-	 * 
-	 * List<User> technicianUsers = new ArrayList<>(); while (rs.next()) { User user
-	 * = new User(); user.setUserId(rs.getInt("userId"));
-	 * user.setName(rs.getString("name"));
-	 * user.setPhoneNumber(rs.getString("phoneNumber"));
-	 * user.setEmail(rs.getString("email"));
-	 * user.setBirthdate(rs.getString("birthdate"));
-	 * user.setGender(rs.getString("gender"));
-	 * user.setAccessRight(AccessRight.valueOf(rs.getString("accessRight")));
-	 * user.setEducationalQualifications(rs.getString("educationalQualifications"));
-	 * user.setSpecializedJobs(rs.getString("specializedJobs"));
-	 * technicianUsers.add(user); }
-	 * 
-	 * pst.close(); connection.close(); return technicianUsers; }
-	 */
-
 	public List<User> fetchTechniciansForTest(int testId) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		LOGGER.log(Level.INFO, "Fetching technicians for test ID: {0}", testId);
@@ -592,7 +441,6 @@ public class UserManagerImpl implements UserManager {
 		PreparedStatement pst = connection.prepareStatement(query);
 		pst.setInt(1, testId);
 		ResultSet rs = pst.executeQuery();
-
 		List<User> technicianUsers = new ArrayList<>();
 		while (rs.next()) {
 			User user = new User();
@@ -608,19 +456,16 @@ public class UserManagerImpl implements UserManager {
 			user.setSelectedTestType(Test.TestType.valueOf(rs.getString("selectedTestType")));
 			technicianUsers.add(user);
 		}
-
 		pst.close();
 		connection.close();
 		LOGGER.log(Level.INFO, "Fetched {0} technicians for test ID: {1}",
 				new Object[] { technicianUsers.size(), testId });
-
 		return technicianUsers;
 	}
 
 	public int getCountOfConsultantUsers() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_TECHNITIAN' AND registrationStatus = 'APPROVED'";
-
 		try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(query)) {
 			if (rs.next()) {
 				int count = rs.getInt(1);
@@ -636,7 +481,6 @@ public class UserManagerImpl implements UserManager {
 	public int getCountOfClientUsers() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String query = "SELECT COUNT(*) FROM user WHERE accessRight = 'ROLE_USER' AND registrationStatus = 'APPROVED'";
-
 		try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(query)) {
 			if (rs.next()) {
 				int count = rs.getInt(1);
@@ -645,7 +489,6 @@ public class UserManagerImpl implements UserManager {
 		} finally {
 			connection.close();
 		}
-
 		return 0;
 	}
 
