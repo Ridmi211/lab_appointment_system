@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +35,7 @@ class UserServiceTest {
     private RequestDispatcher requestDispatcher;
     private int addedUserId;
     private int addedTechnicianId;
+    private int updateId;
 
     @BeforeEach
     void setUp() {
@@ -171,11 +174,61 @@ class UserServiceTest {
         assertFalse(result, "User with duplicated email should not be added");
     }
     
+    @Test
+    void testEditUser() throws SQLException, ClassNotFoundException {
+        // Prepare test data
+        User user3 = new User();
+        user3= userMangerImpl.fetchUserByEmail("alice2@example.com"); 
+        updateId =user3.getUserId();
+        
+        user3.setUserId(updateId);
+        user3.setEmail("alice2@example.com");// Set the user ID of the user to be edited
+        user3.setName("Alice Technician");
+        user3.setPhoneNumber("747474");
+        user3.setBirthdate("1985-03-15");
+        user3.setGender("Female");
+        user3.setAccessRight(AccessRight.ROLE_TECHNITIAN);
+        user3.setRegistrationStatus(RegistrationStatus.PENDING);
+        user3.setEducationalQualifications("Bachelor's degree in Computer Science");
+        user3.setSpecializedJobs("IT Technician");
+        user3.setSelectedTestType(TestType.DEFAULT);
+     
+        // Set other user properties
+
+        // Mock UserService dependencies if needed
+        UserService mockedUserService = mock(UserService.class);
+        when(mockedUserService.editUser(user3)).thenReturn(true); // Return true for successful edit
+
+        // Execute the method under test
+        boolean result = userService.editUser(user3);
+
+        // Verify behavior
+        assertTrue(result, "User should be edited successfully");
+    }
+    
+    @Test
+    void testFetchAllUsers() throws SQLException, ClassNotFoundException {
+        // Prepare test data
+        List<User> expectedUsers = new ArrayList<>();
+        // Populate expectedUsers list with test data
+
+        // Mock UserService dependencies if needed
+        UserService mockedUserService = mock(UserService.class);
+        when(mockedUserService.fetchAllUsers()).thenReturn(expectedUsers);
+
+        // Execute the method under test
+        List<User> actualUsers = mockedUserService.fetchAllUsers();
+
+        // Verify behavior
+        assertNotNull(actualUsers, "Fetched users should not be null");
+        assertEquals(expectedUsers.size(), actualUsers.size(), "Number of fetched users should match");
+        // Add more assertions to compare individual user properties if needed
+    }
 	
 	  @Test
 	  void testDeleteUser() throws SQLException, ClassNotFoundException {
-	 User user2 = new User(); user2 =
-	  userMangerImpl.fetchUserByEmail("alice@example.com"); 
+	 User user2 = new User();
+	 user2 = userMangerImpl.fetchUserByEmail("alice@example.com"); 
 	 addedTechnicianId =user2.getUserId();
 	 
 	 int userId = addedTechnicianId; 
