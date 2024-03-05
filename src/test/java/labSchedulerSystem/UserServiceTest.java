@@ -2,7 +2,9 @@ package labSchedulerSystem;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.labSchedulerSystem.dao.UserManagerImpl;
 import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Test.TestType;
 import com.labSchedulerSystem.model.RegistrationStatus;
@@ -24,13 +27,17 @@ import com.labSchedulerSystem.service.UserService;
 class UserServiceTest {
 
     private UserService userService;
+    private UserManagerImpl userMangerImpl;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private RequestDispatcher requestDispatcher;
+    private int addedUserId;
+    private int addedTechnicianId;
 
     @BeforeEach
     void setUp() {
         userService = new UserService();
+        userMangerImpl= new UserManagerImpl();
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         requestDispatcher = mock(RequestDispatcher.class);
@@ -71,10 +78,13 @@ class UserServiceTest {
 
         // Execute the method under test
         boolean result = userService.addUser(user);
-
+       
+        user = userMangerImpl.fetchUserByEmail("john@example.com");
+    	addedUserId = user.getUserId();
         // Verify behavior
         assertTrue(result, "User should be added successfully");
     }
+    
     
     
     @Test
@@ -104,6 +114,33 @@ class UserServiceTest {
         // Verify behavior
         assertTrue(result, "Technician should be added successfully");
     }
+    @Test
+    void testAddUserForDuplicateEmail() throws SQLException, ClassNotFoundException {
+        // Prepare test data for technician
+        User technician = new User();
+        technician.setName("Alice Technician");
+        technician.setEmail("alice2@example.com");
+        technician.setPassword("password");
+        technician.setBirthdate("1985-03-15");
+        technician.setGender("Female");
+        technician.setAccessRight(AccessRight.ROLE_TECHNITIAN); // Set role to ROLE_TECHNICIAN
+        technician.setRegistrationStatus(RegistrationStatus.PENDING); // Technicians have pending status initially
+        technician.setEducationalQualifications("Bachelor's degree in Computer Science");
+        technician.setSpecializedJobs("IT Technician");
+        technician.setSelectedTestType(TestType.DEFAULT);
+        technician.setRegistrationDate(new Date());
+
+        // Mock UserService dependencies if needed
+        UserService mockedUserService = mock(UserService.class);
+        when(mockedUserService.isEmailAlreadyExists(technician.getEmail())).thenReturn(false);
+        when(mockedUserService.addUser(technician)).thenReturn(true);
+
+        // Execute the method under test
+        boolean result = userService.addUser(technician);
+
+        // Verify behavior
+        assertTrue(result, "Technician should be added successfully");
+    }
     
 
     @Test
@@ -111,7 +148,7 @@ class UserServiceTest {
         // Prepare test data for technician
         User technician = new User();
         technician.setName("Alice Technician");
-        technician.setEmail("alice@example.com"); // Duplicate email
+        technician.setEmail("alice2@example.com"); // Duplicate email
         technician.setPassword("password");
         technician.setBirthdate("1985-03-15");
         technician.setGender("Female");
@@ -133,5 +170,36 @@ class UserServiceTest {
         // Verify behavior
         assertFalse(result, "User with duplicated email should not be added");
     }
+    
+	
+	  @Test
+	  void testDeleteUser() throws SQLException, ClassNotFoundException {
+	 User user2 = new User(); user2 =
+	  userMangerImpl.fetchUserByEmail("alice@example.com"); 
+	 addedTechnicianId =user2.getUserId();
+	 
+	 int userId = addedTechnicianId; 
+	  
+	  UserService mockedUserService =  mock(UserService.class);
+	  when(mockedUserService.deleteUser(userId)).thenReturn(true); 
+	 boolean result = userService.deleteUser(userId);
+	  assertTrue(result, "User should be deleted successfully");
+	  }
+	 
+    
+    @AfterEach
+    void tearDown() {
+        // Remove test data from the database after each test
+        try {
+            if (addedUserId != 0) {
+                boolean result = userService.deleteUser(addedUserId);
+                assertTrue(result, "User should be deleted successfully");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            // Handle exception if deletion fails
+            e.printStackTrace();
+        }
     }
+}
+
 
