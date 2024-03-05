@@ -18,7 +18,7 @@ public class AppointmentService {
 
 	private static AppointmentService appointmentServiceObj;
 
-	private AppointmentService() {
+	public AppointmentService() {
 	}
 
 	public synchronized static AppointmentService getAppointmentService() {

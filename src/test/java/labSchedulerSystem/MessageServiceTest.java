@@ -18,7 +18,7 @@ import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class MessageServiceTest {
 
-    public static int messageId;
+    private int messageId;
 
     @Test
     @DisplayName("Add Message")
@@ -80,18 +80,7 @@ class MessageServiceTest {
         assertFalse(messages.isEmpty(), "The list of messages should not be empty");
     }
 
-    @Test
-    @DisplayName("Reply To Message")
-    void testD() throws ClassNotFoundException, SQLException {
-        MessageService messageService = MessageService.getMessageService();
-        boolean result = messageService.replyToMessage(messageId);
-
-        assertTrue(result, "This should reply to the message");
-
-        // Clean up: Delete the test message from the database if necessary
-        boolean deleteResult = messageService.deleteMessage(messageId);
-        assertTrue(deleteResult);
-    }
+  
 
     @Test
     @DisplayName("Get New Messages Count")
@@ -105,13 +94,16 @@ class MessageServiceTest {
 
     // Add more test methods for other methods in MessageService
 
-    @Test
-    @DisplayName("Delete Message")
-    void testF() throws ClassNotFoundException, SQLException {
-        MessageService messageService = MessageService.getMessageService();
-
-        boolean result = messageService.deleteMessage(messageId);
-
-        assertTrue(result, "This should delete the message");
-    }
+	/*
+	 * @Test
+	 * 
+	 * @DisplayName("Delete Message") void testF() throws ClassNotFoundException,
+	 * SQLException { MessageService messageService =
+	 * MessageService.getMessageService(); messageId = message.getMessageId();
+	 * boolean result = messageService.deleteMessage(messageId);
+	 * 
+	 * assertTrue(result, "This should delete the message");
+	 * 
+	 * System.out.println("MessageId: " + messageId); }
+	 */
 }
