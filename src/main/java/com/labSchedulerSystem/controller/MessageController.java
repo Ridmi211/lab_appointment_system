@@ -136,9 +136,9 @@ public class MessageController extends HttpServlet {
 		try {
 			boolean deleted = getMessageService().deleteMessage(messageId);
 			if (deleted) {
-				message = "Appointment deleted successfully!";
+				message = "Message deleted successfully!";
 			} else {
-				message = "Failed to delete the appointment.";
+				message = "Failed to delete the message.";
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = "Operation failed: " + e.getMessage();

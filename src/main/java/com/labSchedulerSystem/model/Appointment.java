@@ -27,12 +27,6 @@ public class Appointment {
 	private String testResultsDescription;
 	private String testUpdatedBy;
 	private Date testUpdatedOn;
-	
-	/* private String recomendedDoctor; */
-	    
-	    //testtype table
-	
-	
 
 	public String getSeekerEmail() {
 		return seekerEmail;
@@ -140,12 +134,6 @@ public class Appointment {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	/*
-	 * public String getJob() { return job; }
-	 * 
-	 * public void setJob(String job) { this.job = job; }
-	 */
 
 	public String getConsultantName() {
 		return consultantName;

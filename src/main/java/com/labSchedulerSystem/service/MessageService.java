@@ -61,8 +61,8 @@ public class MessageService {
 				+ "Message Details:\n" + "Date: " + message.getMessageDate() + "\n" + "Name: "
 				+ message.getMessangerName() + "\n" + "Email: " + message.getMessangerEmail() + "\n" + "Message: "
 				+ message.getMessageBody() + "\n" + "\n"
-				+ "We appreciate your communication with us. Our team will review your message and respond to your inquiries or concerns as soon as possible. If you have any further questions or need immediate assistance, please contact our support team at [Support Email Address].\n\n"
-				+ "Thank you for reaching out to us.\n\n" + "Best regards,\n" + "The Job Consultancy Service Team\n\n"
+				+ "We appreciate your communication with us. Our team will review your message and respond to your inquiries or concerns as soon as possible.\n\n"
+				+ "Thank you for reaching out to us.\n\n" + "Best regards,\n" + "The MediCheck Laboratory Services Team\n\n"
 				+ "Note: This message is auto-generated.";
 
 		EmailService.sendEmail(message.getMessangerEmail(), subject, messageBody);

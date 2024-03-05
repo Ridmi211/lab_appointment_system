@@ -26,7 +26,7 @@ User user = (User) session.getAttribute("user");
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   
  
-  <title>Job-Seekers
+  <title>Messages
 
   </title>
 
@@ -41,10 +41,25 @@ User user = (User) session.getAttribute("user");
 <Style>
 
 
-        
-/* Apply scrollbar styles to table cells with the "scroll-td" class */
+h4 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -3px;
+	left: -450px;
+}
 
+.reference {
+	color: rgb(25, 31, 53);
+	font-size: 14px;
+}
 
+h4 span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
     </Style>
 
 </head>
@@ -67,8 +82,12 @@ User user = (User) session.getAttribute("user");
  <div class="row m-0 p-0">
  <div class="col-12 m-0 p-0">
    <nav class="p-0 m-0 ">
-    <img class="logo-img" src="" alt="logo">
-    <!-- images/navabar-logo.jpg -->
+    <img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<h4>
+					Medi<span>Check</span>
+				</h4>
     <ul class="" id="sidemenu" >  
     <li><a href="getContact?msgactiontype=newMsg">New Messages</a></li>
         <li><a href="getContact?msgactiontype=all">All Messages</a></li>    
@@ -97,9 +116,9 @@ User user = (User) session.getAttribute("user");
     <div class="col-2 m-0"></div>
 </div>
 
-<div class="row m-0 ">
+<%-- <div class="row m-0 ">
 <p style='color:magenta'>${message}</p>	
-</div>
+</div> --%>
 <!-- table -->
     <!-- <div class="col-sm"> -->
        <div class="row m-0">
@@ -161,7 +180,7 @@ User user = (User) session.getAttribute("user");
     <input type="hidden" name="msgactiontype" value="reply">
     <input type="hidden" name="emailRecipient" value="${message.messangerEmail}">
     
-    <a href="mailto:${message.messangerEmail}?subject=Follow-up to Your Recent Message&body=Hello,${message.messangerName}%0D%0AThis is in reference to your recent message,%0D%0A${message.messageBody}%0D%0A---%0D%0AFirst,We appreciate your communication with us,%0D%0A[reply goes here]%0D%0A%0D%0A--%0D%0AThank you for reaching out to us.%0D%0ABest regards,%0D%0AThe Job Consultancy Service Team" class="btn-reply">Reply</a>
+    <a href="mailto:${message.messangerEmail}?subject=Follow-up to Your Recent Message&body=Hello,${message.messangerName}%0D%0AThis is in reference to your recent message,%0D%0A${message.messageBody}%0D%0A---%0D%0AFirst,We appreciate your communication with us,%0D%0A[reply goes here]%0D%0A%0D%0A--%0D%0AThank you for reaching out to us.%0D%0ABest regards,%0D%0AThe MediCheck Laboratory Support Team" class="btn-reply">Reply</a>
 </form>
 
 </td>

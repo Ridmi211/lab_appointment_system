@@ -168,7 +168,7 @@ User user = (User) session.getAttribute("user");
  </div>
   <div class="normal-content">
 <a href="getuser?useractiontype=consultants" >
-   <i class="fa fa-address-card" aria-hidden="true"></i>
+  <i class="fa-solid fa-user-nurse"></i>
     <span>Technicians</span>
   </a>
  </div>
