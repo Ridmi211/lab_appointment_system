@@ -1,4 +1,4 @@
-package jobConsultancyScheduler;
+package labSchedulerSystem;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
