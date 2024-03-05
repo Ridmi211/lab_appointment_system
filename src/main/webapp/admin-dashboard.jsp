@@ -59,7 +59,6 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
-
 @charset "ISO-8859-1";
 
 * {
@@ -69,7 +68,8 @@ int newMessagesCount = messageService.getNewMessagesCount();
 }
 
 body {
-	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%, rgb(222, 241, 250) 100%);
+	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%,
+		rgb(222, 241, 250) 100%);
 }
 
 @import
@@ -120,7 +120,7 @@ body {
 }
 
 .count {
-	color:#529ece;
+	color: #529ece;
 	font-size: 3.5em;
 	font-weight: 600;
 	line-height: 1;
@@ -214,13 +214,39 @@ keyframes point { 0% {
 }
 
 100
+
+
+
+
 %
 {
 transform
+
+
+
+
 :
-translateX(
+
+
+
+
+translateX
+
+
+(
+
+
+
+
 .125em
-);
+
+
+
+
+)
+
+
+;
 }
 }
 .page-title {
@@ -232,8 +258,8 @@ translateX(
 	text-transform: uppercase;
 }
 
-.welcome-title{
-text-align: center;
+.welcome-title {
+	text-align: center;
 	font-size: 28px;
 	color: #529ece;
 	margin-top: 5px;
@@ -246,7 +272,7 @@ text-align: center;
 	font-size: 22px;
 	margin-top: 40px;
 	position: relative;
-	top:-30px;
+	top: -30px;
 	left: -320px;
 }
 
@@ -254,7 +280,6 @@ text-align: center;
 	color: #91d7f4;
 	font-weight: lighter;
 }
-
 </Style>
 
 </head>
@@ -274,10 +299,12 @@ text-align: center;
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
-			<div class="logo-text">
-				Medi<span>Check</span>
-			</div>
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<div class="logo-text">
+					Medi<span>Check</span>
+				</div>
 				<ul class="" id="sidemenu">
 
 
@@ -290,13 +317,14 @@ text-align: center;
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
 							aria-hidden="true"></i>&nbsp;&nbsp;Logout</a></li>
 					<%
-					} else { %>
+					} else {
+					%>
 					<li><a href="login.jsp"><i class="fa fa-user-circle"
 							aria-hidden="true"></i>&nbsp;&nbsp; Login</a></li>
-							
+
 					<%
 					}
-%>
+					%>
 
 
 				</ul>
@@ -315,13 +343,7 @@ text-align: center;
 		<div class="col-2 m-0"></div>
 	</div>
 
-
-
-
-
-
 	<%
-	/*   User user = (User) session.getAttribute("user"); */
 	if (user != null) {
 	%>
 	<div class="row m-0 ">
@@ -338,26 +360,15 @@ text-align: center;
 
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
-		<div class="col-8 m-0 d-flex justify-content-center">
-
-			<%-- <div class="welcome-title-2">
-				You're logged in as an
-				<%=user.getAccessRight().getDisplayName()%>
-					</div> --%>
-		</div>
+		<div class="col-8 m-0 d-flex justify-content-center"></div>
 		<div class="col-2 m-0"></div>
 	</div>
 	<%
 	}
 	%>
-
-
-
 	<div class="row m-0 ">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
-
-
 			<section class="page-contain">
 				<a href="getuser?useractiontype=pending" class="data-card">
 					<h3>
@@ -366,7 +377,7 @@ text-align: center;
 					<div class="count"><%=pendingUserCount%></div>
 					<h4>
 						Pending<br> Registrations
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=requested" class="data-card">
 					<h3>
 						<i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
@@ -375,8 +386,7 @@ text-align: center;
 					</div>
 					<h4>
 						New <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getContact?msgactiontype=newMsg" class="data-card">
 					<h3>
 						<i class="fa fa-commenting-o" aria-hidden="true"></i>
@@ -385,8 +395,7 @@ text-align: center;
 					</div>
 					<h4>
 						New <br>Messages
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=adminRequestedAll"
 					class="data-card">
 					<h3>
@@ -397,7 +406,7 @@ text-align: center;
 					</div>
 					<h4>
 						pending <br>Appointments
-					</h4> <!-- <p>Manage Issued Prescriptions</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=conConfirmed"
 					class="data-card">
 					<h3>
@@ -408,21 +417,15 @@ text-align: center;
 					</div>
 					<h4>
 						ongoing<br> Appointments
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a>
 			</section>
-
-
 		</div>
 		<div class="col-1 m-0"></div>
 	</div>
-
-
 	<div class="row m-0 mb-5">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
-
-
 			<section class="page-contain">
 				<a href="getAppointment?appactiontype=adminCompleted"
 					class="data-card">
@@ -433,7 +436,7 @@ text-align: center;
 					</div>
 					<h4>
 						Completed<br> Appointments
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=adminRejected"
 					class="data-card">
 					<h3>
@@ -444,8 +447,7 @@ text-align: center;
 					</div>
 					<h4>
 						Rejected <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=seekerCancelled"
 					class="data-card">
 					<h3>
@@ -455,8 +457,7 @@ text-align: center;
 					</div>
 					<h4>
 						Cancelled <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=all" class="data-card">
 					<h3>
 						<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -466,7 +467,6 @@ text-align: center;
 					<h4>
 						All <br>Appointments
 					</h4>
-
 				</a> <a href="getuser?useractiontype=all" class="data-card">
 					<h3>
 						<i class="fa fa-users" aria-hidden="true"></i>
@@ -475,14 +475,11 @@ text-align: center;
 					</div>
 					<h4>
 						Registered <br>Users
-					</h4> 
+					</h4>
 				</a>
 			</section>
-
-
 		</div>
 		<div class="col-1 m-0"></div>
 	</div>
-
 </body>
 </html>

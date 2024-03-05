@@ -1,4 +1,5 @@
 package labSchedulerSystem;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
@@ -18,92 +19,40 @@ import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class MessageServiceTest {
 
-    private int messageId;
+	private int messageId;
 
-    @Test
-    @DisplayName("Add Message")
-    void testA() throws ClassNotFoundException, SQLException {
-        Message message = new Message();
-        message.setMessangerName("Test Name");
-        message.setMessangerEmail("test@example.com");
-        message.setMessageBody("This is a test message");
+	@Test
+	@DisplayName("Add Message")
+	void testA() throws ClassNotFoundException, SQLException {
+		Message message = new Message();
+		message.setMessangerName("Test Name");
+		message.setMessangerEmail("test@example.com");
+		message.setMessageBody("This is a test message");
+		message.setMessageDate(new Date(2024 - 01 - 13));
+		message.setMessageStatus(MessageStatus.NEW);
+		System.out.println("MessageStatus: " + message.getMessageStatus());
+		MessageService messageService = MessageService.getMessageService();
+		boolean result = messageService.addMessage(message);
+		assertTrue(result, "This should add the message to the database");
+		messageId = message.getMessageId();
+		System.out.println("MessageId: " + messageId);
+	}
 
-        // Set the messageDate to the current date and time
-        message.setMessageDate(new Date(2024-01-13));
-        
-        // Set MessageStatus to NEW
-        message.setMessageStatus(MessageStatus.NEW);
-        
-        // Print MessageStatus for debugging
-        System.out.println("MessageStatus: " + message.getMessageStatus());
+	@Test
+	@DisplayName("Fetch All Messages")
+	void testC() throws ClassNotFoundException, SQLException {
+		MessageService messageService = MessageService.getMessageService();
+		List<Message> messages = messageService.fetchAllMessages();
+		assertNotNull(messages, "This should fetch all messages from the database");
+		assertFalse(messages.isEmpty(), "The list of messages should not be empty");
+	}
 
-        MessageService messageService = MessageService.getMessageService();
+	@Test
+	@DisplayName("Get New Messages Count")
+	void testE() throws ClassNotFoundException, SQLException {
+		MessageService messageService = MessageService.getMessageService();
+		int newMessagesCount = messageService.getNewMessagesCount();
+		assertTrue(newMessagesCount >= 0, "This should get the count of new messages");
+	}
 
-        boolean result = messageService.addMessage(message);
-
-        assertTrue(result, "This should add the message to the database");
-
-        // Set messageId for future tests
-        messageId = message.getMessageId();
-        
-        // Print messageId for debugging
-        System.out.println("MessageId: " + messageId);
-    }
-
-
-	/*
-	 * @Test
-	 * 
-	 * @DisplayName("Try To Add Duplicate Message") void testB() throws
-	 * ClassNotFoundException { Message message = new Message();
-	 * message.setMessangerName("Test Name");
-	 * message.setMessangerEmail("test@example.com");
-	 * message.setMessageBody("This is a test message");
-	 * 
-	 * MessageService messageService = MessageService.getMessageService();
-	 * 
-	 * try { messageService.addMessage(message);
-	 * 
-	 * } catch (MysqlDataTruncation e) { assertEquals(MysqlDataTruncation.class,
-	 * e.getClass(), "Expected exception was not thrown."); } catch (SQLException e)
-	 * { fail("Unexpected exception: " + e.getMessage()); } }
-	 */
-
-    @Test
-    @DisplayName("Fetch All Messages")
-    void testC() throws ClassNotFoundException, SQLException {
-        MessageService messageService = MessageService.getMessageService();
-
-        List<Message> messages = messageService.fetchAllMessages();
-
-        assertNotNull(messages, "This should fetch all messages from the database");
-        assertFalse(messages.isEmpty(), "The list of messages should not be empty");
-    }
-
-  
-
-    @Test
-    @DisplayName("Get New Messages Count")
-    void testE() throws ClassNotFoundException, SQLException {
-        MessageService messageService = MessageService.getMessageService();
-
-        int newMessagesCount = messageService.getNewMessagesCount();
-
-        assertTrue(newMessagesCount >= 0, "This should get the count of new messages");
-    }
-
-    // Add more test methods for other methods in MessageService
-
-	/*
-	 * @Test
-	 * 
-	 * @DisplayName("Delete Message") void testF() throws ClassNotFoundException,
-	 * SQLException { MessageService messageService =
-	 * MessageService.getMessageService(); messageId = message.getMessageId();
-	 * boolean result = messageService.deleteMessage(messageId);
-	 * 
-	 * assertTrue(result, "This should delete the message");
-	 * 
-	 * System.out.println("MessageId: " + messageId); }
-	 */
 }
