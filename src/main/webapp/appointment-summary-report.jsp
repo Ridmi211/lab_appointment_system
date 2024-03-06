@@ -8,19 +8,14 @@
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
-
-
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
-
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.stream.Collectors"%>
 <%@ page import="java.util.ArrayList"%>
-
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page import="com.fasterxml.jackson.core.JsonProcessingException"%>
-
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
@@ -30,7 +25,6 @@
 <%@ page import="java.util.Map.Entry"%>
 <%@ page import="java.awt.Color"%>
 <%@ page import="java.util.Random"%>
-
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
@@ -39,14 +33,13 @@
 <%@ page import="java.util.stream.IntStream"%>
 <%@ page import="java.time.Year"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManager"%>
-
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
-
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
 <%@ page import="com.labSchedulerSystem.model.Appointment"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="com.labSchedulerSystem.model.Appointment.Status"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +50,13 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta3/css/all.min.css"> -->
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- exportas pdf -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-<!-- exportas pdf -->
 <title>Appointment Summary Report</title>
-
 <style>
 </style>
 </head>
@@ -77,27 +66,20 @@
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<%
-	// Get the user object from the session
 	User user = (User) session.getAttribute("user");
 	%>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
 	<button id="print"
 		style="background-color: #1da1f2; border: #1da1f2; margin-top: 20px; position: fixed; left: 85%; z-index: 80;"
 		type="button" onclick="generatePDF()" class="btn btn-primary">Export
 		as PDF</button>
 	<script type="text/javascript">
-  function generatePDF() {
-        
-        // Choose the element id which you want to export.
-        var element = document.getElementById('divToExport');
+  function generatePDF() 
+  {        var element = document.getElementById('divToExport');
         element.style.width = '790px';
-        // element.style.height = '900px';
         var opt = {
             margin:       0,
             filename:     'Appointment and test summary.pdf',
@@ -105,9 +87,7 @@
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
           };
-        
-        // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
-        html2pdf().set(opt).from(element).save();
+                html2pdf().set(opt).from(element).save();
       }
 </script>
 
@@ -116,23 +96,18 @@
 			<div class="page-title d-flex align-items-center align-self-center">Appointment
 				Summary Report</div>
 		</div>
-
-
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Number of appointments
 						over time</div>
 				</div>
-
 				<div class=" common-border">
 					<div class="card-comment common-border"></div>
 				</div>
-
 				<div class="row common-border m-0">
 					<div class="col-sm col-12 common-border pb-2 ">
 						<canvas id="myLineChart"></canvas>
-
 					</div>
 				</div>
 			</div>
@@ -142,27 +117,16 @@
 		calendar.setTime(new Date());
 		int currentYear = calendar.get(Calendar.YEAR);
 		%>
-
-
 		<%
 		UserManagerImpl userManager = new UserManagerImpl();
-		// Instantiate the UserManagerImpl or get it from your application context
-		/*    UserManagerImpl userManager = new UserManagerImpl(); */
 		Map<String, List<Integer>> monthlyCountsMap = userManager.getMonthlyUserRegistrationCounts();
 		List<Integer> userCounts = monthlyCountsMap.get("userCounts");
 		List<Integer> consultantCounts = monthlyCountsMap.get("consultantCounts");
-
 		int totalClientsCounts = userCounts.stream().mapToInt(Integer::intValue).sum();
 		int totalConsultantCounts = consultantCounts.stream().mapToInt(Integer::intValue).sum();
-
-		// Get the monthly user registration counts
 		%>
-
 		<%
-		// Instantiate the AppointmentManagerImpl or get it from your application context
 		AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
-
-		// Get the monthly appointment counts for the current year
 		List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 		%>
 		<script>
@@ -194,8 +158,6 @@
         }
     });
 </script>
-
-
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -251,16 +213,16 @@ while (entryIterator.hasNext()) {
             data: [
                 <%-- Loop through the status counts and print the counts for each status --%>
                 <%Set<Entry<String, Integer>> entrySet2 = appointmentStatusCounts.entrySet();
-				Iterator<Entry<String, Integer>> entryIterator2 = entrySet2.iterator();
+Iterator<Entry<String, Integer>> entryIterator2 = entrySet2.iterator();
 
-				while (entryIterator2.hasNext()) {
-					Entry<String, Integer> entry = entryIterator2.next();
-					out.print(entry.getValue());
+while (entryIterator2.hasNext()) {
+	Entry<String, Integer> entry = entryIterator2.next();
+	out.print(entry.getValue());
 
-					if (entryIterator2.hasNext()) {
-						out.print(", ");
-					}
-				}%>
+	if (entryIterator2.hasNext()) {
+		out.print(", ");
+	}
+}%>
             ],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.7)',  // Requested - Red
@@ -314,7 +276,7 @@ while (entryIterator.hasNext()) {
 				</div>
 			</div>
 		</div>
-	<%
+		<%
 		Map<String, Integer> countryAppointmentData = appointmentManager.getAppointmentCountsByTestType();
 		%>
 
@@ -351,9 +313,9 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
         }
     }
 });
-</script> 
+</script>
 
-<!-- 
+		<!-- 
 
 		<div class=" card-container">
 			<div class="col">
@@ -376,7 +338,7 @@ const myPieChartCountry = new Chart(ctxCountryPie, {
 			</div>
 		</div> -->
 
-<%-- 
+		<%-- 
 		<%
 		Map<String, Integer> jobAppointmentData = appointmentManager.getAppointmentCountsByJob();
 		%>
@@ -408,7 +370,7 @@ const myPieChartJob = new Chart(ctxJobPie, {
 </script> --%>
 
 
-<!-- 
+		<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -477,7 +439,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
  --%>
 
 
-<!-- 
+		<!-- 
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -499,7 +461,7 @@ const myBarChartAppointmentsByDay = new Chart(ctxAppointmentsByDay, {
 				</div>
 			</div>
 		</div> -->
-	<%-- 	<%
+		<%-- 	<%
 		Map<String, Integer> appointmentsByTimeSlotData = appointmentManager.getAppointmentCountsByTimeSlot();
 		%>
 
@@ -551,7 +513,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
         </div> -->
 
 
-	<!-- 	<div class=" card-container">
+		<!-- 	<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
@@ -571,7 +533,7 @@ const myBarChartAppointmentsByTimeSlot = new Chart(ctxAppointmentsByTimeSlot, {
 				</div>
 			</div>
 		</div> -->
-<%-- 
+		<%-- 
 		<%
 		try {
 			Map<String, Map<String, Integer>> appointmentsByDayAndTimeSlotData = appointmentManager

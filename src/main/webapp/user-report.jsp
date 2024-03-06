@@ -232,22 +232,16 @@ try {
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
-					<div class="card-title common-border">User and appointment
-						growth</div>
+					<div class="card-title common-border">User and appointment growth</div>
 				</div>
-
 				<div class=" common-border">
 					<div class="card-comment common-border">*Chart provides a
 						comparison between growth of users, technicians and number of
 						scheduled appointments, within the current year.</div>
 				</div>
-
 				<div class="row common-border m-0">
 					<div class="col-sm col-12 common-border pb-2 ">
-
 						<canvas id="myLineChart"></canvas>
-
-
 					</div>
 				</div>
 			</div>
