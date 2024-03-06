@@ -47,7 +47,7 @@ class UserServiceTest {
 	void testAddUser() throws ServletException, IOException, SQLException, ClassNotFoundException {
 		User user = new User();
 		user.setName("John Doe");
-		user.setEmail("john@example.com");
+		user.setEmail("john55@example.com");
 		user.setPassword("password");
 		user.setBirthdate("1990-01-01");
 		user.setGender("Male");
@@ -70,7 +70,7 @@ class UserServiceTest {
 		when(mockedUserService.isEmailAlreadyExists(user.getEmail())).thenReturn(false);
 		when(mockedUserService.addUser(user)).thenReturn(true);
 		boolean result = userService.addUser(user);
-		user = userMangerImpl.fetchUserByEmail("john@example.com");
+		user = userMangerImpl.fetchUserByEmail("john55@example.com");
 		addedUserId = user.getUserId();
 		assertTrue(result, "User should be added successfully");
 	}
@@ -79,7 +79,7 @@ class UserServiceTest {
 	void testAddTechnician() throws SQLException, ClassNotFoundException {
 		User technician = new User();
 		technician.setName("Alice Technician");
-		technician.setEmail("alice@example.com");
+		technician.setEmail("alic@example.com");
 		technician.setPassword("password");
 		technician.setBirthdate("1985-03-15");
 		technician.setGender("Female");
@@ -100,7 +100,7 @@ class UserServiceTest {
 	void testAddUserForDuplicateEmail() throws SQLException, ClassNotFoundException {
 		User technician = new User();
 		technician.setName("Alice Technician");
-		technician.setEmail("alice2@example.com");
+		technician.setEmail("alice442@example.com");
 		technician.setPassword("password");
 		technician.setBirthdate("1985-03-15");
 		technician.setGender("Female");
@@ -121,7 +121,7 @@ class UserServiceTest {
 	void testAddUser_DuplicateEmail() throws SQLException, ClassNotFoundException {
 		User technician = new User();
 		technician.setName("Alice Technician");
-		technician.setEmail("alice2@example.com"); // Duplicate email
+		technician.setEmail("alice442@example.com"); // Duplicate email
 		technician.setPassword("password");
 		technician.setBirthdate("1985-03-15");
 		technician.setGender("Female");
@@ -141,10 +141,10 @@ class UserServiceTest {
 	@Test
 	void testEditUser() throws SQLException, ClassNotFoundException {
 		User user3 = new User();
-		user3 = userMangerImpl.fetchUserByEmail("alice2@example.com");
+		user3 = userMangerImpl.fetchUserByEmail("alice442@example.com");
 		updateId = user3.getUserId();
 		user3.setUserId(updateId);
-		user3.setEmail("alice2@example.com");
+		user3.setEmail("alice442@example.com");
 		user3.setName("Alice Technician");
 		user3.setPhoneNumber("747474");
 		user3.setBirthdate("1985-03-15");
@@ -173,7 +173,7 @@ class UserServiceTest {
 	@Test
 	void testDeleteUser() throws SQLException, ClassNotFoundException {
 		User user2 = new User();
-		user2 = userMangerImpl.fetchUserByEmail("alice@example.com");
+		user2 = userMangerImpl.fetchUserByEmail("alic@example.com");
 		addedTechnicianId = user2.getUserId();
 		int userId = addedTechnicianId;
 		UserService mockedUserService = mock(UserService.class);

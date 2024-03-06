@@ -93,7 +93,7 @@ public class UserController extends HttpServlet {
 	private void viewUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		LOGGER.info("No Reached the 'viewUser' method.");
+		LOGGER.info(" Reached the 'viewUser' method.");
 		try {
 			User user = getUserService().fetchSingleUser(userId);
 			if (user.getUserId() > 0) {

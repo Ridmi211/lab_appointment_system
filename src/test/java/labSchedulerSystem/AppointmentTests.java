@@ -19,90 +19,88 @@ public class AppointmentTests {
 	public AppointmentTests() {
 		// TODO Auto-generated constructor stub
 	}
-	
-    private AppointmentService appointmentService;
-    private UserService userService;
-    private AppointmentManagerImpl appointmentImpl;
-    private int appointmentId;
 
-    @BeforeEach
-    void setUp() {
-        appointmentService = new AppointmentService();
-        userService = new UserService();
-        appointmentImpl= new AppointmentManagerImpl();
-    }
+	private AppointmentService appointmentService;
+	private UserService userService;
+	private AppointmentManagerImpl appointmentImpl;
+	private int appointmentId;
 
-    @Test
-    void testAddAppointment() throws SQLException, ClassNotFoundException {
-        Appointment appointment = new Appointment();
-        appointment.setTechnitianId(81);//add proper id
-        appointment.setSeekerId(30);//add proper id
-        appointment.setScheduledDate("2024-03-05");
-        appointment.setStartTime("09:00");
-        appointment.setStatus(Status.REQUESTED);
-        appointment.setRecomendedDoctor("Dr. Smith");       
-        appointment.setNotes("Follow-up appointment");
-        appointment.setAppointmentRefId("APPT12345");//add proper id
-        appointment.setTestType(TestType.DEFAULT);
-        AppointmentService mockedAppointmentService = mock(AppointmentService.class);
-        when(mockedAppointmentService.addAppointment(appointment)).thenReturn(true); 
-        boolean result = appointmentService.addAppointment(appointment);
-        assertTrue(result, "Appointment should be added successfully");
-    }
+	@BeforeEach
+	void setUp() {
+		appointmentService = new AppointmentService();
+		userService = new UserService();
+		appointmentImpl = new AppointmentManagerImpl();
+	}
 
-    @Test
-    void testFetchAllAppointments() throws SQLException, ClassNotFoundException {
-        AppointmentService mockedAppointmentService = mock(AppointmentService.class);
-        List<Appointment> appointments = List.of();
-        when(mockedAppointmentService.fetchAllAppointments()).thenReturn(appointments);
-        List<Appointment> result = appointmentService.fetchAllAppointments();
-        assertNotNull(result, "Fetched appointment list should not be null");
-          }
-    
-    @Test
-    void testEditAppointment() throws SQLException, ClassNotFoundException {
-         Appointment appointment = new Appointment();
-        appointment.setAppointmentId(43);
-        appointment.setTechnitianId(81);
-        appointment.setSeekerId(30);
-        appointment.setScheduledDate("2024-03-05");
-        appointment.setStartTime("09:00");
-        appointment.setStatus(Status.COMPLETED);
-        appointment.setRecomendedDoctor("Dr. Smith");
-        appointment.setCountry("USA");
-        appointment.setNotes("Follow-up appointment");
-        appointment.setAppointmentRefId("APPT1234");
-        appointment.setTestType(TestType.DEFAULT);
-        appointment.setTestResults("Normal");
-        appointment.setTestResultsDescription("All parameters within normal range");
-        appointment.setTestUpdatedOn(new Date());
-        appointment.setTestUpdatedBy("Dr. John");
-        AppointmentService mockedAppointmentService = mock(AppointmentService.class);
-        when(mockedAppointmentService.editAppointment(appointment)).thenReturn(true);
-        boolean result = appointmentService.editAppointment(appointment);
-        assertTrue(result, "Appointment should be edited successfully");
-    }
+	@Test
+	void testAddAppointment() throws SQLException, ClassNotFoundException {
+		Appointment appointment = new Appointment();
+		appointment.setTechnitianId(81);// add proper id
+		appointment.setSeekerId(30);// add proper id
+		appointment.setScheduledDate("2024-03-05");
+		appointment.setStartTime("09:00");
+		appointment.setStatus(Status.REQUESTED);
+		appointment.setRecomendedDoctor("Dr. Smith");
+		appointment.setNotes("Follow-up appointment");
+		appointment.setAppointmentRefId("APPT9855");// add proper id
+		appointment.setTestType(TestType.DEFAULT);
+		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
+		when(mockedAppointmentService.addAppointment(appointment)).thenReturn(true);
+		boolean result = appointmentService.addAppointment(appointment);
+		assertTrue(result, "Appointment should be added successfully");
+	}
 
-    @Test
-    void testDeleteAppointment() throws SQLException, ClassNotFoundException {
-          int appointmentId = 41; 
-        AppointmentService mockedAppointmentService = mock(AppointmentService.class);
-        when(mockedAppointmentService.deleteAppointment(appointmentId)).thenReturn(true); 
-        boolean result = appointmentService.deleteAppointment(appointmentId);
-        assertTrue(result, "Appointment should be deleted successfully");
-    }
+	@Test
+	void testFetchAllAppointments() throws SQLException, ClassNotFoundException {
+		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
+		List<Appointment> appointments = List.of();
+		when(mockedAppointmentService.fetchAllAppointments()).thenReturn(appointments);
+		List<Appointment> result = appointmentService.fetchAllAppointments();
+		assertNotNull(result, "Fetched appointment list should not be null");
+	}
 
-    @Test
-    void testFetchSingleAppointment() throws SQLException, ClassNotFoundException {
-              int appointmentId = 43; 
-        AppointmentService mockedAppointmentService = mock(AppointmentService.class);
-               Appointment appointment = new Appointment();
-        appointment.setAppointmentId(appointmentId);
-        when(mockedAppointmentService.fetchSingleAppointment(appointmentId)).thenReturn(appointment);
-        Appointment result = appointmentService.fetchSingleAppointment(appointmentId);
-        assertNotNull(result, "Fetched appointment should not be null");
-         }
+	@Test
+	void testEditAppointment() throws SQLException, ClassNotFoundException {
+		Appointment appointment = new Appointment();
+		appointment.setAppointmentId(43);
+		appointment.setTechnitianId(81);
+		appointment.setSeekerId(30);
+		appointment.setScheduledDate("2024-03-05");
+		appointment.setStartTime("09:00");
+		appointment.setStatus(Status.COMPLETED);
+		appointment.setRecomendedDoctor("Dr. Smith");
+		appointment.setCountry("USA");
+		appointment.setNotes("Follow-up appointment");
+		appointment.setAppointmentRefId("APPT1234");
+		appointment.setTestType(TestType.DEFAULT);
+		appointment.setTestResults("Normal");
+		appointment.setTestResultsDescription("All parameters within normal range");
+		appointment.setTestUpdatedOn(new Date());
+		appointment.setTestUpdatedBy("Dr. John");
+		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
+		when(mockedAppointmentService.editAppointment(appointment)).thenReturn(true);
+		boolean result = appointmentService.editAppointment(appointment);
+		assertTrue(result, "Appointment should be edited successfully");
+	}
 
-  
+	@Test
+	void testDeleteAppointment() throws SQLException, ClassNotFoundException {
+		int appointmentId = 38;
+		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
+		when(mockedAppointmentService.deleteAppointment(appointmentId)).thenReturn(true);
+		boolean result = appointmentService.deleteAppointment(appointmentId);
+		assertTrue(result, "Appointment should be deleted successfully");
+	}
+
+	@Test
+	void testFetchSingleAppointment() throws SQLException, ClassNotFoundException {
+		int appointmentId = 43;
+		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
+		Appointment appointment = new Appointment();
+		appointment.setAppointmentId(appointmentId);
+		when(mockedAppointmentService.fetchSingleAppointment(appointmentId)).thenReturn(appointment);
+		Appointment result = appointmentService.fetchSingleAppointment(appointmentId);
+		assertNotNull(result, "Fetched appointment should not be null");
+	}
 
 }
