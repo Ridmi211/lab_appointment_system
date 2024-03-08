@@ -34,10 +34,12 @@ public class UserController extends HttpServlet {
 			fetchSingleUser(request, response);
 		} else if (useractiontype.equals("view")) {
 			viewUser(request, response);
-		} else if (useractiontype.equals("viewConsultant")) {
-			viewConsultant(request, response);
-		} else if (useractiontype.equals("consultants")) {
-			fetchConsultantUsers(request, response);
+			/*
+			 * } else if (useractiontype.equals("viewTechnician")) { viewConsultant(request,
+			 * response);
+			 */
+		} else if (useractiontype.equals("technicians")) {
+			fetchTechnicianUsers(request, response);
 		} else if (useractiontype.equals("pending")) {
 			fetchPendingUsers(request, response);
 		} else {
@@ -51,8 +53,10 @@ public class UserController extends HttpServlet {
 		String useractiontype = request.getParameter("useractiontype");
 		if (useractiontype.equals("login")) {
 			loginUser(request, response);
-		} else if (useractiontype.equals("viewConsultant")) {
-			viewConsultant(request, response);
+			/*
+			 * } else if (useractiontype.equals("viewConsultant")) { viewConsultant(request,
+			 * response);
+			 */
 		} else if (useractiontype.equals("add")) {
 			addUser(request, response);
 		} else if (useractiontype.equals("edit")) {
@@ -70,26 +74,19 @@ public class UserController extends HttpServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
-	private void viewConsultant(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int userId = Integer.parseInt(request.getParameter("userId"));
-		try {
-			User consultant = getUserService().fetchSingleUser(userId);
-			if (consultant.getUserId() > 0) {
-				request.setAttribute("consultant", consultant);
-				RequestDispatcher rd = request.getRequestDispatcher("book-consultant-new.jsp");
-				rd.forward(request, response);
-			} else {
-				request.setAttribute("message", "No technician found!");
-				LOGGER.warning("No technician found!" + consultant.getUserId());
-				RequestDispatcher rd = request.getRequestDispatcher("consultants-list.jsp");
-				rd.forward(request, response);
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/*
+	 * private void viewTechnician(HttpServletRequest request, HttpServletResponse
+	 * response) throws ServletException, IOException { int userId =
+	 * Integer.parseInt(request.getParameter("userId")); try { User consultant =
+	 * getUserService().fetchSingleUser(userId); if (consultant.getUserId() > 0) {
+	 * request.setAttribute("consultant", consultant); RequestDispatcher rd =
+	 * request.getRequestDispatcher("book-consultant-new.jsp"); rd.forward(request,
+	 * response); } else { request.setAttribute("message", "No technician found!");
+	 * LOGGER.warning("No technician found!" + consultant.getUserId());
+	 * RequestDispatcher rd = request.getRequestDispatcher("consultants-list.jsp");
+	 * rd.forward(request, response); } } catch (ClassNotFoundException |
+	 * SQLException e) { e.printStackTrace(); } }
+	 */
 	private void viewUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("userId"));
@@ -337,7 +334,7 @@ public class UserController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void fetchConsultantUsers(HttpServletRequest request, HttpServletResponse response)
+	private void fetchTechnicianUsers(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
 		List<User> consultantUsers = new ArrayList<User>();
@@ -353,7 +350,7 @@ public class UserController extends HttpServlet {
 		}
 		request.setAttribute("consultantUsers", consultantUsers);
 		request.setAttribute("feebackMessage", message);
-		RequestDispatcher rd = request.getRequestDispatcher("view-consultants.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("view-technicians.jsp");
 		rd.forward(request, response);
 	}
 

@@ -151,7 +151,7 @@ User user = (User) session.getAttribute("user");
       <a  href="user-report.jsp" >User</a>
       <a  href="appointment-summary-report.jsp" >Appointments</a>
      
-         <a  href="consultant-summary-report.jsp" > Technicians</a>
+         <a  href="technician-performance-report.jsp" > Technicians</a>
    
   </div>
     
@@ -167,7 +167,7 @@ User user = (User) session.getAttribute("user");
   </a>
  </div>
   <div class="normal-content">
-<a href="getuser?useractiontype=consultants" >
+<a href="getuser?useractiontype=technicians" >
   <i class="fa-solid fa-user-nurse"></i>
     <span>Technicians</span>
   </a>
