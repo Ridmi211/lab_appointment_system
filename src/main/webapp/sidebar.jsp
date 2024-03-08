@@ -90,7 +90,7 @@ User user = (User) session.getAttribute("user");
   <% if (user != null && user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) { %>
  
   <div class="normal-content">
-   <a  href="consultant-dashboard.jsp" >
+   <a  href="technician-dashboard.jsp" >
       <i class="fa fa-tachometer" aria-hidden="true"></i>
     <span>Dashboard</span>
   </a>

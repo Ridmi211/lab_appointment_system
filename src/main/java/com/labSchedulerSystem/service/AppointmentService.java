@@ -272,9 +272,9 @@ public class AppointmentService {
 				+ "**Appointment Details:**\n" + "- Test Type: " + appointment.getTestType().getDisplayName() + "\n"
 				+ "- Technician: " + consultant.getName() + "\n" + "- Date: " + appointment.getScheduledDate() + "\n"
 				+ "- Time: " + appointment.getStartTime() + "\n" + "Recommended Doctor: "
-				+ appointment.getRecomendedDoctor() + "\n\\n"
+				+ appointment.getRecomendedDoctor() + "\n\n"
 
-				+ "**Test Results:**\n" + "- Results: " + appointment.getTestResults() + "\n" + "- Description: "
+				+ "Test Results:\n" + "- Results: " + appointment.getTestResults() + "\n" + "- Description: "
 				+ appointment.getTestResultsDescription() + "\n" + "- Conducted By: " + appointment.getTestUpdatedOn()
 				+ "\n" + "- Documented By: " + appointment.getTestUpdatedBy() + "\n" + "- Documented on: "
 				+ appointment.getTestUpdatedOn() + "\n\\n"

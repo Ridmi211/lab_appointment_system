@@ -515,7 +515,7 @@ h4 span {
 <input class="form-control" type="text" id="testResults" name="testResults" <%= isTechnician ? "" : "readonly" %> value="${appointment.testResults}" />
 
 <label for="testResultsDescription">Test Description:</label>
-<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 100px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
+<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 200px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
 					 
 					 <label
 					for="testUpdatedBy">Test Details Updated By:</label> <input
