@@ -21,7 +21,7 @@ public class UserService implements UserManager {
 
 	private static UserService appointmentServiceObj;
 
-	public UserService() {
+	private UserService() {//singleton
 	}
 
 	public synchronized static UserService getUserService() {
