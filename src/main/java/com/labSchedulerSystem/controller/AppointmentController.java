@@ -540,7 +540,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchAppointmentsByConsultantId(loggedInUserId);
-			request.setAttribute("pageTopic", "My Appointments (consultant)");
+			request.setAttribute("pageTopic", "My Appointments");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -571,7 +571,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchCompletedAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Completed Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Completed Appointments ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -602,7 +602,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchCancelledAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Cancelled Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Cancelled Appointments  ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -633,7 +633,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchUpcomingAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Upcoming Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Upcoming Appointments");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
