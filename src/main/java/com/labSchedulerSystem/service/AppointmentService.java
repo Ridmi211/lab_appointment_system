@@ -209,7 +209,7 @@ public class AppointmentService {
 	public static void sendAppointmentConfirmationEmail(Appointment appointment, User consultant, User seeker) {
 		String subject = "Appointment Confirmation - Test at MediCheck Laboratory Services";
 		StringBuilder messageBody = new StringBuilder("Dear " + seeker.getName() + ",\n\n"
-				+ "Thank you for scheduling your test appointment with MediCheck Laboratory Services. We appreciate your trust in our services.\n\n"
+				+ "Thank you for your payment of LKR"+appointment.getCostOfTest()+" and scheduling your test appointment with MediCheck Laboratory Services. We appreciate your trust in our services.\n\n"
 				+ "Appointment Details:\n" + "Technician: " + consultant.getName() + "\n" + "Date: "
 				+ appointment.getScheduledDate() + "\n" + "Test Type: " + appointment.getTestType().getDisplayName()
 				+ "\n" + "Recommended Doctor: " + appointment.getRecomendedDoctor() + "\n" + "Notes: "
