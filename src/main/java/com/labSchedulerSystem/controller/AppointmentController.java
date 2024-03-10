@@ -125,7 +125,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
-		appointment.setCountry(request.getParameter("test"));
+		appointment.setCostOfTest(request.getParameter("cost"));
 		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
 		appointment.setTestType(Test.TestType.valueOf(request.getParameter("test")));
@@ -719,7 +719,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setAppointmentRefId(request.getParameter("appointmentRefId"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
-		appointment.setCountry(request.getParameter("country"));
+		appointment.setCostOfTest(request.getParameter("cost"));
 		appointment.setRecomendedDoctor(request.getParameter("job"));
 		appointment.setNotes(request.getParameter("notes"));
 		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));

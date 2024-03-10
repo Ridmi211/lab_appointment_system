@@ -290,7 +290,7 @@ public class AppointmentService {
 				+ "We regret to inform you that your test appointment with " + consultant.getName()
 				+ " has been canceled due to unavoidable reasons.\n\n" + "Appointment Details:\n" + "Technician: "
 				+ consultant.getName() + "\n" + "Date: " + appointment.getScheduledDate() + "\n" + "Time: "
-				+ appointment.getStartTime() + "\n" + "Country: " + appointment.getCountry() + "\n" + "Test: "
+				+ appointment.getStartTime() + "\n" + "\n" + "Recomended Doctor: "
 				+ appointment.getRecomendedDoctor() + "\n" + "Notes: " + appointment.getNotes() + "\n" + "\n"
 				+ "We sincerely apologize for any inconvenience this may cause. We understand the importance of your appointment and are committed to providing the best service possible. Please feel free to reschedule your test appointment at your convenience, and we will prioritize your preferences.\n\n"
 				+ "If you have any questions or need further assistance, please contact our support team at [Support Email Address].\n\n"
@@ -307,8 +307,7 @@ public class AppointmentService {
 				+ " scheduled for " + appointment.getScheduledDate() + " at " + appointment.getStartTime()
 				+ " has been canceled. We understand that circumstances may change, and we appreciate your prompt communication regarding this matter.\n\n"
 				+ "Appointment Details:\n" + "Technician: " + consultant.getName() + "\n" + "Date: "
-				+ appointment.getScheduledDate() + "\n" + "Time: " + appointment.getStartTime() + "\n" + "Country: "
-				+ appointment.getCountry() + "\n" + "Test: " + appointment.getRecomendedDoctor() + "\n" + "Notes: "
+				+ appointment.getScheduledDate() + "\n" + "Time: " + appointment.getStartTime() + "\n" + "\n" + "Recomended Doctor: " + appointment.getRecomendedDoctor() + "\n" + "Notes: "
 				+ appointment.getNotes() + "\n" + "\n"
 				+ "If possible, could you please provide the reasons for the cancellation? Your feedback is valuable to us and will help us improve our services. You can reply to this email or contact our support team at [Support Email Address].\n\n"
 				+ "If you still wish to undergo the test or reschedule your appointment, please visit our website or contact our support team. We will do our best to accommodate your preferences.\n\n"
@@ -325,8 +324,7 @@ public class AppointmentService {
 				+ "We regret to inform you that the test appointment scheduled with you by " + seeker.getName() + "on"
 				+ appointment.getScheduledDate() + " has been canceled due to unforeseen circumstances.\n\n"
 				+ "Appointment Details:\n" + "Patient: " + seeker.getName() + "\n" + "Date: "
-				+ appointment.getScheduledDate() + "\n" + "Time: " + appointment.getStartTime() + "\n" + "Country: "
-				+ appointment.getCountry() + "\n" + "Test: " + appointment.getRecomendedDoctor() + "\n" + "Notes: "
+				+ appointment.getScheduledDate() + "\n" + "Time: " + appointment.getStartTime() + "\n" +  "\n" + "Recomended Dctor: " + appointment.getRecomendedDoctor() + "\n" + "Notes: "
 				+ appointment.getNotes() + "\n" + "\n"
 				+ "We understand the importance of your consultations and apologize for any inconvenience this may cause. If you have availability for additional consultations or if the patient decides to reschedule, we will notify you promptly. Your understanding and flexibility are appreciated.\n\n"
 				+ "Thank you for your commitment to providing valuable laboratory services. If you have any further questions or need assistance, please do not hesitate to reach out to our support team at [Support Email Address].\n\n"

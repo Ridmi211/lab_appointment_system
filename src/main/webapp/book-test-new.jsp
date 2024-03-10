@@ -1,8 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
@@ -12,31 +10,19 @@
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
-
-
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
 
 
-<%-- <%
-User user = (User) session.getAttribute("user");
-if (session.getAttribute("user") == null) {
-	response.sendRedirect("login.jsp");
-}
-%> --%>
-
 <%
 User user = (User) session.getAttribute("user");
-// Check if the user is logged in
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
+	return; 
 }
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -49,9 +35,7 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/1a4bb98cfa.js"
 	crossorigin="anonymous"></script>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -60,7 +44,6 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -69,6 +52,7 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
+
 * {
 	margin: 0;
 	padding: 0;
@@ -104,9 +88,6 @@ h2 {
 	background-position: center;
 }
 
-/* .container{
-            padding: 10px ;
-        } */
 .header-text {
 	margin-top: 45%;
 	font-size: 22px;
@@ -127,7 +108,6 @@ h2 {
 	color: #08d8ca;
 }
 
-/* ------------------about ------------------------------- */
 #about {
 	padding: 80px 0;
 	color: #ababab;
@@ -187,9 +167,6 @@ h2 {
 	width: 50%;
 }
 
-/* .tab-contents{
-            font-size: 14px;
-        } */
 .tab-contents ul li {
 	list-style: none;
 	margin: 10px 0px;
@@ -941,9 +918,12 @@ h4 span {
 							</div>
 							<div class="row mb-1 mt-3">Recommended doctor</div>
 							<div class="row">
-								<input name="doctor" id="doctor" required>
+								<input name="doctor" id="doctor" placeholder="Recomended Doctor" required>
 							</div>
-						
+						<div class="row">
+								<input type="hidden" name="cost" id="cost"
+									value="<%=test1.getCost()%>">
+							</div>
 							<!-- Inside your form -->
 							<%
 							// Instantiate TechnicianService
@@ -1062,7 +1042,8 @@ h4 span {
       const date = form.querySelector('input[name="date"]').value;
       const testType = form.querySelector('input[name="test"]').value;
       const notes = form.querySelector('textarea[name="notes"]').value;
-      const doctorName = form.querySelector('input[name="doctor"]').value;
+      const recomendedDoctor = form.querySelector('input[name="doctor"]').value;
+      const costOfTest = form.querySelector('input[name="cost"]').value;
       const technitianId = form.querySelector('select[name="technitianId"]').value;
       
       // Update booking details card with the appointment details
@@ -1073,8 +1054,8 @@ h4 span {
             <li>Name : <%=user.getName()%></li>
             <li>Email : <%=user.getEmail()%></li>           
             <li>Selected Test:<%=test1.getType().getDisplayName()%></li>
-            <li>Recomended Doctor : ${doctorName}</li>
-            <li>Technician : ${doctorName}</li>
+            <li>Recomended Doctor : ${recomendedDoctor}</li>
+      
             <li>Date : ${date}</li>
             <li>Notes : ${notes}</li>
           </div>

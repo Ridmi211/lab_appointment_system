@@ -42,7 +42,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean addAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`,`appointmentRefId`, `testType`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`costOfTest`, `notes`,`appointmentRefId`, `testType`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -50,7 +50,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
 		ps.setString(6, appointment.getRecomendedDoctor());
-		ps.setString(7, appointment.getCountry());
+		ps.setString(7, appointment.getCostOfTest());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
 		ps.setString(10, appointment.getTestType().toString());
@@ -66,7 +66,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean editAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=?,appointmentRefId=?,testType=?,testResults=?,testResultsDescription=? ,testUpdatedOn=?, testUpdatedBy=? WHERE appointmentId=?";
+		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,costOfTest=?,notes=?,appointmentRefId=?,testType=?,testResults=?,testResultsDescription=? ,testUpdatedOn=?, testUpdatedBy=? WHERE appointmentId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -74,7 +74,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
 		ps.setString(6, appointment.getRecomendedDoctor());
-		ps.setString(7, appointment.getCountry());
+		ps.setString(7, appointment.getCostOfTest());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
 		ps.setString(10, appointment.getTestType().toString());
