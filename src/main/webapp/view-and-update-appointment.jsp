@@ -282,6 +282,10 @@ select[name="testType"]:focus {
 	cursor: pointer;
 }
 
+.btn-report{
+	background-color: black;
+}
+
 /* Search bar  */
 .navbar {
 	margin-bottom: 20px;
@@ -534,6 +538,10 @@ h4 span {
 				<button type="submit" class="btn btn-success">Update</button>
 
 				<a id="backButton" class="btn btn-primary">Back</a>
+			<%-- 	<a class="btn btn-report" href="test-results-report.jsp?testId=${appointment.appointmentId}">
+				Report
+							
+							</a> --%>
 
 				<script>
 					document.getElementById('backButton').addEventListener(
@@ -552,6 +560,8 @@ h4 span {
 		<div class="col-1"></div>
 
 	</div>
+
+
 
 
 </body>
