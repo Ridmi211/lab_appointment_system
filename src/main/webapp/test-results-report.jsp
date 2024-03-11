@@ -201,9 +201,74 @@ h4 span {
 							<li>Description:
 							</li> 
 							</ul>
-							<%=test1.getTestResultsDescription()%>
+							<%-- <%=test1.getTestResultsDescription()%> --%>
+							<%
+// Assuming testDescription is the string retrieved from the database
+String testDescription = test1.getTestResultsDescription(); // Retrieve the test description from the database
+
+// Split the test description into individual lines
+String[] lines = testDescription.split("\n");
+
+// Initialize variables to keep track of sections and sub-sections
+String currentSection = "";
+boolean inSubsection = false;
+
+// Start unordered list
+out.println("<ul>");
+
+// Iterate over each line
+for (String line : lines) {
+    line = line.trim(); // Remove leading and trailing whitespace
+
+    // Check if the line is empty
+    if (!line.isEmpty()) {
+        // Check if the line ends with a colon, indicating a new section
+        if (line.endsWith(":")) {
+            // If we were in a sub-section, close the previous sub-section list
+            if (inSubsection) {
+                out.println("</ul>");
+                inSubsection = false;
+            }
+
+            // Close previous section list item if it exists
+            if (!currentSection.isEmpty()) {
+                out.println("</li>");
+            }
+
+            // Start a new section list item
+            out.println("<li>" + line);
+            currentSection = line;
+        } else {
+            // If the line doesn't end with a colon, it's a sub-section
+            // Check if we're already in a sub-section
+            if (!inSubsection) {
+                // If not, start a new sub-section list
+                out.println("<ul>");
+                inSubsection = true;
+            }
+
+            // Add the sub-section as a list item
+            out.println("<li>" + line + "</li>");
+        }
+    }
+}
+
+// Close the last sub-section list if necessary
+if (inSubsection) {
+    out.println("</ul>");
+}
+
+// Close the last section list item if necessary
+if (!currentSection.isEmpty()) {
+    out.println("</li>");
+}
+
+// Close unordered list
+out.println("</ul>");
+%>
 					
 					</div>
+					
 				</div>
 				<div class="row common-border black-bottom m-0 mt-3 pb-3">
 					<div class="col-sm col-8 common-border pb-2 ">

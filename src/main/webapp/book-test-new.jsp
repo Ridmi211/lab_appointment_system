@@ -950,7 +950,7 @@ h4 span {
 
 							<div class="row mb-1 mt-3">Additional Notes</div>
 							<div class="row">
-								<textarea name="notes" style="height: 100px" required></textarea>
+								<textarea name="notes" style="height: 200px" required></textarea>
 							</div>
 							<div>
 								<input type="hidden" name="appactiontype" value="addAppointment" />

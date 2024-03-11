@@ -148,8 +148,8 @@ h4 span {
 					<tr>
 						<th scope="col" class="text-center">Count</th>
 						<th scope="col" class="text-center">Appointment ID</th>
-						<th scope="col" class="text-center">Consultant Name</th>
-						<th scope="col" class="text-center">Job Seeker</th>
+						<th scope="col" class="text-center">Technician </th>
+						<th scope="col" class="text-center">Patient</th>
 						<th scope="col" class="text-center">Date</th>
 						<th scope="col" class="text-center">Time</th>
 						<th scope="col" class="text-center">Status</th>

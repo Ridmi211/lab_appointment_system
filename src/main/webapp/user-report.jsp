@@ -178,7 +178,7 @@ try {
     // Convert the data into JavaScript arrays
 /*  List<String> labelsList = accessRightsData.keySet().stream().map(String::valueOf).collect(Collectors.toList()); */
 
-    String[] customLabels = {"Client", "Admin", "Consultant"};
+    String[] customLabels = {"Technician", "Admin", "Client"};
     List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
 
     String labelsArray = "['" + String.join("', '", customLabels) + "']";
@@ -265,7 +265,7 @@ try {
             fill: false,
         },
         {
-            label: 'Consultant Registrations',
+            label: 'Technician Registrations',
             data: [<%=consultantCounts.get(0)%>, <%=consultantCounts.get(1)%>, <%=consultantCounts.get(2)%>, <%=consultantCounts.get(3)%>, <%=consultantCounts.get(4)%>, <%=consultantCounts.get(5)%>, <%=consultantCounts.get(6)%>, <%=consultantCounts.get(7)%>, <%=consultantCounts.get(8)%>, <%=consultantCounts.get(9)%>, <%=consultantCounts.get(10)%>, <%=consultantCounts.get(11)%>],
             borderColor: 'rgb(75, 192, 192)',
             borderWidth: 2,
