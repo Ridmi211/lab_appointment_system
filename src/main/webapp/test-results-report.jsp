@@ -198,9 +198,10 @@ h4 span {
 						<ul>
 							<li>Test:<%=test1.getTestType().getDisplayName()%></li>
 							<li>Results:<%=test1.getTestResults()%></li>
-							<li>Description:<%=test1.getTestResultsDescription()%>
-							</li>
+							<li>Description:
+							</li> 
 							</ul>
+							<%=test1.getTestResultsDescription()%>
 					
 					</div>
 				</div>

@@ -127,6 +127,8 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			appointment.setStatus(Status.valueOf(rs.getString("status")));
 			appointment.setNotes(rs.getString("notes"));
 			appointment.setConsultantName(rs.getString("consultantName"));
+			appointment.setCostOfTest(rs.getString("costOfTest"));
+			appointment.setRecomendedDoctor(rs.getString("recomendedDoctor"));
 			appointment.setSeekerName(rs.getString("seekerName"));
 			appointment.setSeekerEmail(rs.getString("seekerEmail"));
 			appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));

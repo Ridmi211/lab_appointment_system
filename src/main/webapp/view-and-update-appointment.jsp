@@ -451,8 +451,12 @@ h4 span {
 				<input class="form-control" type="hidden" id="testType1"
 					name="testType1" value="${appointment.testType}" />
 
-				<!--  <label	for="userIdUpdate">consultantId:</label> -->
-				<input class="form-control" type="hidden" id="consultantId"
+				<label
+					for="costOfTest">Payment:</label>
+				<input class="form-control" type="text" id="costOfTest"
+					name="costOfTest" readonly="readonly"
+					value="${appointment.costOfTest}" />
+					<input class="form-control" type="hidden" id="consultantId"
 					name="consultantId" readonly="readonly"
 					value="${appointment.technitianId}" />
 				<!--  <label for="email">seekerId:</label> -->
@@ -466,7 +470,9 @@ h4 span {
 					value="${appointment.startTime}" /> <label for="startTime">Notes</label>
 				<textarea class="form-control" style="height: 100px" type="text"
 					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-
+<label for="recomendedDoctor">Recommended Doctor:</label> <input
+					class="form-control" type="text" id="recomendedDoctor"
+					name="recomendedDoctor" value="${appointment.recomendedDoctor}" />
 				<label for="consultantName">Technician Name:</label> <input
 					class="form-control" type="text" id="consultantName"
 					name="consultantName" value="${appointment.consultantName}" /> <label
