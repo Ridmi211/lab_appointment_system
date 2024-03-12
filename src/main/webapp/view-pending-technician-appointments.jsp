@@ -6,6 +6,10 @@
 <%@ page import="com.labSchedulerSystem.model.RegistrationStatus"%>
 <%
 User user = (User) session.getAttribute("user");
+if (session.getAttribute("user") == null) {
+	response.sendRedirect("login.jsp");
+	return;
+}
 %>
 <!DOCTYPE html>
 <html>

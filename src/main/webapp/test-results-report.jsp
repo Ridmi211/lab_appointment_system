@@ -83,6 +83,10 @@ h4 span {
 	</label>
 	<%
 	User user = (User) session.getAttribute("user");
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
 	%>
 	<%
 	String testIdString = request.getParameter("testId");

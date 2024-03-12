@@ -74,8 +74,13 @@
 		class="fas fa-times" id="cancel"></i>
 	</label>
 	<%
-	User user = (User) session.getAttribute("user");
-	%>
+User user = (User) session.getAttribute("user");
+if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_ADMIN)) {
+	session.setAttribute("errorMessage", "You do not have the required access to view this page.");
+	response.sendRedirect("accessRightError.jsp");
+	return;
+}
+%>
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
 	</div>

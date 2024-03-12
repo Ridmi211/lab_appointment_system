@@ -34,10 +34,15 @@
 <%@ page import="java.time.Year"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManager"%>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
-
 <%
-UserManagerImpl userManager = new UserManagerImpl();
+User user = (User) session.getAttribute("user");
+if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_ADMIN)) {
+	session.setAttribute("errorMessage", "You do not have the required access to view this page.");
+	response.sendRedirect("accessRightError.jsp");
+	return;
+}
 %>
+<%UserManagerImpl userManager = new UserManagerImpl();%>
 <%
 Calendar calendar = Calendar.getInstance();
 calendar.setTime(new Date());
@@ -84,10 +89,6 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
-	<%
-	User user = (User) session.getAttribute("user");
-	%>
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
 	</div>
@@ -109,7 +110,6 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
         html2pdf().set(opt).from(element).save();
       }
 </script>
-
 	<div id="divToExport" class="a4-container">
 		<div class="">
 			<div class="page-title d-flex align-items-center align-self-center">User
@@ -135,18 +135,19 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			</div>
 		</div>
 		<%
-		try {
-			Map<String, Integer> accessRightsData = userManager.getAccessRightsData();
-			String[] customLabels = {"Technician", "Client", "Admin"};
-			List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
-			String labelsArray = "['" + String.join("', '", customLabels) + "']";
-			String dataValuesArray = "[" + String.join(", ", dataValuesList) + "]";
-		%>
+try {
+    Map<String, Integer> accessRightsData = userManager.getAccessRightsData();
+       String[] customLabels = {"Technician", "Client", "Admin"};
+    List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
+
+    String labelsArray = "['" + String.join("', '", customLabels) + "']";
+    String dataValuesArray = "[" + String.join(", ", dataValuesList) + "]";
+%>
 		<script>
     var accessRightsData = {
-        labels: <%=labelsArray%>,
+        labels: <%= labelsArray %>,
         datasets: [{
-            data: <%=dataValuesArray%>,
+            data: <%= dataValuesArray %>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.8)', // Client color
                 'rgba(54, 162, 235, 0.8)', // Consultant color
@@ -165,10 +166,10 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
             title: {
                 display: true,
                 text: 'User Access Rights'
-            },            
-        }
-    });      
-    var countsElement = document.getElementById('accessRightsCounts');
+            },
+                    }
+    });  
+        var countsElement = document.getElementById('accessRightsCounts');
     var countsText = "<strong>Counts:</strong><ul>";
     for (var i = 0; i < accessRightsData.labels.length; i++) {
         countsText += "<li>" + accessRightsData.labels[i] + ": " + accessRightsData.datasets[0].data[i] + "</li>";
@@ -177,10 +178,10 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
     countsElement.innerHTML = countsText;
 </script>
 		<%
-		} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-		}
-		%>
+} catch (ClassNotFoundException | SQLException e) {
+    e.printStackTrace(); 
+}
+%>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -255,17 +256,18 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 						<canvas id="ageDistributionPieChart" width="400" height="200"></canvas>
 					</div>
 					<div class="col-sm col-3 common-border pb-2 m-0 p-0">
+
 						<div id="ageDistributionCounts" class="mt-3 counts-div"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%
-		Map<String, Integer> ageDistributionData = userManager.getAgeDistributionData();
-		String jsonData2 = new ObjectMapper().writeValueAsString(ageDistributionData);
-		%>
+		<%   
+    Map<String, Integer> ageDistributionData = userManager.getAgeDistributionData();
+    String jsonData2 = new ObjectMapper().writeValueAsString(ageDistributionData);
+    %>
 		<script>
-        var ageDistributionData = JSON.parse('<%=jsonData2%>');
+        var ageDistributionData = JSON.parse('<%= jsonData2 %>');
         var labels = Object.keys(ageDistributionData);
         var data = labels.map(function (label) {
             return ageDistributionData[label];
@@ -296,7 +298,7 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
                     text: 'User Age Distribution'
                 }
             }
-        });  
+        });
         var ageDistributionCountsElement = document.getElementById('ageDistributionCounts');
         var ageDistributionCountsText = "<strong>Counts:</strong><ul>";
         for (var i = 0; i < labels.length; i++) {
@@ -323,43 +325,40 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			</div>
 		</div>
 		<%
-		Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
-		String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
-		%>
+    Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
+    String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
+%>
 		<script>
-    var userGenderDistribution = JSON.parse('<%=jsonData%>
-			');
-			var genders = Object.keys(userGenderDistribution);
-			var counts = Object.values(userGenderDistribution);
-			var genderDataset = {
-				label : 'Gender Distribution',
-				data : counts,
-				backgroundColor : [ 'rgba(54, 162, 235, 0.8)',
-						'rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ], // Add more colors if needed
-				borderWidth : 1
-			};
-			var ctx = document.getElementById('userDemographicsChart')
-					.getContext('2d');
-			var userDemographicsChart = new Chart(ctx, {
-				type : 'bar',
-				data : {
-					labels : genders,
-					datasets : [ genderDataset ]
-				},
-				options : {
-					scales : {
-						y : {
-							beginAtZero : true
-						}
-					},
-					plugins : {
-						legend : {
-							display : false
-						}
-					}
-				}
-			});
-		</script>
+    var userGenderDistribution = JSON.parse('<%= jsonData %>');
+    var genders = Object.keys(userGenderDistribution);
+    var counts = Object.values(userGenderDistribution);
+    var genderDataset = {
+        label: 'Gender Distribution',
+        data: counts,
+        backgroundColor: ['rgba(54, 162, 235, 0.8)','rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ],
+        borderWidth: 1
+    };
+    var ctx = document.getElementById('userDemographicsChart').getContext('2d');
+    var userDemographicsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: genders,
+            datasets: [genderDataset]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -378,31 +377,24 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			</div>
 		</div>
 		<%
-		try {
-			Map<RegistrationStatus, Integer> registrationStatusData = userManager.getRegistrationStatusData();
-			String labelsArray = "['" + RegistrationStatus.PENDING.getDisplayName() + "', '"
-			+ RegistrationStatus.APPROVED.getDisplayName() + "', '" + RegistrationStatus.REJECTED.getDisplayName()
-			+ "']";
-			String dataValuesArray = "[" + registrationStatusData.get(RegistrationStatus.PENDING) + ", "
-			+ registrationStatusData.get(RegistrationStatus.APPROVED) + ", "
-			+ registrationStatusData.get(RegistrationStatus.REJECTED) + "]";
-		%>
+try {
+    Map<RegistrationStatus, Integer> registrationStatusData = userManager.getRegistrationStatusData();
+    String labelsArray = "['" + RegistrationStatus.PENDING.getDisplayName() + "', '" + RegistrationStatus.APPROVED.getDisplayName() + "', '" + RegistrationStatus.REJECTED.getDisplayName() + "']";
+    String dataValuesArray = "[" + registrationStatusData.get(RegistrationStatus.PENDING) + ", " + registrationStatusData.get(RegistrationStatus.APPROVED) + ", " + registrationStatusData.get(RegistrationStatus.REJECTED) + "]";
+%>
 		<script>
-			var registrationStatusData = {
-				labels :
-		<%=labelsArray%>
-			,
-				datasets : [ {
-					data :
-		<%=dataValuesArray%>
-			,
-					backgroundColor : [ 'rgba(255, 206, 86, 0.8)', // Pending color
-					'rgba(75, 192, 192, 0.8)', // Approved color
-					'rgba(255, 99, 132, 0.8)' // Rejected color
-					],
-					borderWidth : 1
-				} ]
-			};
+    var registrationStatusData = {
+        labels: <%= labelsArray %>,
+        datasets: [{
+            data: <%= dataValuesArray %>,
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.8)', // Pending color
+                'rgba(75, 192, 192, 0.8)', // Approved color
+                'rgba(255, 99, 132, 0.8)'  // Rejected color
+            ],
+            borderWidth: 1
+        }]
+    };   
 			var ctx6 = document.getElementById(
 					'registrationStatusDoughnutChart').getContext('2d');
 			var registrationStatusDoughnutChart = new Chart(ctx6, {
@@ -425,10 +417,10 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 		</script>
 
 		<%
-		} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-		}
-		%>
+} catch (ClassNotFoundException | SQLException e) {
+    e.printStackTrace(); 
+}
+%>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -448,64 +440,56 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			</div>
 		</div>
 		<%
-		try {
-			Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
-			Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();
-			for (String label : consultantJobTypeDistribution.keySet()) {
-				Test.TestType testType = Test.TestType.valueOf(label);
-				String displayName = testType.getDisplayName();
-				consultantJobTypeDisplayNames.put(label, displayName);
-			}
-			String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
-			String dataValuesArray = "[" + String.join(", ",
-			consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
-		%>
+    try {
+        Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+        Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();       
+        for (String label : consultantJobTypeDistribution.keySet()) {
+            Test.TestType testType = Test.TestType.valueOf(label);
+            String displayName = testType.getDisplayName();
+            consultantJobTypeDisplayNames.put(label, displayName);
+        }
+        String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
+        String dataValuesArray = "[" + String.join(", ", consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+    %>
 		<script>
-			function generateRandomColors(count) {
-				var colors = [];
-				for (var i = 0; i < count; i++) {
-					var red = Math.floor(Math.random() * 100) + 155;
-					var green = Math.floor(Math.random() * 100) + 155;
-					var blue = Math.floor(Math.random() * 100) + 155;
-					var alpha = 0.8;
+        function generateRandomColors(count) {
+            var colors = [];
+            for (var i = 0; i < count; i++) {
+                var red = Math.floor(Math.random() * 100) + 155;
+                var green = Math.floor(Math.random() * 100) + 155;
+                var blue = Math.floor(Math.random() * 100) + 155;
+                var alpha = 0.8;
+                colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+            }
+            return colors;
+        }
+        var consultantJobTypeData = {
+            labels: <%=labelsArray%>,
+            datasets: [{
+                data: <%=dataValuesArray%>,
+                backgroundColor: generateRandomColors(<%=consultantJobTypeDistribution.size()%>),
+            }]
+        };
+        var ctx8 = document.getElementById('consultantJobTypeChart').getContext('2d');
+        var consultantJobTypeChart = new Chart(ctx8, {
+            type: 'pie',
+            data: consultantJobTypeData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Consultant Specialized Job Type Distribution'
+                }
+            }
+        });
+    </script>
 
-					colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
-				}
-				return colors;
-			}
-			var consultantJobTypeData = {
-				labels :
-		<%=labelsArray%>
-			,
-				datasets : [ {
-					data :
-		<%=dataValuesArray%>
-			,
-					backgroundColor : generateRandomColors(
-		<%=consultantJobTypeDistribution.size()%>
-			),
-				} ]
-			};
-			var ctx8 = document.getElementById('consultantJobTypeChart')
-					.getContext('2d');
-			var consultantJobTypeChart = new Chart(ctx8, {
-				type : 'pie',
-				data : consultantJobTypeData,
-				options : {
-					responsive : true,
-					maintainAspectRatio : false,
-					title : {
-						display : true,
-						text : 'Consultant Specialized Job Type Distribution'
-					}
-				}
-			});
-		</script>
 		<%
-		} catch (ClassNotFoundException | SQLException e) {
-		e.printStackTrace();
-		}
-		%>
+    } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace(); 
+    }
+%>
 		<div class="pebble-footer">
 			<div class="row page-footer">
 				<div class="col-4 body-text"></div>
@@ -514,12 +498,10 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			</div>
 		</div>
 		<script>
-			var currentDate = new Date();
-			var formattedDate = currentDate.getFullYear() + '/'
-					+ (currentDate.getMonth() + 1) + '/'
-					+ currentDate.getDate();
-			document.getElementById('currentDay').innerHTML = formattedDate;
-		</script>
+    var currentDate = new Date();
+    var formattedDate = currentDate.getFullYear() + '/' + (currentDate.getMonth() + 1) + '/' + currentDate.getDate();
+    document.getElementById('currentDay').innerHTML = formattedDate;
+</script>
 	</div>
 </body>
 </html>
