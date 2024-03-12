@@ -39,7 +39,6 @@
 <%@ page import="com.labSchedulerSystem.model.Appointment"%>
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="com.labSchedulerSystem.model.Appointment.Status"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,26 +53,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-	<link rel="icon" type="image/x-icon"
+<link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-	
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 <title>Test Results</title>
 <style>
-.black-bottom{
- border-bottom: 2px solid black;
+.black-bottom {
+	border-bottom: 2px solid black;
 }
+
 h4 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: rgb(25, 31, 53);
 	font-size: 22px;
-	/* margin-top: 40px;
-	position: relative;
-	top: -3px;
-	left: -450px; */
 }
-
 
 h4 span {
 	color: #91d7f4;
@@ -89,6 +83,10 @@ h4 span {
 	</label>
 	<%
 	User user = (User) session.getAttribute("user");
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
 	%>
 	<%
 	String testIdString = request.getParameter("testId");
@@ -137,37 +135,33 @@ h4 span {
 	<div id="divToExport" class="a4-container">
 		<div class="">
 			<div class="page-title d-flex align-items-center align-self-center"><%=test1.getAppointmentRefId()%></div>
-
 		</div>
-		
-		
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="d-flex justify-content-center ">
-					<img class="nav-logo p-0 m-0 pt-0 mt-0"
-					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
-					alt="logo"></div>
+						<img class="nav-logo p-0 m-0 pt-0 mt-0"
+							src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+							alt="logo">
+					</div>
 				</div>
 				<div class=" common-border d-flex justify-content-center">
-				
-					
-				<h4>
-					  &nbsp;&nbsp;<span>  MediCheck Laboratory Services</span>
-				</h4>
+					<h4>
+						&nbsp;&nbsp;<span> MediCheck Laboratory Services</span>
+					</h4>
 				</div>
 				<div class=" common-border">
-					<div class="d-flex justify-content-center common-border"><h4> <%=test1.getTestType().getDisplayName()%> results	</h4></div>
+					<div class="d-flex justify-content-center common-border">
+						<h4>
+							<%=test1.getTestType().getDisplayName()%>
+							results
+						</h4>
+					</div>
 				</div>
-				
 			</div>
 		</div>
-		
-		
-		
 		<div class=" card-container">
 			<div class="col">
-				
 				<div class="row common-border black-bottom m-0">
 					<div class="col-sm col-8 common-border pb-2 ">
 						<ul>
@@ -175,7 +169,7 @@ h4 span {
 							<li>Gender:<%=patient.getGender()%></li>
 							<li>Contact:<%=patient.getPhoneNumber()%>
 							</li>
-							</ul>
+						</ul>
 					</div>
 					<div class="col-sm col-3 common-border pb-2 ">
 						<ul>
@@ -185,11 +179,9 @@ h4 span {
 				</div>
 			</div>
 		</div>
-			<div class=" card-container">
+		<div class=" card-container">
 			<div class="col">
-				<div class=" common-border">
-					<!-- <div class="card-title common-border">Patient details</div> -->
-				</div>
+				<div class=" common-border"></div>
 				<div class=" common-border">
 					<div class="card-comment common-border"></div>
 				</div>
@@ -198,95 +190,56 @@ h4 span {
 						<ul>
 							<li>Test:<%=test1.getTestType().getDisplayName()%></li>
 							<li>Results:<%=test1.getTestResults()%></li>
-							<li>Description:
-							</li> 
-							</ul>
-							<%-- <%=test1.getTestResultsDescription()%> --%>
-							<%
-// Assuming testDescription is the string retrieved from the database
-String testDescription = test1.getTestResultsDescription(); // Retrieve the test description from the database
-
-// Split the test description into individual lines
-String[] lines = testDescription.split("\n");
-
-// Initialize variables to keep track of sections and sub-sections
-String currentSection = "";
-boolean inSubsection = false;
-
-// Start unordered list
-out.println("<ul>");
-
-// Iterate over each line
-for (String line : lines) {
-    line = line.trim(); // Remove leading and trailing whitespace
-
-    // Check if the line is empty
-    if (!line.isEmpty()) {
-        // Check if the line ends with a colon, indicating a new section
-        if (line.endsWith(":")) {
-            // If we were in a sub-section, close the previous sub-section list
-            if (inSubsection) {
-                out.println("</ul>");
-                inSubsection = false;
-            }
-
-            // Close previous section list item if it exists
-            if (!currentSection.isEmpty()) {
-                out.println("</li>");
-            }
-
-            // Start a new section list item
-            out.println("<li>" + line);
-            currentSection = line;
-        } else {
-            // If the line doesn't end with a colon, it's a sub-section
-            // Check if we're already in a sub-section
-            if (!inSubsection) {
-                // If not, start a new sub-section list
-                out.println("<ul>");
-                inSubsection = true;
-            }
-
-            // Add the sub-section as a list item
-            out.println("<li>" + line + "</li>");
-        }
-    }
-}
-
-// Close the last sub-section list if necessary
-if (inSubsection) {
-    out.println("</ul>");
-}
-
-// Close the last section list item if necessary
-if (!currentSection.isEmpty()) {
-    out.println("</li>");
-}
-
-// Close unordered list
-out.println("</ul>");
-%>
-					
+							<li>Description:</li>
+						</ul>
+						<%
+						String testDescription = test1.getTestResultsDescription();
+						String[] lines = testDescription.split("\n");
+						String currentSection = "";
+						boolean inSubsection = false;
+						out.println("<ul>");
+						for (String line : lines) {
+							line = line.trim();
+							if (!line.isEmpty()) {
+								if (line.endsWith(":")) {
+							if (inSubsection) {
+								out.println("</ul>");
+								inSubsection = false;
+							}
+							if (!currentSection.isEmpty()) {
+								out.println("</li>");
+							}
+							out.println("<li>" + line);
+							currentSection = line;
+								} else {
+							if (!inSubsection) {
+								out.println("<ul>");
+								inSubsection = true;
+							}
+							out.println("<li>" + line + "</li>");
+								}
+							}
+						}
+						if (inSubsection) {
+							out.println("</ul>");
+						}
+						if (!currentSection.isEmpty()) {
+							out.println("</li>");
+						}
+						out.println("</ul>");
+						%>
 					</div>
-					
 				</div>
 				<div class="row common-border black-bottom m-0 mt-3 pb-3">
 					<div class="col-sm col-8 common-border pb-2 ">
-						
-							Test done by :<%=technician.getName()%>
-							
-							
+						Test done by :<%=technician.getName()%>
 					</div>
 					<div class="col-sm col-4 common-border pb-2 ">
-						
-							Documented on :<%=test1.getTestUpdatedOn()%>
-						
+						Documented on :<%=test1.getTestUpdatedOn()%>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
 		<div class="pebble-footer">
 			<div class="row page-footer">
 				<div class="col-5 body-text"></div>
@@ -295,21 +248,12 @@ out.println("</ul>");
 			</div>
 		</div>
 		<script>
-			// Get the current date
 			var currentDate = new Date();
-
-			// Format the date as YYYY/MM/DD
 			var formattedDate = currentDate.getFullYear() + '/'
 					+ (currentDate.getMonth() + 1) + '/'
 					+ currentDate.getDate();
-
-			// Display the formatted date in the specified element
 			document.getElementById('currentDay').innerHTML = formattedDate;
 		</script>
-		<!-- Card structure-->
 	</div>
-
-	<!-- footer template -->
-
 </body>
 </html>

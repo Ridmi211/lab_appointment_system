@@ -10,8 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.labSchedulerSystem.model.User;
-
 public class EmailService {
 
 	private static EmailService emailServiceObj;

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,10 +24,9 @@ import com.labSchedulerSystem.model.User;
 public class UserManagerImpl implements UserManager {
 
 	public UserManagerImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
-	private Connection getConnection() throws ClassNotFoundException, SQLException { //factory
+	private Connection getConnection() throws ClassNotFoundException, SQLException { // factory design pattern
 		DbDriverManagerFactory driverFactory = new DbDriverManagerFactory();
 		DbDriverManager driverManager = driverFactory.getDbDriver("MySQL");
 		return driverManager.getConnection();
@@ -130,42 +128,30 @@ public class UserManagerImpl implements UserManager {
 		return countsMap;
 	}
 
-	private static final List<String> PREDEFINED_COLORS = Arrays.asList("rgba(255, 99, 132, 0.8)",
-			"rgba(54, 162, 235, 0.8)", "rgba(255, 182, 193, 0.8)", "rgba(240, 230, 140, 0.8)",
-			"rgba(192, 192, 192, 0.8)", "rgba(255, 69, 0, 0.8)", "rgba(0, 128, 0, 0.8)", "rgba(255, 215, 0, 0.8)",
-			"rgba(70, 130, 180, 0.8)", "rgba(128, 0, 128, 0.8)", "rgba(128, 128, 0, 0.8)", "rgba(0, 128, 128, 0.8)",
-			"rgba(165, 42, 42, 0.8)", "rgba(0, 255, 255, 0.8)", "rgba(0, 0, 128, 0.8)", "rgba(255, 20, 147, 0.8)",
-			"rgba(0, 250, 154, 0.8)", "rgba(255, 165, 0, 0.8)", "rgba(255, 0, 255, 0.8)", "rgba(128, 0, 0, 0.8)");
-
-	private String getPredefinedColor(int index) {
-		index = index % PREDEFINED_COLORS.size();
-		return PREDEFINED_COLORS.get(index);
-	}
-
 	public Map<String, Integer> getUserGenderDistribution() throws SQLException, ClassNotFoundException {
-	    Connection connection = null;
-	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
-	    try {
-	        connection = getConnection();
-	        String query = "SELECT gender, COUNT(*) as count FROM user GROUP BY gender";
-	        statement = connection.prepareStatement(query);
-	        resultSet = statement.executeQuery();
-	        Map<String, Integer> genderDistribution = new HashMap<>();
-	        while (resultSet.next()) {
-	            String gender = resultSet.getString("gender");
-	            int count = resultSet.getInt("count");
-	            genderDistribution.put(gender, count);
-	        }
-	        return genderDistribution;
-	    } finally {
-	        if (resultSet != null)
-	            resultSet.close();
-	        if (statement != null)
-	            statement.close();
-	        if (connection != null)
-	            connection.close();
-	    }
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			String query = "SELECT gender, COUNT(*) as count FROM user GROUP BY gender";
+			statement = connection.prepareStatement(query);
+			resultSet = statement.executeQuery();
+			Map<String, Integer> genderDistribution = new HashMap<>();
+			while (resultSet.next()) {
+				String gender = resultSet.getString("gender");
+				int count = resultSet.getInt("count");
+				genderDistribution.put(gender, count);
+			}
+			return genderDistribution;
+		} finally {
+			if (resultSet != null)
+				resultSet.close();
+			if (statement != null)
+				statement.close();
+			if (connection != null)
+				connection.close();
+		}
 	}
 
 	public Map<RegistrationStatus, Integer> getRegistrationStatusData() throws SQLException, ClassNotFoundException {
@@ -325,40 +311,40 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public boolean deleteUser(int userId) throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    boolean result = false;
-	    try {
-	        if (hasAppointments(userId)) {
-	            return false; 
-	        }
-	        String query = "DELETE FROM user WHERE userId=?";
-	        PreparedStatement ps = connection.prepareStatement(query);
-	        ps.setInt(1, userId);
-	        if (ps.executeUpdate() > 0) {
-	            result = true;
-	        }
-	        ps.close();
-	    } finally {
-	        connection.close();
-	    }
-	    return result;
+		Connection connection = getConnection();
+		boolean result = false;
+		try {
+			if (hasAppointments(userId)) {
+				return false;
+			}
+			String query = "DELETE FROM user WHERE userId=?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, userId);
+			if (ps.executeUpdate() > 0) {
+				result = true;
+			}
+			ps.close();
+		} finally {
+			connection.close();
+		}
+		return result;
 	}
 
-	private boolean hasAppointments(int userId) throws SQLException,ClassNotFoundException {
-	    Connection connection = getConnection();
-	    try {
-	        String query = "SELECT COUNT(*) FROM appointments WHERE technitianId=?";
-	        PreparedStatement ps = connection.prepareStatement(query);
-	        ps.setInt(1, userId);
-	        ResultSet rs = ps.executeQuery();
-	        if (rs.next()) {
-	            int count = rs.getInt(1);
-	            return count > 0; 
-	        }
-	        return false; 
-	    } finally {
-	        connection.close();
-	    }
+	private boolean hasAppointments(int userId) throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		try {
+			String query = "SELECT COUNT(*) FROM appointments WHERE technitianId=?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				return count > 0;
+			}
+			return false;
+		} finally {
+			connection.close();
+		}
 	}
 
 	@Override

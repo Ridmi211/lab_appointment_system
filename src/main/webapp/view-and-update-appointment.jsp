@@ -6,29 +6,22 @@
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
 <%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%
 User user = (User) session.getAttribute("user");
-boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN); // Modify this condition according to your User class
-
-// Check if the user is logged in
+boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN);
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
-
 <meta charset="utf-8">
 <title>Update Appointment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +32,6 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -48,8 +40,6 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
-
-/*  <!-- sidebar styling start here  -->*/
 @media print {
 	table {
 		width: 100%;
@@ -68,7 +58,6 @@ if (session.getAttribute("user") == null) {
 }
 
 body {
-	/* justify-content: center; */
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
@@ -190,9 +179,7 @@ p {
 	color: #d6adff;
 	margin: 0;
 }
-/*  <!-- sidebar styling end here  --> */
 
-/* page- header */
 .pageHeader {
 	position: fixed;
 	top: 60px;
@@ -220,7 +207,6 @@ p {
 	font-size: 20px;
 }
 
-/* end of page header */
 .container {
 	max-width: 900px;
 	margin: 150px auto;
@@ -282,11 +268,10 @@ select[name="testType"]:focus {
 	cursor: pointer;
 }
 
-.btn-report{
+.btn-report {
 	background-color: black;
 }
 
-/* Search bar  */
 .navbar {
 	margin-bottom: 20px;
 	justify-content: center;
@@ -357,33 +342,25 @@ h4 span {
 }
 
 .test-title {
-	 text-align: center;
-    font-size: 24px;
-    color: #529ece;
-    margin-top: 30px;
-    margin-bottom: 20px;
-     text-transform: uppercase;
+	text-align: center;
+	font-size: 24px;
+	color: #529ece;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	text-transform: uppercase;
 }
 </Style>
 
 </head>
 <body class="m-0 p-0">
-	<!-- sidebar start here  -->
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
-
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -394,7 +371,6 @@ h4 span {
 					Medi<span>Check</span>
 				</h4>
 				<ul class="" id="sidemenu">
-
 					<%
 					if (user != null) {
 					%>
@@ -412,15 +388,10 @@ h4 span {
 					<%
 					}
 					%>
-
 				</ul>
-
-
 			</nav>
 		</div>
 	</div>
-	<!-- sidebar end here  -->
-
 	<div class="row m-0 " id="appointment">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
@@ -429,17 +400,12 @@ h4 span {
 		<div class="col-1 m-0"></div>
 	</div>
 
-	<div class="row m-0 d-flex justify-content-center">
-		<%-- <p style='color:magenta'>${message}</p>	 --%>
-	</div>
-
+	<div class="row m-0 d-flex justify-content-center"></div>
 	<div class="row m-0">
-		<!-- Search abr  -->
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
 			<form action="appointmentManager" method="post"
 				onsubmit="return confirmUpdate();">
-
 				<input class="form-control" type="hidden" id="appointmentId"
 					name="appointmentId" value="${appointment.appointmentId}" /> <label
 					for="RefId">Appointment RefId:</label> <input class="form-control"
@@ -449,20 +415,15 @@ h4 span {
 					class="form-control" type="text" id="testType" name="testType"
 					readonly="readonly" value="${appointment.testType.displayName}" />
 				<input class="form-control" type="hidden" id="testType1"
-					name="testType1" value="${appointment.testType}" />
-
-				<label
-					for="costOfTest">Payment:</label>
-				<input class="form-control" type="text" id="costOfTest"
-					name="costOfTest" readonly="readonly"
-					value="${appointment.costOfTest}" />
-					<input class="form-control" type="hidden" id="consultantId"
-					name="consultantId" readonly="readonly"
-					value="${appointment.technitianId}" />
-				<!--  <label for="email">seekerId:</label> -->
-				<input class="form-control" type="hidden" id="seekerId"
-					name="seekerId" readonly="readonly" value="${appointment.seekerId}" />
-				<label for="scheduledDate"> Scheduled Date:</label> <input
+					name="testType1" value="${appointment.testType}" /> <label
+					for="costOfTest">Payment:</label> <input class="form-control"
+					type="text" id="costOfTest" name="costOfTest" readonly="readonly"
+					value="${appointment.costOfTest}" /> <input class="form-control"
+					type="hidden" id="consultantId" name="consultantId"
+					readonly="readonly" value="${appointment.technitianId}" /> <input
+					class="form-control" type="hidden" id="seekerId" name="seekerId"
+					readonly="readonly" value="${appointment.seekerId}" /> <label
+					for="scheduledDate"> Scheduled Date:</label> <input
 					class="form-control" type="date" id="scheduledDate"
 					name="scheduledDate" value="${appointment.scheduledDate}" /> <label
 					for="startTime"> Start Time:</label> <input class="form-control"
@@ -470,7 +431,7 @@ h4 span {
 					value="${appointment.startTime}" /> <label for="startTime">Notes</label>
 				<textarea class="form-control" style="height: 100px" type="text"
 					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-<label for="recomendedDoctor">Recommended Doctor:</label> <input
+				<label for="recomendedDoctor">Recommended Doctor:</label> <input
 					class="form-control" type="text" id="recomendedDoctor"
 					name="recomendedDoctor" value="${appointment.recomendedDoctor}" />
 				<label for="consultantName">Technician Name:</label> <input
@@ -486,73 +447,35 @@ h4 span {
 					name="seekerPhoneNumber" value="${appointment.seekerPhoneNumber}" />
 				<label for="country">Appointment status:</label> <input
 					class="form-control" type="text" id="status" name="status"
-					value="${appointment.status.displayName}" readonly="readonly"/> <input
+					value="${appointment.status.displayName}" readonly="readonly" /> <input
 					class="form-control" type="hidden" id="status" name="enum-status"
 					value="${appointment.status}" />
-
-
-
 				<div class="test-title" id="test">Update Test Details</div>
-
-
-				<%-- <label for="selectedTestType">Assigned test type:</label>
-					
-					<select name="testType" id="testType" required>
-						<option value="" disabled selected>${appointment.testType}</option>
-						<%
-						for (TestType type : TestType.values()) {
-						%>
-						<option value="<%=type.name()%>"><%=type.getDisplayName()%></option>
-						<%
-						}
-						%>
-					</select>  --%>
- <label
-					for="testType">Test Type:</label> <input
-					class="form-control" type="text" id="testType" name="testType"
-					readonly="readonly" value="${appointment.testType.displayName}" />
-					
-				<%-- <label for="testResults">Test Results:</label> <input
-					class="form-control" type="text" id="testResults"
-					name="testResults" value="${appointment.testResults}" /> <label
-					for="testResultsDescription">Test Description:</label> <textarea
-					class="form-control" type="text" id="testResultsDescription"
-					name="testResultsDescription" style="height: 100px"
-					value="${appointment.testResultsDescription}" />${appointment.testResultsDescription}</textarea>
-					 --%>
-					 
-					 <label for="testResults">Test Results:</label>
-<input class="form-control" type="text" id="testResults" name="testResults" <%= isTechnician ? "" : "readonly" %> value="${appointment.testResults}" />
-
-<label for="testResultsDescription">Test Description:</label>
-<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 200px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
-					 
-					 <label
-					for="testUpdatedBy">Test Details Updated By:</label> <input
+				<label for="testType">Test Type:</label> <input class="form-control"
+					type="text" id="testType" name="testType" readonly="readonly"
+					value="${appointment.testType.displayName}" /> <label
+					for="testResults">Test Results:</label> <input class="form-control"
+					type="text" id="testResults" name="testResults"
+					<%= isTechnician ? "" : "readonly" %>
+					value="${appointment.testResults}" /> <label
+					for="testResultsDescription">Test Description:</label>
+				<textarea class="form-control" type="text"
+					id="testResultsDescription" name="testResultsDescription"
+					style="height: 200px" <%=isTechnician ? "" : "readonly"%>>${appointment.testResultsDescription}</textarea>
+				<label for="testUpdatedBy">Test Details Updated By:</label> <input
 					class="form-control" type="text" id="testUpdatedBy"
-					name="testUpdatedBy" value="${appointment.testUpdatedBy}" readonly="readonly"/>
-				<label for="testUpdatedOn">Updated On:</label> <input
-					class="form-control" type="text" id="testUpdatedOn"
-					name="testUpdatedOn" value="${appointment.testUpdatedOn}" readonly="readonly"/>
-
-
-
-
-
-				<input type="hidden" name="appactiontype" value="editAppointment" />
-
+					name="testUpdatedBy" value="${appointment.testUpdatedBy}"
+					readonly="readonly" /> <label for="testUpdatedOn">Updated
+					On:</label> <input class="form-control" type="text" id="testUpdatedOn"
+					name="testUpdatedOn" value="${appointment.testUpdatedOn}"
+					readonly="readonly" /> <input type="hidden" name="appactiontype"
+					value="editAppointment" />
 				<button type="submit" class="btn btn-success">Update</button>
-
 				<a id="backButton" class="btn btn-primary">Back</a>
-			<%-- 	<a class="btn btn-report" href="test-results-report.jsp?testId=${appointment.appointmentId}">
-				Report
-							
-							</a> --%>
-
 				<script>
 					document.getElementById('backButton').addEventListener(
 							'click', function() {
-								window.history.back(); // This will navigate back to the previous page in the browser's history.
+								window.history.back();
 							});
 				</script>
 				<script>
@@ -560,15 +483,9 @@ h4 span {
 						return confirm("Are you sure you want to update this user?");
 					}
 				</script>
-
 			</form>
 		</div>
 		<div class="col-1"></div>
-
 	</div>
-
-
-
-
 </body>
 </html>

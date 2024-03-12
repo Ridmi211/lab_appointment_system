@@ -27,8 +27,7 @@ class UserServiceTest {
 	private UserService userService;
 	private UserManagerImpl userMangerImpl;
 	private HttpServletRequest request;
-	private HttpServletResponse response;
-	private RequestDispatcher requestDispatcher;
+	
 	private int addedUserId;
 	private int addedTechnicianId;
 	private int updateId;
@@ -37,9 +36,7 @@ class UserServiceTest {
 	void setUp() {
 		userService = UserService.getUserService();
 		userMangerImpl = new UserManagerImpl();
-		request = mock(HttpServletRequest.class);
-		response = mock(HttpServletResponse.class);
-		requestDispatcher = mock(RequestDispatcher.class);
+		request = mock(HttpServletRequest.class);		
 		userService = spy(UserService.getUserService());
 	}
 

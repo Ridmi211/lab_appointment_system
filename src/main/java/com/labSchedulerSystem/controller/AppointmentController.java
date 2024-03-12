@@ -1,30 +1,20 @@
 package com.labSchedulerSystem.controller;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.util.Base64;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.labSchedulerSystem.dao.AppointmentManager;
 import com.labSchedulerSystem.dao.AppointmentManagerImpl;
-import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
-import com.labSchedulerSystem.model.RegistrationStatus;
 import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
@@ -47,7 +37,7 @@ public class AppointmentController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Action :" + request.getParameter("appactiontype"));
+		LOGGER.log(Level.INFO, "Action: " + request.getParameter("appactiontype"));
 		String appactiontype = request.getParameter("appactiontype");
 		if (appactiontype.equals("singleAppointment")) {
 			fetchSingleAppointment(request, response);
@@ -139,11 +129,9 @@ public class AppointmentController extends HttpServlet {
 				AppointmentService.sendAppointmentConfirmationEmail(appointment, consultant, seeker);
 				message = "The appointment request has been successfully submitted!";
 				LOGGER.log(Level.INFO, "Appointment request submitted for seeker ID: " + seekerId);
-
 			} else {
 				message = "Failed to submit the appointment request!";
 				LOGGER.log(Level.WARNING, "Failed to submit appointment request for seeker ID: " + seekerId);
-
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = "Operation failed! " + e.getMessage();
@@ -191,7 +179,7 @@ public class AppointmentController extends HttpServlet {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
-			 LOGGER.log(Level.SEVERE, "Error fetching appointments", e);
+			LOGGER.log(Level.SEVERE, "Error fetching appointments", e);
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
@@ -208,7 +196,7 @@ public class AppointmentController extends HttpServlet {
 			request.setAttribute("pageTopic", "Pending Appointments - Admin ");
 			if (!(requestedAppointments.size() > 0)) {
 				message = "No records found!";
-				 LOGGER.log(Level.INFO, "No pending appointments found");
+				LOGGER.log(Level.INFO, "No pending appointments found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
@@ -228,7 +216,7 @@ public class AppointmentController extends HttpServlet {
 			tests = getAppointmentService().fetchAllTests();
 			if (!(tests.size() > 0)) {
 				message = "No tests found!";
-				  LOGGER.log(Level.INFO, "No tests found");
+				LOGGER.log(Level.INFO, "No tests found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
@@ -249,7 +237,7 @@ public class AppointmentController extends HttpServlet {
 			request.setAttribute("pageTopic", "Completed Appointments - Admin ");
 			if (!(requestedAppointments.size() > 0)) {
 				message = "No records found!";
-				 LOGGER.log(Level.INFO, "No completed appointments found");
+				LOGGER.log(Level.INFO, "No completed appointments found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
@@ -270,7 +258,7 @@ public class AppointmentController extends HttpServlet {
 			request.setAttribute("pageTopic", "Rejected Appointments - Admin ");
 			if (!(requestedAppointments.size() > 0)) {
 				message = "No records found!";
-				 LOGGER.log(Level.INFO, "No rejected appointments found");
+				LOGGER.log(Level.INFO, "No rejected appointments found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
@@ -291,11 +279,11 @@ public class AppointmentController extends HttpServlet {
 			request.setAttribute("pageTopic", "Cancelled Appointments - Admin ");
 			if (!(requestedAppointments.size() > 0)) {
 				message = "No records found!";
-				 LOGGER.log(Level.INFO, "No cancelled appointments found");
+				LOGGER.log(Level.INFO, "No cancelled appointments found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
-			 LOGGER.log(Level.SEVERE, "Error fetching cancelled appointments", e);
+			LOGGER.log(Level.SEVERE, "Error fetching cancelled appointments", e);
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
@@ -312,11 +300,11 @@ public class AppointmentController extends HttpServlet {
 			request.setAttribute("pageTopic", "Ongoing Appointments - Admin ");
 			if (!(requestedAppointments.size() > 0)) {
 				message = "No records found!";
-				  LOGGER.log(Level.INFO, "No ongoing appointments found");
+				LOGGER.log(Level.INFO, "No ongoing appointments found");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
-			 LOGGER.log(Level.SEVERE, "Error fetching ongoing appointments", e);
+			LOGGER.log(Level.SEVERE, "Error fetching ongoing appointments", e);
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
@@ -466,7 +454,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User from session: " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -487,7 +475,7 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action :" + request.getParameter("message"));
+		LOGGER.log(Level.INFO, "Action: " + request.getParameter("message"));
 		RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -497,7 +485,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User from session: " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -518,7 +506,6 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action : hfg hgfg");
 		RequestDispatcher rd = request.getRequestDispatcher("view-seekers-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -528,7 +515,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User from session: " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -549,7 +536,6 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action : hfg hgfg");
 		RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -559,7 +545,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User from session: " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -580,7 +566,7 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action :" + request.getParameter("message"));
+		LOGGER.log(Level.INFO, "Action: " + request.getParameter("message"));
 		RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -590,7 +576,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User: " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -611,7 +597,7 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action :" + request.getParameter("message"));
+		LOGGER.log(Level.INFO, "Action: " + request.getParameter("message"));
 		RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -621,7 +607,7 @@ public class AppointmentController extends HttpServlet {
 		clearMessage();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -642,7 +628,7 @@ public class AppointmentController extends HttpServlet {
 		}
 		request.setAttribute("requestedAppointments", requestedAppointments);
 		request.setAttribute("feebackMessage", message);
-		System.out.println("Action :" + request.getParameter("message"));
+		LOGGER.log(Level.INFO, "Action: " + request.getParameter("message"));
 		RequestDispatcher rd = request.getRequestDispatcher("view-admin-requested-appointments.jsp");
 		rd.forward(request, response);
 	}
@@ -650,7 +636,8 @@ public class AppointmentController extends HttpServlet {
 	private void viewAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
-		System.out.println("Reached the 'appointmentId' method.");
+
+		LOGGER.log(Level.INFO, "Reached the 'appointmentId' method. ");
 		try {
 			Appointment appointment = getAppointmentService().fetchSingleAppointment(appointmentId);
 			if (appointment.getAppointmentId() > 0) {
@@ -667,46 +654,47 @@ public class AppointmentController extends HttpServlet {
 		}
 	}
 
-	 private void viewTest(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        int testId = Integer.parseInt(request.getParameter("testId"));
-	        LOGGER.log(Level.INFO, "Reached the 'viewTest' method with test ID: " + testId);
-	        try {
-	            Test test = getAppointmentService().fetchSingleTest(testId);
-	            if (test.getTestId() > 0) {
-	                request.setAttribute("test", test);
-	                RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
-	                rd.forward(request, response);
-	            } else {
-	                request.setAttribute("message", "No test found!");
-	                RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
-	                rd.forward(request, response);
-	            }
-	        } catch (ClassNotFoundException | SQLException e) {
-	            LOGGER.log(Level.SEVERE, "Error fetching test with ID: " + testId, e);
-	            e.printStackTrace();
-	        }
-	    }
-	  private void fetchSingleAppointment(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        clearMessage();
-	        int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
-	        try {
-	            Appointment appointment = getAppointmentService().fetchSingleAppointment(appointmentId);
-	            if (appointment.getAppointmentId() > 0) {
-	                request.setAttribute("appointment", appointment);
-	            } else {
-	                message = "No record found!";
-	                LOGGER.log(Level.INFO, "No appointment found with ID: " + appointmentId);
-	            }
-	        } catch (ClassNotFoundException | SQLException e) {
-	            message = e.getMessage();
-	            LOGGER.log(Level.SEVERE, "Error fetching appointment with ID: " + appointmentId, e);
-	        }
-	        request.setAttribute("feebackMessage", message);
-	        RequestDispatcher rd = request.getRequestDispatcher("search-and-update-user.jsp");
-	        rd.forward(request, response);
-	    }
+	private void viewTest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int testId = Integer.parseInt(request.getParameter("testId"));
+		LOGGER.log(Level.INFO, "Reached the 'viewTest' method with test ID: " + testId);
+		try {
+			Test test = getAppointmentService().fetchSingleTest(testId);
+			if (test.getTestId() > 0) {
+				request.setAttribute("test", test);
+				RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
+				rd.forward(request, response);
+			} else {
+				request.setAttribute("message", "No test found!");
+				RequestDispatcher rd = request.getRequestDispatcher("book-test-new.jsp");
+				rd.forward(request, response);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			LOGGER.log(Level.SEVERE, "Error fetching test with ID: " + testId, e);
+			e.printStackTrace();
+		}
+	}
+
+	private void fetchSingleAppointment(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		clearMessage();
+		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+		try {
+			Appointment appointment = getAppointmentService().fetchSingleAppointment(appointmentId);
+			if (appointment.getAppointmentId() > 0) {
+				request.setAttribute("appointment", appointment);
+			} else {
+				message = "No record found!";
+				LOGGER.log(Level.INFO, "No appointment found with ID: " + appointmentId);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error fetching appointment with ID: " + appointmentId, e);
+		}
+		request.setAttribute("feebackMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("search-and-update-user.jsp");
+		rd.forward(request, response);
+	}
 
 	private void editAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -729,7 +717,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setTestUpdatedOn(currentDate);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		System.out.println("User from session: " + user);
+		LOGGER.log(Level.INFO, "User from session " + user);
 		if (user == null) {
 			message = "You are not logged in!";
 			request.setAttribute("feebackMessage", message);
@@ -739,46 +727,47 @@ public class AppointmentController extends HttpServlet {
 		}
 		String loggedInUserName = user.getName();
 		appointment.setTestUpdatedBy(loggedInUserName);
-		   try {
-	            if (getAppointmentService().editAppointment(appointment)) {
-	                message = "The appointment has been successfully updated! Appointment ID: "
-	                        + appointment.getAppointmentRefId();
-	                LOGGER.log(Level.INFO, "Appointment with ID " + appointment.getAppointmentRefId() + " updated successfully");
-	            } else {
-	                message = "Failed to update the Appointment! Appointment ID: " + appointment.getAppointmentRefId();
-	                LOGGER.log(Level.WARNING, "Failed to update appointment with ID: " + appointment.getAppointmentRefId());
-	            }
-	        } catch (ClassNotFoundException | SQLException e) {
-	            message = e.getMessage();
-	            LOGGER.log(Level.SEVERE, "Error updating appointment", e);
-	        }
-	        request.setAttribute("feebackMessage", message);
-	        RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
-	        rd.forward(request, response);
-	    }
+		try {
+			if (getAppointmentService().editAppointment(appointment)) {
+				message = "The appointment has been successfully updated! Appointment ID: "
+						+ appointment.getAppointmentRefId();
+				LOGGER.log(Level.INFO,
+						"Appointment with ID " + appointment.getAppointmentRefId() + " updated successfully");
+			} else {
+				message = "Failed to update the Appointment! Appointment ID: " + appointment.getAppointmentRefId();
+				LOGGER.log(Level.WARNING, "Failed to update appointment with ID: " + appointment.getAppointmentRefId());
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error updating appointment", e);
+		}
+		request.setAttribute("feebackMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
+		rd.forward(request, response);
+	}
 
-	   private void deleteAppointment(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
-	        clearMessage();
-	        int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
-	        try {
-	            boolean deleted = getAppointmentService().deleteAppointment(appointmentId);
-	            if (deleted) {
-	                message = "Appointment deleted successfully!";
-	                LOGGER.log(Level.INFO, "Appointment with ID " + appointmentId + " deleted successfully");
-	            } else {
-	                message = "Failed to delete the appointment.";
-	                LOGGER.log(Level.WARNING, "Failed to delete appointment with ID: " + appointmentId);
-	            }
-	        } catch (ClassNotFoundException | SQLException e) {
-	            message = "Operation failed: " + e.getMessage();
-	            LOGGER.log(Level.SEVERE, "Error deleting appointment", e);
-	        }
-	        HttpSession session = request.getSession();
-	        session.setAttribute("message", message);
+	private void deleteAppointment(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		clearMessage();
+		int appointmentId = Integer.parseInt(request.getParameter("appointmentId"));
+		try {
+			boolean deleted = getAppointmentService().deleteAppointment(appointmentId);
+			if (deleted) {
+				message = "Appointment deleted successfully!";
+				LOGGER.log(Level.INFO, "Appointment with ID " + appointmentId + " deleted successfully");
+			} else {
+				message = "Failed to delete the appointment.";
+				LOGGER.log(Level.WARNING, "Failed to delete appointment with ID: " + appointmentId);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			message = "Operation failed: " + e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error deleting appointment", e);
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("message", message);
 
-	        response.sendRedirect("getAppointment?appactiontype=all");
-	    }
+		response.sendRedirect("getAppointment?appactiontype=all");
+	}
 
 	private void clearMessage() {
 		message = "";

@@ -1,7 +1,6 @@
 package com.labSchedulerSystem.model;
 
 import java.util.Date;
-import java.util.List;
 
 public class User {
 	private int userId;
