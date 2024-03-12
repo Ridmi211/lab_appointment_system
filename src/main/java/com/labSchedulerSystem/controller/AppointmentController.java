@@ -125,7 +125,7 @@ public class AppointmentController extends HttpServlet {
 		appointment.setScheduledDate(request.getParameter("date"));
 		appointment.setStartTime(request.getParameter("time"));
 		appointment.setStatus(Appointment.Status.REQUESTED);
-		appointment.setCountry(request.getParameter("test"));
+		appointment.setCostOfTest(request.getParameter("cost"));
 		appointment.setRecomendedDoctor(request.getParameter("doctor"));
 		appointment.setNotes(request.getParameter("notes"));
 		appointment.setTestType(Test.TestType.valueOf(request.getParameter("test")));
@@ -540,7 +540,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchAppointmentsByConsultantId(loggedInUserId);
-			request.setAttribute("pageTopic", "My Appointments (consultant)");
+			request.setAttribute("pageTopic", "My Appointments");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -571,7 +571,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchCompletedAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Completed Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Completed Appointments ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -602,7 +602,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchCancelledAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Cancelled Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Cancelled Appointments  ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -633,7 +633,7 @@ public class AppointmentController extends HttpServlet {
 		List<Appointment> requestedAppointments = new ArrayList<Appointment>();
 		try {
 			requestedAppointments = getAppointmentService().fetchUpcomingAppointmentsByConId(loggedInUserId);
-			request.setAttribute("pageTopic", "Upcoming Appointments - Consultant ");
+			request.setAttribute("pageTopic", "Upcoming Appointments");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -719,8 +719,8 @@ public class AppointmentController extends HttpServlet {
 		appointment.setAppointmentRefId(request.getParameter("appointmentRefId"));
 		appointment.setStartTime(request.getParameter("startTime"));
 		appointment.setStatus(Status.valueOf(request.getParameter("enum-status")));
-		appointment.setCountry(request.getParameter("country"));
-		appointment.setRecomendedDoctor(request.getParameter("job"));
+		appointment.setCostOfTest(request.getParameter("costOfTest"));
+		appointment.setRecomendedDoctor(request.getParameter("recomendedDoctor"));
 		appointment.setNotes(request.getParameter("notes"));
 		appointment.setTestType(Test.TestType.valueOf(request.getParameter("testType1")));
 		appointment.setTestResults(request.getParameter("testResults"));

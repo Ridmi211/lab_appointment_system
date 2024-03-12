@@ -282,6 +282,10 @@ select[name="testType"]:focus {
 	cursor: pointer;
 }
 
+.btn-report{
+	background-color: black;
+}
+
 /* Search bar  */
 .navbar {
 	margin-bottom: 20px;
@@ -447,8 +451,12 @@ h4 span {
 				<input class="form-control" type="hidden" id="testType1"
 					name="testType1" value="${appointment.testType}" />
 
-				<!--  <label	for="userIdUpdate">consultantId:</label> -->
-				<input class="form-control" type="hidden" id="consultantId"
+				<label
+					for="costOfTest">Payment:</label>
+				<input class="form-control" type="text" id="costOfTest"
+					name="costOfTest" readonly="readonly"
+					value="${appointment.costOfTest}" />
+					<input class="form-control" type="hidden" id="consultantId"
 					name="consultantId" readonly="readonly"
 					value="${appointment.technitianId}" />
 				<!--  <label for="email">seekerId:</label> -->
@@ -462,7 +470,9 @@ h4 span {
 					value="${appointment.startTime}" /> <label for="startTime">Notes</label>
 				<textarea class="form-control" style="height: 100px" type="text"
 					id="notes" name="notes" value="${appointment.notes}">${appointment.notes}</textarea>
-
+<label for="recomendedDoctor">Recommended Doctor:</label> <input
+					class="form-control" type="text" id="recomendedDoctor"
+					name="recomendedDoctor" value="${appointment.recomendedDoctor}" />
 				<label for="consultantName">Technician Name:</label> <input
 					class="form-control" type="text" id="consultantName"
 					name="consultantName" value="${appointment.consultantName}" /> <label
@@ -515,7 +525,7 @@ h4 span {
 <input class="form-control" type="text" id="testResults" name="testResults" <%= isTechnician ? "" : "readonly" %> value="${appointment.testResults}" />
 
 <label for="testResultsDescription">Test Description:</label>
-<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 100px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
+<textarea class="form-control" type="text" id="testResultsDescription" name="testResultsDescription" style="height: 200px" <%= isTechnician ? "" : "readonly" %> >${appointment.testResultsDescription}</textarea>
 					 
 					 <label
 					for="testUpdatedBy">Test Details Updated By:</label> <input
@@ -534,6 +544,10 @@ h4 span {
 				<button type="submit" class="btn btn-success">Update</button>
 
 				<a id="backButton" class="btn btn-primary">Back</a>
+			<%-- 	<a class="btn btn-report" href="test-results-report.jsp?testId=${appointment.appointmentId}">
+				Report
+							
+							</a> --%>
 
 				<script>
 					document.getElementById('backButton').addEventListener(
@@ -552,6 +566,8 @@ h4 span {
 		<div class="col-1"></div>
 
 	</div>
+
+
 
 
 </body>

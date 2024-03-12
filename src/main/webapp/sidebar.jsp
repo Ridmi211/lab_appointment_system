@@ -90,7 +90,7 @@ User user = (User) session.getAttribute("user");
   <% if (user != null && user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) { %>
  
   <div class="normal-content">
-   <a  href="consultant-dashboard.jsp" >
+   <a  href="technician-dashboard.jsp" >
       <i class="fa fa-tachometer" aria-hidden="true"></i>
     <span>Dashboard</span>
   </a>
@@ -151,7 +151,7 @@ User user = (User) session.getAttribute("user");
       <a  href="user-report.jsp" >User</a>
       <a  href="appointment-summary-report.jsp" >Appointments</a>
      
-         <a  href="consultant-summary-report.jsp" > Technicians</a>
+         <a  href="technician-performance-report.jsp" > Technicians</a>
    
   </div>
     
@@ -167,7 +167,7 @@ User user = (User) session.getAttribute("user");
   </a>
  </div>
   <div class="normal-content">
-<a href="getuser?useractiontype=consultants" >
+<a href="getuser?useractiontype=technicians" >
   <i class="fa-solid fa-user-nurse"></i>
     <span>Technicians</span>
   </a>

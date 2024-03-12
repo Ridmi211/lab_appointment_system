@@ -28,7 +28,7 @@ public class UserManagerImpl implements UserManager {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
+	private Connection getConnection() throws ClassNotFoundException, SQLException { //factory
 		DbDriverManagerFactory driverFactory = new DbDriverManagerFactory();
 		DbDriverManager driverManager = driverFactory.getDbDriver("MySQL");
 		return driverManager.getConnection();

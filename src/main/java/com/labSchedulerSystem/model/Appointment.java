@@ -12,7 +12,7 @@ public class Appointment {
 	private String consultantName;
 	private String seekerName;
 	private int seekerId;
-	private String country;
+	private String costOfTest;
 	private String recomendedDoctor;
 	private String scheduledDate;
 	private String startTime;
@@ -20,8 +20,9 @@ public class Appointment {
 	private String notes;
 	private String seekerEmail;
 	private String seekerPhoneNumber;
-	private String seekerJob;
-	private String seekerCountry;
+	/*
+	 * private String seekerJob; private String seekerCountry;
+	 */
 	private Test.TestType testType;
 	private String testResults;
 	private String testResultsDescription;
@@ -44,21 +45,16 @@ public class Appointment {
 		this.seekerPhoneNumber = seekerPhoneNumber;
 	}
 
-	public String getSeekerJob() {
-		return seekerJob;
-	}
-
-	public void setSeekerJob(String seekerJob) {
-		this.seekerJob = seekerJob;
-	}
-
-	public String getSeekerCountry() {
-		return seekerCountry;
-	}
-
-	public void setSeekerCountry(String seekerCountry) {
-		this.seekerCountry = seekerCountry;
-	}
+	/*
+	 * public String getSeekerJob() { return seekerJob; }
+	 * 
+	 * public void setSeekerJob(String seekerJob) { this.seekerJob = seekerJob; }
+	 * 
+	 * public String getSeekerCountry() { return seekerCountry; }
+	 * 
+	 * public void setSeekerCountry(String seekerCountry) { this.seekerCountry =
+	 * seekerCountry; }
+	 */
 
 	public Appointment() {
 	}
@@ -127,14 +123,11 @@ public class Appointment {
 		this.scheduledDate = scheduledDate;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
+	/*
+	 * public String getCountry() { return country; }
+	 * 
+	 * public void setCountry(String country) { this.country = country; }
+	 */
 	public String getConsultantName() {
 		return consultantName;
 	}
@@ -205,6 +198,14 @@ public class Appointment {
 
 	public void setTestUpdatedOn(Date testUpdatedOn) {
 		this.testUpdatedOn = testUpdatedOn;
+	}
+
+	public String getCostOfTest() {
+		return costOfTest;
+	}
+
+	public void setCostOfTest(String costOfTest) {
+		this.costOfTest = costOfTest;
 	}
 
 	public enum Status {

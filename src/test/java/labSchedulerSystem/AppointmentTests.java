@@ -27,8 +27,8 @@ public class AppointmentTests {
 
 	@BeforeEach
 	void setUp() {
-		appointmentService = new AppointmentService();
-		userService = new UserService();
+		appointmentService = AppointmentService.getAppointmentService();
+		userService = UserService.getUserService();
 		appointmentImpl = new AppointmentManagerImpl();
 	}
 
@@ -36,10 +36,11 @@ public class AppointmentTests {
 	void testAddAppointment() throws SQLException, ClassNotFoundException {
 		Appointment appointment = new Appointment();
 		appointment.setTechnitianId(81);// add proper id
-		appointment.setSeekerId(30);// add proper id
+		appointment.setSeekerId(80);// add proper id
 		appointment.setScheduledDate("2024-03-05");
 		appointment.setStartTime("09:00");
 		appointment.setStatus(Status.REQUESTED);
+		appointment.setCostOfTest("2000");
 		appointment.setRecomendedDoctor("Dr. Smith");
 		appointment.setNotes("Follow-up appointment");
 		appointment.setAppointmentRefId("APPT9855");// add proper id
@@ -62,16 +63,16 @@ public class AppointmentTests {
 	@Test
 	void testEditAppointment() throws SQLException, ClassNotFoundException {
 		Appointment appointment = new Appointment();
-		appointment.setAppointmentId(43);
-		appointment.setTechnitianId(81);
-		appointment.setSeekerId(30);
+		appointment.setAppointmentId(67);// add proper id
+		appointment.setTechnitianId(81);// add proper id
+		appointment.setSeekerId(80);// add proper id
 		appointment.setScheduledDate("2024-03-05");
 		appointment.setStartTime("09:00");
 		appointment.setStatus(Status.COMPLETED);
 		appointment.setRecomendedDoctor("Dr. Smith");
-		appointment.setCountry("USA");
+		appointment.setCostOfTest("1000");
 		appointment.setNotes("Follow-up appointment");
-		appointment.setAppointmentRefId("APPT1234");
+		appointment.setAppointmentRefId("APPT98955");// add proper id
 		appointment.setTestType(TestType.DEFAULT);
 		appointment.setTestResults("Normal");
 		appointment.setTestResultsDescription("All parameters within normal range");
@@ -85,7 +86,7 @@ public class AppointmentTests {
 
 	@Test
 	void testDeleteAppointment() throws SQLException, ClassNotFoundException {
-		int appointmentId = 38;
+		int appointmentId = 67;// add proper id
 		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
 		when(mockedAppointmentService.deleteAppointment(appointmentId)).thenReturn(true);
 		boolean result = appointmentService.deleteAppointment(appointmentId);
@@ -94,7 +95,7 @@ public class AppointmentTests {
 
 	@Test
 	void testFetchSingleAppointment() throws SQLException, ClassNotFoundException {
-		int appointmentId = 43;
+		int appointmentId = 68;// add proper id
 		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(appointmentId);

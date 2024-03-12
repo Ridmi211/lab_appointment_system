@@ -54,10 +54,10 @@
 			<label for="usertype">Tell us who you are?</label>
 			<div class="usertype">
 				<label for="seeker"> <input type="radio" name="usertype"
-					id="seeker" value="ROLE_USER" required>A Job Seeker
+					id="seeker" value="ROLE_USER" required>Patient
 				</label> <label for="consultant"> <input type="radio"
 					name="usertype" id="consultant" value="ROLE_TECHNITIAN" required>
-					A Job consultant
+					Technician
 				</label> <label for="admin"> <input type="radio" name="usertype"
 					id="admin" value="ROLE_ADMIN" required> Admin
 				</label>

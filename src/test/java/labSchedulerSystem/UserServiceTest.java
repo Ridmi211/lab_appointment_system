@@ -35,19 +35,19 @@ class UserServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		userService = new UserService();
+		userService = UserService.getUserService();
 		userMangerImpl = new UserManagerImpl();
 		request = mock(HttpServletRequest.class);
 		response = mock(HttpServletResponse.class);
 		requestDispatcher = mock(RequestDispatcher.class);
-		userService = spy(new UserService());
+		userService = spy(UserService.getUserService());
 	}
 
 	@Test
 	void testAddUser() throws ServletException, IOException, SQLException, ClassNotFoundException {
 		User user = new User();
 		user.setName("John Doe");
-		user.setEmail("john55@example.com");
+		user.setEmail("john1@example.com");// set mail address
 		user.setPassword("password");
 		user.setBirthdate("1990-01-01");
 		user.setGender("Male");
@@ -70,7 +70,7 @@ class UserServiceTest {
 		when(mockedUserService.isEmailAlreadyExists(user.getEmail())).thenReturn(false);
 		when(mockedUserService.addUser(user)).thenReturn(true);
 		boolean result = userService.addUser(user);
-		user = userMangerImpl.fetchUserByEmail("john55@example.com");
+		user = userMangerImpl.fetchUserByEmail("john1@example.com");// set mail address
 		addedUserId = user.getUserId();
 		assertTrue(result, "User should be added successfully");
 	}
@@ -79,7 +79,7 @@ class UserServiceTest {
 	void testAddTechnician() throws SQLException, ClassNotFoundException {
 		User technician = new User();
 		technician.setName("Alice Technician");
-		technician.setEmail("alic@example.com");
+		technician.setEmail("alic2@example.com");
 		technician.setPassword("password");
 		technician.setBirthdate("1985-03-15");
 		technician.setGender("Female");
@@ -173,7 +173,7 @@ class UserServiceTest {
 	@Test
 	void testDeleteUser() throws SQLException, ClassNotFoundException {
 		User user2 = new User();
-		user2 = userMangerImpl.fetchUserByEmail("alic@example.com");
+		user2 = userMangerImpl.fetchUserByEmail("alic2@example.com");
 		addedTechnicianId = user2.getUserId();
 		int userId = addedTechnicianId;
 		UserService mockedUserService = mock(UserService.class);

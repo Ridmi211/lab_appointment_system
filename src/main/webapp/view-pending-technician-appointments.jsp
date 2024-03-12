@@ -106,7 +106,7 @@ h4 span {
  <div class="row m-0 ">
     <div class="col-2 m-0"></div>
     <div class="col-8 m-0 d-flex justify-content-center">
-    <div class="page-title">consultant-pending appointments </div>
+    <div class="page-title">Technician-pending appointments </div>
 </div>
     <div class="col-2 m-0"></div>
 </div>
@@ -125,8 +125,8 @@ h4 span {
           <tr >
              <th scope="col" class="text-center">Count </th>
             <th scope="col" class="text-center">Appointment ID</th>
-            <th scope="col" class="text-center">Consultant Name</th>
-            <th scope="col" class="text-center">Job Seeker</th>
+            	<th scope="col" class="text-center">Technician </th>
+						<th scope="col" class="text-center">Patient</th>
            <th scope="col" class="text-center">Date</th>
              <th scope="col" class="text-center">Time</th>
             <th scope="col" class="text-center">Status</th>

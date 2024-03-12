@@ -7,14 +7,11 @@
       
 
 <%
-// Check if the user is logged in and has the appropriate role
 User user = (User) session.getAttribute("user");
 if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN)) {
-    // Set an error message in the session
     session.setAttribute("errorMessage", "You do not have the required access to view this page.");
-    // Redirect the user to the login page
     response.sendRedirect("accessRightError.jsp");
-    return; // Stop processing the current page
+    return; 
 }
 %>
 
@@ -32,21 +29,17 @@ if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN)) 
 <head>
 <meta charset="ISO-8859-1">
  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">  
   <title>Technician Dashboard </title>
-  <!-- <base href="/"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
-<!-- <link rel="stylesheet" type="text/css" href="css/adminDashboard.css">
- -->
+
 <Style>
 
 @charset "ISO-8859-1";
