@@ -5,18 +5,10 @@
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.Test"%>
-
 <%@ page import="java.util.ArrayList"%>
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-
-
-
 <meta charset="utf-8">
 <title>Tests</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +19,6 @@
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -50,7 +41,8 @@ html {
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(242, 248, 255) 100%);
+	background-image: linear-gradient(-45deg, #e3eefe 0%, rgb(242, 248, 255)
+		100%);
 	color: #000000;
 }
 
@@ -60,7 +52,7 @@ h4 {
 	font-size: 22px;
 	margin-top: 40px;
 	position: relative;
-	top:-3px;
+	top: -3px;
 	left: -450px;
 }
 
@@ -87,9 +79,6 @@ h2 {
 	background-position: center;
 }
 
-/* .container{
-            padding: 10px ;
-        } */
 .header-text {
 	margin-top: 45%;
 }
@@ -109,7 +98,6 @@ h2 {
 	color: #08d8ca;
 }
 
-/* ------------------about ------------------------------- */
 #about {
 	padding: 80px 0;
 	color: #ababab;
@@ -169,9 +157,6 @@ h2 {
 	width: 50%;
 }
 
-/* .tab-contents{
-            font-size: 14px;
-        } */
 .tab-contents ul li {
 	list-style: none;
 	margin: 10px 0px;
@@ -190,7 +175,6 @@ h2 {
 	display: block;
 }
 
-/* -------------services-------------- */
 #services {
 	padding: 30px 0;
 	height: 90vh;
@@ -204,7 +188,6 @@ h2 {
 }
 
 .services div {
-	/* background: #262626; */
 	padding: 40px;
 	font-size: 13px;
 	font-weight: 300;
@@ -232,11 +215,9 @@ h2 {
 }
 
 .services div:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
-/* ///////////////// */
 .services-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -277,7 +258,6 @@ h2 {
 	transform: translateY(-10px);
 }
 
-/* ---------------portfolio------------------------- */
 #portfolio {
 	padding: 50px 0;
 }
@@ -295,14 +275,6 @@ h2 {
 	overflow: hidden;
 }
 
-/* .work img {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-            transition: transform 0.5s;
-
-
-        } */
 .layer {
 	width: 360px;
 	height: 0;
@@ -357,7 +329,6 @@ h2 {
 	background: #d6adff;
 }
 
-/* ----------------contact------------------- */
 .contact-left {
 	flex-basis: 35%;
 }
@@ -442,7 +413,6 @@ form .btn2 {
 	color: #d6adff;
 }
 
-/* -----css for small screen------------ */
 nav .fas {
 	display: none;
 }
@@ -480,7 +450,6 @@ nav .fas {
 }
 
 .sub-title:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
@@ -510,19 +479,12 @@ nav .fas {
 	width: 100%;
 	height: 100%;
 	background: rgb(139, 209, 232, 0.449);
-	/* Adjust the color and opacity as needed */
 	z-index: 0;
-	/* You can also add other styles like gradients or patterns here */
 }
 
 body {
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
-	/* align-items: center; */
-	/* width: 100vw; */
-	/* height: 100vh; */
-	/* background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
 }
 
 .sidebar {
@@ -672,7 +634,6 @@ label #cancel {
 	text-align: center;
 }
 
-/* consultat */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
@@ -701,7 +662,6 @@ label #cancel {
 
 .card-container h6 {
 	color: rgb(128, 128, 128);
-	
 }
 
 .card-container .round {
@@ -714,7 +674,6 @@ label #cancel {
 
 button.primary {
 	background-color: #905abd;
-	/* border: 1px solid #2D2747; */
 	border-radius: 3px;
 	color: white;
 	font-family: Montserrat, sans-serif;
@@ -850,47 +809,32 @@ input[type="text"] {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
-
-/*  <!-- sidebar styling end here  --> */
 </Style>
-
 </head>
-
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<%
-	// Get the user object from the session
 	User user = (User) session.getAttribute("user");
 	%>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-	<!-- sidebar end here  -->
 	<nav class="p-0 m-0 pt-0">
-		<img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
-			<h4>
-				Medi<span>Check</span>
-			</h4>
+		<img class="nav-logo p-0 m-0 pt-0 mt-0"
+			src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+			alt="logo">
+		<h4>
+			Medi<span>Check</span>
+		</h4>
 		<ul class="" id="sidemenu">
-			<!--   <li><a href="#header">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Extra-Curricular</a></li>
-        <li><a href="#portfolio">Projects</a></li> -->
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
-
 			<%
 			if (user != null) {
 			%>
-
 			<li><a href="view-profile.jsp"><i class="fa fa-user-circle"
 					aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 			<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -905,51 +849,34 @@ input[type="text"] {
 			%>
 		</ul>
 	</nav>
-
 	<div class="row p-0 m-0">
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
 			style="background-image: url(https://wallpapercave.com/wp/wp2968506.jpg);">
-
 			<div class="container d-flex justify-content-center p-0 m-0">
-
 				<div class="header-text pt-2 ">
-
 					<h1>Choose What's Right for You from our</h1>
 					<h2>Comprehensive Test Selection</h2>
-
-
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-
-
 	<%
 	String selectedTestType = request.getParameter("filterTestType");
-
 	List<Test> tests = (List<Test>) request.getAttribute("tests");
-
 	List<Test> filteredTests = new ArrayList<Test>();
-
 	if (selectedTestType != null && !selectedTestType.isEmpty()) {
-		// Filter by test type
 		for (Test test : tests) {
-			Test.TestType type = test.getType(); // Get the TestType enum
+			Test.TestType type = test.getType();
 			if (type != null && type.getDisplayName().equals(selectedTestType)) {
 		filteredTests.add(test);
 			}
 		}
 	} else {
-		// No test type selected, show all tests
 		filteredTests = tests;
 	}
 	%>
-
-	<!-- Display filtered tests -->
 	<div class="row p-0 pb-5" style="margin-left: 140px; margin-top: 30px;">
 		<div class="container">
 			<div class="row">
@@ -959,14 +886,11 @@ input[type="text"] {
 				<div class="col-sm mb-5">
 					<div class="work">
 						<div class="card-container">
-						<img class="round"
+							<img class="round"
 								src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
 								alt="user" /> <br>
-
-							<!-- Add image, name, and other details for the test -->
 							<div class="name">
 								<%=test.getType().getDisplayName()%>
-
 							</div>
 							<div class="countries">
 								<h6>
@@ -978,24 +902,11 @@ input[type="text"] {
 									<li>Rs.<%=test.getCost()%></li>
 								</ul>
 							</div>
-
-
 						</div>
-						<%-- <div class="layer">
-							<a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
-								<div class="btn btn2">
-									<i class="fa-regular fa-calendar-check"></i> Book
-
-								</div>
-							</a>
-						</div> --%>
 						<%@ page import="javax.servlet.http.HttpSession"%>
-
 						<%
 						HttpSession session2 = request.getSession(false);
-
 						if (session2 == null || session2.getAttribute("user") == null) {
-							// User is not logged in, display a message or redirect to the login page
 						%>
 						<div class="layer">
 							<a href="login.jsp">
@@ -1007,7 +918,6 @@ input[type="text"] {
 						</div>
 						<%
 						} else {
-						// User is logged in, allow access to the page
 						%>
 						<div class="layer">
 							<a href="book-test-new.jsp?testId=<%=test.getTestId()%>">
@@ -1019,7 +929,6 @@ input[type="text"] {
 						<%
 						}
 						%>
-
 					</div>
 				</div>
 				<%
@@ -1028,12 +937,6 @@ input[type="text"] {
 			</div>
 		</div>
 	</div>
-
-	<!--bnbnbnbnbnbnb  -->
-
-
-
-
 	<div
 		class="p-0 m-0 d-flex align-items-center services justify-content-center"
 		id="about-us"
@@ -1055,19 +958,10 @@ input[type="text"] {
 			</div>
 		</div>
 	</div>
-
-	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-
-
 	</div>
-
-	<!-- --------------------javascript-------------------------- -->
 	<script>
- 
-	<script>
-
             var tablinks = document.getElementsByClassName("tab-links");
             var tabcontents = document.getElementsByClassName("tab-contents");
             function opentab(tabname) {
@@ -1093,11 +987,6 @@ input[type="text"] {
             function closemenu() {
                 sidemenu.style.right = "-200px"
             }
-
-
-
-
-
         </script>
 
 	<script>
@@ -1115,18 +1004,12 @@ input[type="text"] {
                         }, 5000)
                         form.reset()
                     })
-
-
                     .catch(error => console.error('Error!', error.message))
             })
         </script>
-	<!-- chart-js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 	<script>
             const ctx = document.getElementById('myChart');
-
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -1146,8 +1029,5 @@ input[type="text"] {
                 }
             });
         </script>
-
-
 </body>
-
 </html>

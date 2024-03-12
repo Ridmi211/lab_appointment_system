@@ -2,9 +2,7 @@ package com.labSchedulerSystem.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import com.labSchedulerSystem.model.Message;
-import com.labSchedulerSystem.model.Appointment.Status;
 import com.labSchedulerSystem.model.Message.MessageStatus;
 
 public interface MessageManager {

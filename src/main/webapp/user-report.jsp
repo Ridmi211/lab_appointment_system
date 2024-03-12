@@ -8,19 +8,14 @@
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
-
-
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
-
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.stream.Collectors"%>
 <%@ page import="java.util.ArrayList"%>
-
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page import="com.fasterxml.jackson.core.JsonProcessingException"%>
-
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
@@ -30,7 +25,6 @@
 <%@ page import="java.util.Map.Entry"%>
 <%@ page import="java.awt.Color"%>
 <%@ page import="java.util.Random"%>
-
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
@@ -39,18 +33,16 @@
 <%@ page import="java.util.stream.IntStream"%>
 <%@ page import="java.time.Year"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManager"%>
-
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 
-
-<%UserManagerImpl userManager = new UserManagerImpl();%>
-
+<%
+UserManagerImpl userManager = new UserManagerImpl();
+%>
 <%
 Calendar calendar = Calendar.getInstance();
 calendar.setTime(new Date());
 int currentYear = calendar.get(Calendar.YEAR);
 %>
-
 <%
 Map<String, List<Integer>> monthlyCountsMap = userManager.getMonthlyUserRegistrationCounts();
 List<Integer> userCounts = monthlyCountsMap.get("userCounts");
@@ -58,7 +50,6 @@ List<Integer> consultantCounts = monthlyCountsMap.get("consultantCounts");
 int totalClientsCounts = userCounts.stream().mapToInt(Integer::intValue).sum();
 int totalConsultantCounts = consultantCounts.stream().mapToInt(Integer::intValue).sum();
 %>
-
 <%
 AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
 List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
@@ -73,24 +64,17 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0-beta3/css/all.min.css"> -->
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- exportas pdf -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-<!-- exportas pdf -->
-
-<!-- Add this in the head section of your HTML -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <title>User Summary Report</title>
-
 <style>
 </style>
 </head>
@@ -102,34 +86,26 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 	</label>
 
 	<%
-	// Get the user object from the session
 	User user = (User) session.getAttribute("user");
 	%>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
 	<button id="print"
 		style="background-color: #1da1f2; border: #1da1f2; margin-top: 20px; position: fixed; left: 85%; z-index: 80;"
 		type="button" onclick="generatePDF()" class="btn btn-primary">Export
 		as PDF</button>
 	<script type="text/javascript">
-  function generatePDF() {
-        
-        // Choose the element id which you want to export.
+  function generatePDF() {  
         var element = document.getElementById('divToExport');
         element.style.width = '790px';
-        // element.style.height = '900px';
         var opt = {
             margin:       0,
             filename:     'User Summary Report.pdf',
             image:        { type: 'jpeg', quality: 1},
             html2canvas:  { scale: 2 },
             jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait',precision: '12' }
-          };
-        
-        // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+          }; 
         html2pdf().set(opt).from(element).save();
       }
 </script>
@@ -139,57 +115,38 @@ List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 			<div class="page-title d-flex align-items-center align-self-center">User
 				Summary Report</div>
 		</div>
-		<!-- Card 1  numbers -->
-
-
-		<!--    accessright -->
-
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">User Access Rights</div>
 				</div>
-
 				<div class=" common-border">
 					<div class="card-comment common-border">* Chart depicts the
 						types of users available within the system</div>
 				</div>
-
 				<div class="row common-border m-0">
 					<div class="col-sm col-9 common-border pb-2 ">
 						<canvas id="accessRightsPieChart" width="400" height="200"></canvas>
 					</div>
 					<div class="col-sm col-3 common-border pb-2 ">
-
 						<div id="accessRightsCounts" class="mt-3 counts-div"></div>
-
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!--      /////////// -->
 		<%
-
-
-try {
-    Map<String, Integer> accessRightsData = userManager.getAccessRightsData();
-
-    // Convert the data into JavaScript arrays
-/*  List<String> labelsList = accessRightsData.keySet().stream().map(String::valueOf).collect(Collectors.toList()); */
-
-   /*  String[] customLabels = {"Technician", "Admin", "Client"}; */
-       String[] customLabels = {"Technician", "Client", "Admin"};
-    List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
-
-    String labelsArray = "['" + String.join("', '", customLabels) + "']";
-    String dataValuesArray = "[" + String.join(", ", dataValuesList) + "]";
-%>
+		try {
+			Map<String, Integer> accessRightsData = userManager.getAccessRightsData();
+			String[] customLabels = {"Technician", "Client", "Admin"};
+			List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
+			String labelsArray = "['" + String.join("', '", customLabels) + "']";
+			String dataValuesArray = "[" + String.join(", ", dataValuesList) + "]";
+		%>
 		<script>
     var accessRightsData = {
-        labels: <%= labelsArray %>,
+        labels: <%=labelsArray%>,
         datasets: [{
-            data: <%= dataValuesArray %>,
+            data: <%=dataValuesArray%>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.8)', // Client color
                 'rgba(54, 162, 235, 0.8)', // Consultant color
@@ -198,7 +155,6 @@ try {
             borderWidth: 1
         }]
     };
-
     var ctx3 = document.getElementById('accessRightsPieChart').getContext('2d');
     var accessRightsPieChart = new Chart(ctx3, {
         type: 'pie',
@@ -209,12 +165,9 @@ try {
             title: {
                 display: true,
                 text: 'User Access Rights'
-            },
-            
+            },            
         }
-    });
-   
-    
+    });      
     var countsElement = document.getElementById('accessRightsCounts');
     var countsText = "<strong>Counts:</strong><ul>";
     for (var i = 0; i < accessRightsData.labels.length; i++) {
@@ -223,17 +176,16 @@ try {
     countsText += "</ul>";
     countsElement.innerHTML = countsText;
 </script>
-
 		<%
-} catch (ClassNotFoundException | SQLException e) {
-    e.printStackTrace(); // Handle the exception appropriately in your application
-}
-%>
-
+		} catch (ClassNotFoundException | SQLException e) {
+		e.printStackTrace();
+		}
+		%>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
-					<div class="card-title common-border">User and appointment growth</div>
+					<div class="card-title common-border">User and appointment
+						growth</div>
 				</div>
 				<div class=" common-border">
 					<div class="card-comment common-border">*Chart provides a
@@ -247,7 +199,6 @@ try {
 				</div>
 			</div>
 		</div>
-
 		<script>
     const data1 = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -273,7 +224,6 @@ try {
             fill: false,
         }]
     };
-
     const ctx1 = document.getElementById('myLineChart').getContext('2d');
     const myLineChart = new Chart(ctx1, {
         type: 'line',
@@ -291,60 +241,35 @@ try {
         }
     });
 </script>
-
-
-
-		<!--    //////////////////////// -->
-
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Users age distribution
 					</div>
 				</div>
-
 				<div class=" common-border">
 					<div class="card-comment common-border"></div>
 				</div>
-
-
 				<div class="row common-border m-0">
 					<div class="col-sm col-9 common-border pb-2 m-0 p-0">
 						<canvas id="ageDistributionPieChart" width="400" height="200"></canvas>
 					</div>
 					<div class="col-sm col-3 common-border pb-2 m-0 p-0">
-
 						<div id="ageDistributionCounts" class="mt-3 counts-div"></div>
-
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<%
-   
-    Map<String, Integer> ageDistributionData = userManager.getAgeDistributionData();
-
-    // Convert Java Map to JSON string
-    String jsonData2 = new ObjectMapper().writeValueAsString(ageDistributionData);
-    
-    
-
-    // You can use jsonData in your JavaScript code
-%>
+		Map<String, Integer> ageDistributionData = userManager.getAgeDistributionData();
+		String jsonData2 = new ObjectMapper().writeValueAsString(ageDistributionData);
+		%>
 		<script>
-        // Parse JSON data in JavaScript
-        var ageDistributionData = JSON.parse('<%= jsonData2 %>');
-
-        // Extract labels, data, and colors from the JSON data
+        var ageDistributionData = JSON.parse('<%=jsonData2%>');
         var labels = Object.keys(ageDistributionData);
         var data = labels.map(function (label) {
             return ageDistributionData[label];
         });
-
-      
-
-        // Create a pie chart using Chart.js
         var ctx = document.getElementById('ageDistributionPieChart').getContext('2d');
         var ageDistributionPieChart = new Chart(ctx, {
             type: 'pie',
@@ -371,9 +296,7 @@ try {
                     text: 'User Age Distribution'
                 }
             }
-        });
-        
-        // Display labels and counts as a list beneath the chart
+        });  
         var ageDistributionCountsElement = document.getElementById('ageDistributionCounts');
         var ageDistributionCountsText = "<strong>Counts:</strong><ul>";
         for (var i = 0; i < labels.length; i++) {
@@ -381,90 +304,62 @@ try {
         }
         ageDistributionCountsText += "</ul>";
         ageDistributionCountsElement.innerHTML = ageDistributionCountsText;
-
     </script>
-		<!--         /////////// -->
-
-
-
-
-		<!--     //////////////////////// -->
-
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">User Demographics</div>
 				</div>
-
 				<div class=" common-border">
 					<div class="card-comment common-border">* Distribution of
-						users by gender </div>
+						users by gender</div>
 				</div>
-
 				<div class="row common-border m-0">
 					<div class="col-sm col-12 common-border pb-2 "
 						style="height: 250px">
-						<!--               <canvas id="geographicalDistributionChart" width="40" height="40"></canvas>
-
- -->
 						<canvas id="userDemographicsChart"></canvas>
-
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
 		<%
-    Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
-
-    // Convert Java Map to JSON string
-    String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
-
-    // You can use jsonData in your JavaScript code
-%> 
-
-<script>
-    // Parse JSON data in JavaScript
-    var userGenderDistribution = JSON.parse('<%= jsonData %>');
-
-    // Extract genders and counts from the JSON data
-    var genders = Object.keys(userGenderDistribution);
-    var counts = Object.values(userGenderDistribution);
-
-    // Create dataset for gender distribution
-    var genderDataset = {
-        label: 'Gender Distribution',
-        data: counts,
-        backgroundColor: ['rgba(54, 162, 235, 0.8)','rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ], // Add more colors if needed
-        borderWidth: 1
-    };
-
-    // Create a bar chart using Chart.js
-    var ctx = document.getElementById('userDemographicsChart').getContext('2d');
-    var userDemographicsChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: genders,
-            datasets: [genderDataset]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    });
-</script>
-
-
-
+		Map<String, Integer> userGenderDistribution = userManager.getUserGenderDistribution();
+		String jsonData = new ObjectMapper().writeValueAsString(userGenderDistribution);
+		%>
+		<script>
+    var userGenderDistribution = JSON.parse('<%=jsonData%>
+			');
+			var genders = Object.keys(userGenderDistribution);
+			var counts = Object.values(userGenderDistribution);
+			var genderDataset = {
+				label : 'Gender Distribution',
+				data : counts,
+				backgroundColor : [ 'rgba(54, 162, 235, 0.8)',
+						'rgba(255, 99, 132, 0.8)', 'rgba(75, 192, 192, 0.8)' ], // Add more colors if needed
+				borderWidth : 1
+			};
+			var ctx = document.getElementById('userDemographicsChart')
+					.getContext('2d');
+			var userDemographicsChart = new Chart(ctx, {
+				type : 'bar',
+				data : {
+					labels : genders,
+					datasets : [ genderDataset ]
+				},
+				options : {
+					scales : {
+						y : {
+							beginAtZero : true
+						}
+					},
+					plugins : {
+						legend : {
+							display : false
+						}
+					}
+				}
+			});
+		</script>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
@@ -482,33 +377,32 @@ try {
 				</div>
 			</div>
 		</div>
-
-		<!--      /////////// -->
 		<%
-try {
-    Map<RegistrationStatus, Integer> registrationStatusData = userManager.getRegistrationStatusData();
-
-    // Convert the data into JavaScript arrays
-    String labelsArray = "['" + RegistrationStatus.PENDING.getDisplayName() + "', '" + RegistrationStatus.APPROVED.getDisplayName() + "', '" + RegistrationStatus.REJECTED.getDisplayName() + "']";
-    String dataValuesArray = "[" + registrationStatusData.get(RegistrationStatus.PENDING) + ", " + registrationStatusData.get(RegistrationStatus.APPROVED) + ", " + registrationStatusData.get(RegistrationStatus.REJECTED) + "]";
-%>
-
+		try {
+			Map<RegistrationStatus, Integer> registrationStatusData = userManager.getRegistrationStatusData();
+			String labelsArray = "['" + RegistrationStatus.PENDING.getDisplayName() + "', '"
+			+ RegistrationStatus.APPROVED.getDisplayName() + "', '" + RegistrationStatus.REJECTED.getDisplayName()
+			+ "']";
+			String dataValuesArray = "[" + registrationStatusData.get(RegistrationStatus.PENDING) + ", "
+			+ registrationStatusData.get(RegistrationStatus.APPROVED) + ", "
+			+ registrationStatusData.get(RegistrationStatus.REJECTED) + "]";
+		%>
 		<script>
-    // Parse JSON data in JavaScript
-    var registrationStatusData = {
-        labels: <%= labelsArray %>,
-        datasets: [{
-            data: <%= dataValuesArray %>,
-            backgroundColor: [
-                'rgba(255, 206, 86, 0.8)', // Pending color
-                'rgba(75, 192, 192, 0.8)', // Approved color
-                'rgba(255, 99, 132, 0.8)'  // Rejected color
-            ],
-            borderWidth: 1
-        }]
-    };
-
-   
+			var registrationStatusData = {
+				labels :
+		<%=labelsArray%>
+			,
+				datasets : [ {
+					data :
+		<%=dataValuesArray%>
+			,
+					backgroundColor : [ 'rgba(255, 206, 86, 0.8)', // Pending color
+					'rgba(75, 192, 192, 0.8)', // Approved color
+					'rgba(255, 99, 132, 0.8)' // Rejected color
+					],
+					borderWidth : 1
+				} ]
+			};
 			var ctx6 = document.getElementById(
 					'registrationStatusDoughnutChart').getContext('2d');
 			var registrationStatusDoughnutChart = new Chart(ctx6, {
@@ -531,102 +425,87 @@ try {
 		</script>
 
 		<%
-} catch (ClassNotFoundException | SQLException e) {
-    e.printStackTrace(); 
-}
-%>
-
-
+		} catch (ClassNotFoundException | SQLException e) {
+		e.printStackTrace();
+		}
+		%>
 		<div class=" card-container">
 			<div class="col">
 				<div class=" common-border">
 					<div class="card-title common-border">Distribution of
 						Technicians by the assigned test type</div>
 				</div>
-
-
-
 				<div class="row common-border m-0 p-0">
 					<div class="col-sm col-12 common-border pb-2 m-0 p-0 "
 						style="height: 250px">
 						<div class=" common-border m-0 p-0">
 							<div class="card-comment common-border m-0 p-0">*
-								Technician availability for different test types are
-								depicted</div>
+								Technician availability for different test types are depicted</div>
 						</div>
 						<canvas id="consultantJobTypeChart" width="200" height="200"></canvas>
-
 					</div>
 				</div>
-
 			</div>
 		</div>
+		<%
+		try {
+			Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
+			Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();
+			for (String label : consultantJobTypeDistribution.keySet()) {
+				Test.TestType testType = Test.TestType.valueOf(label);
+				String displayName = testType.getDisplayName();
+				consultantJobTypeDisplayNames.put(label, displayName);
+			}
+			String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
+			String dataValuesArray = "[" + String.join(", ",
+			consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
+		%>
+		<script>
+			function generateRandomColors(count) {
+				var colors = [];
+				for (var i = 0; i < count; i++) {
+					var red = Math.floor(Math.random() * 100) + 155;
+					var green = Math.floor(Math.random() * 100) + 155;
+					var blue = Math.floor(Math.random() * 100) + 155;
+					var alpha = 0.8;
 
-
-<%
-    try {
-        Map<String, Integer> consultantJobTypeDistribution = userManager.getConsultantJobTypeDistribution();
-        Map<String, String> consultantJobTypeDisplayNames = new HashMap<>();
-        
-        // Get display names for enum labels
-        for (String label : consultantJobTypeDistribution.keySet()) {
-            Test.TestType testType = Test.TestType.valueOf(label);
-            String displayName = testType.getDisplayName();
-            consultantJobTypeDisplayNames.put(label, displayName);
-        }
-
-        // Convert the display names into JavaScript array
-        String labelsArray = "['" + String.join("', '", consultantJobTypeDisplayNames.values()) + "']";
-        String dataValuesArray = "[" + String.join(", ", consultantJobTypeDistribution.values().stream().map(String::valueOf).toArray(String[]::new)) + "]";
-    %>
-
-    <script>
-        // JavaScript function to generate colors dynamically
-        function generateRandomColors(count) {
-            var colors = [];
-            for (var i = 0; i < count; i++) {
-                var red = Math.floor(Math.random() * 100) + 155; // Adjust the range for lighter colors
-                var green = Math.floor(Math.random() * 100) + 155;
-                var blue = Math.floor(Math.random() * 100) + 155;
-                var alpha = 0.8; // Constant alpha value
-
-                colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
-            }
-            return colors;
-        }
-
-        // Parse JSON data in JavaScript
-        var consultantJobTypeData = {
-            labels: <%=labelsArray%>,
-            datasets: [{
-                data: <%=dataValuesArray%>,
-                backgroundColor: generateRandomColors(<%=consultantJobTypeDistribution.size()%>),
-            }]
-        };
-
-        var ctx8 = document.getElementById('consultantJobTypeChart').getContext('2d');
-        var consultantJobTypeChart = new Chart(ctx8, {
-            type: 'pie',
-            data: consultantJobTypeData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                title: {
-                    display: true,
-                    text: 'Consultant Specialized Job Type Distribution'
-                }
-            }
-        });
-    </script>
-
-<%
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace(); // Handle the exception appropriately in your application
-    }
-%>
-
-
-
+					colors.push(`rgba(${red}, ${green}, ${blue}, ${alpha})`);
+				}
+				return colors;
+			}
+			var consultantJobTypeData = {
+				labels :
+		<%=labelsArray%>
+			,
+				datasets : [ {
+					data :
+		<%=dataValuesArray%>
+			,
+					backgroundColor : generateRandomColors(
+		<%=consultantJobTypeDistribution.size()%>
+			),
+				} ]
+			};
+			var ctx8 = document.getElementById('consultantJobTypeChart')
+					.getContext('2d');
+			var consultantJobTypeChart = new Chart(ctx8, {
+				type : 'pie',
+				data : consultantJobTypeData,
+				options : {
+					responsive : true,
+					maintainAspectRatio : false,
+					title : {
+						display : true,
+						text : 'Consultant Specialized Job Type Distribution'
+					}
+				}
+			});
+		</script>
+		<%
+		} catch (ClassNotFoundException | SQLException e) {
+		e.printStackTrace();
+		}
+		%>
 		<div class="pebble-footer">
 			<div class="row page-footer">
 				<div class="col-4 body-text"></div>
@@ -635,19 +514,12 @@ try {
 			</div>
 		</div>
 		<script>
-    // Get the current date
-    var currentDate = new Date();
-
-    // Format the date as YYYY/MM/DD
-    var formattedDate = currentDate.getFullYear() + '/' + (currentDate.getMonth() + 1) + '/' + currentDate.getDate();
-
-    // Display the formatted date in the specified element
-    document.getElementById('currentDay').innerHTML = formattedDate;
-</script>
-		<!-- Card structure-->
+			var currentDate = new Date();
+			var formattedDate = currentDate.getFullYear() + '/'
+					+ (currentDate.getMonth() + 1) + '/'
+					+ currentDate.getDate();
+			document.getElementById('currentDay').innerHTML = formattedDate;
+		</script>
 	</div>
-
-	<!-- footer template -->
-
 </body>
 </html>

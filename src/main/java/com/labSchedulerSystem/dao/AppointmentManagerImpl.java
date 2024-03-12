@@ -12,19 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManager;
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManagerFactory;
-import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
-import com.labSchedulerSystem.model.RegistrationStatus;
 import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.Test.TestType;
-import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
 
 public class AppointmentManagerImpl implements AppointmentManager {

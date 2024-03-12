@@ -16,7 +16,6 @@ if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_ADMIN)) {
 	return;
 }
 %>
-
 <%
 AppointmentService appointmentService = AppointmentService.getAppointmentService();
 UserService userService = UserService.getUserService();
@@ -214,41 +213,16 @@ keyframes point { 0% {
 }
 
 100
-
-
-
-
 %
 {
 transform
-
-
-
-
 :
-
-
-
-
-translateX
-
-
-(
-
-
-
-
+translateX(
 .125em
-
-
-
-
-)
-
-
-;
+);
 }
 }
+
 .page-title {
 	text-align: center;
 	font-size: 24px;
@@ -280,22 +254,18 @@ translateX
 	color: #91d7f4;
 	font-weight: lighter;
 }
-</Style>
 
+</Style>
 </head>
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
 	</div>
-	<!-- sidebar end here  -->
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -306,12 +276,9 @@ translateX
 					Medi<span>Check</span>
 				</div>
 				<ul class="" id="sidemenu">
-
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -325,16 +292,10 @@ translateX
 					<%
 					}
 					%>
-
-
 				</ul>
-
-
-
 			</nav>
 		</div>
 	</div>
-
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
@@ -342,7 +303,6 @@ translateX
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
-
 	<%
 	if (user != null) {
 	%>

@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
-
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.RegistrationStatus"%>
-
 <%
 User user = (User) session.getAttribute("user");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -46,10 +42,12 @@ h4 {
 	top: -3px;
 	left: -450px;
 }
+
 .reference {
 	color: rgb(25, 31, 53);
 	font-size: 14px;
 }
+
 h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
@@ -62,13 +60,9 @@ h4 span {
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -79,12 +73,9 @@ h4 span {
 					Medi<span>Check</span>
 				</h4>
 				<ul class="" id="sidemenu">
-
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -97,17 +88,10 @@ h4 span {
 					<%
 					}
 					%>
-
-
 				</ul>
-
-
-
 			</nav>
 		</div>
 	</div>
-
-
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
@@ -115,10 +99,6 @@ h4 span {
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
-
-
-	<!-- table -->
-	<!-- <div class="col-sm"> -->
 	<div class="row m-0">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0">
@@ -127,17 +107,15 @@ h4 span {
 					<tr>
 						<th scope="col" class="text-center">Count</th>
 						<th scope="col" class="text-center">Appointment ID</th>
-						<th scope="col" class="text-center">Technician </th>
+						<th scope="col" class="text-center">Technician</th>
 						<th scope="col" class="text-center">Patient</th>
 						<th scope="col" class="text-center">Date</th>
 						<th scope="col" class="text-center">Time</th>
 						<th scope="col" class="text-center">Status</th>
-						<!--  <th scope="col">Role</th> -->
 						<th scope="col">View</th>
 						<th scope="col">Delete</th>
 					</tr>
 				</thead>
-				<!--  <tbody> -->
 				<tag:forEach var="appointment" items="${appointmentList}">
 					<tr>
 						<td scope="row"></td>
@@ -150,8 +128,6 @@ h4 span {
 							<div class=" status-btn">${appointment.status.displayName}
 							</div>
 						</td>
-
-						<%--     <td class="text-center">${user.accessRight.displayName}</td> --%>
 						<td class="btn-column">
 							<form action="appointmentManager" method="post">
 								<input type="hidden" name="appointmentId"
@@ -159,7 +135,6 @@ h4 span {
 									type="hidden" name="appactiontype" value="view">
 								<button type="submit" class="btn-view">View</button>
 							</form>
-
 						</td>
 						<td class="btn-column">
 							<form onsubmit="return confirmDelete();"
@@ -170,12 +145,9 @@ h4 span {
 								<button type="submit" class="btn-delete">Delete</button>
 							</form>
 						</td>
-
 					</tr>
 				</tag:forEach>
-				<!--   </tbody> -->
 			</table>
-
 		</div>
 		<div class="col-1"></div>
 	</div>
@@ -184,6 +156,5 @@ h4 span {
 			return confirm("Are you sure you want to delete this user?");
 		}
 	</script>
-
 </body>
 </html>

@@ -1,47 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ page import="com.labSchedulerSystem.model.User" %>
-    <%@ page import="com.labSchedulerSystem.model.AccessRight" %>
-      <%@ page import="com.labSchedulerSystem.service.AppointmentService" %>
-      
-
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.labSchedulerSystem.model.User"%>
+<%@ page import="com.labSchedulerSystem.model.AccessRight"%>
+<%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%
 User user = (User) session.getAttribute("user");
 if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN)) {
-    session.setAttribute("errorMessage", "You do not have the required access to view this page.");
-    response.sendRedirect("accessRightError.jsp");
-    return; 
+	session.setAttribute("errorMessage", "You do not have the required access to view this page.");
+	response.sendRedirect("accessRightError.jsp");
+	return;
 }
 %>
-
 <%
-        AppointmentService appointmentService = AppointmentService.getAppointmentService();
-        int loggedInUserId = user.getUserId();
-        int adminRequestedAppointmentsCount = appointmentService.getAdminRequestedAppointmentsCount(loggedInUserId);
-        int appointmentsByConsultantIdCount = appointmentService.getAppointmentsByConsultantIdCount(loggedInUserId);
-         int cancelledAppointmentsCount = appointmentService.getCancelledAppointmentsByConIdCount(loggedInUserId);
-        int upcomingAppointmentsCountByConId = appointmentService.getUpcomingAppointmentsByConIdCount(loggedInUserId);
-        int completedAppointmentsCountByConId = appointmentService.getCompletedAppointmentsByConIdCount(loggedInUserId);
+AppointmentService appointmentService = AppointmentService.getAppointmentService();
+int loggedInUserId = user.getUserId();
+int adminRequestedAppointmentsCount = appointmentService.getAdminRequestedAppointmentsCount(loggedInUserId);
+int appointmentsByConsultantIdCount = appointmentService.getAppointmentsByConsultantIdCount(loggedInUserId);
+int cancelledAppointmentsCount = appointmentService.getCancelledAppointmentsByConIdCount(loggedInUserId);
+int upcomingAppointmentsCountByConId = appointmentService.getUpcomingAppointmentsByConIdCount(loggedInUserId);
+int completedAppointmentsCountByConId = appointmentService.getCompletedAppointmentsByConIdCount(loggedInUserId);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">  
-  <title>Technician Dashboard </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="icon" type="image/x-icon"
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+	rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+	rel="stylesheet">
+<title>Technician Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
+<link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
-
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
-
 @charset "ISO-8859-1";
 
 * {
@@ -51,7 +55,8 @@ if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN)) 
 }
 
 body {
-	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%, rgb(222, 241, 250) 100%);
+	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%,
+		rgb(222, 241, 250) 100%);
 }
 
 @import
@@ -102,7 +107,7 @@ body {
 }
 
 .count {
-	color:#529ece;
+	color: #529ece;
 	font-size: 3.5em;
 	font-weight: 600;
 	line-height: 1;
@@ -117,7 +122,6 @@ body {
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 700;
-	/* line-height: 1; */
 	line-height: 1.2;
 	letter-spacing: 0.1em;
 	margin: 0 0 10px;
@@ -196,13 +200,27 @@ keyframes point { 0% {
 }
 
 100
+
+
 %
 {
 transform
+
+
 :
-translateX(
+
+
+translateX
+(
+
+
 .125em
-);
+
+
+)
+;
+
+
 }
 }
 .page-title {
@@ -214,8 +232,8 @@ translateX(
 	text-transform: uppercase;
 }
 
-.welcome-title{
-text-align: center;
+.welcome-title {
+	text-align: center;
 	font-size: 28px;
 	color: #529ece;
 	margin-top: 5px;
@@ -228,7 +246,7 @@ text-align: center;
 	font-size: 22px;
 	margin-top: 40px;
 	position: relative;
-	top:-30px;
+	top: -30px;
 	left: -320px;
 }
 
@@ -236,146 +254,130 @@ text-align: center;
 	color: #91d7f4;
 	font-weight: lighter;
 }
-
-
-    </Style>
-
+</Style>
 </head>
-<body >
- <!-- sidebar start here  -->
-   <input type="checkbox" id="check">
-      <label style="position: fixed; top: 60px; z-index: 1; left: -5px;" for="check">
-        <i class="fas fa-bars" id="btn"></i>
-        <i class="fas fa-times" id="cancel"></i>
-      </label>
+<body>
+	<input type="checkbox" id="check">
+	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
+		for="check"> <i class="fas fa-bars" id="btn"></i> <i
+		class="fas fa-times" id="cancel"></i>
+	</label>
 
-<div class="sidebar">
- <jsp:include page="sidebar.jsp" />  
-</div>  <!-- sidebar end here  -->   
+	<div class="sidebar">
+		<jsp:include page="sidebar.jsp" />
+	</div>
 
- <div class="row m-0 p-0">
- <div class="col-12 m-0 p-0">
-   <nav class="p-0 m-0 ">
-   <img class="nav-logo p-0 m-0 pt-0 mt-0" src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg" alt="logo">
-			<div class="logo-text">
-				Medi<span>Check</span>
-			</div>
-    <!-- images/navabar-logo.jpg -->
-    <ul class="" id="sidemenu" >
-       
-        
-          <% if (user != null) { %>
-          
-    <li ><a href="view-profile.jsp"><i class="fa fa-user-circle" aria-hidden="true" ></i>&nbsp;&nbsp; <%= user.getName() %></a></li> 
-        <li ><a href="logout.jsp"><i class="fa fa-sign-out" aria-hidden="true" ></i>&nbsp;&nbsp;Logout</a></li> 
-  <% } else { %>
-    <li ><a href="login.jsp"><i class="fa fa-user-circle" aria-hidden="true" ></i>&nbsp;&nbsp; Login</a></li> 
-  <% } %>
-         
-        
-    </ul>
-    
-   
-   
-  </nav>
- </div>
-  </div>
-
-<div class="row m-0 ">
-    <div class="col-2 m-0"></div>
-    <div class="col-8 m-0 d-flex justify-content-center">
-    <div class="page-title">Technician - DASHBOARD</div>
-</div>
-    <div class="col-2 m-0"></div>
-</div>  
-
-
-
-
-
-  
-    <% 
-  /*   User user = (User) session.getAttribute("user"); */
-    if (user != null) {
-    %>
-   <div class="row m-0 ">
-    <div class="col-2 m-0"></div>
-    <div class="col-8 m-0 d-flex justify-content-center">
-    
-    <div class="welcome-title">
+	<div class="row m-0 p-0">
+		<div class="col-12 m-0 p-0">
+			<nav class="p-0 m-0 ">
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<div class="logo-text">
+					Medi<span>Check</span>
+				</div>
+				<ul class="" id="sidemenu">
+					<%
+					if (user != null) {
+					%>
+					<li><a href="view-profile.jsp"><i
+							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
+					<li><a href="logout.jsp"><i class="fa fa-sign-out"
+							aria-hidden="true"></i>&nbsp;&nbsp;Logout</a></li>
+					<%
+					} else {
+					%>
+					<li><a href="login.jsp"><i class="fa fa-user-circle"
+							aria-hidden="true"></i>&nbsp;&nbsp; Login</a></li>
+					<%
+					}
+					%>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="row m-0 ">
+		<div class="col-2 m-0"></div>
+		<div class="col-8 m-0 d-flex justify-content-center">
+			<div class="page-title">Technician - DASHBOARD</div>
+		</div>
+		<div class="col-2 m-0"></div>
+	</div>
+	<%
+	if (user != null) {
+	%>
+	<div class="row m-0 ">
+		<div class="col-2 m-0"></div>
+		<div class="col-8 m-0 d-flex justify-content-center">
+			<div class="welcome-title">
 				Welcome,
 				<%=user.getName()%>!
-			</div></div>
-    <div class="col-2 m-0"></div>
-</div> 
-
-<div class="row m-0 ">
-    <div class="col-2 m-0"></div>
-    <div class="col-8 m-0 d-flex justify-content-center">
-    
-  <%--     <p>You're logged in as  <%= user.getAccessRight().getDisplayName() %></p>
-   --%>   </div>
-    <div class="col-2 m-0"></div>
-</div> 
-    <% } %>
- 
-
-
-  
- 
- <div class="row m-0 ">
-    <div class="col-1 m-0"></div>
-    <div class="col-10 m-0 d-flex justify-content-center">
-  
-
-  <section class="page-contain">
-    <a href="getAppointment?appactiontype=adminRequested" class="data-card">
-    <h3> <i class="fa fa-calendar-plus-o" aria-hidden="true"></i></h3>
-     <div class="count"><%= adminRequestedAppointmentsCount %></div>
-      <h4> New<br> Appointments</h4>    
-    
-      <!-- <p>Manage registered patients</p> -->     
-    </a>
-      <a href="getAppointment?appactiontype=conUpcoming" class="data-card">
-       <h3><i class="fa fa-clock-o" aria-hidden="true"></i></h3>
-    <div class="count"><%= upcomingAppointmentsCountByConId %> </div>
-      <h4> Upcoming <br>Appointments</h4>
-      <!-- <p>Manage Registered Pharmacists</p> -->    
-    
-    </a>
-    <a href="getAppointment?appactiontype=conComplete" class="data-card">
-       <h3><i class="fa fa-calendar-check-o" aria-hidden="true"></i> </h3>
-       <div class="count"><%= completedAppointmentsCountByConId %> </div>
-      <h4> Completed <br>Appointments</h4>
-      <!-- <p>Manage Registered Pharmacists</p> -->     
-    
-    </a>
-      <a href="getAppointment?appactiontype=conCancelled" class="data-card">
-      <h3> <i class="fa fa-calendar-times-o" aria-hidden="true"></i></h3>
-      <div class="count"><%= cancelledAppointmentsCount %> </div>
-      <h4> Cancelled <br>Appointments</h4>
-      <!-- <p>Manage Registered Pharmacists</p> -->    
-    
-    </a>
-   
-    
-   
-   
-   
-
-  </section>
- 
-</div>
-    <div class="col-1 m-0"></div>
-</div>  
- 
- <div class="row m-0 ">
-    <div class="col-2 m-0"></div>
-    <div class="col-8 m-0 d-flex justify-content-center">
-    <div class="page-title-2 "> </div>
-</div>
-    <div class="col-2 m-0"></div>
-    </div>
- 
+			</div>
+		</div>
+		<div class="col-2 m-0"></div>
+	</div>
+	<div class="row m-0 ">
+		<div class="col-2 m-0"></div>
+		<div class="col-8 m-0 d-flex justify-content-center"></div>
+		<div class="col-2 m-0"></div>
+	</div>
+	<%
+	}
+	%>
+	<div class="row m-0 ">
+		<div class="col-1 m-0"></div>
+		<div class="col-10 m-0 d-flex justify-content-center">
+			<section class="page-contain">
+				<a href="getAppointment?appactiontype=adminRequested"
+					class="data-card">
+					<h3>
+						<i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+					</h3>
+					<div class="count"><%=adminRequestedAppointmentsCount%></div>
+					<h4>
+						New<br> Appointments
+					</h4>
+				</a> <a href="getAppointment?appactiontype=conUpcoming"
+					class="data-card">
+					<h3>
+						<i class="fa fa-clock-o" aria-hidden="true"></i>
+					</h3>
+					<div class="count"><%=upcomingAppointmentsCountByConId%>
+					</div>
+					<h4>
+						Upcoming <br>Appointments
+					</h4>
+				</a> <a href="getAppointment?appactiontype=conComplete"
+					class="data-card">
+					<h3>
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+					</h3>
+					<div class="count"><%=completedAppointmentsCountByConId%>
+					</div>
+					<h4>
+						Completed <br>Appointments
+					</h4>
+				</a> <a href="getAppointment?appactiontype=conCancelled"
+					class="data-card">
+					<h3>
+						<i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+					</h3>
+					<div class="count"><%=cancelledAppointmentsCount%>
+					</div>
+					<h4>
+						Cancelled <br>Appointments
+					</h4>
+				</a>
+			</section>
+		</div>
+		<div class="col-1 m-0"></div>
+	</div>
+	<div class="row m-0 ">
+		<div class="col-2 m-0"></div>
+		<div class="col-8 m-0 d-flex justify-content-center">
+			<div class="page-title-2 "></div>
+		</div>
+		<div class="col-2 m-0"></div>
+	</div>
 </body>
 </html>

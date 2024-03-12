@@ -1,25 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
-
-
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
-
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.stream.Collectors"%>
 <%@ page import="java.util.ArrayList"%>
-
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@ page import="com.fasterxml.jackson.core.JsonProcessingException"%>
-
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
@@ -27,7 +21,6 @@
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.Map.Entry"%>
-
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
@@ -40,42 +33,25 @@
 <%
 UserManagerImpl userManager = new UserManagerImpl();
 %>
-
 <%
 Calendar calendar = Calendar.getInstance();
 calendar.setTime(new Date());
 int currentYear = calendar.get(Calendar.YEAR);
 %>
-
-
 <%
-// Instantiate the UserManagerImpl or get it from your application context
-/*    UserManagerImpl userManager = new UserManagerImpl(); */
 Map<String, List<Integer>> monthlyCountsMap = userManager.getMonthlyUserRegistrationCounts();
 List<Integer> userCounts = monthlyCountsMap.get("userCounts");
 List<Integer> technicianCounts = monthlyCountsMap.get("consultantCounts");
-
-/* int totalClientsCounts = userCounts.stream().mapToInt(Integer::intValue).sum();
-int totalConsultantCounts = consultantCounts.stream().mapToInt(Integer::intValue).sum(); */
-
 int totalClientsCounts = userManager.getCountOfClientUsers();
 int totalConsultantCounts = userManager.getCountOfConsultantUsers();
-
-// Get the monthly user registration counts
 %>
-
-
 <%
-// Instantiate the AppointmentManagerImpl or get it from your application context
 AppointmentManagerImpl appointmentManager = new AppointmentManagerImpl();
-
-// Get the monthly appointment counts for the current year
 List<Integer> monthlyCounts = appointmentManager.getMonthlyAppointmentCounts();
 %>
 <%
 AppointmentService appointmentService = AppointmentService.getAppointmentService();
 UserService userService = UserService.getUserService();
-
 int totalAppointmentsCount = appointmentService.getTotalAppointmentsCount();
 int completedAppointmentsCount = appointmentService.getCompletedAppointmentsCount();
 int requestedAppointmentsCount = appointmentService.getRequestedAppointmentsCount();
@@ -85,22 +61,18 @@ int seekerCancelledAppointmentsCount = appointmentService.getSeekerCancelledAppo
 int adminRequestedAllAppointmentsCount = appointmentService.getAdminRequestedAllAppointmentsCount();
 int allUserCount = userService.getAllUsersCount();
 int pendingUserCount = userService.getPendingUsersCount();
-
 MessageService messageService = MessageService.getMessageService();
 int newMessagesCount = messageService.getNewMessagesCount();
 %>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/1a4bb98cfa.js"
 	crossorigin="anonymous"></script>
-
 <meta charset="ISO-8859-1">
 <title>MediCheck</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,7 +83,6 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -119,12 +90,9 @@ int newMessagesCount = messageService.getNewMessagesCount();
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/home-style.css">
-
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
-<!-- Add this in the head section of your HTML -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 
 <Style>
 .main-title {
@@ -150,13 +118,10 @@ h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
 }
-
-/*  <!-- sidebar styling end here  --> */
 </Style>
 
 </head>
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
@@ -164,20 +129,12 @@ h4 span {
 	</label>
 
 	<%
-	// Get the user object from the session
 	User user = (User) session.getAttribute("user");
 	%>
 
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-
-	<!-- sidebar end here  -->
-
-
-	<!--   nav -->
 	<nav class="p-0 m-0 pt-0">
 		<img class="nav-logo p-0 m-0 pt-0 mt-0"
 			src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
@@ -188,14 +145,11 @@ h4 span {
 		<ul class="" id="sidemenu">
 			<li><a href="#header">Home</a></li>
 			<li><a href="#about-us">About</a></li>
-			<!-- 			<li><a href="#experts">Our Experts</a></li> -->
 			<li><a href="#growth">Growth</a></li>
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
-
 			<%
 			if (user != null) {
 			%>
-
 			<li><a href="view-profile.jsp"><i class="fa fa-user-circle"
 					aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 			<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -210,15 +164,12 @@ h4 span {
 			%>
 		</ul>
 	</nav>
-	<!--   nav -->
 	<div class="row p-0 m-0">
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
 			style="background-image: url(https://wallpapers.com/images/hd/medical-background-cjge7e89adg6ub8x.jpg);">
-
 			<div class="container d-flex justify-content-center p-0 m-0">
-
 				<div class="header-text pt-2">
 					<div class="mt-2 first-title">EMPOWER YOUR WELLNESS JOURNEY
 						WITH</div>
@@ -226,23 +177,14 @@ h4 span {
 					<a href="getAppointment?appactiontype=allTests" class="btn-purple"
 						style="text-size: 12px;">Schedule Your Appointment</a>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
-	<!-- Services  -->
-
-
 	<div id="home" class="mt-3 mb-0 pt-5">
 		<div class="container pt-5" style="text-align: center; height: 90vh;">
-			<!-- <h1>Extra-Curricular Activities</h1> -->
 			<div class="services justify-content-center">
-
-
 				<div class="m-2">
 					<i class="fa-solid fa-hand-holding-hand purple-icon"></i>
-					<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
 					<h2>Appointments</h2>
 					<p style="text-align: justify;">At MediCheck, our modern online
 						appointment scheduling system provides access to essential medical
@@ -251,13 +193,8 @@ h4 span {
 						experience. Once registered, you'll have the convenience of
 						monitoring your upcoming appointments, ensuring a seamless and
 						organized approach to managing your health with MediCheck..</p>
-
-					<!--   <a href="#" class="btn-purple">See more</a> -->
 				</div>
-
-
 				<div class="m-2">
-					<!-- <i class="fa-solid fa-users"></i> -->
 					<i class="fa-sharp fa-solid fa-people-group purple-icon"></i>
 					<h2>Technicians</h2>
 					<p style="text-align: justify;">We have a team of skilled
@@ -265,7 +202,6 @@ h4 span {
 						your medical tests at MediCheck. Our technicians possess extensive
 						training and experience in conducting a wide range of tests,
 						guaranteeing reliable results for your healthcare needs..</p>
-					<!--  <a href="#" class="btn-purple">See more</a> -->
 				</div>
 
 				<div class="m-2">
@@ -279,15 +215,10 @@ h4 span {
 						catalog, which includes blood tests, imaging scans, genetic
 						screenings, and more, all aimed at providing you with accurate and
 						timely insights into your health</p>
-					<!--   <a href="#" class="btn-purple">See more</a> -->
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<!-- About us -->
-
-
 	<div
 		class="p-0 m-0 mb-5 d-flex align-items-center services justify-content-center"
 		id="about-us"
@@ -313,37 +244,23 @@ h4 span {
 			</div>
 		</div>
 	</div>
-	<!--  -->
-
-
-
-	<!-------------------------------------------------- about  ----------------------------------------- -->
-
-	<!-------------------------------------------------- about  ----------------------------------------- -->
 	<div id="growth" style="background-color: rgb(139, 209, 232, 0.149);">
 		<div class="container" style="height: 85vh;">
 			<div class="row ">
 				<div class="about-col-1 ">
-
 					<h1 class="mt-5 pt-5 sub-title " style="color: #529ece;">
 						Witness the vibrant growth of our community in
 						<%=currentYear%>!
 					</h1>
-					<!-- <img src="https://images.inc.com/uploaded_files/image/1920x1080/getty_468868827_970566970450047_60099.jpg" alt="user image"> -->
 				</div>
 				<div class="about-col-2">
 					<p>
 					<div class="tab-titles"></div>
-					<!-- skills -->
 					<div class="tab-contents active-tab" id="Skills">
-
 						<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 						<div>
 							<canvas id="myLineChart"></canvas>
 						</div>
-
-
-
 						<script>
 							const data1 = {
 								labels : [ 'January', 'February', 'March',
@@ -469,11 +386,8 @@ h4 span {
 							});
 						</script>
 					</div>
-					<!-- Education -->
 					<div class="tab-contents" id="Education"></div>
-
 					<div class="tab-contents " id="Languages">
-
 						<div style="width: 320px; height: 420px;">
 							<canvas id="doughnutChart"></canvas>
 						</div>
@@ -490,7 +404,6 @@ h4 span {
 									hoverOffset : 4
 								} ]
 							};
-
 							const chartContext = document.getElementById(
 									'doughnutChart').getContext('2d');
 							const myChart = new Chart(chartContext, {
@@ -498,22 +411,13 @@ h4 span {
 								data : data
 							});
 						</script>
-
-
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
-
-	<!-- ---------------------------------------services--------------------------------------------------------------------- -->
-
-
 	<div class="p-0 m-0 "
 		style="background-color: #ffffff; height: 60vh; color: #529ece; font-size: 2.5rem;">
-		<!-- <div class="container m-0 p-0 pt-2" style="text-align: center;height: 70vh; background-color: #5b4a6b; width: 100%;"> -->
 		<div class="row p-0 m-0 pt-5 font-weight-bold"
 			style="text-align: center; margin-top: 50px;">
 			<h1>
@@ -521,42 +425,29 @@ h4 span {
 			</h1>
 		</div>
 		<div class="m-0 services justify-content-center">
-
 			<div class="m-2 font-weight-bold" style="font-size: 4.5rem">
-				<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
 				15+ <br> <span><h5>
 						Years of Experience
 						</h2></span>
-
 			</div>
-
 			<div class="m-2 font-weight-bold" style="font-size: 4.5rem">
-				<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
 				<%=totalConsultantCounts%>+<br> <span><h5>
 						Qualified Experts
 						</h2></span>
-
 			</div>
 			<div class="m-2 font-weight-bold" style="font-size: 4.5rem">
-				<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
 				<%=totalClientsCounts%>+<br> <span><h5>
 						Happy Clients
 						</h2></span>
 
 			</div>
 			<div class="m-2 font-weight-bold" style="font-size: 4.5rem">
-				<!-- <i class="fa-sharp fa-solid fa-people-group"></i> -->
 				<%=completedAppointmentsCount%>+<br> <span><h5>
 						Success Stories
 						</h2></span>
-
 			</div>
 		</div>
-
 	</div>
-	<!-- ----------------portfolio-------------------------------------------------- -->
-
-
 	<div class="p-0 m-0 "
 		style="background-color: #f9f2fc; height: 60vh; color: #529ece; font-size: 2.5rem;">
 		<div class="row pt-5 font-weight-bold p-0 m-0"
@@ -567,42 +458,25 @@ h4 span {
 			</h1>
 		</div>
 		<div class="m-0 services justify-content-center">
-
 			<a href="add-user.jsp" class="btn btn2">Register Now</a>
 		</div>
-
 	</div>
-
-
-	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-
-
 	</div>
-
-	<!-- --------------------javascript-------------------------- -->
 	<script>
 		function resetForm() {
 			document.getElementById("form1").reset();
 		}
 	</script>
-
-
 	<script>
 		var sidemenu = document.getElementById("sidemenu");
-
 		function openmenu() {
 			sidemenu.style.right = "0"
 		}
-
 		function closemenu() {
 			sidemenu.style.right = "-200px"
 		}
 	</script>
-
-
-
 </body>
 </html>
-

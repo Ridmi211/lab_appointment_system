@@ -2,8 +2,6 @@ package com.labSchedulerSystem.model;
 
 import java.util.Date;
 
-import com.labSchedulerSystem.model.Test.TestType;
-
 public class Appointment {
 
 	private int appointmentId;
@@ -20,9 +18,6 @@ public class Appointment {
 	private String notes;
 	private String seekerEmail;
 	private String seekerPhoneNumber;
-	/*
-	 * private String seekerJob; private String seekerCountry;
-	 */
 	private Test.TestType testType;
 	private String testResults;
 	private String testResultsDescription;
@@ -44,17 +39,6 @@ public class Appointment {
 	public void setSeekerPhoneNumber(String seekerPhoneNumber) {
 		this.seekerPhoneNumber = seekerPhoneNumber;
 	}
-
-	/*
-	 * public String getSeekerJob() { return seekerJob; }
-	 * 
-	 * public void setSeekerJob(String seekerJob) { this.seekerJob = seekerJob; }
-	 * 
-	 * public String getSeekerCountry() { return seekerCountry; }
-	 * 
-	 * public void setSeekerCountry(String seekerCountry) { this.seekerCountry =
-	 * seekerCountry; }
-	 */
 
 	public Appointment() {
 	}
@@ -123,11 +107,6 @@ public class Appointment {
 		this.scheduledDate = scheduledDate;
 	}
 
-	/*
-	 * public String getCountry() { return country; }
-	 * 
-	 * public void setCountry(String country) { this.country = country; }
-	 */
 	public String getConsultantName() {
 		return consultantName;
 	}

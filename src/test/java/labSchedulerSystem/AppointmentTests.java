@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import com.labSchedulerSystem.dao.AppointmentManagerImpl;
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Appointment.Status;
 import com.labSchedulerSystem.model.Test.TestType;
 import com.labSchedulerSystem.service.AppointmentService;
-import com.labSchedulerSystem.service.UserService;
 
 public class AppointmentTests {
 
@@ -20,22 +18,17 @@ public class AppointmentTests {
 		// TODO Auto-generated constructor stub
 	}
 
-	private AppointmentService appointmentService;
-	private UserService userService;
-	private AppointmentManagerImpl appointmentImpl;
-	private int appointmentId;
+	private AppointmentService appointmentService;	
 
 	@BeforeEach
 	void setUp() {
-		appointmentService = AppointmentService.getAppointmentService();
-		userService = UserService.getUserService();
-		appointmentImpl = new AppointmentManagerImpl();
+		appointmentService = AppointmentService.getAppointmentService();	
 	}
 
 	@Test
 	void testAddAppointment() throws SQLException, ClassNotFoundException {
 		Appointment appointment = new Appointment();
-		appointment.setTechnitianId(81);// add proper id
+		appointment.setTechnitianId(39);// add proper id
 		appointment.setSeekerId(80);// add proper id
 		appointment.setScheduledDate("2024-03-05");
 		appointment.setStartTime("09:00");
@@ -63,8 +56,8 @@ public class AppointmentTests {
 	@Test
 	void testEditAppointment() throws SQLException, ClassNotFoundException {
 		Appointment appointment = new Appointment();
-		appointment.setAppointmentId(67);// add proper id
-		appointment.setTechnitianId(81);// add proper id
+		appointment.setAppointmentId(70);// add proper id
+		appointment.setTechnitianId(39);// add proper id
 		appointment.setSeekerId(80);// add proper id
 		appointment.setScheduledDate("2024-03-05");
 		appointment.setStartTime("09:00");
@@ -86,7 +79,7 @@ public class AppointmentTests {
 
 	@Test
 	void testDeleteAppointment() throws SQLException, ClassNotFoundException {
-		int appointmentId = 67;// add proper id
+		int appointmentId = 63;// add proper id
 		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
 		when(mockedAppointmentService.deleteAppointment(appointmentId)).thenReturn(true);
 		boolean result = appointmentService.deleteAppointment(appointmentId);
@@ -95,7 +88,7 @@ public class AppointmentTests {
 
 	@Test
 	void testFetchSingleAppointment() throws SQLException, ClassNotFoundException {
-		int appointmentId = 68;// add proper id
+		int appointmentId = 70;// add proper id
 		AppointmentService mockedAppointmentService = mock(AppointmentService.class);
 		Appointment appointment = new Appointment();
 		appointment.setAppointmentId(appointmentId);

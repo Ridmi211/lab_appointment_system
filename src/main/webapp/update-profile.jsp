@@ -6,19 +6,13 @@
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
 <%@ page import="com.labSchedulerSystem.model.Test"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <%
 User user = (User) session.getAttribute("user");
-boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN); // Modify this condition according to your User class
-
-boolean isAdmin = user != null && user.getAccessRight().equals(AccessRight.ROLE_ADMIN); // Modify this condition according to your User class
-
-// Check if the user is logged in
+boolean isTechnician = user != null && user.getAccessRight().equals(AccessRight.ROLE_TECHNITIAN);
+boolean isAdmin = user != null && user.getAccessRight().equals(AccessRight.ROLE_ADMIN);
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
 
@@ -30,9 +24,8 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
-
 <meta charset="utf-8">
-<title>MC-Update Profile</title>
+<title>Update Profile</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -41,7 +34,6 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -72,8 +64,8 @@ h4 span {
 }
 
 body {
-	background-image: linear-gradient(-45deg, rgb(214, 230, 254) 0%, rgb(233, 232, 253) 100%);
-
+	background-image: linear-gradient(-45deg, rgb(214, 230, 254) 0%,
+		rgb(233, 232, 253) 100%);
 }
 
 .form-group {
@@ -82,42 +74,41 @@ body {
 
 label {
 	font-weight: bold;
-	 	font-family: 'Source Sans Pro', sans-serif;
- 	font-size: 13px;
- 	color: rgb(25, 31, 53);
- 	letter-spacing: 1.5px;
- 	margin-top: 5px;
- 	margin-bottom: 10px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 13px;
+	color: rgb(25, 31, 53);
+	letter-spacing: 1.5px;
+	margin-top: 5px;
+	margin-bottom: 10px;
 }
 
-input[type="text"], input[type="date"],select[name="selectedTestType"], textarea {
+input[type="text"], input[type="date"], select[name="selectedTestType"],
+	textarea {
 	width: 100%;
 	border: 0;
- 	border-radius: 5px;
- 	padding: 6px 10px;
- 	outline: none;
- 	color: rgb(25, 31, 53);
- 	-webkit-transition: all .2s ease-out;
- 	-moz-transition: all .2s ease-out;
- 	-ms-transition: all .2s ease-out;
- 	-o-transition: all .2s ease-out;
- 	transition: all .2s ease-out;
-
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
 }
 
 select[name="selectedTestType"]:focus {
- 	width: 100%;
+	width: 100%;
 	border: 0;
- 	border-radius: 5px;
- 	padding: 6px 10px;
- 	outline: none;
- 	color: rgb(25, 31, 53);
- 	-webkit-transition: all .2s ease-out;
- 	-moz-transition: all .2s ease-out;
- 	-ms-transition: all .2s ease-out;
- 	-o-transition: all .2s ease-out;
- 	transition: all .2s ease-out;
-
+	border-radius: 5px;
+	padding: 6px 10px;
+	outline: none;
+	color: rgb(25, 31, 53);
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	transition: all .2s ease-out;
 }
 
 .btn {
@@ -163,23 +154,16 @@ select[name="selectedTestType"]:focus {
 	cursor: pointer;
 }
 </Style>
-
 </head>
 <body class="m-0 p-0">
-	<!-- sidebar start here  -->
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -189,13 +173,10 @@ select[name="selectedTestType"]:focus {
 				<h4>
 					Medi<span>Check</span>
 				</h4>
-				<!-- images/navabar-logo.jpg -->
 				<ul class="" id="sidemenu">
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -208,16 +189,10 @@ select[name="selectedTestType"]:focus {
 					<%
 					}
 					%>
-
 				</ul>
-
-
 			</nav>
 		</div>
 	</div>
-	<!-- sidebar end here  -->
-
-
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
@@ -225,18 +200,12 @@ select[name="selectedTestType"]:focus {
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
-
-	<div class="row m-0 d-flex justify-content-center ">
-		<%-- <p style='color:magenta'>${message}</p>	 --%>
-	</div>
-
+	<div class="row m-0 d-flex justify-content-center "></div>
 	<div class="row m-0 mb-5">
-		<!-- Search abr  -->
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
 			<form action="usermanager" method="post"
 				onsubmit="return confirmUpdate();">
-
 				<input class="form-control" type="hidden" id="accessRight"
 					name="accessRight" readonly="readonly" value="${user.accessRight}" />
 				<label for="userIdUpdate">User ID:</label> <input
@@ -253,14 +222,10 @@ select[name="selectedTestType"]:focus {
 					value="${user.birthdate}" /> <label for="gender">Gender:</label> <input
 					class="form-control" type="text" id="gender" name="gender"
 					value="${user.gender}" />
-
 				<c:if test="${user.accessRight == 'ROLE_TECHNITIAN'}">
-
 					<label for="selectedTestType">Assigned test type:</label>
-				<%-- 	<input class="form-control" type="text" id="selectedTestType"
-						name="selectedTestType" value="${user.selectedTestType}" /> --%>
-					<select name="selectedTestType" id="selectedTestType" >
-						<option value="${user.selectedTestType}"  selected>${user.selectedTestType.displayName}</option>
+					<select name="selectedTestType" id="selectedTestType">
+						<option value="${user.selectedTestType}" selected>${user.selectedTestType.displayName}</option>
 						<%
 						for (TestType type : TestType.values()) {
 						%>
@@ -269,44 +234,33 @@ select[name="selectedTestType"]:focus {
 						}
 						%>
 					</select>
-					
-					
-					
-					<label for="educationalQualifications">Educational Qualifications</label>
+					<label for="educationalQualifications">Educational
+						Qualifications</label>
 					<input class="form-control" type="text"
 						id="educationalQualifications" name="educationalQualifications"
 						value="${user.educationalQualifications}" />
-
-					<label for="specializedJobs">Specialized Job qualifications:</label>
+					<label for="specializedJobs">Specialized Job
+						qualifications:</label>
 					<input class="form-control" type="text" id="specializedJobs"
 						name="specializedJobs" value="${user.specializedJobs}" />
 				</c:if>
-
 				<input type="hidden" name="useractiontype" value="edit" />
-
 				<button type="submit" class="btn btn-success">Update</button>
-
 				<a id="backButton" class="btn btn-primary">Back</a>
-
 				<script>
 					document.getElementById('backButton').addEventListener(
 							'click', function() {
-								window.history.back(); // This will navigate back to the previous page in the browser's history.
+								window.history.back();
 							});
 				</script>
-
-
 			</form>
 		</div>
 		<div class="col-1"></div>
 	</div>
-
 	<script>
 		function confirmUpdate() {
 			return confirm("Are you sure you want to update this user?");
 		}
 	</script>
-
-
 </body>
 </html>

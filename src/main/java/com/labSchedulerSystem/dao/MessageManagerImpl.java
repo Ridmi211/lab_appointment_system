@@ -10,9 +10,7 @@ import java.util.List;
 
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManager;
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManagerFactory;
-import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Message;
-import com.labSchedulerSystem.model.Appointment.Status;
 import com.labSchedulerSystem.model.Message.MessageStatus;
 
 public class MessageManagerImpl implements MessageManager {
@@ -111,7 +109,7 @@ public class MessageManagerImpl implements MessageManager {
 					contact.setMessangerName(rs.getString("messangerName"));
 					contact.setMessangerEmail(rs.getString("messangerEmail"));
 					contact.setMessageBody(rs.getString("messageBody"));
-					contact.setMessageStatus(MessageStatus.valueOf(rs.getString("messageStatus"))); 
+					contact.setMessageStatus(MessageStatus.valueOf(rs.getString("messageStatus")));
 					messageList.add(contact);
 				}
 			}
