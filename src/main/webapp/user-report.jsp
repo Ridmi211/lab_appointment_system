@@ -178,7 +178,8 @@ try {
     // Convert the data into JavaScript arrays
 /*  List<String> labelsList = accessRightsData.keySet().stream().map(String::valueOf).collect(Collectors.toList()); */
 
-    String[] customLabels = {"Technician", "Admin", "Client"};
+   /*  String[] customLabels = {"Technician", "Admin", "Client"}; */
+       String[] customLabels = {"Technician", "Client", "Admin"};
     List<String> dataValuesList = accessRightsData.values().stream().map(String::valueOf).collect(Collectors.toList());
 
     String labelsArray = "['" + String.join("', '", customLabels) + "']";
