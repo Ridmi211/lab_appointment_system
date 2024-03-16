@@ -4,22 +4,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.webAppCis6003</groupId>
 	<artifactId>labSchedulerSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
 	<name>labSchedulerSystem Maven Webapp</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -54,30 +50,17 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.cis6003</groupId>
 			<artifactId>ams</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<!--<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>-->
-		<!--
-		https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		</dependency>	
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!--
-		https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
@@ -99,14 +82,12 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!--stripe-->
 		<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
 		<dependency>
 			<groupId>com.stripe</groupId>
 			<artifactId>stripe-java</artifactId>
 			<version>24.17.0</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -120,11 +101,7 @@
 			<version>1.5.0</version>
 			<scope>test</scope>
 		</dependency>
-
-
 	</dependencies>
-
-
 	<build>
 		<finalName>labSchedulerSystem</finalName>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven

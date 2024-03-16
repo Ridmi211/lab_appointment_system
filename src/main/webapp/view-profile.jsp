@@ -5,11 +5,9 @@
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%
 User user = (User) session.getAttribute("user");
-// Check if the user is logged in
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
 <!DOCTYPE html>
@@ -21,7 +19,6 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -30,7 +27,6 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -39,8 +35,6 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/navbar-style.css">
 <Style>
-
-/*  <!-- sidebar styling start here  -->*/
 * {
 	margin: 0;
 	padding: 0;
@@ -60,7 +54,6 @@ body {
 .form-control[type="search"] {
 	width: 400px;
 	margin-right: 10px;
-	/* Add margin to create space between search bar and buttons */
 }
 
 .btn-outline-success {
@@ -77,7 +70,6 @@ body {
 	box-shadow: 0 0 0 0.2rem rgba(24, 132, 165, 0.5);
 }
 
-/* Card */
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
@@ -90,7 +82,7 @@ body {
 
 .card-img-top {
 	width: 100%;
-	height: 200px; /* Adjust the height as desired */
+	height: 200px;
 	object-fit: cover;
 }
 
@@ -112,17 +104,10 @@ body {
 
 .list-group-item {
 	font-size: 14px;
-	border: none; /* Remove borders from list items */
-	padding: 5px 0; /* Adjust padding as desired */
+	border: none;
+	padding: 5px 0;
 }
 
-/* .btn {
-  margin-top: 10px;
-  font-size: 16px;
-  padding: 8px 16px;
-} */
-
-/* buttons */
 .btn {
 	margin: 10px;
 	padding: 10px;
@@ -201,19 +186,14 @@ h4 span {
 
 </head>
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -224,11 +204,9 @@ h4 span {
 					Medi<span>Check</span>
 				</h4>
 				<ul class="" id="sidemenu">
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -241,18 +219,11 @@ h4 span {
 					<%
 					}
 					%>
-
 				</ul>
-
-
 			</nav>
 		</div>
 	</div>
-
-	<!-- sidebar end here  -->
-
 	<div class="container">
-
 		<div class="row m-0 ">
 			<div class="col-2 m-0"></div>
 			<div class="col-8 m-0 d-flex justify-content-center">
@@ -269,17 +240,13 @@ h4 span {
 						alt="Card image cap">
 					<div class="card-body">
 						<div class="card-title"><%=user.getName()%></div>
-
 						<ul class="list-group">
-
 							<div class="card-text">User ID :</div>
 							<li class="list-group-item"><%=user.getUserId()%></li>
 							<div class="card-text">Gender :</div>
 							<li class="list-group-item"><%=user.getGender()%></li>
 							<div class="card-text">Birthdate :</div>
 							<li class="list-group-item"><%=user.getBirthdate()%></li>
-
-
 							<div class="card-text">Email :</div>
 							<li class="list-group-item"><%=user.getEmail()%></li>
 							<div class="card-text">Conatct Number :</div>
@@ -290,15 +257,12 @@ h4 span {
 							if (user != null && user.getAccessRight() == AccessRight.ROLE_TECHNITIAN) {
 							%>
 							<li class="list-group-item"></li>
-								<div class="card-text">Assigned Test Type :</div>
+							<div class="card-text">Assigned Test Type :</div>
 							<li class="list-group-item"><%=user.getSelectedTestType().getDisplayName()%></li>
-							
 							<div class="card-text">Specialized Jobs :</div>
 							<li class="list-group-item"><%=user.getSpecializedJobs()%></li>
-
 							<div class="card-text">Qualifications :</div>
 							<li class="list-group-item"><%=user.getEducationalQualifications()%></li>
-
 							<%
 							}
 							%>
@@ -307,28 +271,20 @@ h4 span {
 							<div class="col-6">
 								<a id="backButton" class="btn btn-primary">Back</a>
 							</div>
-
-
 							<div class="col-6">
 								<a class="btn btn-success" href="update-profile.jsp">Edit</a>
 							</div>
-							<!--      <input type="hidden" name="useractiontype" value="edit"/>				
-				<button type="submit" ">Update </button>	 -->
 						</div>
-
 					</div>
 				</div>
-
-
 			</div>
 			<div class="col-2"></div>
 		</div>
 	</div>
 </body>
-
 <script>
 	document.getElementById('backButton').addEventListener('click', function() {
-		window.history.back(); // This will navigate back to the previous page in the browser's history.
+		window.history.back();
 	});
 </script>
 </html>

@@ -13,10 +13,9 @@ User user = (User) session.getAttribute("user");
 if (user == null || !user.getAccessRight().equals(AccessRight.ROLE_ADMIN)) {
 	session.setAttribute("errorMessage", "You do not have the required access to view this page.");
 	response.sendRedirect("accessRightError.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
-
 <%
 AppointmentService appointmentService = AppointmentService.getAppointmentService();
 UserService userService = UserService.getUserService();
@@ -41,7 +40,7 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 	rel="stylesheet">
-<title>Admin dashboard</title>
+<title>Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -49,7 +48,8 @@ int newMessagesCount = messageService.getNewMessagesCount();
 	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
-	href="https://static.vecteezy.com/system/resources/previews/010/430/526/non_2x/job-for-immigrants-app-icon-refugee-employment-construction-worker-finding-work-abroad-hard-hat-worker-handyman-uiux-user-interface-web-or-mobile-application-isolated-illustration-vector.jpg">
+	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -67,7 +67,8 @@ int newMessagesCount = messageService.getNewMessagesCount();
 }
 
 body {
-	background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+	background-image: linear-gradient(-45deg, rgb(255, 255, 255) 0%,
+		rgb(222, 241, 250) 100%);
 }
 
 @import
@@ -83,7 +84,7 @@ body {
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
-	background: #d6cdf1;
+	background: rgb(199, 224, 248);
 	padding: 2em;
 	font-family: 'Open Sans', sans-serif;
 }
@@ -112,13 +113,13 @@ body {
 	line-height: 1;
 	padding-bottom: 5px;
 	margin: 0 0 0.142857143em;
-	border-bottom: 2px solid #a759f5;
+	border-bottom: 2px solid rgb(88, 143, 245);
 	transition: color .45s ease, border .45s ease;
 	text-align: center;
 }
 
 .count {
-	color: #584674;
+	color: #529ece;
 	font-size: 3.5em;
 	font-weight: 600;
 	line-height: 1;
@@ -171,9 +172,9 @@ body {
 }
 
 .data-card:hover {
-	background: #906bcf;
+	background: rgb(107, 148, 207);
 	transform: scale(1.02);
-	border-color: #c1b1f7;
+	border-color: rgb(179, 196, 247);
 }
 
 .data-card:hover h3 {
@@ -221,64 +222,80 @@ translateX(
 );
 }
 }
+
 .page-title {
 	text-align: center;
 	font-size: 24px;
-	color: #7c6694;
+	color: rgb(86, 121, 165);
 	margin-top: 100px;
 	margin-bottom: 20px;
 	text-transform: uppercase;
 }
-</Style>
 
+.welcome-title {
+	text-align: center;
+	font-size: 28px;
+	color: #529ece;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.logo-text {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(25, 31, 53);
+	font-size: 22px;
+	margin-top: 40px;
+	position: relative;
+	top: -30px;
+	left: -320px;
+}
+
+.logo-text span {
+	color: #91d7f4;
+	font-weight: lighter;
+}
+
+</Style>
 </head>
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
 	</div>
-	<!-- sidebar end here  -->
-
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
-				<img class="logo-img" src="" alt="logo">
-				<!-- images/navabar-logo.jpg -->
+				<img class="nav-logo p-0 m-0 pt-0 mt-0"
+					src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
+					alt="logo">
+				<div class="logo-text">
+					Medi<span>Check</span>
+				</div>
 				<ul class="" id="sidemenu">
-
-
 					<%
 					if (user != null) {
 					%>
-
 					<li><a href="view-profile.jsp"><i
 							class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 					<li><a href="logout.jsp"><i class="fa fa-sign-out"
 							aria-hidden="true"></i>&nbsp;&nbsp;Logout</a></li>
 					<%
-					} else { %>
+					} else {
+					%>
 					<li><a href="login.jsp"><i class="fa fa-user-circle"
 							aria-hidden="true"></i>&nbsp;&nbsp; Login</a></li>
-							
+
 					<%
 					}
-%>
-
-
+					%>
 				</ul>
-
-
-
 			</nav>
 		</div>
 	</div>
-
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
@@ -286,49 +303,32 @@ translateX(
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
-
-
-
-
-
-
 	<%
-	/*   User user = (User) session.getAttribute("user"); */
 	if (user != null) {
 	%>
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
 		<div class="col-8 m-0 d-flex justify-content-center">
 
-			<h1>
+			<div class="welcome-title">
 				Welcome,
 				<%=user.getName()%>!
-			</h1>
+			</div>
 		</div>
 		<div class="col-2 m-0"></div>
 	</div>
 
 	<div class="row m-0 ">
 		<div class="col-2 m-0"></div>
-		<div class="col-8 m-0 d-flex justify-content-center">
-
-			<p>
-				You're logged in as
-				<%=user.getAccessRight().getDisplayName()%></p>
-		</div>
+		<div class="col-8 m-0 d-flex justify-content-center"></div>
 		<div class="col-2 m-0"></div>
 	</div>
 	<%
 	}
 	%>
-
-
-
 	<div class="row m-0 ">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
-
-
 			<section class="page-contain">
 				<a href="getuser?useractiontype=pending" class="data-card">
 					<h3>
@@ -337,7 +337,7 @@ translateX(
 					<div class="count"><%=pendingUserCount%></div>
 					<h4>
 						Pending<br> Registrations
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=requested" class="data-card">
 					<h3>
 						<i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
@@ -346,8 +346,7 @@ translateX(
 					</div>
 					<h4>
 						New <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getContact?msgactiontype=newMsg" class="data-card">
 					<h3>
 						<i class="fa fa-commenting-o" aria-hidden="true"></i>
@@ -356,8 +355,7 @@ translateX(
 					</div>
 					<h4>
 						New <br>Messages
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=adminRequestedAll"
 					class="data-card">
 					<h3>
@@ -368,7 +366,7 @@ translateX(
 					</div>
 					<h4>
 						pending <br>Appointments
-					</h4> <!-- <p>Manage Issued Prescriptions</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=conConfirmed"
 					class="data-card">
 					<h3>
@@ -379,21 +377,15 @@ translateX(
 					</div>
 					<h4>
 						ongoing<br> Appointments
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a>
 			</section>
-
-
 		</div>
 		<div class="col-1 m-0"></div>
 	</div>
-
-
 	<div class="row m-0 mb-5">
 		<div class="col-1 m-0"></div>
 		<div class="col-10 m-0 d-flex justify-content-center">
-
-
 			<section class="page-contain">
 				<a href="getAppointment?appactiontype=adminCompleted"
 					class="data-card">
@@ -404,7 +396,7 @@ translateX(
 					</div>
 					<h4>
 						Completed<br> Appointments
-					</h4> <!-- <p>Manage registered patients</p> -->
+					</h4>
 				</a> <a href="getAppointment?appactiontype=adminRejected"
 					class="data-card">
 					<h3>
@@ -415,8 +407,7 @@ translateX(
 					</div>
 					<h4>
 						Rejected <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=seekerCancelled"
 					class="data-card">
 					<h3>
@@ -426,8 +417,7 @@ translateX(
 					</div>
 					<h4>
 						Cancelled <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getAppointment?appactiontype=all" class="data-card">
 					<h3>
 						<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -436,8 +426,7 @@ translateX(
 					</div>
 					<h4>
 						All <br>Appointments
-					</h4> <!-- <p>Manage Registered Pharmacists</p> -->
-
+					</h4>
 				</a> <a href="getuser?useractiontype=all" class="data-card">
 					<h3>
 						<i class="fa fa-users" aria-hidden="true"></i>
@@ -446,14 +435,11 @@ translateX(
 					</div>
 					<h4>
 						Registered <br>Users
-					</h4> <!-- <p>Manage Issued Prescriptions</p> -->
+					</h4>
 				</a>
 			</section>
-
-
 		</div>
 		<div class="col-1 m-0"></div>
 	</div>
-
 </body>
 </html>

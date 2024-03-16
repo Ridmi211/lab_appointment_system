@@ -2,11 +2,9 @@ package com.labSchedulerSystem.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Appointment.Status;
 import com.labSchedulerSystem.model.Test;
-import com.labSchedulerSystem.model.User;
 
 public interface AppointmentManager {
 
@@ -18,8 +16,8 @@ public interface AppointmentManager {
 
 	public Appointment fetchSingleAppointment(int appointmentId) throws SQLException, ClassNotFoundException;
 
-	public Test  fetchSingleTest(int testId) throws SQLException, ClassNotFoundException;
-	
+	public Test fetchSingleTest(int testId) throws SQLException, ClassNotFoundException;
+
 	public List<Test> fetchAllTests() throws SQLException, ClassNotFoundException;
 
 	public List<Appointment> fetchAppointmentsBySeekerId(int loggedInUserId)

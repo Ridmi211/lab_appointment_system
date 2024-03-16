@@ -29,17 +29,14 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		LOGGER.info(" User action type" + request.getParameter("useractiontype"));
 		String useractiontype = request.getParameter("useractiontype");
-
 		if (useractiontype.equals("single")) {
 			fetchSingleUser(request, response);
 		} else if (useractiontype.equals("view")) {
 			viewUser(request, response);
-		} else if (useractiontype.equals("viewConsultant")) {
-			viewConsultant(request, response);
-		} else if (useractiontype.equals("consultants")) {
-			fetchConsultantUsers(request, response);
+		} else if (useractiontype.equals("technicians")) {
+			fetchTechnicianUsers(request, response);
 		} else if (useractiontype.equals("pending")) {
 			fetchPendingUsers(request, response);
 		} else {
@@ -49,12 +46,10 @@ public class UserController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Useraction" + request.getParameter("useractiontype"));
+		LOGGER.info(" User action type" + request.getParameter("useractiontype"));
 		String useractiontype = request.getParameter("useractiontype");
 		if (useractiontype.equals("login")) {
 			loginUser(request, response);
-		} else if (useractiontype.equals("viewConsultant")) {
-			viewConsultant(request, response);
 		} else if (useractiontype.equals("add")) {
 			addUser(request, response);
 		} else if (useractiontype.equals("edit")) {
@@ -72,30 +67,10 @@ public class UserController extends HttpServlet {
 
 	private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
-	private void viewConsultant(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int userId = Integer.parseInt(request.getParameter("userId"));
-		try {
-			User consultant = getUserService().fetchSingleUser(userId);
-			if (consultant.getUserId() > 0) {
-				request.setAttribute("consultant", consultant);
-				RequestDispatcher rd = request.getRequestDispatcher("book-consultant-new.jsp");
-				rd.forward(request, response);
-			} else {
-				request.setAttribute("message", "No consultant found!");
-				LOGGER.warning("No consultant found!" + consultant.getUserId());
-				RequestDispatcher rd = request.getRequestDispatcher("consultants-list.jsp");
-				rd.forward(request, response);
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void viewUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		System.out.println("Reached the 'viewUser' method.");
+		LOGGER.info(" Reached the 'viewUser' method.");
 		try {
 			User user = getUserService().fetchSingleUser(userId);
 			if (user.getUserId() > 0) {
@@ -124,13 +99,13 @@ public class UserController extends HttpServlet {
 				LOGGER.info("User found for email: " + email);
 				if (AccessRight.ROLE_TECHNITIAN.getDisplayName().equals(user.getAccessRight().getDisplayName())) {
 					if (RegistrationStatus.PENDING.equals(user.getRegistrationStatus())) {
-						request.setAttribute("loginError", "Consultant registration is pending approval.");
-						LOGGER.warning("Consultant registration is pending approval for user: " + user.getUserId());
+						request.setAttribute("loginError", "Technician registration is pending approval.");
+						LOGGER.warning("Technician registration is pending approval for user: " + user.getUserId());
 						RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 						rd.forward(request, response);
 						return;
 					} else if (RegistrationStatus.REJECTED.equals(user.getRegistrationStatus())) {
-						request.setAttribute("loginError", "Consultant registration has been rejected.");
+						request.setAttribute("loginError", "Technician registration has been rejected.");
 						RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 						rd.forward(request, response);
 						return;
@@ -262,13 +237,14 @@ public class UserController extends HttpServlet {
 		}
 		try {
 			if (getUserService().editUser(user)) {
-				UserService.sendUserUpdateEmail(user);
 				message = "The user has been successfully updated! User ID: " + user.getUserId();
+				LOGGER.info("User successfully updated. User ID: " + user.getUserId());
 			} else {
 				message = "Failed to update the user! User ID: " + user.getUserId();
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Failed to update the user. User ID:" + user.getUserId(), e);
 		}
 		request.setAttribute("feebackMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
@@ -281,35 +257,39 @@ public class UserController extends HttpServlet {
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		try {
 			if (getUserService().deleteUser(userId)) {
-				message = "The user has been successfully deleted. user Code: " + userId;
+				message = "The user has been successfully deleted. User Code: " + userId;
+				LOGGER.info("User with ID " + userId + " has been successfully deleted.");
 			} else {
-				message = "Failed to delete the user! user Code: " + userId;
+				message = "Failed to delete the user! There are existing appointments for this user. User Code: "
+						+ userId;
+				LOGGER.warning("Failed to delete user with ID " + userId + ". Existing appointments found.");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.severe("Error occurred while deleting user with ID " + userId + ": " + e.getMessage());
 		}
-
-		HttpSession session = request.getSession();
-		session.setAttribute("message", message);
-		response.sendRedirect("getuser?useractiontype=all");
+		request.setAttribute("feebackMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("feedback-message.jsp");
+		rd.forward(request, response);
 	}
 
 	private void fetchSingleUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
 		int userId = Integer.parseInt(request.getParameter("userId"));
-
 		try {
 			User user = getUserService().fetchSingleUser(userId);
 			if (user.getUserId() > 0) {
 				request.setAttribute("user", user);
 			} else {
 				message = "No record found!";
+				LOGGER.log(Level.INFO, "No record found for user with ID: " + userId);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error fetching single user", e);
 		}
-		request.setAttribute("feebackMessage", message);
+		request.setAttribute("feedbackMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("search-and-update-user.jsp");
 		rd.forward(request, response);
 	}
@@ -320,12 +300,13 @@ public class UserController extends HttpServlet {
 		List<User> userList = new ArrayList<User>();
 		try {
 			userList = getUserService().fetchAllUsers();
-
 			if (!(userList.size() > 0)) {
 				message = "No record found!";
+				LOGGER.log(Level.INFO, "No users found in the database");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error fetching all users", e);
 		}
 		request.setAttribute("userList", userList);
 		request.setAttribute("feebackMessage", message);
@@ -333,21 +314,23 @@ public class UserController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private void fetchConsultantUsers(HttpServletRequest request, HttpServletResponse response)
+	private void fetchTechnicianUsers(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		clearMessage();
 		List<User> consultantUsers = new ArrayList<User>();
 		try {
 			consultantUsers = getUserService().fetchAllConsultantUsers();
 			if (!(consultantUsers.size() > 0)) {
-				message = "No consultant users found!";
+				message = "No Technicians found!";
+				LOGGER.log(Level.INFO, "No Technicians found in the database");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error fetching Technician users", e);
 		}
 		request.setAttribute("consultantUsers", consultantUsers);
 		request.setAttribute("feebackMessage", message);
-		RequestDispatcher rd = request.getRequestDispatcher("view-consultants.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("view-technicians.jsp");
 		rd.forward(request, response);
 	}
 
@@ -358,10 +341,12 @@ public class UserController extends HttpServlet {
 		try {
 			pendingUsers = getUserService().fetchPendingUsers();
 			if (!(pendingUsers.size() > 0)) {
-				message = "No consultant users found!";
+				message = "No pending users found!";
+				LOGGER.log(Level.INFO, "No pending users found in the database");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error fetching pending users", e);
 		}
 		request.setAttribute("pendingUsers", pendingUsers);
 		request.setAttribute("feebackMessage", message);
@@ -378,15 +363,17 @@ public class UserController extends HttpServlet {
 				User approvedUser = getUserService().fetchSingleUser(userId);
 				UserService.sendApprovalEmail(approvedUser);
 				message = "User has been approved!";
+				LOGGER.log(Level.INFO, "User with ID " + userId + " has been approved");
 			} else {
 				message = "Failed to approve the user!";
+				LOGGER.log(Level.WARNING, "Failed to approve user with ID: " + userId);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = "Operation failed! " + e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error approving user", e);
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("message", message);
-
 		response.sendRedirect("getuser?useractiontype=pending");
 	}
 
@@ -399,11 +386,14 @@ public class UserController extends HttpServlet {
 				User rejectedUser = getUserService().fetchSingleUser(userId);
 				UserService.sendRejectionEmail(rejectedUser);
 				message = "User has been rejected!";
+				LOGGER.log(Level.INFO, "User with ID " + userId + " has been rejected");
 			} else {
 				message = "Failed to reject the user!";
+				LOGGER.log(Level.WARNING, "Failed to reject user with ID: " + userId);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = "Operation failed! " + e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error rejecting user", e);
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("message", message);

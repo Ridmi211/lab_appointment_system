@@ -62,5 +62,4 @@
     	<servlet-name>ReportController</servlet-name>
     	<url-pattern>/getReports</url-pattern>
     </servlet-mapping>
-
 </web-app>

@@ -4,12 +4,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
-
 <%@ page import="java.util.ArrayList"%>
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +16,7 @@
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/1a4bb98cfa.js"
 	crossorigin="anonymous"></script>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -32,8 +25,6 @@
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -76,9 +67,6 @@ h2 {
 	background-position: center;
 }
 
-/* .container{
-            padding: 10px ;
-        } */
 .header-text {
 	margin-top: 45%;
 }
@@ -98,7 +86,6 @@ h2 {
 	color: #08d8ca;
 }
 
-/* ------------------about ------------------------------- */
 #about {
 	padding: 80px 0;
 	color: #ababab;
@@ -158,9 +145,6 @@ h2 {
 	width: 50%;
 }
 
-/* .tab-contents{
-            font-size: 14px;
-        } */
 .tab-contents ul li {
 	list-style: none;
 	margin: 10px 0px;
@@ -179,7 +163,6 @@ h2 {
 	display: block;
 }
 
-/* -------------services-------------- */
 #services {
 	padding: 30px 0;
 	height: 90vh;
@@ -193,7 +176,6 @@ h2 {
 }
 
 .services div {
-	/* background: #262626; */
 	padding: 40px;
 	font-size: 13px;
 	font-weight: 300;
@@ -221,11 +203,9 @@ h2 {
 }
 
 .services div:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
-/* ///////////////// */
 .services-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -266,7 +246,6 @@ h2 {
 	transform: translateY(-10px);
 }
 
-/* ---------------portfolio------------------------- */
 #portfolio {
 	padding: 50px 0;
 }
@@ -284,14 +263,6 @@ h2 {
 	overflow: hidden;
 }
 
-/* .work img {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-            transition: transform 0.5s;
-
-
-        } */
 .layer {
 	width: 360px;
 	height: 0;
@@ -351,7 +322,6 @@ h2 {
 	background: #d6adff;
 }
 
-/* ----------------contact------------------- */
 .contact-left {
 	flex-basis: 35%;
 }
@@ -436,7 +406,6 @@ form .btn2 {
 	color: #529ece;
 }
 
-/* -----css for small screen------------ */
 nav .fas {
 	display: none;
 }
@@ -474,7 +443,6 @@ nav .fas {
 }
 
 .sub-title:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
@@ -504,19 +472,12 @@ nav .fas {
 	width: 100%;
 	height: 100%;
 	background: rgb(139, 209, 232, 0.449);
-	/* Adjust the color and opacity as needed */
 	z-index: 0;
-	/* You can also add other styles like gradients or patterns here */
 }
 
 body {
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
-	/* align-items: center; */
-	/* width: 100vw; */
-	/* height: 100vh; */
-	/* background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
 }
 
 .sidebar {
@@ -666,7 +627,6 @@ label #cancel {
 	text-align: center;
 }
 
-/* consultat */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
@@ -703,7 +663,6 @@ label #cancel {
 
 button.primary {
 	background-color: #905abd;
-	/* border: 1px solid #2D2747; */
 	border-radius: 3px;
 	color: white;
 	font-family: Montserrat, sans-serif;
@@ -859,33 +818,22 @@ h4 span {
 	color: #91d7f4;
 	font-weight: lighter;
 }
-
-/*  <!-- sidebar styling end here  --> */
 </Style>
-
 </head>
-
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
 		class="fas fa-times" id="cancel"></i>
 	</label>
-
 	<%
-	// Get the user object from the session
 	User user = (User) session.getAttribute("user");
 	%>
-
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
-
 	</div>
-
-	<!-- sidebar end here  -->
 	<nav class="p-0 m-0 pt-0">
-	<img class="nav-logo p-0 m-0 pt-0 mt-0"
+		<img class="nav-logo p-0 m-0 pt-0 mt-0"
 			src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
 			alt="logo">
 		<h4>
@@ -893,11 +841,9 @@ h4 span {
 		</h4>
 		<ul class="" id="sidemenu">
 			<li class="m-0"><a class="m-0" href="#contact">Contact</a></li>
-
 			<%
 			if (user != null) {
 			%>
-
 			<li><a href="view-profile.jsp"><i class="fa fa-user-circle"
 					aria-hidden="true"></i>&nbsp;&nbsp; <%=user.getName()%></a></li>
 			<li><a href="logout.jsp"><i class="fa fa-sign-out"
@@ -912,54 +858,24 @@ h4 span {
 			%>
 		</ul>
 	</nav>
-
 	<div class="row p-0 m-0">
 		<div
 			class="p-0 m-0 d-flex align-items-end d-flex justify-content-center"
 			id="header"
 			style="background-image: url(https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_767389_17028477443396086.jpg
 			);">
-
 			<div class="container d-flex justify-content-center p-0 m-0">
-
 				<div class="header-text pt-2 ">
-
 					<h1>Embark on Your Health Journey with Our Skilled</h1>
 					<h2>Technician Team</h2>
-
 				</div>
-
 			</div>
 		</div>
 	</div>
-
-	<!-- <div class="row mt-5" style="color: #3f2e59;">
-		<div class="col-2"></div>
-		<div class="col-3">
-			<label for="filterCountry">Filter by Country:</label> <input
-				type="text" id="filterCountry" placeholder="Enter country"
-				name="filterCountry">
-		</div>
-		<div class="col-3">
-			<label for="filterJob">Filter by Job:</label> <input type="text"
-				id="filterJob" name="filterJob" placeholder="Enter job">
-		</div>
-		<div class="col-2">
-			<button class="btn-purple mt-4" onclick="applyFilter()">Apply
-				Filter</button>
-		</div>
-		<div class="col-2"></div>
-	</div> -->
-
-
-	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
-
 	<%
 	String selectedCountry = request.getParameter("filterCountry");
-	String selectedJob = request.getParameter("filterJob"); // Add this line
-
+	String selectedJob = request.getParameter("filterJob");
 	List<User> consultantUsers = (List<User>) request.getAttribute("consultantUsers");
-
 	List<User> filteredConsultants = new ArrayList<User>();
 	if (selectedCountry != null && !selectedCountry.isEmpty()) {
 		for (User user2 : consultantUsers) {
@@ -969,17 +885,16 @@ h4 span {
 		for (String country : countries) {
 			if (country.equals(selectedCountry)) {
 				filteredConsultants.add(user2);
-				break; // No need to check further if country is found
+				break;
 			}
 		}
 			}
 		}
 	} else {
-		// No country selected, show all consultants
 		filteredConsultants = consultantUsers;
 	}
 
-	if (selectedJob != null && !selectedJob.isEmpty()) { // Add this condition
+	if (selectedJob != null && !selectedJob.isEmpty()) {
 		List<User> jobFilteredConsultants = new ArrayList<User>();
 		for (User user2 : filteredConsultants) {
 			String specializedJobs = user2.getSpecializedJobs();
@@ -988,28 +903,22 @@ h4 span {
 		for (String job : jobs) {
 			if (job.equals(selectedJob)) {
 				jobFilteredConsultants.add(user2);
-				break; // No need to check further if job is found
+				break;
 			}
 		}
 			}
 		}
-		filteredConsultants = jobFilteredConsultants; // Update filtered consultants with job filter
+		filteredConsultants = jobFilteredConsultants;
 	}
 	%>
-
-
 	<div class="row p-0 pb-5  "
 		style="margin-left: 140px; margin-top: 30px;">
-
 		<div class="container">
 			<div class="row">
-
-
 				<%
 				for (User user2 : filteredConsultants) {
 				%>
 				<div class="col-sm mb-5">
-
 					<div class="work">
 						<div class="card-container">
 							<img class="round"
@@ -1021,9 +930,7 @@ h4 span {
 							<div class="test">
 								Assigned test:
 								<%=user2.getSelectedTestType().getDisplayName()%></div>
-
 							<div class="countries">
-								<%--  <h6>   <%= user.getSpecializedCountries() %></h6> --%>
 								<ul>
 									<%
 									String eduQualifications = user2.getEducationalQualifications();
@@ -1055,21 +962,7 @@ h4 span {
 								</ul>
 							</div>
 						</div>
-						<%-- 	<div class="layer">
-							
-							<form action="usermanager" method="post">
-								<input type="hidden" name="userId"
-									value="<%=String.valueOf(user2.getUserId()).trim()%>">
-								<input type="hidden" name="useractiontype"
-									value="viewConsultant">
-								<button type="submit" class="btn btn2">View</button>
-							</form>
-
-							</a>
-		<!-- <a href="add-user.jsp"  class="btn primary"><i class="fa-solid fa-calendar-plus"></i>&nbsp;Book Now</a> -->
-						</div> --%>
 					</div>
-
 				</div>
 				<%
 				}
@@ -1077,9 +970,6 @@ h4 span {
 			</div>
 		</div>
 	</div>
-
-
-
 	<div
 		class="p-0 m-0 d-flex align-items-center services justify-content-center"
 		id="about-us"
@@ -1094,38 +984,24 @@ h4 span {
 					</h1>
 				</div>
 				<div class="m-0 services justify-content-center">
-
 					<a href="add-user.jsp" class="btn btn2 mb-5">Register Now</a>
 				</div>
-
 			</div>
 		</div>
 	</div>
-
-	<!-- ------------------------------contact-------------------------------- -->
 	<div id="contact">
 		<jsp:include page="contact.jsp" />
-
 	</div>
-
-	<!-- --------------------javascript-------------------------- -->
-	<script>
- 
+	<script> 
     function applyFilter() {
-        // Get the values entered by the user in the text input fields
         var selectedCountry = document.getElementById("filterCountry").value;
         var selectedJob = document.getElementById("filterJob").value;
-
-        // Loop through the consultants and display only those that match the filter criteria
         var consultants = document.querySelectorAll(".work");
         consultants.forEach(function (consultant) {
             var countries = consultant.querySelector(".countries");
             var countriesText = countries.textContent.toLowerCase();
-
             var jobs = consultant.querySelector(".skills");
             var jobsText = jobs.textContent.toLowerCase();
-
-            // Check if the user input is found in the consultant's countries or jobs
             if (
                 (selectedCountry === "" || countriesText.includes(selectedCountry.toLowerCase())) &&
                 (selectedJob === "" || jobsText.includes(selectedJob.toLowerCase()))
@@ -1136,13 +1012,8 @@ h4 span {
             }
         });
     }
-
 </script>
-
-
-
 	<script>
-
             var tablinks = document.getElementsByClassName("tab-links");
             var tabcontents = document.getElementsByClassName("tab-contents");
             function opentab(tabname) {
@@ -1154,75 +1025,16 @@ h4 span {
                 }
                 event.currentTarget.classList.add("active-link");
                 document.getElementById(tabname).classList.add("active-tab");
-
             }
         </script>
-
 	<script>
             var sidemenu = document.getElementById("sidemenu");
-
             function openmenu() {
                 sidemenu.style.right = "0"
             }
-
             function closemenu() {
                 sidemenu.style.right = "-200px"
             }
-
-
-
-
-
         </script>
-
-<!-- 	<script>
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwjcx0iILVo5hybLY6R97WYDrv3PQ7RoVLotpwiMk7FAUS7EPA5Ajsnsw6sr7zWa1V6/exec'
-            const form = document.forms['submit-to-google-sheet']
-            const msg = document.getElementById("msg")
-
-            form.addEventListener('submit', e => {
-                e.preventDefault()
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => {
-                        msg.innerHTML = "Message sent successfully"
-                        setTimeout(function () {
-                            msg.innerHTML = ""
-                        }, 5000)
-                        form.reset()
-                    })
-
-
-                    .catch(error => console.error('Error!', error.message))
-            })
-        </script> -->
-	<!-- chart-js -->
-<!-- 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-	<script>
-            const ctx = document.getElementById('myChart');
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
- -->
-
 </body>
-
 </html>

@@ -12,19 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManager;
 import com.labSchedulerSystem.dao.dbUtils.DbDriverManagerFactory;
-import com.labSchedulerSystem.model.AccessRight;
 import com.labSchedulerSystem.model.Appointment;
-import com.labSchedulerSystem.model.RegistrationStatus;
 import com.labSchedulerSystem.model.Test;
 import com.labSchedulerSystem.model.Test.TestType;
-import com.labSchedulerSystem.model.User;
 import com.labSchedulerSystem.model.Appointment.Status;
 
 public class AppointmentManagerImpl implements AppointmentManager {
@@ -42,7 +34,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean addAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`country`, `notes`,`appointmentRefId`, `testType`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO appointments(`technitianId`, `seekerId`, `scheduledDate`, `startTime`, `status`,`recomendedDoctor`,`costOfTest`, `notes`,`appointmentRefId`, `testType`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -50,7 +42,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
 		ps.setString(6, appointment.getRecomendedDoctor());
-		ps.setString(7, appointment.getCountry());
+		ps.setString(7, appointment.getCostOfTest());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
 		ps.setString(10, appointment.getTestType().toString());
@@ -66,7 +58,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 	@Override
 	public boolean editAppointment(Appointment appointment) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
-		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,country=?,notes=?,appointmentRefId=?,testType=?,testResults=?,testResultsDescription=? ,testUpdatedOn=?, testUpdatedBy=? WHERE appointmentId=?";
+		String query = "UPDATE appointments SET technitianId=?,seekerId=?,scheduledDate=?,startTime=?,status=?,recomendedDoctor=?,costOfTest=?,notes=?,appointmentRefId=?,testType=?,testResults=?,testResultsDescription=? ,testUpdatedOn=?, testUpdatedBy=? WHERE appointmentId=?";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointment.getTechnitianId());
 		ps.setInt(2, appointment.getSeekerId());
@@ -74,7 +66,7 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		ps.setString(4, appointment.getStartTime());
 		ps.setString(5, appointment.getStatus().name());
 		ps.setString(6, appointment.getRecomendedDoctor());
-		ps.setString(7, appointment.getCountry());
+		ps.setString(7, appointment.getCostOfTest());
 		ps.setString(8, appointment.getNotes());
 		ps.setString(9, appointment.getAppointmentRefId());
 		ps.setString(10, appointment.getTestType().toString());
@@ -115,9 +107,9 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, appointmentId);
 		ResultSet rs = ps.executeQuery();
-		Appointment appointment = null; // Initialize to null
+		Appointment appointment = null;
 		while (rs.next()) {
-			appointment = new Appointment(); // Update only if data is found
+			appointment = new Appointment();
 			appointment.setAppointmentId(rs.getInt("appointmentId"));
 			appointment.setAppointmentRefId(rs.getString("appointmentRefId"));
 			appointment.setTechnitianId(rs.getInt("technitianId"));
@@ -127,6 +119,8 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			appointment.setStatus(Status.valueOf(rs.getString("status")));
 			appointment.setNotes(rs.getString("notes"));
 			appointment.setConsultantName(rs.getString("consultantName"));
+			appointment.setCostOfTest(rs.getString("costOfTest"));
+			appointment.setRecomendedDoctor(rs.getString("recomendedDoctor"));
 			appointment.setSeekerName(rs.getString("seekerName"));
 			appointment.setSeekerEmail(rs.getString("seekerEmail"));
 			appointment.setSeekerPhoneNumber(rs.getString("seekerPhoneNumber"));
@@ -168,11 +162,8 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, testId);
 		ResultSet rs = ps.executeQuery();
-
-		Test test = null; // Initialize the Test object outside the loop
-
+		Test test = null;
 		while (rs.next()) {
-			// Create a new Test object inside the loop
 			test = new Test(null, query);
 			test.setTestId(rs.getInt("testId"));
 			test.setType(TestType.valueOf(rs.getString("type")));
@@ -184,7 +175,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			test.setLowReferenceRange(rs.getString("LowReferenceRange"));
 			test.setHighReferenceRange(rs.getString("HighReferenceRange"));
 		}
-
 		ps.close();
 		connection.close();
 		return test;
@@ -197,7 +187,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setString(1, testType);
 		ResultSet rs = ps.executeQuery();
-
 		Test test = null;
 		if (rs.next()) {
 			test = new Test(null, query);
@@ -205,17 +194,15 @@ public class AppointmentManagerImpl implements AppointmentManager {
 			test.setType(TestType.valueOf(rs.getString("type")));
 			test.setDescription(rs.getString("description"));
 			test.setCost(rs.getString("cost"));
-			test.setPreparationInstructions("PreparationInstructions");
+			test.setPreparationInstructions(rs.getString("PreparationInstructions"));
 			test.setReportReadyIn(rs.getString("ReportReadyIn"));
 			test.setMeasurementUnit(rs.getString("MeasurementUnit"));
 			test.setLowReferenceRange(rs.getString("LowReferenceRange"));
 			test.setHighReferenceRange(rs.getString("HighReferenceRange"));
 		}
-
 		rs.close();
 		ps.close();
 		connection.close();
-
 		return test;
 	}
 
@@ -245,7 +232,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return appointmentList;
 	}
 
-//	Newly requested  appointments
 	@Override
 	public List<Appointment> fetchRequestedAppointments() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
@@ -272,7 +258,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return requestedAppointments;
 	}
 
-//	 consultant rejected appointments
 	@Override
 	public List<Appointment> fetchConsultantRejectedAppointments() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
@@ -299,7 +284,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return requestedAppointments;
 	}
 
-//	Appointments sent to consultant
 	@Override
 	public List<Appointment> fetchAdminRequestedAllAppointments() throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
@@ -404,7 +388,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return requestedAppointments;
 	}
 
-//	Admin sent appointments to consultant fetch by con id 	
 	@Override
 	public List<Appointment> fetchAdminRequestedAppointments(int loggedInUserId)
 			throws SQLException, ClassNotFoundException {
@@ -628,9 +611,6 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		LOGGER.info("countryAppointmentCounts: " + countryAppointmentCounts);
 		return countryAppointmentCounts;
 	}
-	
-	
-	
 
 	public List<String> generateRandomColors(int count) {
 		List<String> colors = new ArrayList<>();
@@ -721,97 +701,28 @@ public class AppointmentManagerImpl implements AppointmentManager {
 		return appointmentsByDayAndTimeSlotData;
 	}
 
-	/*
-	 * public Map<String, Integer> getAppointmentCountsByConsultant() throws
-	 * SQLException, ClassNotFoundException { Connection connection =
-	 * getConnection(); Map<String, Integer> appointmentsByConsultantData = new
-	 * HashMap<>(); String query =
-	 * "SELECT technitianId, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId"
-	 * ; try (PreparedStatement ps = connection.prepareStatement(query)) { try
-	 * (ResultSet rs = ps.executeQuery()) { while (rs.next()) { String consultantId
-	 * = rs.getString("technitianId"); int appointmentCount =
-	 * rs.getInt("appointmentCount"); String consultantName =
-	 * getConsultantNameById(consultantId);
-	 * appointmentsByConsultantData.put(consultantName, appointmentCount); } } }
-	 * connection.close(); LOGGER.info("appointmentsByConsultantData: " +
-	 * appointmentsByConsultantData); return appointmentsByConsultantData; }
-	 */
-	
-	/*
-	 * public Map<String, Map<String, Integer>> getAppointmentCountsByConsultant()
-	 * throws SQLException, ClassNotFoundException { Connection connection =
-	 * getConnection(); Map<String, Map<String, Integer>>
-	 * appointmentsByConsultantData = new HashMap<>(); String query =
-	 * "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status"
-	 * ; try (PreparedStatement ps = connection.prepareStatement(query)) { try
-	 * (ResultSet rs = ps.executeQuery()) { while (rs.next()) { String consultantId
-	 * = rs.getString("technitianId"); String status = rs.getString("status"); int
-	 * appointmentCount = rs.getInt("appointmentCount"); String consultantName =
-	 * getConsultantNameById(consultantId);
-	 * appointmentsByConsultantData.putIfAbsent(consultantName, new HashMap<>());
-	 * appointmentsByConsultantData.get(consultantName).put(status,
-	 * appointmentCount); } } } connection.close();
-	 * LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
-	 * return appointmentsByConsultantData; }
-	 */
-
-//	public Map<String, Map<Appointment.Status, Integer>> getAppointmentCountsByTechnicianAndStatus() throws SQLException, ClassNotFoundException {
-//	    Connection connection = getConnection();
-//	    Map<String, Map<Appointment.Status, Integer>> appointmentsByTechnicianAndStatus = new HashMap<>();
-//	    String query = "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status";
-//	    try (PreparedStatement ps = connection.prepareStatement(query)) {
-//	        try (ResultSet rs = ps.executeQuery()) {
-//	            while (rs.next()) {
-//	                String technicianId = rs.getString("technitianId");
-//	                Appointment.Status status = Appointment.Status.valueOf(rs.getString("status"));
-//	                int appointmentCount = rs.getInt("appointmentCount");
-//
-//	                // Get technician name using technicianId
-//	                String technicianName = getConsultantNameById(technicianId);
-//
-//	                // If technician entry does not exist, create a new map
-//	                if (!appointmentsByTechnicianAndStatus.containsKey(technicianName)) {
-//	                    appointmentsByTechnicianAndStatus.put(technicianName, new HashMap<>());
-//	                }
-//
-//	                // Update appointment count for the specific status
-//	                appointmentsByTechnicianAndStatus.get(technicianName).put(status, appointmentCount);
-//	            }
-//	        }
-//	    }
-//	    connection.close();
-//	    LOGGER.info("appointmentsByTechnicianAndStatus: " + appointmentsByTechnicianAndStatus);
-//	    return appointmentsByTechnicianAndStatus;
-//	}
-	public Map<String, Map<String, Integer>> getAppointmentCountsByConsultant() throws SQLException, ClassNotFoundException {
-	    Connection connection = getConnection();
-	    Map<String, Map<String, Integer>> appointmentsByConsultantData = new HashMap<>();
-	    String query = "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status";
-	    try (PreparedStatement ps = connection.prepareStatement(query)) {
-	        try (ResultSet rs = ps.executeQuery()) {
-	            while (rs.next()) {
-	                String consultantId = rs.getString("technitianId");
-	                String status = rs.getString("status");
-	                int appointmentCount = rs.getInt("appointmentCount");
-	                String consultantName = getConsultantNameById(consultantId);
-	                appointmentsByConsultantData.putIfAbsent(consultantName, new HashMap<>());
-	                appointmentsByConsultantData.get(consultantName).put(status, appointmentCount);
-	                
-	                // Calculate and store the total count for each consultant
-					/*
-					 * int totalCount =
-					 * appointmentsByConsultantData.get(consultantName).getOrDefault("Total", 0);
-					 * totalCount += appointmentCount;
-					 * appointmentsByConsultantData.get(consultantName).put("Total", totalCount);
-					 */
-	            }
-	        }
-	    }
-	    connection.close();
-	    LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
-	    return appointmentsByConsultantData;
+	public Map<String, Map<String, Integer>> getAppointmentCountsByConsultant()
+			throws SQLException, ClassNotFoundException {
+		Connection connection = getConnection();
+		Map<String, Map<String, Integer>> appointmentsByConsultantData = new HashMap<>();
+		String query = "SELECT technitianId, status, COUNT(*) AS appointmentCount FROM appointments GROUP BY technitianId, status";
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					String consultantId = rs.getString("technitianId");
+					String status = rs.getString("status");
+					int appointmentCount = rs.getInt("appointmentCount");
+					String consultantName = getConsultantNameById(consultantId);
+					appointmentsByConsultantData.putIfAbsent(consultantName, new HashMap<>());
+					appointmentsByConsultantData.get(consultantName).put(status, appointmentCount);
+				}
+			}
+		}
+		connection.close();
+		LOGGER.info("appointmentsByConsultantData: " + appointmentsByConsultantData);
+		return appointmentsByConsultantData;
 	}
-	
+
 	public String getConsultantNameById(String userId) throws SQLException, ClassNotFoundException {
 		Connection connection = getConnection();
 		String consultantName = null;

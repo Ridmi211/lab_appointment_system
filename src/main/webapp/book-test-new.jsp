@@ -1,8 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="tag" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page import="com.labSchedulerSystem.model.User"%>
 <%@ page import="com.labSchedulerSystem.model.AccessRight"%>
 <%@ page import="com.labSchedulerSystem.model.Test.TestType"%>
@@ -12,31 +10,18 @@
 <%@ page import="com.labSchedulerSystem.service.AppointmentService"%>
 <%@ page import="com.labSchedulerSystem.service.UserService"%>
 <%@ page import="com.labSchedulerSystem.service.MessageService"%>
-
-
 <%@ page import="java.time.Year"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.labSchedulerSystem.dao.AppointmentManagerImpl"%>
 <%@ page import="com.labSchedulerSystem.dao.UserManagerImpl"%>
 
-
-<%-- <%
-User user = (User) session.getAttribute("user");
-if (session.getAttribute("user") == null) {
-	response.sendRedirect("login.jsp");
-}
-%> --%>
-
 <%
 User user = (User) session.getAttribute("user");
-// Check if the user is logged in
 if (session.getAttribute("user") == null) {
-	// Redirect the user to a login page or display an error message
 	response.sendRedirect("login.jsp");
-	return; // Stop processing the current page
+	return;
 }
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -49,9 +34,7 @@ if (session.getAttribute("user") == null) {
 	rel="stylesheet">
 <script src="https://kit.fontawesome.com/1a4bb98cfa.js"
 	crossorigin="anonymous"></script>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -60,7 +43,6 @@ if (session.getAttribute("user") == null) {
 	crossorigin="anonymous">
 <link rel="icon" type="image/x-icon"
 	href="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
@@ -104,9 +86,6 @@ h2 {
 	background-position: center;
 }
 
-/* .container{
-            padding: 10px ;
-        } */
 .header-text {
 	margin-top: 45%;
 	font-size: 22px;
@@ -127,7 +106,6 @@ h2 {
 	color: #08d8ca;
 }
 
-/* ------------------about ------------------------------- */
 #about {
 	padding: 80px 0;
 	color: #ababab;
@@ -187,9 +165,6 @@ h2 {
 	width: 50%;
 }
 
-/* .tab-contents{
-            font-size: 14px;
-        } */
 .tab-contents ul li {
 	list-style: none;
 	margin: 10px 0px;
@@ -208,7 +183,6 @@ h2 {
 	display: block;
 }
 
-/* -------------services-------------- */
 #services {
 	padding: 30px 0;
 	height: 90vh;
@@ -222,7 +196,6 @@ h2 {
 }
 
 .services div {
-	/* background: #262626; */
 	padding: 40px;
 	font-size: 13px;
 	font-weight: 300;
@@ -250,11 +223,9 @@ h2 {
 }
 
 .services div:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
-/* ///////////////// */
 .services-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -295,7 +266,6 @@ h2 {
 	transform: translateY(-10px);
 }
 
-/* ---------------portfolio------------------------- */
 #portfolio {
 	padding: 50px 0;
 }
@@ -313,14 +283,6 @@ h2 {
 	overflow: hidden;
 }
 
-/* .work img {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-            transition: transform 0.5s;
-
-
-        } */
 .layer {
 	width: 360px;
 	height: 0;
@@ -380,7 +342,6 @@ h2 {
 	background: #d6adff;
 }
 
-/* ----------------contact------------------- */
 .contact-left {
 	flex-basis: 35%;
 }
@@ -480,7 +441,6 @@ form .btn2 {
 
 }
 .sub-title:hover {
-	/* background: #d6adff; */
 	transform: translateY(-10px);
 }
 
@@ -587,7 +547,6 @@ label #cancel {
 	text-align: center;
 }
 
-/* consultat */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .card-container {
@@ -624,7 +583,6 @@ label #cancel {
 
 button.primary {
 	background-color: #905abd;
-	/* border: 1px solid #2D2747; */
 	border-radius: 3px;
 	color: white;
 	font-family: Montserrat, sans-serif;
@@ -822,14 +780,10 @@ h4 span {
 	min-height: 350px;
 	text-align: center;
 }
-
-/*  <!-- sidebar styling end here  --> */
 </Style>
 
 </head>
-
 <body>
-	<!-- sidebar start here  -->
 	<input type="checkbox" id="check">
 	<label style="position: fixed; top: 60px; z-index: 1; left: -5px;"
 		for="check"> <i class="fas fa-bars" id="btn"></i> <i
@@ -838,7 +792,6 @@ h4 span {
 	<div class="sidebar">
 		<jsp:include page="sidebar.jsp" />
 	</div>
-	<!-- sidebar end here  -->
 	<div class="row m-0 p-0">
 		<div class="col-12 m-0 p-0">
 			<nav class="p-0 m-0 ">
@@ -872,7 +825,6 @@ h4 span {
 		<div class="title-one">Check out our availability and book the
 			date and time that works for you</div>
 	</div>
-	<!-- ---------------------------------------Consultants--------------------------------------------------------------------- -->
 	<div class="row p-0 p-5  " style="margin-left: 140px; margin-top: 0px;">
 		<div class="container">
 			<div class="row">
@@ -883,20 +835,12 @@ h4 span {
 				AppointmentService appointmentService = AppointmentService.getAppointmentService();
 				Test test1 = appointmentManager.fetchSingleTest(testId);
 				%>
-				<%-- <%
-				
-				UserManagerImpl userManager = new UserManagerImpl();
-				
-				
-				%>
- --%>
 				<div class="col-sm mb-5">
 					<div class="work">
 						<div class="card-container">
 							<img class="round"
 								src="https://png.pngtree.com/template/20191029/ourmid/pngtree-logo-medical-laboratory-observer-vector-image_324823.jpg"
 								alt="user" /> <br>
-							<%--   <div class="name"><%= test1.getTestId() %></div> --%>
 							<div class="name">
 								<%=test1.getType().getDisplayName()%>
 							</div>
@@ -941,18 +885,16 @@ h4 span {
 							</div>
 							<div class="row mb-1 mt-3">Recommended doctor</div>
 							<div class="row">
-								<input name="doctor" id="doctor" required>
+								<input name="doctor" id="doctor" placeholder="Recomended Doctor"
+									required>
 							</div>
-						
-							<!-- Inside your form -->
+							<div class="row">
+								<input type="hidden" name="cost" id="cost"
+									value="<%=test1.getCost()%>">
+							</div>
 							<%
-							// Instantiate TechnicianService
 							UserManagerImpl userManager = new UserManagerImpl();
-
-							// Call the method
 							List<User> technicians = userManager.fetchTechniciansForTest(testId);
-
-							// Populate dropdown
 							%>
 							<div class="row mb-1 mt-3">Select Technician</div>
 							<div class="row">
@@ -970,7 +912,7 @@ h4 span {
 
 							<div class="row mb-1 mt-3">Additional Notes</div>
 							<div class="row">
-								<textarea name="notes" style="height: 100px" required></textarea>
+								<textarea name="notes" style="height: 200px" required></textarea>
 							</div>
 							<div>
 								<input type="hidden" name="appactiontype" value="addAppointment" />
@@ -997,75 +939,51 @@ h4 span {
 							<li class="pb-2">Your Payment</li>
 							<ul style="padding-left: 30px;">
 								<li>00.00</li>
-
 							</ul>
 						</div>
 						<div class="countries"></div>
 					</div>
 				</div>
-
-
-				<!-- payment/////////////////// -->
 				<div id="paymentModal" class="modal">
 					<div class="modal-container">
-						<!-- Payment form goes here -->
-						<!-- For simplicity, let's assume a simple payment form with credit card fields -->
 						<div class="inner-modal-container">
 							<div class="title-two">Payment Details</div>
 							<form id="paymentForm">
-								<!-- Credit card fields -->
 								<input type="text" placeholder="Credit Card Number" required>
 								<input type="text" placeholder="Expiry Date" required> <input
 									type="text" placeholder="CVV" required>
 								<div class="name">
 									Amount :<%=test1.getCost()%></div>
 								<br>
-								<!-- Submit button for payment -->
 								<button type="submit" class="btn btn3">Pay Now</button>
 							</form>
 						</div>
 					</div>
 				</div>
-				<!-- //////////////////////////// -->
-
-
-
 			</div>
 		</div>
-
-
 		<script>
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("bookingForm");
     const bookingDetailsCard = document.getElementById("bookingDetailsCard");
     const paymentModal = document.getElementById("paymentModal");
     const paymentForm = document.getElementById("paymentForm");
-
-    // Show payment modal when the form is submitted
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       paymentModal.style.display = "block";
     });
-
-    // Handle payment form submission
     paymentForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      // Perform payment processing here (e.g., validate credit card details, make API call to payment gateway)
-      // After successful payment, update booking details card and hide payment modal
       updateBookingDetails();
       paymentModal.style.display = "none";
     });
-
-    // Function to update booking details card
     function updateBookingDetails() {
-      // Get form data
       const date = form.querySelector('input[name="date"]').value;
       const testType = form.querySelector('input[name="test"]').value;
       const notes = form.querySelector('textarea[name="notes"]').value;
-      const doctorName = form.querySelector('input[name="doctor"]').value;
+      const recomendedDoctor = form.querySelector('input[name="doctor"]').value;
+      const costOfTest = form.querySelector('input[name="cost"]').value;
       const technitianId = form.querySelector('select[name="technitianId"]').value;
-      
-      // Update booking details card with the appointment details
       const bookingDetailsHTML = `
         Your booking details are as follows
         <div class="card-container mt-2">
@@ -1073,8 +991,8 @@ h4 span {
             <li>Name : <%=user.getName()%></li>
             <li>Email : <%=user.getEmail()%></li>           
             <li>Selected Test:<%=test1.getType().getDisplayName()%></li>
-            <li>Recomended Doctor : ${doctorName}</li>
-            <li>Technician : ${doctorName}</li>
+            <li>Recomended Doctor : ${recomendedDoctor}</li>
+      
             <li>Date : ${date}</li>
             <li>Notes : ${notes}</li>
           </div>
@@ -1090,57 +1008,12 @@ h4 span {
       `;
       bookingDetailsCard.innerHTML = bookingDetailsHTML;
       bookingDetailsCard.style.display = "block";
-
-      // Add event listener to confirm booking button
       const confirmBookingButton = document.getElementById("confirmBookingButton");
       confirmBookingButton.addEventListener("click", function () {
-        form.submit(); // Submit the booking form
+        form.submit();
       });
     }
   });
 </script>
-
-
-
-		<%-- 		<script>
-		document.addEventListener("DOMContentLoaded", function () {
-		    const form = document.getElementById("bookingForm");
-		    const bookingDetailsCard = document.getElementById("bookingDetailsCard");	    
-		    form.addEventListener("submit", function (e) {
-		        e.preventDefault(); 
-		        const date = form.querySelector('input[name="date"]').value;
-		        const testType = form.querySelector('input[name="test"]').value;
-		        const notes = form.querySelector('textarea[name="notes"]').value;
-		        const doctorName = form.querySelector('input[name="doctor"]').value;
-		        const bookingDetailsHTML = `        
-		            Your booking details are as follows
-		            <div class="card-container mt-2">
-		                <div style="padding-left: 30px; text-align: left; line-height: 2.5rem">
-		                    <li>Name : <%=user.getName()%></li>
-		                    <li>Email : <%=user.getEmail()%></li>
-		                    <li>Recomended Doctor : ${doctorName}</li>  
-		                    <li>Selected Test: ${testType}</li>
-		                    <li>Notes : ${notes}</li>                                          
-		                </div>                                                                         
-		                <div class="skills" style="padding-left: 30px;">
-		                    <li class="pb-2">Selected date and time</li>
-		                    <ul style="padding-left: 30px;"></ul>
-		                </div>
-		                <div class="countries">
-		                    <button id="confirmBookingButton" style="position: relative; left: 0%;" class="btn btn2">Confirm booking</button>
-		                </div>
-		            </div>
-		        `;
-		        bookingDetailsCard.innerHTML = bookingDetailsHTML;
-		        bookingDetailsCard.style.display = "block";
-		        const confirmBookingButton = document.getElementById("confirmBookingButton");
-		        confirmBookingButton.addEventListener("click", function () {
-		            form.submit();
-		        });
-		    });
-		});
-
-</script> --%>
 </body>
-
 </html>

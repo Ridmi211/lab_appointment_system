@@ -5,18 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.labSchedulerSystem.model.Appointment;
 import com.labSchedulerSystem.model.Message;
 import com.labSchedulerSystem.model.Message.MessageStatus;
-import com.labSchedulerSystem.service.AppointmentService;
 import com.labSchedulerSystem.service.MessageService;
 
 public class MessageController extends HttpServlet {
@@ -136,9 +132,9 @@ public class MessageController extends HttpServlet {
 		try {
 			boolean deleted = getMessageService().deleteMessage(messageId);
 			if (deleted) {
-				message = "Appointment deleted successfully!";
+				message = "Message deleted successfully!";
 			} else {
-				message = "Failed to delete the appointment.";
+				message = "Failed to delete the message.";
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			message = "Operation failed: " + e.getMessage();
