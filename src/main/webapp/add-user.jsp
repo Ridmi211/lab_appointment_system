@@ -58,9 +58,11 @@
 				</label> <label for="consultant"> <input type="radio"
 					name="usertype" id="consultant" value="ROLE_TECHNITIAN" required>
 					Technician
-				</label> <label for="admin"> <input type="radio" name="usertype"
+				</label> 
+				
+				<!-- <label for="admin"> <input type="radio" name="usertype"
 					id="admin" value="ROLE_ADMIN" required> Admin
-				</label>
+				</label> -->
 			</div>
 			<div id="jobConsultantQuestions" style="display: none;">
 				<p>Please fill following mandatory fields.</p>
